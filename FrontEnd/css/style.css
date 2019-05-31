@@ -955,11 +955,11 @@ label.checkme {
 /* ===== Header top Style ===== */
 .header-top {
 	font-size: 13px;
-	background: #000;
+	background: #4a70af;
 	border-bottom: 1px solid #424242;
 }
 .header-top a {
-    color: #808080;
+    color: #fff;
 }
 .header-top-left, .header-top-right {
 	margin: 8px 0;
@@ -986,7 +986,11 @@ label.checkme {
 	border-left: none;
 }
 .header {
-    background: #000 none repeat scroll 0 0;
+    background: #4a70af none repeat scroll 0 0;
+}
+#imagen-logo{
+width: 100px;
+
 }
 /* ----------------------------------------------
 	2.2 Navbar
