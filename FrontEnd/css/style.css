@@ -97,7 +97,7 @@ body {
  color: #FFF;
 }
 ::selection {
-	background-color: #1A1A1A;
+	background-color: #fff;
 	color: #FFF;
 }
 img {
@@ -127,7 +127,7 @@ hr {
 }
 .dropdown-menu {
 	background-clip: padding-box;
-	background-color: rgba(0, 0, 0, 1);
+	background-color:#4a70af ;
 	border: none;
 	border-radius: 0px;
 	box-shadow: none;
@@ -139,7 +139,7 @@ hr {
 	padding: 5px 15px;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-	background-color: #f44336;
+	background-color: #4a70af ;
 	color: #fff;
 }
 ul {
@@ -988,6 +988,15 @@ label.checkme {
 .header {
     background: #4a70af none repeat scroll 0 0;
 }
+.header-index{
+	height: 102px;
+}
+.container-index{
+	height: 100px;
+}
+.navbar-index{
+	height:100px;
+}
 #imagen-logo{
 width: 100px;
 
@@ -1068,26 +1077,26 @@ width: 100px;
 	margin-bottom: 3px;
 }
 #menu > li > a {
-	padding: 55px 18px;
+	padding: 41px 18px;
 	border-radius: 0;
 	overflow:hidden;
 	color: #fff;
 	text-transform: uppercase;
 }
 #menu > li > a:hover, #menu > li > a:focus {
-	background-color: #f44336;
+	background-color: #FDBB30;
 	color: #fff;
 }
 #menu .mega-dropdown:hover > a, #menu .mega-dropdown > a:hover, #menu .mega-dropdown > a:focus, #menu .dropdown:hover > a{
-	background-color: #f44336;
+	background-color: #FDBB30;
 	color: #fff;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
-	background-color: #f44336;
+	background-color: #FDBB30;
 	color: #fff;
 }
 #menu > li > a::before{
-    background: #f44336 none repeat scroll 0 0;
+    background: #FDBB30 none repeat scroll 0 0;
     bottom: 0;
     content: "";
     display: block;
