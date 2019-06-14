@@ -176,7 +176,7 @@ ul {
 a {
 	cursor: pointer;
 	text-decoration: none;
-	color: #808080;
+	color: #fff;
 	transition: all 0.25s ease 0s;
 	-moz-transition: all 0.25s ease 0s;
 	-webkit-transition: all 0.25s ease 0s;
@@ -988,6 +988,7 @@ label.checkme {
 .header {
     background: #4a70af none repeat scroll 0 0;
 }
+<<<<<<< HEAD
 .header-index{
 	height: 102px;
 }
@@ -997,6 +998,11 @@ label.checkme {
 .navbar-index{
 	height:100px;
 }
+=======
+.header-about{
+	height: 100px;
+}
+>>>>>>> 9ade789163e6505e529e6643769e5fdf37e4d157
 #imagen-logo{
 width: 100px;
 
@@ -1010,7 +1016,7 @@ width: 100px;
 	margin: 0;
 }
 .navbar-brand {
-	padding: 25px 0;
+	padding: 20px 0;
 }
 .navbar-header .navbar-brand {
 	height: auto;
@@ -2251,7 +2257,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	4.1 Footer General
 ----------------------------------------------- */
 .footer {
-	background: #000;
+	background: #4a70af;
 }
 .footer-title, .footer h6  {
 	color: #fff;
@@ -2260,13 +2266,14 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	font-size: 16px;
 }
 .footer a, .footer p{
-	color: #9E9E9E;
+	color: #fff;
 }
 .footer a:hover{
-	color: #f44336 ;
+	color: #fdbb30 ;
 }
 .footer-logo a img {
 	transition: all 0.4s ease-in-out 0s;
+	height: 100px;
 	-webkit-transition: all 0.4s ease-in-out 0s;
 	-moz-transition: all 0.4s ease-in-out 0s;
 	-o-transition: all 0.4s ease-in-out 0s;
@@ -2281,14 +2288,14 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	display: inline-block;
 }
 .footer-link li a {
-	border-left: 1px solid #808080;
+	border-left: 1px solid #fff;
 	padding: 0 10px;
 	display: inline-block;
 	line-height: 1;
 }
 .footer-block li {
 	padding: 5px 0;
-	color: #9E9E9E;
+	color: #fff;
 }
 .footer .form-group > input {
 	width: 100%;
@@ -2307,17 +2314,12 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	-o-transition: all 0.4s ease-in-out 0s;
 }
 .social_icon ul li a i.fa:hover {
-	color: #f44336 ;
+	color: #fdbb30 ;
 }
-.footer-bottom {
-	background: #000;
+.copyright-part{
 	color: #fff;
-	border-top: 1px solid #424242;
 }
-.payment-icon li {
-	display: inline-block;
-	font-size: 22px;
-}
+
 /* ----------------------------------------------
 	4.2 Scrollup
 ----------------------------------------------- */
