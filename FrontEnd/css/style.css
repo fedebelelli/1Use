@@ -988,21 +988,9 @@ label.checkme {
 .header {
     background: #4a70af none repeat scroll 0 0;
 }
-<<<<<<< HEAD
-.header-index{
-	height: 102px;
-}
-.container-index{
-	height: 100px;
-}
-.navbar-index{
-	height:100px;
-}
-=======
 .header-about{
 	height: 100px;
 }
->>>>>>> 9ade789163e6505e529e6643769e5fdf37e4d157
 #imagen-logo{
 width: 100px;
 
