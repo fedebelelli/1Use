@@ -72,7 +72,11 @@ Created by: 	Lionode
 
 .buscador-input{
 	height: 38px;
-	width: 728px;
+	width: 760px;
+}
+
+.glyphicon{
+	position: initial;
 }
 
 
