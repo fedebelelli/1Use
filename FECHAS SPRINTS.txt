@@ -16,14 +16,14 @@
 26 JULIO	- 26 AGOSTO	--> SPRINT 3
 
 	-Gestión de alquileres (búsqueda + filtros)
-	-Gestión de alquileres (Estructura publicación)
+	-Gestión de publicacion (Estructura publicación)
 
 
 26 AGOSTO	- 26 SEPTIEMBRE --> SPRINT 4
 
 	-Administración de alquiler de objeto entre usuarios sin intervención
 	-Gestión de puntuacion de usuarios
-	-Gestión de anuncios
+	-Gestión de alquileres
 
 
 26 SEPTIEMBRE	- 26 OCTUBRE	--> SPRINT 5
