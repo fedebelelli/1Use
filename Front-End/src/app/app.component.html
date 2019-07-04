@@ -1,0 +1,260 @@
+<div class="wrapper">
+  <!-- =====  HEADER START  ===== -->
+  <header id="header">
+    <div class="header-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+
+          </div>
+          <div class="col-sm-6">
+            <ul class="header-top-right text-right">
+              <li class="account"><a [routerLink]="['/login']" [routerLinkActive]="['actived']">Mi cuenta</a></li>
+              <li class="sitemap"><a href="#">Sitemap</a></li>
+              <li class="cart"><a href="cart_page.html">My Cart</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header">
+      <div class="container">
+        <nav class="navbar">
+          <div class="navbar-header mtb_20"> <a class="navbar-brand" href="index.html"> <img alt="Coolsd"
+                src="../assets/images/logo.png"> </a> </div>
+          <div class="header-right pull-right mtb_50">
+            <button class="navbar-toggle pull-left" type="button" data-toggle="collapse"
+              data-target=".js-navbar-collapse"> <span class="i-bar"><i class="fa fa-bars"></i></span></button>
+            <div class="shopping-icon">
+              <div class="cart-item " data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true"
+                role="button">Item's : <span class="cart-qty">02</span></div>
+              <div id="cart-dropdown" class="cart-menu collapse">
+                <ul>
+                  <li>
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><a href="#"><img src="../assets/images/product/70x84.jpg"
+                                alt="iPod Classic" title="iPod Classic"></a></td>
+                          <td class="text-left product-name"><a href="#">MacBook Pro</a>
+                            <span class="text-left price">$20.00</span>
+                            <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
+                          </td>
+                          <td class="text-center"><a class="close-cart"><i class="fa fa-times-circle"></i></a></td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><a href="#"><img src="../assets/images/product/70x84.jpg"
+                                alt="iPod Classic" title="iPod Classic"></a></td>
+                          <td class="text-left product-name"><a href="#">MacBook Pro</a>
+                            <span class="text-left price">$20.00</span>
+                            <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
+                          </td>
+                          <td class="text-center"><a class="close-cart"><i class="fa fa-times-circle"></i></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                  <li>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td class="text-right"><strong>Sub-Total</strong></td>
+                          <td class="text-right">$2,100.00</td>
+                        </tr>
+                        <tr>
+                          <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
+                          <td class="text-right">$2.00</td>
+                        </tr>
+                        <tr>
+                          <td class="text-right"><strong>VAT (20%)</strong></td>
+                          <td class="text-right">$20.00</td>
+                        </tr>
+                        <tr>
+                          <td class="text-right"><strong>Total</strong></td>
+                          <td class="text-right">$2,122.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                  <li>
+                    <form action="http://html.lionode.com/cools/cart_page.html">
+                      <input class="btn pull-left mt_10" value="View cart" type="submit">
+                    </form>
+                    <form action="http://html.lionode.com/cools/checkout_page.html">
+                      <input class="btn pull-right mt_10" value="Checkout" type="submit">
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="main-search pull-right">
+              <div class="search-overlay">
+                <!-- Close Icon -->
+                <a href="javascript:void(0)" class="search-overlay-close"></a>
+                <!-- End Close Icon -->
+                <div class="container">
+                  <!-- Search Form -->
+                  <form role="search" id="searchform" action="http://html.lionode.com/search" method="get">
+                    <label class="h5 normal search-input-label">Enter keywords To Search Entire
+                      Store</label>
+                    <input value="" name="q" placeholder="Search here..." type="search">
+                    <button type="submit"></button>
+                  </form>
+                  <!-- End Search Form -->
+                </div>
+              </div>
+              <div class="header-search"> <a id="search-overlay-btn"></a> </div>
+            </div>
+          </div>
+          <div class="collapse navbar-collapse js-navbar-collapse pull-right">
+            <ul id="menu" class="nav navbar-nav">
+              <li> <a href="index.html">Home</a></li>
+              <li> <a href="category_page.html">Shop</a></li>
+              <li> <a href="blog_page.html">Blog</a></li>
+              <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection
+                </a>
+                <ul class="dropdown-menu mega-dropdown-menu row">
+                  <li class="col-md-3">
+                    <ul>
+                      <li class="dropdown-header">Women's</li>
+                      <li><a href="#">Unique Features</a></li>
+                      <li><a href="#">Image Responsive</a></li>
+                      <li><a href="#">Auto Carousel</a></li>
+                      <li><a href="#">Newsletter Form</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Good Typography</a></li>
+                    </ul>
+                  </li>
+                  <li class="col-md-3">
+                    <ul>
+                      <li class="dropdown-header">Man's</li>
+                      <li><a href="#">Unique Features</a></li>
+                      <li><a href="#">Image Responsive</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Auto Carousel</a></li>
+                      <li><a href="#">Newsletter Form</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Good Typography</a></li>
+                    </ul>
+                  </li>
+                  <li class="col-md-3">
+                    <ul>
+                      <li class="dropdown-header">Children's</li>
+                      <li><a href="#">Unique Features</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Image Responsive</a></li>
+                      <li><a href="#">Auto Carousel</a></li>
+                      <li><a href="#">Newsletter Form</a></li>
+                      <li><a href="#">Four columns</a></li>
+                      <li><a href="#">Good Typography</a></li>
+                    </ul>
+                  </li>
+                  <li class="col-md-3">
+                    <ul>
+                      <li id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="item active"> <a href="#"><img src="../assets/images/menu-banner1.jpg"
+                                class="img-responsive" alt="Banner1"></a></div>
+                          <!-- End Item -->
+                          <div class="item"> <a href="#"><img src="../assets/images/menu-banner2.jpg"
+                                class="img-responsive" alt="Banner1"></a></div>
+                          <!-- End Item -->
+                          <div class="item"> <a href="#"><img src="../assets/images/menu-banner3.jpg"
+                                class="img-responsive" alt="Banner1"></a></div>
+                          <!-- End Item -->
+                        </div>
+                        <!-- End Carousel Inner -->
+                      </li>
+                      <!-- /.carousel -->
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages
+                </a>
+                <ul class="dropdown-menu">
+                  <li> <a href="contact_us.html">Contact us</a></li>
+                  <li> <a href="cart_page.html">Cart</a></li>
+                  <li> <a href="checkout_page.html">Checkout</a></li>
+                  <li> <a href="product_detail_page.html">Product Detail Page</a></li>
+                  <li> <a href="single_blog.html">Single Post</a></li>
+                </ul>
+              </li>
+              <li> <a href="about.html">About us</a></li>
+            </ul>
+          </div>
+          <!-- /.nav-collapse -->
+        </nav>
+      </div>
+    </div>
+  </header>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+
+  <!-- =====  FOOTER START  ===== -->
+  <div class="footer pt_30">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 footer-block">
+          <div class="content_footercms_right">
+            <div class="footer-contact">
+              <div class="footer-logo mb_40"> <a href="index.html"> <img src="../assets/images/E3.png" alt="OneUse">
+                </a>
+              </div>
+              <ul>
+                <li>Boulevar Illia 255 7C</li>
+                <li>(02336) - 492851</li>
+                <li>OneUse@loscracks.com</li>
+              </ul>
+              <div class="social_icon">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-google"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                </ul>
+              </div>
+              <div class="copyright-part">@ 2018 All Rights Reserved One Use</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 footer-block">
+          <h6 class="footer-title ptb_20">Categories</h6>
+          <ul>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Footwear</a></li>
+            <li><a href="#">Jewellery</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 footer-block">
+          <h6 class="footer-title ptb_20">Information</h6>
+          <ul>
+            <li><a href="contact.html">Specials</a></li>
+            <li><a href="#">New Products</a></li>
+            <li><a href="#">Best Sellers</a></li>
+            <li><a href="#">Our Stores</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 footer-block">
+          <h6 class="footer-title ptb_20">My Account</h6>
+          <ul>
+            <li><a href="#">Checkout</a></li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">My Orders</a></li>
+            <li><a href="#">My Credit Slips</a></li>
+            <li><a href="#">My Addresses</a></li>
+            <li><a href="#">My Personal Info</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- =====  FOOTER END  ===== -->
