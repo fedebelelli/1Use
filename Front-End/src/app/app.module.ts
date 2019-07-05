@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ErrorComponent } from './components/error/error.component';
     LoginComponent,
     PerfilUsuarioComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    TerminosCondicionesComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
