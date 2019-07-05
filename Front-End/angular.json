@@ -31,7 +31,13 @@
               "src/assets/css/magnific-popup.css",
               "src/assets/css/owl.carousel.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jQuery_v3.1.1.min.js",
+              "src/assets/js/owl.carousel.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/jquery.magnific-popup.js",
+              "src/assets/js/custom.js"
+            ]
           },
           "configurations": {
             "production": {
