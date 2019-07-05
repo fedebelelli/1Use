@@ -1211,6 +1211,9 @@ label.checkme {
 #imagen-logo {
 	width: 100px;
 }
+#image-FaceGoogle{
+	max-width: 48%;
+}
 
 /* ----------------------------------------------
 	2.2 Navbar
