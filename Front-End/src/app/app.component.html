@@ -1,116 +1,39 @@
 <div class="wrapper">
   <!-- =====  HEADER START  ===== -->
+  
   <header id="header">
     <div class="header-top">
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-
           </div>
           <div class="col-sm-6">
             <ul class="header-top-right text-right">
-              <li class="account"><a [routerLink]="['/login']" [routerLinkActive]="['actived']">Mi cuenta</a></li>
-              <li class="sitemap"><a href="#">Sitemap</a></li>
-              <li class="cart"><a href="cart_page.html">My Cart</a></li>
+              <li class="account"><a [routerLink]="['/login']">Mi cuenta</a></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="header">
-      <div class="container">
-        <nav class="navbar">
-          <div class="navbar-header mtb_20"> <a class="navbar-brand" href="index.html"> <img alt="Coolsd"
-                src="../assets/images/logo.png"> </a> </div>
+    <div class="header header-index">
+      <div class="container container-index">
+        <nav class="navbar navbar-index">
+          <div id="imagen-logo" class="navbar-header mtb_20">
+            <a class="navbar-index" [routerLink]="['/home']"> <img alt="1UseLogo" src="../assets/images/E3.png"> </a> </div>
           <div class="header-right pull-right mtb_50">
             <button class="navbar-toggle pull-left" type="button" data-toggle="collapse"
               data-target=".js-navbar-collapse"> <span class="i-bar"><i class="fa fa-bars"></i></span></button>
-            <div class="shopping-icon">
-              <div class="cart-item " data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true"
-                role="button">Item's : <span class="cart-qty">02</span></div>
-              <div id="cart-dropdown" class="cart-menu collapse">
-                <ul>
-                  <li>
-                    <table class="table table-striped">
-                      <tbody>
-                        <tr>
-                          <td class="text-center"><a href="#"><img src="../assets/images/product/70x84.jpg"
-                                alt="iPod Classic" title="iPod Classic"></a></td>
-                          <td class="text-left product-name"><a href="#">MacBook Pro</a>
-                            <span class="text-left price">$20.00</span>
-                            <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
-                          </td>
-                          <td class="text-center"><a class="close-cart"><i class="fa fa-times-circle"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><a href="#"><img src="../assets/images/product/70x84.jpg"
-                                alt="iPod Classic" title="iPod Classic"></a></td>
-                          <td class="text-left product-name"><a href="#">MacBook Pro</a>
-                            <span class="text-left price">$20.00</span>
-                            <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
-                          </td>
-                          <td class="text-center"><a class="close-cart"><i class="fa fa-times-circle"></i></a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </li>
-                  <li>
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td class="text-right"><strong>Sub-Total</strong></td>
-                          <td class="text-right">$2,100.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                          <td class="text-right">$2.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>VAT (20%)</strong></td>
-                          <td class="text-right">$20.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Total</strong></td>
-                          <td class="text-right">$2,122.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </li>
-                  <li>
-                    <form action="http://html.lionode.com/cools/cart_page.html">
-                      <input class="btn pull-left mt_10" value="View cart" type="submit">
-                    </form>
-                    <form action="http://html.lionode.com/cools/checkout_page.html">
-                      <input class="btn pull-right mt_10" value="Checkout" type="submit">
-                    </form>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="main-search pull-right">
-              <div class="search-overlay">
-                <!-- Close Icon -->
-                <a href="javascript:void(0)" class="search-overlay-close"></a>
-                <!-- End Close Icon -->
-                <div class="container">
-                  <!-- Search Form -->
-                  <form role="search" id="searchform" action="http://html.lionode.com/search" method="get">
-                    <label class="h5 normal search-input-label">Enter keywords To Search Entire
-                      Store</label>
-                    <input value="" name="q" placeholder="Search here..." type="search">
-                    <button type="submit"></button>
-                  </form>
-                  <!-- End Search Form -->
-                </div>
-              </div>
-              <div class="header-search"> <a id="search-overlay-btn"></a> </div>
-            </div>
           </div>
-          <div class="collapse navbar-collapse js-navbar-collapse pull-right">
+          <div class="navbar-index navbar-collapse js-navbar-collapse pull-right">
             <ul id="menu" class="nav navbar-nav">
-              <li> <a href="index.html">Home</a></li>
-              <li> <a href="category_page.html">Shop</a></li>
-              <li> <a href="blog_page.html">Blog</a></li>
+              <li>
+                <div class="buscador-div">
+                  <input type="text" class="buscador-input" placeholder="Buscar productos..."
+                    aria-label="Buscar productos..." aria-describedby="button-addon2">
+                  <button class="buscador-boton btn glyphicon glyphicon-search" type="button"
+                    id="button-addon2"></button>
+                </div>
+              </li>
               <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection
                 </a>
                 <ul class="dropdown-menu mega-dropdown-menu row">
@@ -169,16 +92,6 @@
                       <!-- /.carousel -->
                     </ul>
                   </li>
-                </ul>
-              </li>
-              <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages
-                </a>
-                <ul class="dropdown-menu">
-                  <li> <a href="contact_us.html">Contact us</a></li>
-                  <li> <a href="cart_page.html">Cart</a></li>
-                  <li> <a href="checkout_page.html">Checkout</a></li>
-                  <li> <a href="product_detail_page.html">Product Detail Page</a></li>
-                  <li> <a href="single_blog.html">Single Post</a></li>
                 </ul>
               </li>
               <li> <a href="about.html">About us</a></li>

@@ -23,13 +23,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/style.css",
-              "src/assets/css/bootstrap.css",
-              "src/assets/css/font-awesome.min.css",
-              "src/assets/css/ionicons.min.css",
-              "src/assets/css/jquery-ui.css",
               "src/assets/css/magnific-popup.css",
-              "src/assets/css/owl.carousel.css"
+              "src/assets/css/ionicons.min.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/jquery-ui.css",
+              "src/assets/css/owl.carousel.css",
+              "src/assets/css/style.css"
             ],
             "scripts": [
               "src/assets/js/jQuery_v3.1.1.min.js",
@@ -126,6 +125,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Front-End"
 }
