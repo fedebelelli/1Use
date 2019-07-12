@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TerminosCondicionesComponent,
     AboutComponent,
     RegisterComponent,
-    MaterialModule
+    
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     AuthRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    MaterialModule 
   ],
   providers: [appRoutingProviders, AuthService],
   bootstrap: [AppComponent]
