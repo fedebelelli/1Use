@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: '*', component: ErrorComponent},
     {path: 'register', component: RegisterComponent},
+    {path: 'auth', loadChildren: './components/auth.module#AuthModule'}
 ];
 
 export const appRoutingProviders: any[] = [];

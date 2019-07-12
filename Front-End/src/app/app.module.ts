@@ -16,6 +16,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthService } from './services/auth.service';
+import { AuthRoutingModule } from './components/auth-routing.module';
 
 
 
@@ -35,9 +37,10 @@ import { RegisterComponent } from './components/register/register.component';
     routing,
     CommonModule,
     FormsModule,
+    AuthRoutingModule,
     HttpClientModule 
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
