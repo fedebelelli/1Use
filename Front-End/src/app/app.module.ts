@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
-
+import { MaterialModule } from './material/material.module';
 
 
 
@@ -18,6 +18,7 @@ import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { AuthRoutingModule } from './components/auth-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -30,7 +31,8 @@ import { AuthRoutingModule } from './components/auth-routing.module';
     ErrorComponent,
     TerminosCondicionesComponent,
     AboutComponent,
-    RegisterComponent
+    RegisterComponent,
+    MaterialModule
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { AuthRoutingModule } from './components/auth-routing.module';
     CommonModule,
     FormsModule,
     AuthRoutingModule,
-    HttpClientModule 
+    HttpClientModule,
+    BrowserAnimationsModule 
   ],
   providers: [appRoutingProviders, AuthService],
   bootstrap: [AppComponent]
