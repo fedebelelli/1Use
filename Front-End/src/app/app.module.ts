@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
+
+
 
 
 import { AppComponent } from './app.component';
@@ -10,6 +15,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
 import { AboutComponent } from './components/about/about.component';
+import { RegisterComponent } from './components/register/register.component';
+
+
 
 @NgModule({
   declarations: [
@@ -19,11 +27,15 @@ import { AboutComponent } from './components/about/about.component';
     HomeComponent,
     ErrorComponent,
     TerminosCondicionesComponent,
-    AboutComponent
+    AboutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    routing
+    routing,
+    CommonModule,
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

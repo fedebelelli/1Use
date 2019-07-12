@@ -7,6 +7,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { AboutComponent } from './components/about/about.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes: Routes = [
 
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
     {path: 'perfil/:id', component: PerfilUsuarioComponent},
     {path: 'about', component: AboutComponent},
     {path: '*', component: ErrorComponent},
+    {path: 'register', component: RegisterComponent},
 ];
 
 export const appRoutingProviders: any[] = [];
