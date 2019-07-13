@@ -17,9 +17,10 @@ const appRoutes: Routes = [
     {path: 'terminos-condiciones', component: TerminosCondicionesComponent},
     {path: 'perfil/:id', component: PerfilUsuarioComponent},
     {path: 'about', component: AboutComponent},
-    {path: '*', component: ErrorComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'auth', loadChildren: './components/auth.module#AuthModule'}
+    {path: 'auth', loadChildren: './components/auth.module#AuthModule'},
+    {path: '*', component: ErrorComponent},
+
 ];
 
 export const appRoutingProviders: any[] = [];

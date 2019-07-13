@@ -102,6 +102,7 @@ mat-grid-tile {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
+    margin-left: 140px;
 }
 
 .buscador-full-width {
@@ -118,14 +119,24 @@ mat-grid-tile {
     text-align: justify;
 }
 
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-    flex-basis: 0;
+.input-login {
+    width: 500px !important;
 }
 
-.example-headers-align .mat-expansion-panel-header-description {
-    justify-content: space-between;
-    align-items: center;
+.form-login {
+    width: 500px;
+    margin-left: 460px;
+    margin-top: 100px;
+    max-width: 500px;
+    min-width: 100px;
+}
+
+.mat-form-field {
+    display: block !important;
+}
+
+.text-center {
+    text-align: center;
 }
 
 
@@ -816,6 +827,7 @@ i.right {
 
 .panel-heading {
     padding: 15px;
+    text-align: center;
 }
 
 .panel-group .panel {
@@ -1000,7 +1012,7 @@ select {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: #e5e5e5;
+    border-color: white;
     border-image: none;
     border-radius: 0;
     border-style: solid;
@@ -1059,7 +1071,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-    border-color: #000;
+    border-color: white;
 }
 
 .full-with-form {
@@ -1339,7 +1351,7 @@ label.checkme {
 }
 
 #image-FaceGoogle {
-    max-width: 48%;
+    max-width: 100%;
 }
 
 
