@@ -10,11 +10,13 @@
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
         <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
         <button mat-button class="spanToolbar" [routerLink]="['/login']">Mi cuenta</button>
-        <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Herramientas</button></mat-menu>
+        <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
         <mat-menu #subMenu="matMenu">
-            <button mat-menu-item>Cortadoras de cesped</button>
-            <button mat-menu-item>Sierras electricas</button>
-        </mat-menu>
+            <button mat-menu-item>Electrónica</button>
+            <button mat-menu-item>Música</button>
+            <button mat-menu-item>Deporte</button>
+            <button mat-menu-item>Artículos del Hogar</button>
+            <button mat-menu-item>Otros</button>
     </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
@@ -45,20 +47,21 @@
     </mat-grid-tile>
     <mat-grid-tile class="justify-footer">
         <div>
-            <h6 class="footer-title ptb_20">Categories</h6>
-            <ul>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Footwear</a></li>
-                <li><a href="#">Jewellery</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Accessories</a></li>
+           
+
+          <h6 class="footer-title ptb_20">Categorías</h6>
+          <ul>
+              <li><a href="#">Electrónica</a></li>
+              <li><a href="#">Música</a></li>
+              <li><a href="#">Deporte</a></li>
+              <li><a href="#">Artículos del hogar</a></li>
+              <li><a href="#">Otros</a></li>
             </ul>
         </div>
     </mat-grid-tile>
     <mat-grid-tile class="justify-footer">
         <div>
-            <h6 class="footer-title ptb_20">Information</h6>
+            <h6 class="footer-title ptb_20">Información</h6>
             <ul>
                 <li><a [routerLink]="['/about']">Sobre nosotros</a></li>
                 <li><a [routerLink]="['/terminos-condiciones']">Términos y condiciones</a></li>
