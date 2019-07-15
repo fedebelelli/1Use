@@ -11,8 +11,8 @@ import {Observable, BehaviorSubject} from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  private _registerUrl = "http://localhost:4200/api/register"
-  private _loginUrl = "http://localhost:4200/api/login"
+  private _registerUrl = "http://localhost:4201/api/register"
+  private _loginUrl = "http://localhost:4201/api/login"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
