@@ -1,36 +1,27 @@
-'use strict'
-
-const cors = require('cors');
-const authRoutes = require('./auth/auth.routes');
 const express = require('express');
-const app = express();
-const db = require('./config/db');
-
-db();
-
-const router = express.Router();
-
 const bodyParser = require('body-parser');
-const bodyParserJSON = bodyParser.json();
-const bodyParserURLEncoded = bodyParser.urlencoded({extended: true});
-
-app.use(bodyParserJSON);
-app.use(bodyParserURLEncoded);
+const PORT = 4200
+const api = require('./routes/api')
+const app = express()
+const cors = require('cors')
 
 app.use(cors());
-app.use('/api', router);
-authRoutes(router);
 
-router.get('/', (req, res)=> {
+app.use(bodyParser.json());
 
-    res.send('Hello !!')
+app.use('/api', api)
+
+app.get('/', function(req, res) {
+
+    res.send('Hello from server')
 
 });
 
-app.listen(4200, ()=> console.log('Servidor corriendo en puerto 4200'));
 
-app.use(router);
+app.listen(PORT, function(){
 
-app.post('/iPost', function(req, res) {
-    res.send('POST!!');
-});
+    console.log('Servidor corriendo en puerto ' +PORT)
+
+})
+
+

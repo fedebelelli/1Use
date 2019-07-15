@@ -33,19 +33,19 @@
 </head>
 
 <body>
-    <form class="form-login" #frmLogin="ngForm" id="login-form" action="#" method="post" (ngSubmit)="onLogin(frmLogin)">
+    <form class="form-login"  id="login-form" action="#" method="post">
         <div class="panel-heading">
             <p class="active" id="login-form-link">Iniciar Sesión</p>
         </div>
         <hr>
         <br>
         <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="E-mail" [(ngModel)]="value1" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
+            <input type="email" matInput placeholder="E-mail" [(ngModel)]="loginUserData.email" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
             <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''"><mat-icon>close</mat-icon></button>
         </mat-form-field>
 
         <mat-form-field hideRequiredMarker>
-            <input type="password" matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password" id="password" tabindex="2" ngModel>
+            <input type="password" matInput placeholder="Contraseña" [(ngModel)] = "loginUserData.password" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password" id="password" tabindex="2" ngModel>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -53,7 +53,7 @@
 
         <mat-checkbox color="primary" tabindex="3" name="remember" id="remember">Recuérdame</mat-checkbox>
         <div class="text-center mt_30">
-            <button mat-raised-button color="primary">Iniciar sesión</button>
+            <button mat-raised-button color="primary" (click)="loginUser()">Iniciar sesión</button>
             <!--
             <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar Sesión">
             -->

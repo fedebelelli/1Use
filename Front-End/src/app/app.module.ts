@@ -5,9 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
@@ -36,11 +33,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     routing,
     CommonModule,
-    FormsModule,
+    
     AuthRoutingModule,
-    HttpClientModule,
+    
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule 

@@ -12,16 +12,28 @@ import { User } from '../../models/user';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authServices: AuthService, private router: Router) { }
+  loginUserData = {}
+  constructor(private _auth: AuthService ) { }
 
   ngOnInit() {
   }
 
-  onLogin(form): void {
-    this.authServices.login(form.value).subscribe(res => {
-      this.router.navigateByUrl('/components');
-    });
+
+  loginUser(){
+
+    this ._auth.loginUser(this.loginUserData).subscribe(
+
+      res => console.log(res),
+      err => console.log(err)
+
+    )
+
   }
+  // onLogin(form): void {
+  //  // this.authServices.login(form.value).subscribe(res => {
+  //     this.router.navigateByUrl('/login');
+  //   });
+  // }
 
   //Variables y métodos para los inputs/forms
   value1 = '';

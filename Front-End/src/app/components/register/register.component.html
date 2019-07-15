@@ -40,17 +40,17 @@
         <hr>
         <br>
         <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="value1" [ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="Nombre de usuario" id="Nombre" tabindex="1" ngModel>
+            <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name" [ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="Nombre de usuario" id="Nombre" tabindex="1" ngModel>
             <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''"><mat-icon>close</mat-icon></button>
         </mat-form-field>
 
         <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="E-mail" [(ngModel)]="value2" [ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
+            <input type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email" name="email"[ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
             <button mat-button *ngIf="value2" matSuffix mat-icon-button aria-label="Clear" (click)="value2=''"><mat-icon>close</mat-icon></button>
         </mat-form-field>
 
         <mat-form-field hideRequiredMarker>
-            <input type="password" matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" (input)="onPasswordInput()" name="password" id="password" tabindex="2" formControlName="password" ngModel>
+            <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password" name="password" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" (input)="onPasswordInput()" name="password" id="password" tabindex="2" formControlName="password" ngModel>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -69,11 +69,11 @@
         </mat-form-field>
 
         <div class="text-center mt_30">
-            <button mat-raised-button color="primary">Registrarse</button>
+            <button (click)="registerUser()" type="button" mat-raised-button color="primary">Registrarse</button>
             
             <p class="tycFoot">
             <br>
-                Al registrarse, declara que es mayor de edad y acepta los <a class="active" href="terminos-condiciones.html" title="Leer términos y condiciones">Términos y condiciones</a> de OneUSe.
+                Al registrarse, declara que es mayor de edad y acepta los <a class="active" [routerLink]="['/terminos-condiciones']"  title="Leer términos y condiciones">Términos y condiciones</a> de OneUSe.
            
             </p>
             <!--
@@ -173,6 +173,7 @@
 
     -->
 
+        
     <a id="scrollup"> </a>
 
 </body>
