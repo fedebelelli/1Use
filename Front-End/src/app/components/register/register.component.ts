@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -17,7 +18,9 @@ export class RegisterComponent implements OnInit {
 
   registerUserData = {}
 
-constructor( private _auth: AuthService, private FormBuilder: FormBuilder ){ }
+  
+
+constructor( private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router ){ }
 
 
  
@@ -33,7 +36,12 @@ constructor( private _auth: AuthService, private FormBuilder: FormBuilder ){ }
 
     this ._auth.registerUser(this.registerUserData).subscribe(
 
-        res => console.log(res),
+        res => {
+          
+          console.log(res)
+          localStorage.setItem('token', res.token)
+          this._router.navigate(['/home'])
+        },
         err => console.log(err)
 
       )
