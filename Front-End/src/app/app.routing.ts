@@ -8,6 +8,7 @@ import { TerminosCondicionesComponent } from './components/terminos-condiciones/
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 
 const appRoutes: Routes = [
 
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'auth', loadChildren: './components/auth.module#AuthModule'},
     {path: '*', component: ErrorComponent},
+    {path: 'categorias', component: CategoriasComponent},
 
 ];
 

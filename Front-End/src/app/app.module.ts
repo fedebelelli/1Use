@@ -16,7 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { AuthRoutingModule } from './components/auth-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CategoriasComponent } from './components/categorias/categorias.component'; 
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TerminosCondicionesComponent,
     AboutComponent,
     RegisterComponent,
-    
+    CategoriasComponent,
   ],
   imports: [
     BrowserModule,
