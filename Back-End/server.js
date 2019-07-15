@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const PORT = 4200
-const api = require('./routes/api')
-const app = express()
-const cors = require('cors')
+const PORT = 4201;
+const api = require('./routes/api');
+const app = express();
+const cors = require('cors');
 
 app.use(cors());
 
