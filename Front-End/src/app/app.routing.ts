@@ -9,7 +9,7 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
-
+import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 const appRoutes: Routes = [
 
     {path: '', component: HomeComponent},
@@ -22,6 +22,7 @@ const appRoutes: Routes = [
     {path: 'auth', loadChildren: './components/auth.module#AuthModule'},
     {path: '*', component: ErrorComponent},
     {path: 'categorias', component: CategoriasComponent},
+    {path: 'confirmacionemail', component: ConfirmacionEmailComponent},
 
 ];
 
