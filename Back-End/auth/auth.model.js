@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 mongoose.set('useCreateIndex', true);
 const userSchema = new Schema({
 
-     name: {
+    name: {
 
-         type: String,
-         required: true,
-         trim: true
+        type: String,
+        required: true,
+        trim: true
 
     },
 
@@ -24,9 +24,19 @@ const userSchema = new Schema({
 
         type: String,
         required: true,
-       trim: true
+        trim: true
+
+    },
+
+    confirmed: {
+
+        type: Boolean,
+        required: true,
+        defaultValue: false
 
     }
+
+
 
 
 

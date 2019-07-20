@@ -13,6 +13,7 @@ export class AuthService {
 
   private _registerUrl = "http://localhost:4201/api/register"
   private _loginUrl = "http://localhost:4201/api/login"
+  private _confirmar = "http://localhost:4201/api/confirmation"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -30,6 +31,10 @@ export class AuthService {
 
     return this.http.post<any>(this._loginUrl, user)
 
+  }
+
+  confirmar(token){
+    return this.http.post<any>(this._confirmar, {token: token});
   }
  
     

@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     {path: 'auth', loadChildren: './components/auth.module#AuthModule'},
     {path: '*', component: ErrorComponent},
     {path: 'categorias', component: CategoriasComponent},
-    {path: 'confirmacionemail', component: ConfirmacionEmailComponent},
+    {path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent},
 
 ];
 
