@@ -72,8 +72,8 @@ router.post('/register', (req, res) => {
                     const url = 'http://localhost:4200/confirmacionemail/' + token;
                     transporter.sendMail({
                         to: userData.email,
-                        subject: 'Confirm Email',
-                        html: 'Please click this email to confirm your email: <a href="' + url + '">' + url + '</a>',
+                        subject: 'Estas a punto de ser usuario de OneUse!!!',
+                        html: 'Para confirmar tu email, por favor, haga click en este link. Gracias por registrarte en OneUse: <a href="' + url + '">' + url + '</a>',
                     });
                 },
             );

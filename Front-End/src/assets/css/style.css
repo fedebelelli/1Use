@@ -197,7 +197,7 @@ ul li {
  list-style: none; 
 }
 
-ul #icono{list-style-image: url("C:\Users\Roo\Documents\GitHub\1Use\Front-End\src\assets\images\check.png") !important; }
+/* ul #icono{list-style-image: url("../../../assets/images/check.png") !important; } */
 
 br {
     font-size: 0;

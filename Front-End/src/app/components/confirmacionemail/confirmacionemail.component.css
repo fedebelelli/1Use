@@ -16,9 +16,9 @@
     background: linear-gradient(to right, rgba(60, 64, 143, 0.95) 0%, rgba(91, 97, 207, 0.95) 100%);
   }
 
-.ulim {
-    list-style-image: url("C:\Users\Roo\Documents\GitHub\1Use\Front-End\src\assets\images\check.png") !important;
-  }
+/* .ulim {
+    list-style-image: url("../../../assets/images/check.png") !important;
+  } */
 
 
   banner-content{ 
