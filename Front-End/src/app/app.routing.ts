@@ -10,6 +10,7 @@ import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
+import { ConfirmaComponent } from './components/confirma/confirma.component';
 const appRoutes: Routes = [
 
     {path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
     {path: '*', component: ErrorComponent},
     {path: 'categorias', component: CategoriasComponent},
     {path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent},
+    {path: 'confirma', component: ConfirmaComponent},
 
 ];
 

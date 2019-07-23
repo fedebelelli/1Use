@@ -18,6 +18,7 @@ import { AuthRoutingModule } from './components/auth-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriasComponent } from './components/categorias/categorias.component'; 
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
+import { ConfirmaComponent } from './components/confirma/confirma.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ConfirmacionEmailComponent } from './components/confirmacionemail/confi
     RegisterComponent,
     CategoriasComponent,
     ConfirmacionEmailComponent,
+    ConfirmaComponent
   ],
   imports: [
     BrowserModule,

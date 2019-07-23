@@ -7,9 +7,10 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from '../services/auth.service';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { ConfirmaComponent } from './confirma/confirma.component';
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [RegisterComponent, LoginComponent, ConfirmaComponent],
   imports: [
     CommonModule,
     FormsModule,
