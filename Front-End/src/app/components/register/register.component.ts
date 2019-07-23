@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'appr-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -15,20 +15,25 @@ export class RegisterComponent implements OnInit {
 
   minPw = 8;
   formGroup: FormGroup;
-
+  appregister: FormGroup;
   registerUserData = {}
 
-  
+  emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  passwordPattern:  " ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$";
 
-constructor( private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router ){ }
+constructor( private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router ){ 
+  
+}
 
 
  
 
   ngOnInit() {
      this.formGroup = this.FormBuilder.group({
-       password: ['', [Validators.required, Validators.minLength(this.minPw)]],
-       password2: ['', [Validators.required]]
+       password: ['', [Validators.required]],
+       password2: ['', [Validators.required]],
+       name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
      }, { validator: passwordMatchValidator });
   }
 
@@ -50,11 +55,21 @@ constructor( private _auth: AuthService, private FormBuilder: FormBuilder, priva
 
   }
 
+  onSaveForm() {
+    if (this.formGroup.valid) {
+      this.registerUser();
+      console.log('valid');
+    } else {
+      console.log('Not Valid');
+    }
+  }
+
 
    /* Shorthands for form controls (used from within template) */
    get password() { return this.formGroup.get('password'); }
    get password2() { return this.formGroup.get('password2'); }
-
+   get name() { return this.formGroup.get('name'); }
+   get email() { return this.formGroup.get('email'); }
    /* Called on each input in either password field */
    onPasswordInput() {
      if (this.formGroup.hasError('passwordMismatch'))

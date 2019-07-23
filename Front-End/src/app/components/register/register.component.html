@@ -28,34 +28,41 @@
     <link rel="shortcut icon" href="../../../assets/images/favicon.png">
     <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.html">
     <link rel="apple-touch-icon" sizes="72x72" href="../../../assets/images/apple-touch-icon-72x72.html">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../../assets/images/apple-touch-icon-114x114.html">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../../assets/images/apple-touch-icon-114x114.html
+    (ngSubmit)="onSaveForm()"">
     -->
 </head>
 
 <body>
-    <form class="form-login" #frmLogin="ngForm" id="login-form" action="#" method="post" (ngSubmit)="onLogin(frmLogin)" [formGroup]="formGroup">
+    <form class="form-login" #frmLogin="ngForm" name=register id="login-form" action="#" method="post" (ngSubmit)="onLogin(frmLogin)"  [formGroup]="formGroup">
         <div class="panel-heading">
             <p class="active" id="login-form-link">Registrarse en el sitio </p>
         </div>
         <hr>
         <br>
         <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name" [ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="Nombre de usuario" id="Nombre" tabindex="1" ngModel>
-            <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''"><mat-icon>close</mat-icon></button>
+            <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name"  class="input-login" style="color: black !important" name="name" id="Nombre" tabindex="1" formControlName="name" ngModel>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value1=''"><mat-icon>close</mat-icon></button>
+            <mat-error *ngIf="name.hasError('required')">Nombre requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email" name="email"[ngModelOptions]="{standalone: true}" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
-            <button mat-button *ngIf="value2" matSuffix mat-icon-button aria-label="Clear" (click)="value2=''"><mat-icon>close</mat-icon></button>
-        </mat-form-field>
+            <input type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email" [pattern]="emailPattern" name="email" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" formControlName="name" ngModel>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value2=''"><mat-icon>close</mat-icon></button>
+            <mat-error *ngIf="email.hasError('pattern')">Email no válido</mat-error>
+            <mat-error *ngIf="email.hasError('required')">Email no válido</mat-error>
+            
+        </mat-form-field>   
 
         <mat-form-field hideRequiredMarker>
-            <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password" name="password" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" (input)="onPasswordInput()" name="password" id="password" tabindex="2" formControlName="password" ngModel>
+            <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password"  pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d$@$!%*?&]{8,15}$" name="password" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password" id="password" tabindex="2" formControlName="password" ngModel>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
+            
+            <mat-error *ngIf="password.hasError('pattern')">La contraseña debe tener al menos 8(ocho) caracteres y contener una mayúscula.</mat-error>
             <mat-error *ngIf="password.hasError('required')">Contraseña requerida</mat-error>
-            <mat-error *ngIf="password.hasError('minlength')">La contraseña debe tener por lo menos {{minPw}} caracteres</mat-error>
+           
         </mat-form-field>
 
         <mat-form-field hideRequiredMarker>
@@ -69,7 +76,7 @@
         </mat-form-field>
 
         <div class="text-center mt_30">
-            <button (click)="registerUser()" type="button" mat-raised-button color="primary">Registrarse</button>
+        <button (click)="registerUser()" type="submit" [disabled]="!formGroup.valid" mat-raised-button color="primary">Registrarse</button>
             
             <p class="tycFoot">
                 <br>
