@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
 
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
 
 mongoose.connect(db, { useNewUrlParser: true }, err => {
 

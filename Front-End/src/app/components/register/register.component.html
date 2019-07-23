@@ -64,7 +64,7 @@
 
         <mat-form-field hideRequiredMarker>
             <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password"
-                pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d$@$!%*?&]{8,15}$" name="password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,15}$" name="password"
                 [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password"
                 id="password" tabindex="2" formControlName="password" ngModel required>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -72,7 +72,7 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
 
-            <mat-error *ngIf="password.hasError('pattern')">La contraseña debe tener al menos 8(ocho) caracteres y contener una mayúscula.</mat-error>
+            <mat-error *ngIf="password.hasError('pattern')">La contraseña debe tener al menos 8(ocho) caracteres y contener al menos una mayúscula y un dígito.</mat-error>
             <mat-error *ngIf="password.hasError('required')">Contraseña requerida</mat-error>
 
         </mat-form-field>

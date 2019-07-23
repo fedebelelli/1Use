@@ -4,7 +4,7 @@ const PORT = 4201;
 const api = require('./routes/api');
 const app = express();
 const cors = require('cors');
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
 app.use(cors());
 
 app.use(bodyParser.json());
