@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'appr-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -15,23 +15,25 @@ export class RegisterComponent implements OnInit {
 
   minPw = 8;
   formGroup: FormGroup;
-
+  appregister: FormGroup;
   registerUserData = {}
 
   emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordPattern:  " ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$";
 
-constructor( private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router ){ }
+constructor( private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router ){ 
+  
+}
 
 
  
 
   ngOnInit() {
      this.formGroup = this.FormBuilder.group({
-       password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+       password: ['', [Validators.required]],
        password2: ['', [Validators.required]],
        name: ['', [Validators.required]],
-      email: ['', [Validators.required,  Validators.pattern(this.emailPattern)]],
+      email: ['', [Validators.required]],
      }, { validator: passwordMatchValidator });
   }
 
@@ -51,6 +53,15 @@ constructor( private _auth: AuthService, private FormBuilder: FormBuilder, priva
 
     //console.log(this.registerUserData)
 
+  }
+
+  onSaveForm() {
+    if (this.formGroup.valid) {
+      this.registerUser();
+      console.log('valid');
+    } else {
+      console.log('Not Valid');
+    }
   }
 
 
