@@ -3483,4 +3483,22 @@ a.thumbnail.active {
     text-align: center;
     background-color: #fff;
 }
+/*==========Danilo Styles*========*/
+#perfil{
+    background: #ccc;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.barraPerfil{
+    
+    width: 50%;
+}
+.datos{
+    width: 50%;
+}
 
+.iconitos{
+    display: inline;
+    padding-left: 6px;
+}

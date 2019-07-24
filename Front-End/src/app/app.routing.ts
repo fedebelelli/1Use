@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'terminos-condiciones', component: TerminosCondicionesComponent},
-    {path: 'perfil/:id', component: PerfilUsuarioComponent},
+    {path: 'perfil', component: PerfilUsuarioComponent},
     {path: 'about', component: AboutComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'auth', loadChildren: './components/auth.module#AuthModule'},
