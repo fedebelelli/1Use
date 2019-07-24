@@ -20,6 +20,9 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 import { ConfirmaComponent } from './components/confirma/confirma.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderComponent } from './components/navigation/header/header.component';
+import { FooterComponent } from './components/navigation/footer/footer.component';
+import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RegisterComponent,
     CategoriasComponent,
     ConfirmacionEmailComponent,
-    ConfirmaComponent
+    ConfirmaComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<mat-toolbar class="navbar">
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div fxFlex fxLayout fxFlexOrder="1" fxLayoutAlign.xs="end" fxFlexOrder.xs="3">
+        <a [routerLink]="['/home']">
+            <img ngClass.xs="img-logo-index-sm" class="img-logo-index" alt="1UseLogo" src="../assets/images/E3.png">
+        </a>
+    </div>
+
+    <div fxFlex fxLayout fxLayoutAlign="center center" fxFlexOrder="2" fxLayout.xs="20px" fxFlexOrder.xs="2" >
+        <form>
+            <mat-form-field fxFlex ngClass.gt-md="input-xl">
+                <input matInput>
+                <button mat-button>
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
+    </div>
+    <!--class="buscador" class="buscador-full-width" -->
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs fxFlexOrder="3">
+        <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
+        <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
+        <button mat-button class="spanToolbar" [routerLink]="['/login']">Mi cuenta</button>
+        <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
+        <mat-menu #subMenu="matMenu">
+            <button mat-menu-item>Electrónica</button>
+            <button mat-menu-item>Música</button>
+            <button mat-menu-item>Deporte</button>
+            <button mat-menu-item>Artículos del Hogar</button>
+            <button mat-menu-item>Otros</button>
+        </mat-menu>
+    </div>
+
+</mat-toolbar>

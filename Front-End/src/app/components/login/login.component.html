@@ -1,76 +1,48 @@
-<!DOCTYPE html>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
-
-<head>
-    <!-- =====  BASIC PAGE NEEDS  ===== -->
-    <meta charset="utf-8">
-    <title>1Use</title>
-    <!-- =====  SEO MATE  ===== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="distribution" content="global">
-    <meta name="revisit-after" content="2 Days">
-    <meta name="robots" content="ALL">
-    <meta name="rating" content="8 YEARS">
-    <meta name="Language" content="en-us">
-    <meta name="GOOGLEBOT" content="NOARCHIVE">
-    <!-- =====  MOBILE SPECIFICATION  ===== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="viewport" content="width=device-width">
-    <!-- =====  CSS  ===== 
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/owl.carousel.css">
-    <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.html">
-    <link rel="apple-touch-icon" sizes="72x72" href="../../../assets/images/apple-touch-icon-72x72.html">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../../assets/images/apple-touch-icon-114x114.html">
-    -->
-</head>
-
-<body>
-    <form class="form-login"  id="login-form" action="#" method="post">
+<section>
+    <form id="login-form" action="#" method="post" fxLayout="column" fxLayoutAlign="center center" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
         <div class="panel-heading">
             <p class="active" id="login-form-link">Iniciar Sesión</p>
         </div>
         <hr>
-        <br>
-        <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="E-mail" [(ngModel)]="loginUserData.email" class="input-login" style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
-            <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''"><mat-icon>close</mat-icon></button>
-        </mat-form-field>
-
-        <mat-form-field hideRequiredMarker>
-            <input type="password" matInput placeholder="Contraseña" [(ngModel)] = "loginUserData.password" [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password" id="password" tabindex="2" ngModel>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+            <input type="email" matInput placeholder="E-mail" [(ngModel)]="loginUserData.email" class="input-login"
+                style="color: black !important" name="email" id="username1" tabindex="1" ngModel>
+            <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''">
+                <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
 
-        <mat-checkbox color="primary" tabindex="3" name="remember" id="remember">Recuérdame</mat-checkbox>
-        <div class="text-center mt_30">
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+            <input type="password" matInput placeholder="Contraseña" [(ngModel)]="loginUserData.password"
+                [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password"
+                id="password" tabindex="2" ngModel>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-checkbox color="primary" tabindex="3" name="remember" id="remember" ngClass.xs="input-sm">Recuérdame</mat-checkbox>
+        <div class="text-center mt_30" ngClass.xs="input-sm">
             <button mat-raised-button color="primary" (click)="loginUser()">Iniciar sesión</button>
             <!--
             <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar Sesión">
             -->
         </div>
         <br>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <img id="image-FaceGoogle" src="../../../assets/images/FacebookGoogle.PNG">
         </div>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <a [routerLink]="['/register']" tabindex="5" class="active">¿No tienes una cuenta? Registrate</a>
         </div>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <a href="#" tabindex="5" class="forgot-password active">¿Olvidaste tu contraseña?</a>
         </div>
     </form>
-
-    <!-- 
+</section>
+<!-- 
     <div class="container">
         <div class="row ">
             <div class="mtb_30">
@@ -146,8 +118,4 @@
     </div>
  -->
 
-    <a id="scrollup">Scroll</a>
-
-</body>
-
-</html>
+<a id="scrollup">Scroll</a>

@@ -1,75 +1,20 @@
-<mat-toolbar class="navbar">
-    <a [routerLink]="['/home']"> <img class="img-logo-index" alt="1UseLogo" src="../assets/images/E3.png"> </a>
-    <form class="buscador">
-        <mat-form-field class="buscador-full-width">
-            <input matInput>
-            <button mat-button class="boton-buscador"><mat-icon>search</mat-icon></button>
-        </mat-form-field>
-    </form>
-    <div>
-        <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/login']">Mi cuenta</button>
-        <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
-        <mat-menu #subMenu="matMenu">
-            <button mat-menu-item>Electrónica</button>
-            <button mat-menu-item>Música</button>
-            <button mat-menu-item>Deporte</button>
-            <button mat-menu-item>Artículos del Hogar</button>
-            <button mat-menu-item>Otros</button>
-          </mat-menu>
-    </div>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
 
-<mat-grid-list cols="3" rowHeight="fit" style="height: 40%" gutterSize="0px">
-    <mat-grid-tile>
-        <div>
-            <div style="text-align: left !important"  cols="3" >
-                <a [routerLink]="['/home']"> <img class="footer-logo" src="../assets/images/E3.png" alt="OneUse"></a>
-            </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-            <ul style="color: white !important">
-                <li>Boulevar Illia 255 7C</li>
-                <li>(02336) - 492851</li>
-                <li>OneUse@loscracks.com</li>
-            </ul>
-            <div class="social_icon" style="text-align: left !important">
-                <ul>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                </ul>
-            </div>
-            <div class="copyright-part" style="text-align: center !important">@ 2018 All Rights Reserved One Use</div>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="justify-footer">
-        <div>
-           
 
-          <h6 class="footer-title ptb_20">Categorías</h6>
-          <ul>
-              <li><a href="#">Electrónica</a></li>
-              <li><a href="#">Música</a></li>
-              <li><a href="#">Deporte</a></li>
-              <li><a href="#">Artículos del hogar</a></li>
-              <li><a href="#">Otros</a></li>
-            </ul>
-        </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="justify-footer">
-        <div>
-            <h6 class="footer-title ptb_20">Información</h6>
-            <ul>
-                <li><a [routerLink]="['/about']">Sobre nosotros</a></li>
-                <li><a [routerLink]="['/terminos-condiciones']">Términos y condiciones</a></li>
-            </ul>
-        </div>
-    </mat-grid-tile>
-</mat-grid-list>
+
+
 
 
 <!--
