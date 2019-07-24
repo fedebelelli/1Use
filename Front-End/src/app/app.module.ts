@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriasComponent } from './components/categorias/categorias.component'; 
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 import { ConfirmaComponent } from './components/confirma/confirma.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -41,9 +41,8 @@ import { ConfirmaComponent } from './components/confirma/confirma.component';
     HttpClientModule,
     routing,
     CommonModule,
-    
     AuthRoutingModule,
-    
+    FlexLayoutModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule 
