@@ -3335,3 +3335,9 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     text-align: center;
     background-color: #fff;
 }
+
+/*======Style Danilo======*/
+.iconitos{
+    padding: 6px;
+    display:inline;
+}

@@ -3,28 +3,28 @@
     <div fxLayout fxFlexOrder="1">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <a>
+                <a [routerLink]="['/perfil']">
                     <mat-icon>account_circle</mat-icon><span class="iconitos">Mi Perfil</span>
                 </a>
 
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a>
+                <a [routerLink]="['/home']">
                     <mat-icon>book</mat-icon><span class="iconitos">Mis Publicaciones</span>
                 </a>
 
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a>
+                <a [routerLink]="['/home']">
                     <mat-icon>assignment</mat-icon> <span class="iconitos">Mis Alquileres</span>
                 </a>
 
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a>
+                <a [routerLink]="['/home']">
                     <mat-icon>exit_to_app</mat-icon><span class="iconitos">Salir</span>
                 </a>
 
@@ -38,19 +38,19 @@
             <hr>
             <br>
             <mat-form-field>
-                <input value="nombre" matInput placeholder="Nombre">
+                <input value="Nombre" matInput placeholder="Nombre">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="apellido" matInput placeholder="Apellido">
+                <input value="Apellido" matInput placeholder="Apellido">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="email" matInput placeholder="Email">
+                <input value="Email" matInput placeholder="Email">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="direccion" matInput placeholder="Direccion">
+                <input value="Direccion" matInput placeholder="Direccion">
 
             </mat-form-field>
             <mat-form-field>
@@ -61,11 +61,15 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input value="numero_telefono" matInput placeholder="Telefono">
+                <input value="Numero de Telefono" matInput placeholder="Telefono">
                 <mat-icon matSuffix>phone</mat-icon>
-
 
             </mat-form-field>
         </div>
+    </div>
+    <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start">
+        <div style="padding-left: 35px; padding-bottom: 15px">
+            <button mat-raised-button color="primary">Editar Datos</button>
+        </div>    
     </div>
 </div>
