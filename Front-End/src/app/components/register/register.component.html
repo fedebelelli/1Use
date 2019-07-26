@@ -1,48 +1,15 @@
-<!DOCTYPE html>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en">
-
-<head>
-    <!-- =====  BASIC PAGE NEEDS  ===== -->
-    <meta charset="utf-8">
-    <title>1Use</title>
-    <!-- =====  SEO MATE  ===== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="distribution" content="global">
-    <meta name="revisit-after" content="2 Days">
-    <meta name="robots" content="ALL">
-    <meta name="rating" content="8 YEARS">
-    <meta name="Language" content="en-us">
-    <meta name="GOOGLEBOT" content="NOARCHIVE">
-    <!-- =====  MOBILE SPECIFICATION  ===== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="viewport" content="width=device-width">
-    <!-- =====  CSS  ===== 
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/owl.carousel.css">
-    <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.html">
-    <link rel="apple-touch-icon" sizes="72x72" href="../../../assets/images/apple-touch-icon-72x72.html">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../../assets/images/apple-touch-icon-114x114.html
-    (ngSubmit)="onSaveForm()"">
-    -->
-</head>
-
-<body>
-    <form class="form-login" #frmLogin="ngForm" name=register id="login-form" action="#" method="post" [formGroup]="formGroup">
+<section>
+    <form #frmLogin="ngForm" name=register id="login-form" action="#" method="post"
+        [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="center center" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
         <div class="panel-heading">
             <p class="active" id="login-form-link">Registrarse en el sitio </p>
         </div>
         <hr>
         <br>
-        <mat-form-field hideRequiredMarker>
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
             <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name"
-                class="input-login" style="color: black !important" name="name" id="Nombre" tabindex="1"
+                class="input-login" style="color: black !important" id="Nombre" tabindex="1"
                 formControlName="name" ngModel required>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value1=''">
                 <mat-icon>close</mat-icon>
@@ -50,8 +17,8 @@
             <mat-error *ngIf="name.hasError('required')">Nombre requerido</mat-error>
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker>
-            <input type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email"
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+            <input #email_usuario type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email"
                 [pattern]="emailPattern" name="email" class="input-login" style="color: black !important" name="email"
                 id="username1" tabindex="1" formControlName="email" ngModel required>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value2=''">
@@ -59,10 +26,9 @@
             </button>
             <mat-error *ngIf="email.hasError('pattern')">Email no válido</mat-error>
             <mat-error *ngIf="email.hasError('required')">Email no válido</mat-error>
-
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker>
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
             <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password"
                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,15}$" name="password"
                 [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password"
@@ -72,12 +38,13 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
 
-            <mat-error *ngIf="password.hasError('pattern')">La contraseña debe tener al menos 8(ocho) caracteres y contener al menos una mayúscula y un dígito.</mat-error>
+            <mat-error *ngIf="password.hasError('pattern')">La contraseña debe tener al menos 8(ocho) caracteres y
+                contener al menos una mayúscula y un dígito.</mat-error>
             <mat-error *ngIf="password.hasError('required')">Contraseña requerida</mat-error>
 
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker>
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
             <input type="password" matInput placeholder="Repetir contraseña" [type]="hide2 ? 'password' : 'text'"
                 class="input-login" style="color: black !important" formControlName="password2"
                 (input)="onPasswordInput()" required>
@@ -91,11 +58,12 @@
             </mat-error>
         </mat-form-field>
 
-        <div class="text-center mt_30">
-            <button (click)="registerUser()" type="submit" [disabled]="formGroup.invalid" mat-raised-button color="primary">Registrarse</button>
+        <div class="text-center mt_30" ngClass.xs="input-sm">
+            <button (click)="registerUser()" type="submit" [disabled]="formGroup.invalid" mat-raised-button
+                color="primary">Registrarse</button>
             <p class="tycFoot">
                 <br>
-                Al registrarse, declara que es mayor de edad y acepta los <a class="active" href="/terminos-condiciones"
+                Al registrarse, declara que es mayor de edad <br> y acepta los <a class="active" href="/terminos-condiciones"
                     title="Leer términos y condiciones">Términos y condiciones</a> de OneUse.
             </p>
             <!--
@@ -103,21 +71,21 @@
             -->
         </div>
         <br>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <img id="image-FaceGoogle" src="../../../assets/images/FacebookGoogle.PNG">
         </div>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <a [routerLink]="['/login']" tabindex="5" class="active"> ¿ Ya tienes una cuenta? Iniciar Sesión </a>
         </div>
-        <div class="text-center">
+        <div class="text-center" ngClass.xs="input-sm">
             <a href="#" tabindex="5" class="forgot-password active">¿Olvidaste tu contraseña?</a>
         </div>
     </form>
+</section>
 
 
 
-
-    <!-- 
+<!-- 
     <div class="container">
         <div class="row ">
             <div class="mtb_30">
@@ -196,8 +164,4 @@
     -->
 
 
-    <a id="scrollup"> </a>
-
-</body>
-
-</html>
+<a id="scrollup"> </a>
