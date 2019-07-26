@@ -127,7 +127,18 @@ mat-grid-tile {
     text-align: justify;
 }
 
+.color-snackbar{
+    background: #4a70af;
+    color: white;
+}
 
+.mat-simple-snackbar-action{
+    color: white;
+}
+
+.mat-simple-snackbar-action:hover{
+    color: rgb(253, 187, 48);
+}
 
 .form-login {
     width: 500px;

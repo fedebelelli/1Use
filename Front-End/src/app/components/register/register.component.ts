@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'appr-register',
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
   emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordPattern: " ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$";
 
-  constructor(private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router) { }
+  constructor(private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.formGroup = this.FormBuilder.group({
@@ -39,9 +40,19 @@ export class RegisterComponent implements OnInit {
         localStorage.setItem('token', res.token)
         this._router.navigate(['/home'])
       },
-      err => console.log(err)
+      err => {
+        //console.log(err);
+        this.openSnackBar(err.error, "Aceptar");
+      } 
     )
     //console.log(this.registerUserData)
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 8000,
+      panelClass: ['color-snackbar']
+    });
   }
 
   onSaveForm() {

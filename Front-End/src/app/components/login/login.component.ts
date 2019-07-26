@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
-
-
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +12,10 @@ import { User } from '../../models/user';
 export class LoginComponent implements OnInit {
 
   loginUserData = {}
-  constructor(private _auth: AuthService, private _router: Router ) { }
+  constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
-
 
   loginUser(){
 
@@ -25,15 +23,24 @@ export class LoginComponent implements OnInit {
 
       res => {
           
-        console.log(res)
+        //console.log(res)
         localStorage.setItem('token', res.token)
         this._router.navigate(['/home'])
       },
-      err => console.log(err)
-
+      err => {
+        //console.log(err);
+        this.openSnackBar(err.error,"Aceptar");
+      }
     )
-
   }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,  {
+      duration: 8000,
+      panelClass: ['color-snackbar']
+    });
+  }
+
   // onLogin(form): void {
   //  // this.authServices.login(form.value).subscribe(res => {
   //     this.router.navigateByUrl('/login');
@@ -43,6 +50,9 @@ export class LoginComponent implements OnInit {
   //Variables y métodos para los inputs/forms
   value1 = '';
   hide = true;
+
+   
+
 
 
 }

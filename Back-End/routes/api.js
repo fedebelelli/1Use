@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 mongoose.connect(db, { useNewUrlParser: true }, err => {
 
@@ -59,8 +59,8 @@ router.post('/register', (req, res) => {
     user.save((error, registeredUser) => {
 
         if (error) {
-
             console.log(error)
+            res.status(401).send("El e-mail ingresado ya existe. Por favor, intentelo nuevamente")
         } else {
             //jwt de usuario, enviar mail con ese token, y mail con redireccion
             let payload = { subject: registeredUser.email }
@@ -88,39 +88,32 @@ router.post('/login', (req, res) => {
     let userData = req.body
 
     User.findOne({ email: userData.email }, (error, user) => {
-
+        
         if (error) {
-
             console.log(error)
         }
         else {
 
-            if (!user || !user.confirmed) {
-
-                res.status(401).send('Invalid email')
-            } else {
-
+            if (!user) {
+                res.status(401).send('E-mail incorrecto')
+            }
+            else {
                 if (user.password !== userData.password) {
-
-                    res.status(401).send('Invalid Password')
+                    res.status(401).send('Contraseña incorrecta')
                 }
                 else {
-
-
-                    let payload = { subject: user._id }
-                    let token = jwt.sign(payload, 'secretKey')
-                    res.status(200).send({ token })
+                    if (!user.confirmed) {
+                        res.status(401).send('Tu usuario no ha sido validado. Verifica tu casilla de e-mail')
+                    }
+                    else {
+                        let payload = { subject: user._id }
+                        let token = jwt.sign(payload, 'secretKey')
+                        res.status(200).send({ token })
+                    }
                 }
-
             }
-
-
-
         }
-
     })
-
-
 })
 
 router.post('/confirmation', (req, res) => {
@@ -141,6 +134,30 @@ router.post('/confirmation', (req, res) => {
         res.status(401).send();
     }
 
+});
+
+router.get('/user', function (req, res) {
+    let userData = req.body;
+    User.findOne({ email: userData.email }, (error, user) => {
+        if (error) {
+            console.log(error)
+        }
+        else {
+            if (!user || !user.confirmed) {
+                console.log("holis1");
+                res.status(401).send('Invalid email')
+            } else {
+                if (user.password !== userData.password) {
+                    console.log("holis2");
+                    res.status(401).send('Invalid Password')
+                }
+                else {
+                    console.log("holis3");
+                    res.status(200).send({ token })
+                }
+            }
+        }
+    })
 });
 
 //app.use(router);

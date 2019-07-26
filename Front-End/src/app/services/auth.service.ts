@@ -36,7 +36,6 @@ export class AuthService {
   confirmar(token){
     return this.http.post<any>(this._confirmar, {token: token});
   }
- 
-    
+
 
 }
