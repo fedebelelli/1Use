@@ -62,6 +62,7 @@ const MaterialComponents = [
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
+  MatDividerModule
 ]
 
 @NgModule({ imports: [MaterialComponents], exports: [MaterialComponents] })
