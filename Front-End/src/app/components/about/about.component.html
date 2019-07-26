@@ -1,25 +1,25 @@
-<div class="container">
-    <!--ABOUT START -->
-    <div class="col-sm-8 col-md-8 col-lg-9 mtb_30">
-        <div class="row ">
-            <div class="col-md-12">
-                <div class="about-text">
-                    <div class="about-heading-wrap">
-                        <h2 class="about-heading mb_20 mt_40 ptb_10">¿Qué es <span>OneUse</span>?</h2>
-                    </div>
-                    <p>OneUse es una plataforma web que nos permite sacar provecho de aquellos objetos que no usamos y tenemos en nuestras casas ociosamente, alquilandolo a otras personas que precisen de dicho objeto mediante una transaccion segura y confiable!
-                        A través de OneUse, no sólo podrás ahorrar el dinero al no comprar, sino que podrás sacar partido a tus objetos, evitando así el consumo excesivo y los desplazamientos innecesarios
-                    </p>
-                </div>
-            </div>
+<section>
+    <div fxLayout="column" fxLayoutAlign="center center" ngClass.gt-sm="bloque-que-es-1use" fxLayoutGap="20px"
+        ngClass.lt-md="bloque-que-es-1use-mobile">
+        <h2 class="about-heading">¿Qué es <span>OneUse</span>?</h2>
+        <div fxFlex.lt-md fxLayoutAlign.lt-md="start start">
+            <p>
+                OneUse es una plataforma web que nos permite sacar provecho de aquellos objetos que no usamos
+                y tenemos en nuestras casas ociosamente, alquilandolo a otras personas que precisen de dicho
+                objeto mediante una transaccion segura y confiable!
+                A través de OneUse, no sólo podrás ahorrar el dinero al no comprar, sino que podrás sacar
+                partido a tus objetos, evitando así el consumo excesivo y los desplazamientos innecesarios
+            </p>
         </div>
-        <!--HERRAMIENTAS Y VALORES START-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="heading-part mb_20 mt_40">
-                    <h2 class="main_title">Que herramientas utilizamos?</h2>
-                </div>
-                <!--HERRAMIENTAS START -->
+    </div>
+    <!--HERRAMIENTAS Y VALORES START-->
+    <div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+        <div fxFlex fxFlexAlign="start" fxFlexOffset="20px" fxFlexAlign.lt-md="center">
+            <div class="heading-part mb_20 mt_40">
+                <h2 class="main_title">¿Que herramientas utilizamos?</h2>
+            </div>
+            <!--HERRAMIENTAS START -->
+            <div ngClass.lt-md="bloque-herramientas-lt-md">
                 <mat-accordion class="example-headers-align">
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
@@ -86,145 +86,161 @@
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
-            <!--HERRAMIENTAS END -->
-            <!--VALORES START-->
-            <div class="col-md-6">
-                <div class="heading-part mb_20 mt_40 ">
-                    <h2 class="main_title">Nuestros Valores</h2>
+        </div>
+        <!--HERRAMIENTAS END -->
+        <!--VALORES START-->
+        <div fxFlex.gt-sm fxFlexAlign.gt-sm="end" ngClass.gt-sm="bloque-nuestros-valores"
+            ngClass.lt-md="bloque-nuestros-valores-lt-md">
+            <div class="heading-part mb_20 mt_40 ">
+                <h2 class="main_title">Nuestros Valores</h2>
+            </div>
+            <div id="p_line">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span>
+                    </div>
+                    <span class="progress-type">Creatividad</span>
                 </div>
-                <div id="p_line">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span>
-                        </div>
-                        <span class="progress-type">Creatividad</span>
-                    </div>
 
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">40%
-                                        Complete (success)</span> </div>
-                        <span class="progress-type">Transparencia</span>
-                    </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">40%
+                            Complete (success)</span> </div>
+                    <span class="progress-type">Transparencia</span>
+                </div>
 
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">20%
-                                        Complete (info)</span> </div>
-                        <span class="progress-type">Honestidad</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
-                                        Complete (warning)</span> </div>
-                        <span class="progress-type">Responsabilidad Social</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">80%
-                                        Complete (danger)</span> </div>
-                        <span class="progress-type">Pasión</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
-                                            Complete (warning)</span> </div>
-                        <span class="progress-type">Excelencia</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
-                                                Complete (warning)</span> </div>
-                        <span class="progress-type">Seguridad</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
-                                            Complete (warning)</span> </div>
-                        <span class="progress-type">Respeto</span>
-                    </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">20%
+                            Complete (info)</span> </div>
+                    <span class="progress-type">Honestidad</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
+                            Complete (warning)</span> </div>
+                    <span class="progress-type">Responsabilidad Social</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">80%
+                            Complete (danger)</span> </div>
+                    <span class="progress-type">Pasión</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
+                            Complete (warning)</span> </div>
+                    <span class="progress-type">Excelencia</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
+                            Complete (warning)</span> </div>
+                    <span class="progress-type">Seguridad</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"> <span class="sr-only">60%
+                            Complete (warning)</span> </div>
+                    <span class="progress-type">Respeto</span>
                 </div>
             </div>
-            <!--VALORES END -->
         </div>
-        <!--HERRAMIENTAS Y VALORES END -->
-        <!--PROFESIONALES START -->
-        <div class="heading-part">
-            <h2 class="main_title mt_50">Nuestros Profesionales</h2>
+        <!--VALORES END -->
+    </div>
+    <!--HERRAMIENTAS Y VALORES END -->
+    <!--PROFESIONALES START -->
+    <div class="heading-part bloque-nuestros-profesionales">
+        <h2 class="main_title mt_50">Nuestros Profesionales</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" class="team_grid" fxLayout.lt-md="column"
+        fxLayoutAlign.lt-md="center">
+        <!-- <div class="team3col owl-carousel"> -->
+        <div class=" team-detail mt_25" fxLayout="column" fxLayoutAlign="center center">
+            <div class="team-item-img"><img id="image-Profesional" src="../../../assets/images/danilo.jpg"
+                    alt="Danilo Lucena" /></div>
+            <div class="team-designation mt_20">Full Stack Developer</div>
+            <h4 class="team-title  mtb_10">Danilo Lucena </h4>
+            <p>
+                Muy comprometido, con sentido de pertenencia, creativo y con actitud positiva..
+            </p>
+            <ul class="social mt_20 mb_80">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="https://www.instagra,.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
         </div>
-        <div class="team_grid box">
-            <div class="team3col owl-carousel">
-                <div class="item team-detail">
-                    <div class="team-item-img"><img id="image-Profesional" src="../../../assets/images/danilo.jpg" alt="Danilo Lucena" /></div>
-                    <div class="team-designation mt_20">Full Stack Developer</div>
-                    <h4 class="team-title  mtb_10">Danilo Lucena </h4>
-                    <p>
-                        Muy comprometido, con sentido de pertenencia, creativo y con actitud positiva..
-                    </p>
-                    <ul class="social mt_20 mb_80">
-                        <li><a href="https://www.facebook.com/" target="_blank"><i
-                                            class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="https://www.instagra,.com/" target="_blank"><i
-                                    class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <div class="item team-detail">
-                    <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/VanHeerden.jpg" alt="Juan Van Heerden" /> </div>
-                    <div class="team-designation mt_20">Full Stack Developer</div>
-                    <h4 class="team-title  mtb_10">Juan Van Heerden</h4>
-                    <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
-                    </p>
-                    <ul class="social mt_20 mb_80">
-                        <li><a href="https://www.facebook.com/" target="_blank"><i
-                                                class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="https://www.instagra,.com/" target="_blank"><i
-                                        class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <div class="item team-detail">
-                    <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Belloti.jpg" alt="Melina Belloti" /> </div>
-                    <div class="team-designation mt_20">DB Developer</div>
-                    <h4 class="team-title  mtb_10">Melina Bellotti </h4>
-                    <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
-                    </p>
-                    <ul class="social mt_20 mb_80">
-                        <li><a href="https://www.facebook.com/" target="_blank"><i
-                                                class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="https://www.instagra,.com/" target="_blank"><i
-                                        class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <div class="item team-detail">
-                    <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Belelli.jpg" alt="Federico Belleli" /> </div>
-                    <div class="team-designation mt_20">Back End Developer</div>
-                    <h4 class="team-title  mtb_10">Federico Belleli </h4>
-                    <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
-                    </p>
-                    <ul class="social mt_20 mb_80">
-                        <li><a href="https://www.facebook.com/" target="_blank"><i
-                                                class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="https://www.instagra,.com/" target="_blank"><i
-                                        class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <div class="item team-detail">
-                    <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Morales.jpg" alt="Rocio Morales" /> </div>
-                    <div class="team-designation mt_20">Front End Developer</div>
-                    <h4 class="team-title  mtb_10">Rocio Morales </h4>
-                    <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
-                    </p>
-                    <ul class="social mt_20 mb_80">
-                        <li><a href="https://www.facebook.com/" target="_blank"><i
-                                                class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="https://www.instagra,.com/" target="_blank"><i
-                                        class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
+        <div class=" team-detail" fxLayout="column" fxLayoutAlign="center center">
+            <div class="team-item-img">
+                <img id="image-Profesional" src="../../../assets/images/VanHeerden.jpg" alt="Juan Van Heerden" />
             </div>
-            <!--PROFESIONALES END -->
+            <div class="team-designation mt_20">Full Stack Developer</div>
+            <h4 class="team-title  mtb_10">Juan Van Heerden</h4>
+            <p>Siempre con cara de ogt, como en la foto de mierda esta</p>
+            <ul class="social mt_20 mb_80">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="https://www.instagra,.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
         </div>
+        <div class=" team-detail" fxLayout="column" fxLayoutAlign="center center">
+            <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Belloti.jpg"
+                    alt="Melina Belloti" /> </div>
+            <div class="team-designation mt_20">DB Developer</div>
+            <h4 class="team-title  mtb_10">Melina Bellotti </h4>
+            <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
+            </p>
+            <ul class="social mt_20 mb_80">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="https://www.instagra,.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class=" team-detail" fxLayout="column" fxLayoutAlign="center center">
+            <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Belelli.jpg"
+                    alt="Federico Belleli" /> </div>
+            <div class="team-designation mt_20">Back End Developer</div>
+            <h4 class="team-title  mtb_10">Federico Belleli </h4>
+            <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
+            </p>
+            <ul class="social mt_20 mb_80">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="https://www.instagra,.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class=" team-detail" fxLayout="column" fxLayoutAlign="center center">
+            <div class="team-item-img"> <img id="image-Profesional" src="../../../assets/images/Morales.jpg"
+                    alt="Rocio Morales" /> </div>
+            <div class="team-designation mt_20">Front End Developer</div>
+            <h4 class="team-title  mtb_10">Rocio Morales </h4>
+            <p>Lorem ipsum dolor sit amet, sea in odio erat, volumu Clita prodesset Rem ipsum dolor s..
+            </p>
+            <ul class="social mt_20 mb_80">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="https://www.instagra,.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <!--PROFESIONALES END -->
     </div>
     <!--ABOUT END -->
-</div>
+
+</section>

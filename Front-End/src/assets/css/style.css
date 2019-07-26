@@ -128,7 +128,7 @@ mat-grid-tile {
 }
 
 .color-snackbar{
-    background: #4a70af;
+    background: #1a1a1a;
     color: white;
 }
 
@@ -2714,7 +2714,11 @@ span.price {
 ----------------------------------------------- */
 
 .team-detail {
-    padding: 0 10px;
+    text-align: justify;
+}
+
+.team-detail p{
+    width: 70%;
 }
 
 .team-designation, .team-title {
