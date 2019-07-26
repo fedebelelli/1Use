@@ -1,3 +1,15 @@
 .input-xl{
     width: 400px;
 }
+
+.buscador-lt-md{
+    margin-left: 30px;
+}
+
+.buscador-md{
+    margin-left: 30px;
+}
+
+.mat-form-field-infix{
+    width: 100%;
+}

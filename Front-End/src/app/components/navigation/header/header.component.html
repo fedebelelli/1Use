@@ -1,18 +1,18 @@
 <mat-toolbar class="navbar">
-    <div fxHide.gt-xs>
+    <div fxHide.gt-md>
         <button mat-icon-button (click)="onToggleSidenav()">
             <mat-icon>menu</mat-icon>
         </button>
     </div>
-    <div fxFlex fxLayout fxFlexOrder="1" fxLayoutAlign.xs="end" fxFlexOrder.xs="3">
+    <div fxFlex fxLayout fxFlexOrder="1" fxLayoutAlign.lt-md="end" fxFlexOrder.lt-md="3">
         <a [routerLink]="['/home']">
-            <img ngClass.xs="img-logo-index-sm" class="img-logo-index" alt="1UseLogo" src="../assets/images/E3.png">
+            <img ngClass.lt-md="img-logo-index-sm" class="img-logo-index" alt="1UseLogo" src="../assets/images/E3.png">
         </a>
     </div>
 
-    <div fxFlex fxLayout fxLayoutAlign="center center" fxFlexOrder="2" fxLayout.xs="20px" fxFlexOrder.xs="2" >
+    <div fxFlex fxLayout fxLayoutAlign="center center" fxFlexOrder="2" fxLayout.lt-md="20px" fxFlexOrder.lt-md="2" ngClass.lt-md="buscador-lt-md" >
         <form>
-            <mat-form-field fxFlex ngClass.gt-md="input-xl">
+            <mat-form-field fxFlex ngClass.gt-md="input-xl" ngClass.md="buscador-md">
                 <input matInput>
                 <button mat-button>
                     <mat-icon>search</mat-icon>
@@ -21,7 +21,7 @@
         </form>
     </div>
     <!--class="buscador" class="buscador-full-width" -->
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs fxFlexOrder="3">
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-md fxFlexOrder="3">
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
         <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
         <button mat-button class="spanToolbar" [routerLink]="['/login']">Iniciar Sesion</button>
