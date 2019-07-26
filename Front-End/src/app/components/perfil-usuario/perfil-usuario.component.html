@@ -1,1 +1,75 @@
-<p>Usuario bienvenido a tu perfil!!</p>
+<div fxFlex fxLayout="row">
+    <!--<div class="barraPerfil" fxLayout="column" fxLayoutAlign="start">-->
+    <div fxLayout fxFlexOrder="1">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <a [routerLink]="['/perfil']">
+                    <mat-icon>account_circle</mat-icon><span class="iconitos">Mi Perfil</span>
+                </a>
+
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/home']">
+                    <mat-icon>book</mat-icon><span class="iconitos">Mis Publicaciones</span>
+                </a>
+
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/home']">
+                    <mat-icon>assignment</mat-icon> <span class="iconitos">Mis Alquileres</span>
+                </a>
+
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/home']">
+                    <mat-icon>exit_to_app</mat-icon><span class="iconitos">Salir</span>
+                </a>
+
+            </mat-toolbar-row>
+
+        </mat-toolbar>
+    </div>
+    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start">
+        <div style="width: 600px; padding-left: 35px; padding-top: 10px">
+            <h3>Datos de tu cuenta</h3>
+            <hr>
+            <br>
+            <mat-form-field>
+                <input value="Nombre" matInput placeholder="Nombre">
+
+            </mat-form-field>
+            <mat-form-field>
+                <input value="Apellido" matInput placeholder="Apellido">
+
+            </mat-form-field>
+            <mat-form-field>
+                <input value="Email" matInput placeholder="Email">
+
+            </mat-form-field>
+            <mat-form-field>
+                <input value="Direccion" matInput placeholder="Direccion">
+
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Fecha">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <input value="Numero de Telefono" matInput placeholder="Telefono">
+                <mat-icon matSuffix>phone</mat-icon>
+
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start">
+        <div style="padding-left: 35px; padding-bottom: 15px">
+            <button mat-raised-button color="primary">Editar Datos</button>
+        </div>    
+    </div>
+</div>
