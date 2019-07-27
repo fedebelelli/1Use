@@ -33,87 +33,85 @@
         </mat-toolbar>
     </div>
     <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start">
-        <div style="width: 600px; padding-left: 35px; padding-top: 10px">
+        <div style="width: 800px; height: 500px; padding-left: 35px; padding-top: 10px">
             <h3>Datos de tu cuenta</h3>
             <hr>
             <br>
-            <mat-form-field>
-                <input [value]="nombreUsuario" matInput placeholder="Nombre Usuario">
-
-            </mat-form-field>
-            <mat-form-field>
-                <input [value]="nombre" matInput placeholder="Nombre">
-
-            </mat-form-field>
-            <mat-form-field>
-                <input [value]="apellido" matInput placeholder="Apellido">
-
-            </mat-form-field>
-            <mat-form-field>
-                <input [value]="email" matInput placeholder="Email">
-
-            </mat-form-field>
-
-            <mat-form-field>
-                <input [value]="telefono" matInput placeholder="Telefono">
-                <mat-icon matSuffix>phone</mat-icon>
-
-            </mat-form-field>
 
 
-            <!--     <mat-form-field>
-                <input [value]= "fechaNcimiento" placeholder="Birthdate" [matDatepicker]="picker" [max]="maxDate" ngModel name="birthdate" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-hint>Debes ser mayor de 18 años</mat-hint>
-                </mat-form-field> -->
+            <mat-tab-group>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="iconitos">person_pin</mat-icon>
+                        Datos Personales
+                    </ng-template>
+                    <br>
+                    <mat-form-field>
+                        <input [value]="nombreUsuario" matInput placeholder="Nombre Usuario">
 
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input [value]="nombre" matInput placeholder="Nombre">
 
-            <mat-form-field>
-                <input [value]="fechaNacimiento" matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento"
-                    [max]="maxDate" ngModel name="fechaNacimiento">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-hint>Debes ser mayor de 18 años</mat-hint>
-            </mat-form-field>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input [value]="apellido" matInput placeholder="Apellido">
 
-            <br>
-            <br>
-            <h4>Datos Direccion</h4>
-            <hr>
-            <br>
-            <form [formGroup]="deshabilitarCiudad">
-                <mat-form-field>
-                    <mat-select placeholder="Provincia" [value]="provincia" formControlName="seleccionProvincia"
-                        (selectionChange)="onSelectionChanged($event)">
-                        <mat-option *ngFor="let provincia of datosProvincias" [value]="provincia.value">
-                            {{provincia.viewValue}} </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input [value]="email" matInput placeholder="Email">
 
-                <mat-form-field>
-                    <mat-select placeholder="Ciudad" [value]="ciudad">
-                        <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
-                            {{ciudad.viewValue}} </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!--  <mat-form-field>
-                    <input type="text" placeholder="Ciudad" matInput [formControl]="myControl" [matAutocomplete]="auto"
-                        formControlName="testInput">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field> -->
-            </form>
+                    </mat-form-field>
 
-            <mat-form-field>
-                <input matInput placeholder="Direccion" [value]="direccion">
-            </mat-form-field>
+                    <mat-form-field>
+                        <input [value]="telefono" matInput placeholder="Telefono">
+                        <mat-icon matSuffix>phone</mat-icon>
 
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input [value]="fechaNacimiento" matInput [matDatepicker]="picker"
+                            placeholder="Fecha Nacimiento" [max]="maxDate" ngModel name="fechaNacimiento">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                        <mat-hint>Debes ser mayor de 18 años</mat-hint>
+                    </mat-form-field>
+
+                </mat-tab>
+
+                <mat-tab style>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="iconitos">home</mat-icon>
+                        Datos de Dirección
+                    </ng-template>
+                    <br>
+                    <form [formGroup]="deshabilitarCiudad">
+                        <mat-form-field>
+                            <mat-select placeholder="Provincia" [value]="provincia" formControlName="seleccionProvincia"
+                                (selectionChange)="onSelectionChanged($event)">
+                                <mat-option *ngFor="let provincia of datosProvincias" [value]="provincia.value">
+                                    {{provincia.viewValue}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select placeholder="Ciudad" [value]="ciudad">
+                                <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
+                                    {{ciudad.viewValue}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Direccion" [value]="direccion">
+                    </mat-form-field>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
+
+
+
+
     <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start">
         <div style="padding-left: 35px; padding-bottom: 15px">
             <button mat-raised-button color="primary">Guardar Datos</button>
