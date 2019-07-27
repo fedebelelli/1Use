@@ -45,16 +45,21 @@ export class PerfilUsuarioComponent implements OnInit {
 
   //Para Autocomplete
   myControl = new FormControl();
-  options: string[] = this.ciudadesFiltradas; 
+  options: string[] = this.ciudadesFiltradas;
   /* ['One', 'Two', 'Three']; 
     this.ciudadesFiltradas; 
   */
   filteredOptions: Observable<string[]>;
-
+  maxDate;
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
+
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
+
     console.log(['One', 'Two', 'Three']);
 
     this._auth.user_data(this.emailLogueado).subscribe(
@@ -138,7 +143,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   }
 
-  filtrarCiudades(selectedValue){
+  filtrarCiudades(selectedValue) {
     var filtro = [], index, ciudades = this.datosCiudades;
 
     for (index in ciudades) {
@@ -181,6 +186,9 @@ export class PerfilUsuarioComponent implements OnInit {
     this.datosCiudades = arregloFinal;
     //console.log(this.datosCiudades);
   }
+
+
+
 
   /*
   filtrarCiudades(selectedValue) {
