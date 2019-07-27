@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData = {}
+  loginUserData = {email: undefined}
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit {
 
       res => {
           
-        //console.log(res)
+        //console.log(this.loginUserData)
         localStorage.setItem('token', res.token)
+        localStorage.setItem('email', this.loginUserData.email)
         this._router.navigate(['/home'])
+        
       },
       err => {
         //console.log(err);

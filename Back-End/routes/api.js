@@ -5,6 +5,9 @@ const router = express.Router()
 const User = require('../auth/auth.model');
 const nodemailer = require("nodemailer");
 const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded ( { extended:false } ) );
+app.use( bodyParser.json() );
 
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -88,7 +91,7 @@ router.post('/login', (req, res) => {
     let userData = req.body
 
     User.findOne({ email: userData.email }, (error, user) => {
-        
+
         if (error) {
             console.log(error)
         }
@@ -136,29 +139,18 @@ router.post('/confirmation', (req, res) => {
 
 });
 
-router.get('/user', function (req, res) {
-    let userData = req.body;
-    User.findOne({ email: userData.email }, (error, user) => {
+router.get('/user-data', function (req, res) {
+    let params = req.query.email;
+    User.findOne({email: params}, (error, user) => {
         if (error) {
-            console.log(error)
+            console.log("No pasa nada che")
         }
         else {
-            if (!user || !user.confirmed) {
-                console.log("holis1");
-                res.status(401).send('Invalid email')
-            } else {
-                if (user.password !== userData.password) {
-                    console.log("holis2");
-                    res.status(401).send('Invalid Password')
-                }
-                else {
-                    console.log("holis3");
-                    res.status(200).send({ token })
-                }
-            }
+            res.status(200).send(user);
         }
     })
 });
+
 
 //app.use(router);
 

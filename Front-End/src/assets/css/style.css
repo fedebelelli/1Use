@@ -119,9 +119,7 @@ mat-grid-tile {
     width: 100%;
 }
 
-.mat-input-element, .mat-toolbar {
-    color: white !important;
-}
+
 
 .justify-footer, .text-justify {
     text-align: justify;

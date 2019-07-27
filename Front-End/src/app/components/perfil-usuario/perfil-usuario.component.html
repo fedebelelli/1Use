@@ -38,38 +38,60 @@
             <hr>
             <br>
             <mat-form-field>
-                <input value="Nombre" matInput placeholder="Nombre">
+                <input  [value]="nombreUsuario" matInput placeholder="Nombre Usuario">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="Apellido" matInput placeholder="Apellido">
+                <input [value]="nombre" matInput placeholder="Nombre">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="Email" matInput placeholder="Email">
+                <input [value]="apellido" matInput placeholder="Apellido">
 
             </mat-form-field>
             <mat-form-field>
-                <input value="Direccion" matInput placeholder="Direccion">
+                <input [value]="email" matInput placeholder="Email">
 
             </mat-form-field>
+
             <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Fecha">
+                <input [value]="telefono" matInput placeholder="Telefono">
+                <mat-icon matSuffix>phone</mat-icon>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <input [value]="fechaNacimiento" matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
 
             </mat-form-field>
 
-            <mat-form-field>
-                <input value="Numero de Telefono" matInput placeholder="Telefono">
-                <mat-icon matSuffix>phone</mat-icon>
 
+            <h4>Datos Direccion</h4>
+            <hr>
+            <br>
+            <mat-form-field>
+                <mat-select placeholder="Provincia">
+                  <mat-option value="option">Se tienen que cargar todas las provincias</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-select placeholder="Localidad">
+                  <mat-option value="option">Se tienen que cargar todas las localidades correspondientes a la provincia</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            <mat-form-field>
+                <input matInput placeholder="Direccion">
             </mat-form-field>
+
         </div>
     </div>
     <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start">
         <div style="padding-left: 35px; padding-bottom: 15px">
-            <button mat-raised-button color="primary">Editar Datos</button>
-        </div>    
+            <button mat-raised-button color="primary">Guardar Datos</button>
+        </div>
     </div>
 </div>

@@ -13,3 +13,7 @@
 .mat-form-field-infix{
     width: 100%;
 }
+
+.mat-input-element, .mat-toolbar {
+    color: white !important;
+}

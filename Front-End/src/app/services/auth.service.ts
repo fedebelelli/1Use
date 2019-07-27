@@ -14,6 +14,8 @@ export class AuthService {
   private _registerUrl = "http://localhost:4201/api/register"
   private _loginUrl = "http://localhost:4201/api/login"
   private _confirmar = "http://localhost:4201/api/confirmation"
+  private _userData = "http://localhost:4201/api/user-data?email="
+
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -37,5 +39,8 @@ export class AuthService {
     return this.http.post<any>(this._confirmar, {token: token});
   }
 
+  user_data(email){
+    return this.http.get<any>(this._userData + email)
+  }
 
 }
