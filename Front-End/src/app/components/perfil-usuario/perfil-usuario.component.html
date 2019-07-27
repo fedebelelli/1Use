@@ -38,7 +38,7 @@
             <hr>
             <br>
             <mat-form-field>
-                <input  [value]="nombreUsuario" matInput placeholder="Nombre Usuario">
+                <input [value]="nombreUsuario" matInput placeholder="Nombre Usuario">
 
             </mat-form-field>
             <mat-form-field>
@@ -71,20 +71,34 @@
             <h4>Datos Direccion</h4>
             <hr>
             <br>
+            <form [formGroup]="deshabilitarCiudad">
+                <mat-form-field>
+                    <mat-select placeholder="Provincia" [value]="provincia" formControlName="seleccionProvincia"
+                        (selectionChange)="onSelectionChanged($event)">
+                        <mat-option *ngFor="let provincia of datosProvincias" [value]="provincia.value">
+                            {{provincia.viewValue}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select placeholder="Ciudad" [value]="ciudad">
+                        <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
+                            {{ciudad.viewValue}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+               <!--  <mat-form-field>
+                    <input type="text" placeholder="Ciudad" matInput [formControl]="myControl" [matAutocomplete]="auto"
+                        formControlName="testInput">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field> -->
+            </form>
+
             <mat-form-field>
-                <mat-select placeholder="Provincia">
-                  <mat-option value="option">Se tienen que cargar todas las provincias</mat-option>
-                </mat-select>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-select placeholder="Localidad">
-                  <mat-option value="option">Se tienen que cargar todas las localidades correspondientes a la provincia</mat-option>
-                </mat-select>
-              </mat-form-field>
-              
-            <mat-form-field>
-                <input matInput placeholder="Direccion">
+                <input matInput placeholder="Direccion" [value]="direccion">
             </mat-form-field>
 
         </div>
