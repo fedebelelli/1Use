@@ -50,7 +50,7 @@ import { SidenavListComponent } from './components/navigation/sidenav-list/siden
     AuthRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MaterialModule 
   ],
   providers: [appRoutingProviders, AuthService],

@@ -51,10 +51,10 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this._adapter.setLocale('es');
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-
 
     this._auth.user_data(this.emailLogueado).subscribe(
       res => {
@@ -77,7 +77,10 @@ export class PerfilUsuarioComponent implements OnInit {
 
         if (res.fecha_nacimiento == undefined) {
           this.fechaNacimiento = undefined;
-        } else { this.date = new FormControl(new Date(res.fecha_nacimiento), Validators.required); }
+        } else {
+          let fecha = new Date(res.fecha_nacimiento);
+          this.date = new FormControl({ value: fecha, disabled: true }, [Validators.required])
+        }
 
         if (res.provincia == undefined) {
           this.provincia = undefined;
@@ -96,10 +99,8 @@ export class PerfilUsuarioComponent implements OnInit {
         this.openSnackBar(error.error, "Aceptar")
       }
     )
-
     this.crearJSONprovincias();
     this.crearJSONciudades();
-
   }
 
   openSnackBar(message: string, action: string) {
@@ -109,14 +110,8 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
 
-  deshabilitarCiudad = new FormGroup({
-    seleccionProvincia: new FormControl("", Validators.required),
-    testInput: new FormControl({ value: "", disabled: true }, [Validators.required])
-  });
-
   onSelectionChanged({ value }) {
     this.filtrarCiudades(value);
-    this.deshabilitarCiudad.get('testInput').enable();
   }
 
   filtrarCiudades(selectedValue) {

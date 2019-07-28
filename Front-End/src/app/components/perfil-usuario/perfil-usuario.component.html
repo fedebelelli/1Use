@@ -67,7 +67,7 @@
 
                         <mat-form-field>
                             <input matInput placeholder="Fecha de nacimiento" [matDatepicker]="picker" [max]="maxDate"
-                                ngModel [(ngModel)]="user.fecha_nacimiento" name="date" disabled [formControl]="date">
+                                ngModel [(ngModel)]="user.fecha_nacimiento" name="date" [formControl]="date">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <!-- <mat-datepicker fxHide.lt-md="true" #picker disabled="false"></mat-datepicker> -->
                             <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
