@@ -32,7 +32,6 @@ export class PerfilUsuarioComponent implements OnInit {
   public telefono: number;
   public fechaNacimiento: string;
   public provincia: string;
-  public ciudad: string;
   public direccion: string;
 
   //Para traer los datos de la BD en el form
@@ -44,6 +43,7 @@ export class PerfilUsuarioComponent implements OnInit {
   datosProvincias: Provincias[];
   ciudadesFiltradas: string[];
   date = new FormControl();
+  ciudad = new FormControl();
 
   maxDate;
 
@@ -82,13 +82,21 @@ export class PerfilUsuarioComponent implements OnInit {
           this.date = new FormControl({ value: fecha, disabled: true }, [Validators.required])
         }
 
-        if (res.provincia == undefined) {
-          this.provincia = undefined;
-        } else this.provincia = res.provincia;
-
         if (res.ciudad == undefined) {
           this.ciudad = undefined;
-        } else this.ciudad = res.ciudad;
+        } else {
+          let ciudad = res.ciudad;
+          this.ciudad = new FormControl({ value: ciudad, disabled: false }, [Validators.required]);
+        }
+
+        if (res.provincia == undefined) {
+          this.provincia = undefined;
+          this.ciudad = new FormControl({value: "", disabled: true}, [Validators.required]);
+        } else {
+          this.provincia = res.provincia;
+          this.filtrarCiudades(this.provincia);
+        }
+
 
         if (res.direccion == undefined) {
           this.direccion = "";
@@ -112,6 +120,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   onSelectionChanged({ value }) {
     this.filtrarCiudades(value);
+    this.ciudad = new FormControl({value: "", disabled: false}, [Validators.required]);
   }
 
   filtrarCiudades(selectedValue) {
