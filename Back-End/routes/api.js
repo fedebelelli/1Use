@@ -6,8 +6,8 @@ const User = require('../auth/auth.model');
 const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded ( { extended:false } ) );
-app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -141,7 +141,7 @@ router.post('/confirmation', (req, res) => {
 
 router.get('/user-data', function (req, res) {
     let params = req.query.email;
-    User.findOne({email: params}, (error, user) => {
+    User.findOne({ email: params }, (error, user) => {
         if (error) {
             console.log("No pasa nada che")
         }
@@ -151,7 +151,17 @@ router.get('/user-data', function (req, res) {
     })
 });
 
+router.put('/update-user', function (req, res) {
 
-//app.use(router);
+    var params = req.query.email;
+    var user = req.body;
+
+    User.findOneAndUpdate({ email: params }, user, (err, pUpdated) => {
+        if (err) return res.status(500).send("Error en BD");
+        if (!pUpdated) return res.status(500).send("Error en BD");
+        return res.status(200).send("Datos guardados correctamente");
+    });
+})
+
 
 module.exports = router;

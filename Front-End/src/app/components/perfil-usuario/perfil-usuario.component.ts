@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material';
 import provincias from './provincias.json';
 import ciudades from './ciudades-argentinas.json';
-import { FormControl, NgControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import moment from 'moment';
+
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
 
@@ -19,52 +19,45 @@ export interface Provincias {
 @Component({
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
-  styleUrls: ['./perfil-usuario.component.css']
+  styleUrls: ['./perfil-usuario.component.css'],
+  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'es-LA' }]
 })
 
 export class PerfilUsuarioComponent implements OnInit {
 
-  nombreUsuario: string;
-  nombre: string;
-  apellido: string;
-  email: string;
-  telefono: number;
-  fechaNacimiento: Date;
-  provincia: string;
-  localidad: string;
-  direccion: string;
+  public nombreUsuario: string;
+  public nombre: string;
+  public apellido: string;
+  public email: string;
+  public telefono: number;
+  public fechaNacimiento: string;
+  public provincia: string;
+  public ciudad: string;
+  public direccion: string;
 
   //Para traer los datos de la BD en el form
-  userData = {};
+  public user = {};
   emailLogueado = localStorage.getItem("email");
 
   //Para armar los JSON de provincias y ciudades
   datosCiudades = [];
   datosProvincias: Provincias[];
   ciudadesFiltradas: string[];
+  date = new FormControl();
 
-  //Para Autocomplete
-  myControl = new FormControl();
-  options: string[] = this.ciudadesFiltradas;
-  /* ['One', 'Two', 'Three']; 
-    this.ciudadesFiltradas; 
-  */
-  filteredOptions: Observable<string[]>;
   maxDate;
-  constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) {
+
+  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>) {
   }
 
   ngOnInit() {
-
+    this._adapter.setLocale('es');
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
 
 
-    console.log(['One', 'Two', 'Three']);
-
     this._auth.user_data(this.emailLogueado).subscribe(
       res => {
-        console.log(res);
 
         this.nombreUsuario = res.name;
 
@@ -82,17 +75,17 @@ export class PerfilUsuarioComponent implements OnInit {
           this.telefono = null;
         } else this.telefono = res.telefono;
 
-        if (res.fechaNacimiento == undefined) {
+        if (res.fecha_nacimiento == undefined) {
           this.fechaNacimiento = undefined;
-        } else this.fechaNacimiento = res.fechaNacimiento;
-
-        if (res.localidad == undefined) {
-          this.localidad = undefined;
-        } else this.localidad = res.localidad;
+        } else { this.date = new FormControl(new Date(res.fecha_nacimiento), Validators.required); }
 
         if (res.provincia == undefined) {
           this.provincia = undefined;
         } else this.provincia = res.provincia;
+
+        if (res.ciudad == undefined) {
+          this.ciudad = undefined;
+        } else this.ciudad = res.ciudad;
 
         if (res.direccion == undefined) {
           this.direccion = "";
@@ -107,12 +100,6 @@ export class PerfilUsuarioComponent implements OnInit {
     this.crearJSONprovincias();
     this.crearJSONciudades();
 
-    //Para Autocomplete
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
   }
 
   openSnackBar(message: string, action: string) {
@@ -122,25 +109,14 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
 
-  //Para Autocomplete
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
   deshabilitarCiudad = new FormGroup({
     seleccionProvincia: new FormControl("", Validators.required),
-    testInput: new FormControl({ value: "", disabled: true }, [
-      Validators.required
-    ])
+    testInput: new FormControl({ value: "", disabled: true }, [Validators.required])
   });
 
   onSelectionChanged({ value }) {
-    console.log(value);
     this.filtrarCiudades(value);
     this.deshabilitarCiudad.get('testInput').enable();
-
   }
 
   filtrarCiudades(selectedValue) {
@@ -187,22 +163,18 @@ export class PerfilUsuarioComponent implements OnInit {
     //console.log(this.datosCiudades);
   }
 
-
-
-
-  /*
-  filtrarCiudades(selectedValue) {
-    var filtro: string[] = [], index, ciudades = this.datosCiudades;
-
-    for (index in ciudades) {
-      if (ciudades[index].value == selectedValue) {
-        filtro.push(ciudades[index].viewValue)
+  onSubmit() {
+    let email = localStorage.getItem("email");
+    this._auth.update_user(this.user, email).subscribe(
+      res => {
+        this.openSnackBar(res, "Aceptar");
+      },
+      err => {
+        this.openSnackBar(err.error.text, "Aceptar");
       }
-    }
-    this.ciudadesFiltradas = filtro;
-    console.log(this.ciudadesFiltradas);
+    )
   }
-  */
+
 
 }
 
