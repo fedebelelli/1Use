@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginUserData = {email: undefined}
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
-
+  
   ngOnInit() {
   }
 
