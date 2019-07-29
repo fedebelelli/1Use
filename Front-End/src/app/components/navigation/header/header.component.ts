@@ -10,12 +10,14 @@ export class HeaderComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter<void>();
   onToggleSidenav() { this.sidenavToggle.emit(); }
+  
 
-  estado1: boolean;
+  estadoBuscador: boolean;
   inicioSesion: boolean;
   urlActual: string;
   urlRecortada: string;
   usuarioActivo;
+
   constructor(private singleton: SingletonService) { }
 
   ngOnInit() {
@@ -35,8 +37,8 @@ export class HeaderComponent implements OnInit {
   }
 
   checkPage(url) {
-    this.estado1 = this.singleton.paginaActual(url);
-    this.singleton.setEstado(this.estado1);
+    this.estadoBuscador = this.singleton.paginaActual(url);
+    this.singleton.setEstado(this.estadoBuscador);
   }
 
 

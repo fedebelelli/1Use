@@ -9,10 +9,22 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-   constructor() { }
+  inicioSesion: boolean;
+  urlActual: string;
+  urlRecortada: string;
+  usuarioActivo;
+
+   constructor(private singleton: SingletonService) { }
 
 
-  ngOnInit() {
+   ngOnInit() {
+
   }
 
+/*   setearInicioSesion() {
+    this.usuarioActivo = localStorage.getItem("email");
+    if (this.usuarioActivo == null) {
+      this.singleton.setInicioSesion(false);
+    } else this.singleton.setInicioSesion(true);
+  } */
 }

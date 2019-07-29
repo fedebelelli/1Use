@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   loginUserData = { email: undefined }
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
+  estado: boolean;
 
   ngOnInit() {
 
@@ -26,15 +27,23 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem('token', res.token)
         localStorage.setItem('email', this.loginUserData.email)
-
-        this._router.navigate(['/home'])
-        this.indicarInicio();
+        this.estado = true;
+        this._router.navigate(['/home']);
       },
       err => {
+        this.estado = false;
         this.openSnackBar(err.error, "Aceptar");
       }
     )
   }
+
+  iniciarSesion() {
+    if (this.estado) {
+      this.singleton.setInicioSesion(true);
+      this.indicarInicio();
+    } else this.singleton.setInicioSesion(false);
+  }
+
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

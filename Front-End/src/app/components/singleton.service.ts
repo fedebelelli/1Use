@@ -41,6 +41,19 @@ export class SingletonService {
     if (urlActual == "/categorias") {
       this.estado = false;
     }
+    
+    if (urlActual == "/terminos-condiciones") {
+      this.estado = false;
+    }
+
+    if (urlActual == "/confirmacionemail") {
+      this.estado = false;
+    }
+
+    if (urlActual == "/confirma") {
+      this.estado = false;
+    }
+    
     return this.estado;
   }
 

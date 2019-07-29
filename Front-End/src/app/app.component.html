@@ -3,7 +3,7 @@
     <app-sidenav-list (closeSidenav)="sidenav.close()" (cambiarEstado)="header.checkPage($event)"></app-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-header #header (sidenavToggle)="sidenav.toggle()" ></app-header>
+    <app-header #header (sidenavToggle)="sidenav.toggle()"></app-header>
     <main>
       <app-login fxHide="true" (inicioSesion)="header.mostrarPantalla()"></app-login>
       <router-outlet></router-outlet>
