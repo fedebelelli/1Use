@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 
 export class SingletonService {
 
-  constructor(private _router: Router) { }
+  constructor() { }
 
   estado: boolean;
 
-  paginaActual(urlActual:string): boolean {
-    
+  paginaActual(urlActual: string): boolean {
+
     if (urlActual == "/login") {
       this.estado = false;
     }
@@ -36,6 +36,18 @@ export class SingletonService {
     if (urlActual == "/") {
       this.estado = true;
     }
+
+    if (urlActual == "/categorias") {
+      this.estado = false;
+    }
+    return this.estado;
+  }
+
+  setEstado(estado: boolean) {
+    this.estado = estado;
+  }
+
+  getEstado(): boolean {
     return this.estado;
   }
 
