@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SingletonService } from '../singleton.service'
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +20,4 @@ export class HomeComponent implements OnInit {
 
   }
 
-/*   setearInicioSesion() {
-    this.usuarioActivo = localStorage.getItem("email");
-    if (this.usuarioActivo == null) {
-      this.singleton.setInicioSesion(false);
-    } else this.singleton.setInicioSesion(true);
-  } */
 }

@@ -11,9 +11,6 @@ import { SingletonService } from '../singleton.service';
 })
 export class LoginComponent implements OnInit {
 
-  @Output() inicioSesion = new EventEmitter<void>();
-  indicarInicio() { this.inicioSesion.emit() };
-
   loginUserData = { email: undefined }
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
   estado: boolean;
@@ -28,7 +25,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token)
         localStorage.setItem('email', this.loginUserData.email)
         this.estado = true;
-        this._router.navigate(['/home']);
+        //this._router.navigate(['/home']);
+        this.iniciarSesion();
       },
       err => {
         this.estado = false;
@@ -40,7 +38,7 @@ export class LoginComponent implements OnInit {
   iniciarSesion() {
     if (this.estado) {
       this.singleton.setInicioSesion(true);
-      this.indicarInicio();
+      window.location.assign('/home');
     } else this.singleton.setInicioSesion(false);
   }
 

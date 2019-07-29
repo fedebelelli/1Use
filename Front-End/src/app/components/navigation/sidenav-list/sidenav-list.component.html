@@ -11,11 +11,15 @@
         <mat-icon>help</mat-icon>
         <span class="nav-caption">Sobre nosotros</span>
     </a>
-    <a mat-list-item routerLink="/login" (click)="onClose(); buscador('/login')">
+    <a mat-list-item routerLink="/login" (click)="onClose(); buscador('/login')" [fxShow]=!estadoSesion>
+        <mat-icon>face</mat-icon>
+        <span class="nav-caption">Iniciar sesión</span>
+    </a>
+    <a mat-list-item routerLink="/perfil" (click)="onClose(); buscador('/perfil')" [fxShow]=estadoSesion>
         <mat-icon>face</mat-icon>
         <span class="nav-caption">Mi cuenta</span>
     </a>
-    <a mat-list-item (click)="onClose()">
+    <a mat-list-item (click)="onClose(); cerrarSesion()" [fxShow]=estadoSesion>
         <mat-icon>close</mat-icon>
         <span class="nav-caption">Cerrar Sesión</span>
     </a>

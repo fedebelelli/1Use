@@ -19,10 +19,28 @@ export class SidenavListComponent implements OnInit {
     this.onClick(url);
   }
 
-  constructor() { }
+  usuarioActivo;
+
+  estadoSesion: boolean;
+
+  cerrarSesion() {
+    localStorage.removeItem("email");
+    this.singleton.setInicioSesion(false);
+    window.location.assign('/home');
+  }
+
+  constructor(private singleton: SingletonService) { }
 
   ngOnInit() {
+    this.usuarioActivo = localStorage.getItem("email");
 
+    if (this.usuarioActivo == null) {
+      this.singleton.setInicioSesion(false);
+    } else this.singleton.setInicioSesion(true);
+
+    this.estadoSesion = this.singleton.getInicioSesion();
+
+    console.log(this.estadoSesion);
   }
 
 }

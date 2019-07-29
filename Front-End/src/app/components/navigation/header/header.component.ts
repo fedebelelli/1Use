@@ -42,8 +42,4 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  mostrarPantalla() {
-    console.log("holiss");
-  }
-
 }
