@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material';
-import { SingletonService } from '../singleton.service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +10,16 @@ import { SingletonService } from '../singleton.service';
 })
 export class LoginComponent implements OnInit {
 
+<<<<<<< HEAD
   @Output() inicioSesion = new EventEmitter<void>();
   indicarInicio() { this.inicioSesion.emit() };
 
   loginUserData = { email: undefined }
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
+=======
+  loginUserData = {email: undefined}
+  constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
+>>>>>>> ccf4b67eb5c975c39af944a658c2cedaa3a96808
 
   ngOnInit() {
     

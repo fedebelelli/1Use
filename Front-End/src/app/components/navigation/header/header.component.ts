@@ -1,16 +1,15 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { SingletonService } from '../../singleton.service'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter<void>();
-  onToggleSidenav() { this.sidenavToggle.emit(); }
 
+<<<<<<< HEAD
   estado1: boolean;
   inicioSesion: boolean;
   urlActual: string;
@@ -44,4 +43,13 @@ export class HeaderComponent implements OnInit {
     console.log("holiss");
   }
 
+=======
+  onToggleSidenav() { this.sidenavToggle.emit(); }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+>>>>>>> ccf4b67eb5c975c39af944a658c2cedaa3a96808
 }
