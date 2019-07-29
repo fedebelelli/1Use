@@ -4,7 +4,6 @@ import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { SingletonService } from '../singleton.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
 
   ngOnInit() {
-    
+
   }
 
   loginUser() {
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem('token', res.token)
         localStorage.setItem('email', this.loginUserData.email)
-        
+
         this._router.navigate(['/home'])
         this.indicarInicio();
       },

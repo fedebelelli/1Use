@@ -1,14 +1,15 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { SingletonService } from '../../singleton.service';
+import { SingletonService } from '../../singleton.service'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter<void>();
+  onToggleSidenav() { this.sidenavToggle.emit(); }
 
   estado1: boolean;
   inicioSesion: boolean;

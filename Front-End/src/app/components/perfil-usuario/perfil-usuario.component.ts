@@ -6,7 +6,6 @@ import provincias from './provincias.json';
 import ciudades from './ciudades-argentinas.json';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import moment from 'moment';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');

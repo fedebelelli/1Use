@@ -88,25 +88,13 @@ mat-grid-tile {
     color: white;
 }
 
-.img-logo-index {
-    width: 80px;
-    height: 50px;
-    margin-top: 14px;
-}
-
-.img-logo-index-sm {
-    width: 52px;
-    height: 34px;
-    margin-top: 6px;
-}
-
 .boton-buscador {
     color: white;
 }
 
 .mat-form-field-infix {
-    width: 300px;
-}
+    width: 100% !important;
+} 
 
 .buscador {
     min-width: 150px;
@@ -202,7 +190,6 @@ body {
 
 img {
     height: 100px;
-    max-width: 100%;
     border: none;
     outline: none;
     transition: all 0.4s ease 0s;
