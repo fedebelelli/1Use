@@ -12,15 +12,26 @@ export class HeaderComponent implements OnInit {
   onToggleSidenav() { this.sidenavToggle.emit(); }
 
   estado1: boolean;
+  inicioSesion: boolean;
   urlActual: string;
   urlRecortada: string;
+  usuarioActivo;
   constructor(private singleton: SingletonService) { }
-
 
   ngOnInit() {
     this.urlActual = window.location.href;
     this.urlRecortada = this.urlActual.substr(21);
     this.checkPage(this.urlRecortada);
+    this.setearInicioSesion();
+  }
+
+  setearInicioSesion() {
+    this.usuarioActivo = localStorage.getItem("email");
+    if (this.usuarioActivo == null) {
+      this.singleton.setInicioSesion(false);
+    } else this.singleton.setInicioSesion(true);
+    
+    this.inicioSesion = this.singleton.getInicioSesion();
   }
 
   checkPage(url) {
@@ -29,5 +40,8 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  mostrarPantalla() {
+    console.log("holiss");
+  }
 
 }

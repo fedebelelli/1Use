@@ -10,6 +10,7 @@ export class SingletonService {
   constructor() { }
 
   estado: boolean;
+  inicioSesion: boolean;
 
   paginaActual(urlActual: string): boolean {
 
@@ -49,6 +50,14 @@ export class SingletonService {
 
   getEstado(): boolean {
     return this.estado;
+  }
+
+  setInicioSesion(inicio: boolean) {
+    this.inicioSesion = inicio;
+  }
+
+  getInicioSesion(): boolean {
+    return this.inicioSesion;
   }
 
 }

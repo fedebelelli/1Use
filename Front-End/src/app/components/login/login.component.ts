@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material';
 import { SingletonService } from '../singleton.service';
 
@@ -12,34 +11,33 @@ import { SingletonService } from '../singleton.service';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() inicioSesion = new EventEmitter<void>();
+  indicarInicio() { this.inicioSesion.emit() };
 
-  loginUserData = {email: undefined}
-  constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
-  
+  loginUserData = { email: undefined }
+  constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
+
   ngOnInit() {
+    
   }
 
-  loginUser(){
-
-    this ._auth.loginUser(this.loginUserData).subscribe(
-
+  loginUser() {
+    this._auth.loginUser(this.loginUserData).subscribe(
       res => {
-          
-        //console.log(this.loginUserData)
         localStorage.setItem('token', res.token)
         localStorage.setItem('email', this.loginUserData.email)
-        this._router.navigate(['/home'])
         
+        this._router.navigate(['/home'])
+        this.indicarInicio();
       },
       err => {
-        //console.log(err);
-        this.openSnackBar(err.error,"Aceptar");
+        this.openSnackBar(err.error, "Aceptar");
       }
     )
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action,  {
+    this._snackBar.open(message, action, {
       duration: 8000,
       panelClass: ['color-snackbar']
     });
@@ -55,7 +53,7 @@ export class LoginComponent implements OnInit {
   value1 = '';
   hide = true;
 
-   
+
 
 
 
