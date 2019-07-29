@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material';
+import { SingletonService } from '../singleton.service';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,10 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
+
   loginUserData = {email: undefined}
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar) { }
-
+  
   ngOnInit() {
   }
 
