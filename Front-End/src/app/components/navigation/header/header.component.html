@@ -23,18 +23,12 @@
     <!--class="buscador" class="buscador-full-width" -->
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-md fxFlexOrder="3">
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
-<<<<<<< HEAD
         <button mat-button class="spanToolbar" [routerLink]="['/about']" (click)="checkPage('/about')">Sobre
             Nosotros</button>
         <button mat-button class="spanToolbar" [routerLink]="['/login']" (click)="checkPage('/login')" [fxShow]=!inicioSesion>Iniciar
             Sesion</button>
         <button mat-button class="spanToolbar" [routerLink]="['/perfil']" (click)="checkPage('/perfil')" [fxShow]=inicioSesion>Mi
             cuenta</button>
-=======
-        <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/login']">Iniciar Sesion</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/perfil']">Mi cuenta</button>
->>>>>>> ccf4b67eb5c975c39af944a658c2cedaa3a96808
         <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
         <mat-menu #subMenu="matMenu">
             <button mat-menu-item>Electrónica</button>
