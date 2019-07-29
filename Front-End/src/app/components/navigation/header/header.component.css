@@ -1,6 +1,5 @@
 .input-xl{
     width: 400px;
-    height: 100%;
 }
 
 .buscador-lt-md{
@@ -11,19 +10,10 @@
     margin-left: 30px;
 }
 
+.mat-form-field-infix{
+    width: 100%;
+}
+
 .mat-input-element, .mat-toolbar {
     color: white !important;
-}
-
-.img-logo-index {
-    width: 80px;
-    height: 50px;
-    margin-top: 14px;
-    margin-left: 70px;
-}
-
-.img-logo-index-sm {
-    width: 52px;
-    height: 34px;
-    margin-top: 6px;
 }

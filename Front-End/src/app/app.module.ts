@@ -23,7 +23,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { FooterComponent } from './components/navigation/footer/footer.component';
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
-import { SingletonService } from './components/singleton.service'
 
 @NgModule({
   declarations: [
@@ -52,10 +51,9 @@ import { SingletonService } from './components/singleton.service'
     FlexLayoutModule,
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    MaterialModule,
-    
+    MaterialModule 
   ],
-  providers: [appRoutingProviders, AuthService, SingletonService ],
+  providers: [appRoutingProviders, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
