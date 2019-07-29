@@ -5,13 +5,13 @@
         </button>
     </div>
     <div fxFlex fxLayout fxFlexOrder="1" fxLayoutAlign.lt-md="end" fxFlexOrder.lt-md="3">
-        <a [routerLink]="['/home']">
+        <a [routerLink]="['/home']" (click)="checkPage('/home')" >
             <img ngClass.lt-md="img-logo-index-sm" class="img-logo-index" alt="1UseLogo" src="../assets/images/E3.png">
         </a>
     </div>
 
     <div fxFlex.gt-md fxLayout.gt-md fxLayoutAlign.gt-md="center center" fxFlexOrder.gt-md="2" ngClass.gt-md="input-xl"
-        fxLayout.lt-md="20px" fxFlexOrder.lt-md="2" ngClass.lt-md="buscador-lt-md" [fxShow]=estado>
+        fxLayout.lt-md="20px" fxFlexOrder.lt-md="2" ngClass.lt-md="buscador-lt-md" [fxShow]=estado1>
         <form>
             <mat-form-field>
                 <input matInput>
@@ -24,9 +24,9 @@
     <!--class="buscador" class="buscador-full-width" -->
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-md fxFlexOrder="3">
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/about']">Sobre Nosotros</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/login']">Iniciar Sesion</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/perfil']">Mi cuenta</button>
+        <button mat-button class="spanToolbar" [routerLink]="['/about']" (click)="checkPage('/about')">Sobre Nosotros</button>
+        <button mat-button class="spanToolbar" [routerLink]="['/login']" (click)="checkPage('/login')">Iniciar Sesion</button>
+        <button mat-button class="spanToolbar" [routerLink]="['/perfil']" (click)="checkPage('/perfil')">Mi cuenta</button>
         <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
         <mat-menu #subMenu="matMenu">
             <button mat-menu-item>Electrónica</button>

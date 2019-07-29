@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { SingletonService } from '../../singleton.service'
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,33 +13,25 @@ export class HeaderComponent implements OnInit {
 
   onToggleSidenav() { this.sidenavToggle.emit(); }
 
-  constructor(private _router: Router) { }
-
-  estado: boolean = true;
+  estado1: boolean
+  urlActual: string;
+  urlRecortada: string;
+  constructor(private _router: Router, private singleton: SingletonService) { }
 
   ngOnInit() {
-    this.paginaActual();
+    this.urlActual = window.location.href;
+    this.urlRecortada = this.urlActual.substr(21);
+    this.checkPage(this.urlRecortada);
+    console.log(this.urlRecortada);
   }
 
-  paginaActual(){
-    let urlActual: string = this._router.url;
-
-    if(urlActual.includes("/login")){
-      this.estado = false;
-    }
-
-    if(urlActual.includes("/register")){
-      this.estado = false;
-    }
-
-    if(urlActual.includes("/perfil")){
-      this.estado = false;
-    }
-
-    if(urlActual.includes("/about")){
-      this.estado = false;
-    }
-
+  checkPage(url){
+    this.estado1 = this.singleton.paginaActual(url);
   }
+
+  checkInitialPage(){
+    this.estado1 = this.singleton.paginaActual(this._router.url);
+  }
+
 
 }
