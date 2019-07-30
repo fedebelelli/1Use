@@ -24,7 +24,8 @@ export class SidenavListComponent implements OnInit {
   estadoSesion: boolean;
 
   cerrarSesion() {
-    localStorage.removeItem("email");
+    localStorage.removeItem("email"); 
+    localStorage.removeItem("token");
     this.singleton.setInicioSesion(false);
     window.location.assign('/home');
   }

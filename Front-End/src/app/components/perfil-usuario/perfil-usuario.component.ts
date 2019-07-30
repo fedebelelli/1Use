@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material';
@@ -6,6 +6,7 @@ import provincias from './provincias.json';
 import ciudades from './ciudades-argentinas.json';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { SingletonService } from '../singleton.service';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
@@ -44,12 +45,21 @@ export class PerfilUsuarioComponent implements OnInit {
   date = new FormControl();
   ciudad = new FormControl();
 
+  //Para Datepicker
   maxDate;
 
-  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>) {
+  //Para mensaje de eror
+  @Output() mensajeError = new EventEmitter<string>();
+  enviarError(mensaje: string) { this.mensajeError.emit(mensaje) }
+
+  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router) {
   }
 
   ngOnInit() {
+
+    if (this.verificarInicioSesion() == false) {
+      return;
+    }
 
     this._adapter.setLocale('es');
     this.maxDate = new Date();
@@ -90,7 +100,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
         if (res.provincia == undefined) {
           this.provincia = undefined;
-          this.ciudad = new FormControl({value: "", disabled: true}, [Validators.required]);
+          this.ciudad = new FormControl({ value: "", disabled: true }, [Validators.required]);
         } else {
           this.provincia = res.provincia;
           this.filtrarCiudades(this.provincia);
@@ -119,7 +129,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   onSelectionChanged({ value }) {
     this.filtrarCiudades(value);
-    this.ciudad = new FormControl({value: "", disabled: false}, [Validators.required]);
+    this.ciudad = new FormControl({ value: "", disabled: false }, [Validators.required]);
   }
 
   filtrarCiudades(selectedValue) {
@@ -178,6 +188,15 @@ export class PerfilUsuarioComponent implements OnInit {
     )
   }
 
+  verificarInicioSesion(): boolean {
+    if (this.singleton.getInicioSesion() == false) {
+      //this.singleton.setMensajeError('ERROR: La página solicitada no puedo ser accedida debido a que no has iniciado sesión. Por favor, inicia sesión para poder realizar la funcionalidad deseada')
+      this._router.navigate(['/*']);
+      //document.location.reload();
+      return false;
+    }
+    return true;
+  }
 
 }
 

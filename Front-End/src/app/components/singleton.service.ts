@@ -11,6 +11,7 @@ export class SingletonService {
 
   estado: boolean;
   inicioSesion: boolean;
+  mensajeError: string;
 
   paginaActual(urlActual: string): boolean {
 
@@ -41,7 +42,7 @@ export class SingletonService {
     if (urlActual == "/categorias") {
       this.estado = false;
     }
-    
+
     if (urlActual == "/terminos-condiciones") {
       this.estado = false;
     }
@@ -53,7 +54,7 @@ export class SingletonService {
     if (urlActual == "/confirma") {
       this.estado = false;
     }
-    
+
     return this.estado;
   }
 
@@ -70,7 +71,17 @@ export class SingletonService {
   }
 
   getInicioSesion(): boolean {
-    return this.inicioSesion;
+    if (localStorage.getItem("email") != null) {
+      return true;
+    }
+    return false;
   }
 
+  setMensajeError(mensaje: string) {
+    this.mensajeError = mensaje;
+  }
+
+  getMensajeError(): string {
+    return this.mensajeError;
+  }
 }
