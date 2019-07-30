@@ -91,9 +91,7 @@
                         <br>
 
                         <mat-form-field>
-                            <mat-select placeholder="Provincia" [value]="provincia"
-                                (selectionChange)="onSelectionChanged($event)" [(ngModel)]="user.provincia"
-                                name="provincia">
+                            <mat-select placeholder="Provincia" [value]="provincia" (selectionChange)="onSelectionChanged($event)" [(ngModel)]="user.provincia" name="provincia">
                                 <mat-option *ngFor="let provincia of datosProvincias" [value]="provincia.value">
                                     {{provincia.viewValue}} </mat-option>
                             </mat-select>
