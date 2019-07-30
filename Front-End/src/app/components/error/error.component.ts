@@ -13,12 +13,6 @@ export class ErrorComponent implements OnInit {
   constructor(private singleton: SingletonService) { }
 
   ngOnInit() {
-    this.obtenerError();
-  }
-
-  obtenerError() {
-    //this.error = error;
-    this.error = this.singleton.getMensajeError();
   }
 
   inicio(){

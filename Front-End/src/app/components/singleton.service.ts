@@ -11,7 +11,7 @@ export class SingletonService {
 
   estado: boolean;
   inicioSesion: boolean;
-  mensajeError: string;
+  token: string;
 
   paginaActual(urlActual: string): boolean {
 
@@ -58,6 +58,12 @@ export class SingletonService {
     return this.estado;
   }
 
+  verificarToken(): boolean {
+    this.token = localStorage.getItem("token");
+    if (this.token == null) return false;
+    else return true;
+  }
+
   setEstado(estado: boolean) {
     this.estado = estado;
   }
@@ -77,11 +83,4 @@ export class SingletonService {
     return false;
   }
 
-  setMensajeError(mensaje: string) {
-    this.mensajeError = mensaje;
-  }
-
-  getMensajeError(): string {
-    return this.mensajeError;
-  }
-}
+} 

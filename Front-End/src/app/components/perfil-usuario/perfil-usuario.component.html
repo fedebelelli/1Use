@@ -1,47 +1,47 @@
 <div  fxLayout="row" fxFlexFill>
-    <div fxLayout fxFlexOrder="1" ngClass.lt-md="toolbar-div-lt-md">
+    <div fxLayout fxFlexOrder="1" ngClass.lt-lg="toolbar-div-lt-md">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
                 <a [routerLink]="['/perfil']">
-                    <mat-icon>account_circle</mat-icon><span class="iconitos" fxHide.lt-md="true">Mi Perfil</span>
+                    <mat-icon>account_circle</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mi Perfil</span>
                 </a>
             </mat-toolbar-row>
 
             <mat-toolbar-row>
                 <a [routerLink]="['/home']">
-                    <mat-icon>book</mat-icon><span class="iconitos" fxHide.lt-md="true">Mis Publicaciones</span>
+                    <mat-icon>book</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mis Publicaciones</span>
                 </a>
             </mat-toolbar-row>
 
             <mat-toolbar-row>
                 <a [routerLink]="['/home']">
-                    <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-md="true">Mis Alquileres</span>
+                    <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-lg="true">Mis Alquileres</span>
                 </a>
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a [routerLink]="['/home']" fxFlexAlign.lt-md="flex-end">
-                    <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-md="true">Salir</span>
+                <a [routerLink]="['/home']" fxFlexAlign.lt-lg="flex-end">
+                    <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
                 </a>
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
-    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-md="column"
-        fxLayoutAlign.lt-md="center center">
-        <div ngClass.gt-md="tab-gt-md" ngClass.lt-md="tab-lt-md">
+    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
+        fxLayoutAlign.lt-lg="center center">
+        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
             <h3>Datos de tu cuenta</h3>
             <hr>
             <br>
             <form #udpdateForm="ngForm">
                 <mat-tab-group>
                     <mat-tab>
-                        <div fxHide.lt-md="true">
+                        <div fxHide.lt-lg="true">
                             <ng-template mat-tab-label>
                                 <mat-icon class="iconitos">person_pin</mat-icon>
                                 Datos Personales
                             </ng-template>
                         </div>
-                        <div fxShow.lt-md="true">
+                        <div fxShow.lt-lg="true">
                             <ng-template mat-tab-label>
                                 <mat-icon class="iconitos">person_pin</mat-icon>
                                 Datos
@@ -115,14 +115,14 @@
                 </mat-tab-group>
             </form>
         </div>
-        <div fxLayout="row" fxFlexOrder="3" style="width:100%" fxLayoutAlign="center start" fxShow.lt-md="true" fxHide.gt-md="true">
+        <div fxLayout="row" fxFlexOrder="3" style="width:100%" fxLayoutAlign="center start" fxShow.lt-lg="true" fxHide.gt-md="true">
             <div style="padding-bottom: 15px; padding-top: 20px;">
                 <button (click)="onSubmit()" mat-raised-button color="primary">Guardar datos</button>
             </div>
         </div>
     </div>
 
-    <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start" fxShow.gt-md="true" fxHide.lt-md="true">
+    <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start" fxShow.gt-md="true" fxHide.lt-lg="true">
         <div style="padding-left: 35px; padding-bottom: 15px">
             <button (click)="onSubmit()" mat-raised-button color="primary">Guardar datos</button>
         </div>

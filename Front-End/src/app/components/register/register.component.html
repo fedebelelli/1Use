@@ -1,13 +1,13 @@
 <section>
     <form #frmLogin="ngForm" name=register id="login-form" action="#" method="post"
-        [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="center center" fxLayout.lt-sm="column"
-        fxLayoutAlign.lt-sm="center center">
+        [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="center center" fxLayout.lt-lg="column"
+        fxLayoutAlign.lt-lg="center center">
         <div class="panel-heading">
             <p class="active" id="login-form-link">Registrarse en el sitio </p>
         </div>
         <hr>
         <br>
-        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+        <mat-form-field hideRequiredMarker ngClass.lt-lg="input-sm">
             <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name"
                 class="input-login" style="color: black !important" id="Nombre" tabindex="1"
                 formControlName="name" ngModel required>
@@ -17,7 +17,7 @@
             <mat-error *ngIf="name.hasError('required')">Usuario requerido</mat-error>
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+        <mat-form-field hideRequiredMarker ngClass.lt-lg="input-sm">
             <input #email_usuario type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email"
                 [pattern]="emailPattern" name="email" class="input-login" style="color: black !important" name="email"
                 id="username1" tabindex="1" formControlName="email" ngModel required>
@@ -28,7 +28,7 @@
             <mat-error *ngIf="email.hasError('required')">Email no válido</mat-error>
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+        <mat-form-field hideRequiredMarker ngClass.lt-lg="input-sm">
             <input type="password" matInput placeholder="Contraseña" [(ngModel)]="registerUserData.password"
                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,15}$" name="password"
                 [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password"
@@ -44,7 +44,7 @@
 
         </mat-form-field>
 
-        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+        <mat-form-field hideRequiredMarker ngClass.lt-lg="input-sm">
             <input type="password" matInput placeholder="Repetir contraseña" [type]="hide2 ? 'password' : 'text'"
                 class="input-login" style="color: black !important" formControlName="password2"
                 (input)="onPasswordInput()" required>
@@ -58,7 +58,7 @@
             </mat-error>
         </mat-form-field>
 
-        <div class="text-center mt_30" ngClass.xs="input-sm">
+        <div class="text-center mt_30" ngClass.lt-lg="input-sm">
             <button (click)="registerUser()" type="submit" [disabled]="formGroup.invalid" mat-raised-button
                 color="primary">Registrarse</button>
             <p class="tycFoot">
@@ -71,13 +71,13 @@
             -->
         </div>
         <br>
-        <div class="text-center" ngClass.xs="input-sm">
+        <div class="text-center" ngClass.lt-lg="input-sm">
             <img id="image-FaceGoogle" src="../../../assets/images/FacebookGoogle.PNG">
         </div>
-        <div class="text-center" ngClass.xs="input-sm">
+        <div class="text-center" ngClass.lt-lg="input-sm">
             <a [routerLink]="['/login']" tabindex="5" class="active"> ¿ Ya tienes una cuenta? Iniciar Sesión </a>
         </div>
-        <div class="text-center" ngClass.xs="input-sm">
+        <div class="text-center" ngClass.lt-lg="input-sm">
             <a href="#" tabindex="5" class="forgot-password active">¿Olvidaste tu contraseña?</a>
         </div>
     </form>
