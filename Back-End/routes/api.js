@@ -63,7 +63,7 @@ router.post('/register', (req, res) => {
 
         if (error) {
             console.log(error)
-            res.status(401).send("El e-mail ingresado ya existe. Por favor, intentelo nuevamente")
+            res.status(401).send("Error en base de datos. Probar nuevamente");
         } else {
             //jwt de usuario, enviar mail con ese token, y mail con redireccion
             let payload = { subject: registeredUser.email }
@@ -98,11 +98,11 @@ router.post('/login', (req, res) => {
         else {
 
             if (!user) {
-                res.status(401).send('E-mail incorrecto')
+                res.status(401).send('Datos incorrecto')
             }
             else {
                 if (user.password !== userData.password) {
-                    res.status(401).send('Contraseña incorrecta')
+                    res.status(401).send('Datos incorrectos')
                 }
                 else {
                     if (!user.confirmed) {

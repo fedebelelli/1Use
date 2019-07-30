@@ -100,7 +100,7 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-select placeholder="Ciudad" [formControl]="ciudad" [(ngModel)]="user.ciudad"
+                            <mat-select placeholder="Ciudad" [formControl]="ciudadControl" [(ngModel)]="user.ciudad"
                                 name="ciudad">
                                 <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
                                     {{ciudad.viewValue}} </mat-option>

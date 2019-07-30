@@ -32,44 +32,30 @@ const userSchema = new Schema({
 
     nombre: {
         type: String,
-        required: true,
-        defaultValue: false
     },
 
     apellido: {
         type: String,
-        required: false,
-        defaultValue: false
     },
 
     fecha_nacimiento: {
         type: Date,
-        required: false,
-        defaultValue: false
     },
 
     telefono: {
         type: String,
-        required: false,
-        defaultValue: false
     },
 
     direccion: {
         type: String,
-        required: false,
-        defaultValue: false
     },
 
     ciudad: {
         type: String,
-        required: false,
-        defaultValue: false
     },
 
     provincia: {
         type: String,
-        required: false,
-        defaultValue: false
     }
 
 }, {

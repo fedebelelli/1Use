@@ -36,13 +36,13 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     this._auth.registerUser(this.registerUserData).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
         localStorage.setItem('token', res.token)
-        this._router.navigate(['/home'])
+        this._router.navigate(['/confirma'])
       },
       err => {
         //console.log(err);
-        this.openSnackBar(err.error, "Aceptar");
+        this.openSnackBar("Error en la base de datos. Probar en otro momento", "Aceptar");
       } 
     )
     //console.log(this.registerUserData)

@@ -43,7 +43,7 @@ export class PerfilUsuarioComponent implements OnInit {
   datosProvincias: Provincias[];
   ciudadesFiltradas: string[];
   date = new FormControl();
-  ciudad = new FormControl();
+  ciudadContol = new FormControl();
 
   //Para Datepicker
   maxDate;
@@ -86,21 +86,22 @@ export class PerfilUsuarioComponent implements OnInit {
 
         if (res.fecha_nacimiento == undefined) {
           this.fechaNacimiento = undefined;
+          this.date = new FormControl({ value: '', disabled: true }, [Validators.required])
         } else {
           let fecha = new Date(res.fecha_nacimiento);
           this.date = new FormControl({ value: fecha, disabled: true }, [Validators.required])
         }
 
         if (res.ciudad == undefined) {
-          this.ciudad = undefined;
+          this.ciudadContol = undefined;
         } else {
           let ciudad = res.ciudad;
-          this.ciudad = new FormControl({ value: ciudad, disabled: false }, [Validators.required]);
+          this.ciudadContol = new FormControl({ value: ciudad, disabled: false }, [Validators.required]);
         }
 
         if (res.provincia == undefined) {
           this.provincia = undefined;
-          this.ciudad = new FormControl({ value: "", disabled: true }, [Validators.required]);
+          this.ciudadContol = new FormControl({ value: "", disabled: true }, [Validators.required]);
         } else {
           this.provincia = res.provincia;
           this.filtrarCiudades(this.provincia);
@@ -128,8 +129,9 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   onSelectionChanged({ value }) {
+    this.ciudadContol = new FormControl({ disabled: false });
     this.filtrarCiudades(value);
-    this.ciudad = new FormControl({ value: "", disabled: false }, [Validators.required]);
+    
   }
 
   filtrarCiudades(selectedValue) {
