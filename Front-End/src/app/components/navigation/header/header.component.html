@@ -25,12 +25,48 @@
     <!--class="buscador" class="buscador-full-width" -->
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-lg fxFlexOrder="3">
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/about']" (click)="checkPage('/about'); setearInicioSesion()">Sobre
+        <button mat-button class="spanToolbar" [routerLink]="['/about']"
+            (click)="checkPage('/about'); setearInicioSesion()">Sobre
             Nosotros</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/login']" (click)="checkPage('/login'); setearInicioSesion()" [fxShow]=!inicioSesion>Iniciar
+        <button mat-button class="spanToolbar" [routerLink]="['/login']"
+            (click)="checkPage('/login'); setearInicioSesion()" [fxShow]=!inicioSesion>Iniciar
             Sesion</button>
-        <button mat-button class="spanToolbar" [routerLink]="['/perfil']" (click)="checkPage('/perfil'); setearInicioSesion()" [fxShow]=inicioSesion>Mi
-            cuenta</button>
+        <div class="dropdown" #myDropdown=dropdown dropdown>
+            <button mat-button class="spanToolbar" (click)="ngOnInit(); setearInicioSesion(); openNow()"
+                [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle>
+                <mat-icon>account_circle</mat-icon> {{usuarioIniciado.nombre}}
+            </button>
+            <ul class="dropdown-menu" dropdownMenu fxLayout="row" fxLayoutAlign="center" [fxHide]=!estadoDropdown>
+                <!-- *ngIf=estadoDropdown -->
+                <div class="bienvenida-container" fxLayout="column" fxFlex>
+                    <div fxFlexAlign="center" class="circulo-container">
+                        <svg width="150" height="150">
+                            <circle cx="75" cy="75" r="70" stroke="gray" stroke-width="2" fill="white" />
+                        </svg>
+                        <!-- <div class="posicion-icono">
+                            <mat-icon class="tamaño-icono">face</mat-icon>
+                        </div> -->
+                        <div>
+                            <img class="img-user-logged" src="../../../../assets/images/ricardo.gif">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="bienvenida-mensaje">¡Hola, {{usuarioIniciado.nombre}}!</p>
+                    </div>
+                    <div fxFlexAlign="center" class="bienvenida-boton">
+                        <button mat-raised-button color="primary">Ir a mi cuenta</button>
+                    </div>
+                </div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div fxLayout="column">
+                    <li><a class="neat" rel="noopener"> Mis publicaciones</a></li>
+                    <li><a class="neat" rel="noopener"> Mis alquileres</a></li>
+                    <li><a class="neat" rel="noopener" routerLink="/perfil"> Mis datos</a></li>
+                    <li><a class="neat" rel="noopener" (click)="cerrarSesion()"> Cerrar sesión</a></li>
+                </div>
+            </ul>
+        </div>
+
         <mat-menu #appMenu="matMenu"><button mat-menu-item [matMenuTriggerFor]="subMenu">Todas</button></mat-menu>
         <mat-menu #subMenu="matMenu">
             <button mat-menu-item>Electrónica</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SingletonService } from '../../singleton.service'
 
 @Component({
@@ -24,10 +24,7 @@ export class SidenavListComponent implements OnInit {
   estadoSesion: boolean;
 
   cerrarSesion() {
-    localStorage.removeItem("email"); 
-    localStorage.removeItem("token");
-    this.singleton.setInicioSesion(false);
-    window.location.assign('/home');
+    this.singleton.cerrarSesion();
   }
 
   constructor(private singleton: SingletonService) { }
@@ -40,8 +37,6 @@ export class SidenavListComponent implements OnInit {
     } else this.singleton.setInicioSesion(true);
 
     this.estadoSesion = this.singleton.getInicioSesion();
-
-    console.log(this.estadoSesion);
   }
 
 }

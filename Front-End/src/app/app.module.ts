@@ -24,6 +24,7 @@ import { HeaderComponent } from './components/navigation/header/header.component
 import { FooterComponent } from './components/navigation/footer/footer.component';
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 import { SingletonService } from './components/singleton.service'
+import { DropdownModule } from 'angular-custom-dropdown'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { SingletonService } from './components/singleton.service'
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MaterialModule,
-    
+    DropdownModule
   ],
   providers: [appRoutingProviders, AuthService, SingletonService ],
   bootstrap: [AppComponent]

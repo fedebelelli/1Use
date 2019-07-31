@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +80,13 @@ export class SingletonService {
       return true;
     }
     return false;
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem("email"); 
+    localStorage.removeItem("token");
+    this.setInicioSesion(false);
+    window.location.assign('/home');
   }
 
 } 

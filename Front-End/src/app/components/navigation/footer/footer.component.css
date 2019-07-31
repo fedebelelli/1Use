@@ -28,3 +28,7 @@ section{
 img{
     height: 100%;
 }
+
+ul{
+    list-style: none;
+}

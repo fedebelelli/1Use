@@ -43,7 +43,7 @@ export class PerfilUsuarioComponent implements OnInit {
   datosProvincias: Provincias[];
   ciudadesFiltradas: string[];
   date = new FormControl();
-  ciudadControl: FormControl;
+  ciudadControl: FormControl = new FormControl();
 
   //Para Datepicker
   maxDate;
@@ -190,9 +190,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   verificarInicioSesion(): boolean {
     if (this.singleton.getInicioSesion() == false) {
-      //this.singleton.setMensajeError('ERROR: La página solicitada no puedo ser accedida debido a que no has iniciado sesión. Por favor, inicia sesión para poder realizar la funcionalidad deseada')
       this._router.navigate(['/*']);
-      //document.location.reload();
       return false;
     }
     return true;
