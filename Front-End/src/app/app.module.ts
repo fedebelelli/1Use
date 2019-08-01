@@ -25,6 +25,7 @@ import { FooterComponent } from './components/navigation/footer/footer.component
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 import { SingletonService } from './components/singleton.service'
 import { DropdownModule } from 'angular-custom-dropdown'
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DropdownModule } from 'angular-custom-dropdown'
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MaterialModule,
-    DropdownModule
+    DropdownModule,
+    MaterialFileInputModule
   ],
   providers: [appRoutingProviders, AuthService, SingletonService ],
   bootstrap: [AppComponent]

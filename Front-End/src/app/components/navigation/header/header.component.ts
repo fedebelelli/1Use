@@ -81,11 +81,11 @@ export class HeaderComponent implements OnInit {
     let email = localStorage.getItem("email");
     this._auth.user_data(email).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.usuarioIniciado = res;
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     )
   }

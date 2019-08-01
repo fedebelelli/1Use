@@ -56,6 +56,10 @@ const userSchema = new Schema({
 
     provincia: {
         type: String,
+    },
+
+    removableFile: {
+        type: String
     }
 
 }, {

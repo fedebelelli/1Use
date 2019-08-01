@@ -25,14 +25,31 @@ export interface Provincias {
 
 export class PerfilUsuarioComponent implements OnInit {
 
-  public nombreUsuario: string;
+  public name: string;
   public nombre: string;
   public apellido: string;
   public email: string;
   public telefono: number;
-  public fechaNacimiento: string;
-  public provincia: string;
+  public fechaNacimiento: Date;
+  public provinciaActual: string;
   public direccion: string;
+  public imagen: string;
+  public ciudad: string;
+
+  //Datos del form
+  formulario = new FormGroup({
+    name: new FormControl({ value: '', disabled: true }),
+    nombre: new FormControl({ value: '', disabled: false }),
+    apellido: new FormControl({ value: '', disabled: false }),
+    email: new FormControl({ value: '', disabled: true }),
+    telefono: new FormControl({ value: '', disabled: false }),
+    fecha_nacimiento: new FormControl({ value: '', disabled: false }),
+    provincia: new FormControl({ value: '', disabled: false }),
+    direccion: new FormControl({ value: '', disabled: false }),
+    removablefile: new FormControl({ value: '', disabled: false }),
+    ciudad: new FormControl({ value: '', disabled: false })
+  });
+
 
   //Para traer los datos de la BD en el form
   public user = {};
@@ -52,6 +69,8 @@ export class PerfilUsuarioComponent implements OnInit {
   @Output() mensajeError = new EventEmitter<string>();
   enviarError(mensaje: string) { this.mensajeError.emit(mensaje) }
 
+
+
   constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router) {
   }
 
@@ -68,7 +87,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this._auth.user_data(this.emailLogueado).subscribe(
       res => {
 
-        this.nombreUsuario = res.name;
+        this.name = res.name;
 
         if (res.nombre == undefined) {
           this.nombre = "";
@@ -89,27 +108,34 @@ export class PerfilUsuarioComponent implements OnInit {
           this.date = new FormControl({ value: '', disabled: true }, [Validators.required])
         } else {
           let fecha = new Date(res.fecha_nacimiento);
-          this.date = new FormControl({ value: fecha, disabled: true }, [Validators.required])
+          this.fechaNacimiento = fecha;
+          this.date = new FormControl({ value: fecha, disabled: true }, [Validators.required]);
+
         }
 
         if (res.ciudad == undefined) {
           this.ciudadControl = new FormControl({ value: '', disabled: true }, [Validators.required]);
         } else {
           let ciudad = res.ciudad;
+          this.ciudad = ciudad;
           this.ciudadControl = new FormControl({ value: ciudad, disabled: false }, [Validators.required]);
         }
 
         if (res.provincia == undefined) {
-          this.provincia = undefined; 
+          this.provinciaActual = undefined;
         } else {
-          this.provincia = res.provincia;
-          this.filtrarCiudades(this.provincia);
+          this.provinciaActual = res.provincia;
+          this.filtrarCiudades(this.provinciaActual);
         }
 
 
         if (res.direccion == undefined) {
           this.direccion = "";
         } else this.direccion = res.direccion;
+
+        if (res.imagen == undefined) {
+          this.imagen = "asd";
+        } else this.imagen = res.removablefile;
 
       },
       error => {
@@ -118,6 +144,7 @@ export class PerfilUsuarioComponent implements OnInit {
     )
     this.crearJSONprovincias();
     this.crearJSONciudades();
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -128,6 +155,7 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   onSelectionChanged({ value }) {
+    this.provinciaActual = value;
     this.ciudadControl.enable();
     this.filtrarCiudades(value);
   }
@@ -176,9 +204,25 @@ export class PerfilUsuarioComponent implements OnInit {
     //console.log(this.datosCiudades);
   }
 
+  /*   onSubmit() {
+      let email = localStorage.getItem("email");
+      this._auth.update_user(this.user, email).subscribe(
+        res => {
+          this.openSnackBar(res, "Aceptar");
+        },
+        err => {
+          this.openSnackBar(err.error.text, "Aceptar");
+        }
+      )
+    } */
+
   onSubmit() {
+    this.updateFormularioControl();
     let email = localStorage.getItem("email");
-    this._auth.update_user(this.user, email).subscribe(
+
+    console.log(this.formulario);
+
+    this._auth.update_user(this.formulario.value, email).subscribe(
       res => {
         this.openSnackBar(res, "Aceptar");
       },
@@ -194,6 +238,23 @@ export class PerfilUsuarioComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  updateFormularioControl() {
+
+    this.formulario.patchValue({
+      name: this.name,
+      nombre: this.nombre,
+      apellido: this.apellido,
+      email: this.email,
+      telefono: this.telefono,
+      fecha_nacimiento: this.fechaNacimiento,
+      provincia: this.provinciaActual,
+      direccion: this.direccion,
+      ciudad: this.ciudad,
+      removablefile: this.imagen
+    })
+
   }
 
 }
