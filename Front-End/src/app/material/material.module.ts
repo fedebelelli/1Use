@@ -27,7 +27,8 @@ import {
   MatDialogModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  
 } from '@angular/material';
 
 import { MatBadgeModule } from '@angular/material/badge';
@@ -62,7 +63,8 @@ const MaterialComponents = [
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
-  MatDividerModule
+  MatDividerModule,
+
 ]
 
 @NgModule({ imports: [MaterialComponents], exports: [MaterialComponents] })
