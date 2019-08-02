@@ -1,45 +1,165 @@
 <section>
-    <mat-horizontal-stepper linear #stepper>
-        <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-            <form [formGroup]="firstFormGroup">
+    <mat-horizontal-stepper  #stepper>
+        <mat-step [stepControl]="primerFormGroup" errorMessage="Elige una categoria para tu producto">
+            <form [formGroup]="primerFormGroup">
                 <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
-                <mat-form-field>
-                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-                </mat-form-field>
+
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Hogar
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Articulos para el hogar
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes formControlName="primerCtrl">
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Musica
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Instrumentos musicales, parlantes, microfonos, otros
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes>
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Moda
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Indumentaria, belleza, cuidado personal, otros
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes>
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Libros
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Ficcion, didacticos, infantiles, otros
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes>
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Tecnologia
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Computacion, electronica, accesorios, otros
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes>
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Mascotas
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Cadenas, ropa, otros
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-selection-list #shoes>
+                            <mat-list-option *ngFor="let shoe of typesOfShoes">
+                              {{shoe}}
+                            </mat-list-option>
+                          </mat-selection-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Deporte
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Elementos, cosas para el crack, otros
+                            </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <mat-selection-list #shoes>
+                        <mat-list-option *ngFor="let shoe of typesOfShoes">
+                          {{shoe}}
+                        </mat-list-option>
+                      </mat-selection-list>
+                </mat-expansion-panel>
+
+
                 <div>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperNext color="primary">Siguiente</button>
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-            <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Añade los datos de tu producto producto</ng-template>
+        <mat-step [stepControl]="segundoFormGroup" errorMessage="Los datos de tu productos son necesarios.">
+            <form [formGroup]="segundoFormGroup">
+                <ng-template matStepLabel>Añade los datos de tu producto</ng-template>
                 <mat-form-field>
-                    <input matInput placeholder="Titulo" formControlName="secondCtrl" required>
+                    <input matInput placeholder="Titulo de la Publicación" formControlName="segundoCtrl" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Descripcion" formControlName="secondCtrl" required>
+                    <textarea matInput placeholder="Descrpción del producto" cdkTextareaAutosize
+                        formControlName="secondCtrl" required></textarea>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="precio" formControlName="secondCtrl" required>
-                    
+                    <input matInput type="number" placeholder="precio por dia de alquiler" formControlName="segundoCtrl" required>
                 </mat-form-field>
-              
+                <mat-form-field>
+                    <input matInput type="number" placeholder="precio por semana de alquiler" formControlName="segundoCtrl" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="precio por mes de alquiler" formControlName="segundoCtrl" required>
+                </mat-form-field>
+
                 <div>
-                    <button mat-button matStepperPrevious>Vovler</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-button matStepperPrevious color="primary">Vovler</button>
+                    <button mat-button matStepperNext color="primary">Siguiente</button>
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-            <form [formGroup]="secondFormGroup">
+        <mat-step [stepControl]="tercerFormGroup" errorMessage="La foto de tu producto es necesaria.">
+            <form [formGroup]="tercerFormGroup">
                 <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
                 <mat-form-field>
-                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                    <input matInput placeholder="Narnia" formControlName="tercerCtrl" required>
                 </mat-form-field>
                 <div>
-                    <button mat-button matStepperPrevious>Volver</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-button matStepperPrevious color="primary">Volver</button>
+                    <button mat-button matStepperNext color="primary">Siguiente</button>
                 </div>
             </form>
         </mat-step>

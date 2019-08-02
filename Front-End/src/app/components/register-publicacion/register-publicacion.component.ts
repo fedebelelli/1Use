@@ -11,16 +11,23 @@ import {STEPPER_GLOBAL_OPTIONS} from  '@angular/cdk/stepper' ;
   }]
 })
 export class RegisterPublicacionComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+
+  primerFormGroup: FormGroup;
+  segundoFormGroup: FormGroup;
+  tercerFormGroup: FormGroup;
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    this.primerFormGroup = this._formBuilder.group({
+      primerCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.segundoFormGroup = this._formBuilder.group({
+      segundoCtrl: ['', Validators.required]
+    });
+    this.tercerFormGroup = this._formBuilder.group({
+      tercerCtrl: ['', Validators.required]
     });
   }
+
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 }

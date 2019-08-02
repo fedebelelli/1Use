@@ -225,7 +225,7 @@ export class PerfilUsuarioComponent implements OnInit {
           });
       }
     )
-    window.location.reload();
+   // window.location.reload();
     this.openSnackBar("Todo legal", "Aceptar");
   }
 
