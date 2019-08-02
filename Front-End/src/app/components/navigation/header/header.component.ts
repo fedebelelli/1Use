@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit {
     this.checkPage(this.paginaActual);
     this.setearInicioSesion();
     this.obtenerNombreLogueado();
-    this._id = this.singleton.getIdLogueado();
-    this.mostrarImagen = true;
+    //this._id = this.singleton.getIdLogueado();
+    //this.mostrarImagen = true;
   }
 
   setearInicioSesion() {
