@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriasComponent } from './components/categorias/categorias.component'; 
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 import { ConfirmaComponent } from './components/confirma/confirma.component';
+import {RegisterPublicacionComponent} from './components/register-publicacion/register-publicacion.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { FooterComponent } from './components/navigation/footer/footer.component';
@@ -26,6 +27,7 @@ import { SidenavListComponent } from './components/navigation/sidenav-list/siden
 import { SingletonService } from './components/singleton.service'
 import { DropdownModule } from 'angular-custom-dropdown'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     AboutComponent,
     RegisterComponent,
     CategoriasComponent,
+    RegisterPublicacionComponent,
     ConfirmacionEmailComponent,
     ConfirmaComponent,
     HeaderComponent,

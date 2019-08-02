@@ -1,0 +1,56 @@
+<section>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Añade los datos de tu producto producto</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="Titulo" formControlName="secondCtrl" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Descripcion" formControlName="secondCtrl" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="precio" formControlName="secondCtrl" required>
+                    
+                </mat-form-field>
+              
+                <div>
+                    <button mat-button matStepperPrevious>Vovler</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperPrevious>Volver</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Publica</ng-template>
+            <p>Tu producto esta listo para ser publicado!</p>
+            <div>
+                <button mat-button matStepperPrevious>Volver</button>
+                <button mat-button (click)="stepper.reset()">Resetear Datos</button>
+                <button mat-raised-button color="primary">Pública</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</section>
