@@ -32,8 +32,9 @@
             <h3>Datos de tu cuenta</h3>
             <hr>
             <br>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()"> <!-- #udpdateForm="ngForm" -->
-                <mat-tab-group>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <!-- #udpdateForm="ngForm" -->
+                <mat-tab-group (selectedTabChange)="cambioTab($event)">
                     <mat-tab>
                         <div fxHide.lt-lg="true">
                             <ng-template mat-tab-label>
@@ -49,34 +50,35 @@
                         </div>
                         <br>
                         <mat-form-field>
-                            <input [value]="name" formControlName="name" name="name" matInput (ngModelChange)="name = $event"
-                                placeholder="Nombre Usuario" disabled="true">
+                            <input [value]="name" formControlName="name" name="name" matInput
+                                (ngModelChange)="name = $event" placeholder="Nombre Usuario" disabled="true">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input [value]="nombre" formControlName="nombre" name="nombre" matInput (ngModelChange)="nombre = $event"
-                                placeholder="Nombre">
+                            <input [value]="nombre" formControlName="nombre" name="nombre" matInput
+                                (ngModelChange)="nombre = $event" placeholder="Nombre">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input [value]="apellido" formControlName="apellido" name="apellido" matInput (ngModelChange)="apellido = $event"
-                                placeholder="Apellido">
+                            <input [value]="apellido" formControlName="apellido" name="apellido" matInput
+                                (ngModelChange)="apellido = $event" placeholder="Apellido">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input [value]="email" formControlName="email" name="email" matInput placeholder="Email" (ngModelChange)="email = $event"
-                                email disabled="true">
+                            <input [value]="email" formControlName="email" name="email" matInput placeholder="Email"
+                                (ngModelChange)="email = $event" email disabled="true">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input type="number" [value]="telefono" formControlName="telefono" name="telefono" matInput (ngModelChange)="telefono = $event"
-                                placeholder="Telefono">
+                            <input type="number" [value]="telefono" formControlName="telefono" name="telefono" matInput
+                                (ngModelChange)="telefono = $event" placeholder="Telefono">
                             <mat-icon matSuffix>phone</mat-icon>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input matInput placeholder="Fecha de nacimiento" [matDatepicker]="picker" [max]="maxDate" (ngModelChange)="fechaNacimiento = $event"
-                                ngModel formControlName="fecha_nacimiento" name="date" [formControl]="date">
+                            <input matInput placeholder="Fecha de nacimiento" [matDatepicker]="picker" [max]="maxDate"
+                                (ngModelChange)="fechaNacimiento = $event" ngModel formControlName="fecha_nacimiento"
+                                name="date" [formControl]="date">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <!-- <mat-datepicker fxHide.lt-md="true" #picker disabled="false"></mat-datepicker> -->
                             <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
@@ -91,25 +93,25 @@
                         <br>
 
                         <mat-form-field>
-                            <mat-select placeholder="Provincia" [value]="provincia" 
+                            <mat-select placeholder="Provincia" [value]="provinciaActual"
                                 (selectionChange)="onSelectionChanged($event)" formControlName="provincia"
-                                name="provincia" >
+                                name="provincia">
                                 <mat-option *ngFor="let provincia of datosProvincias" [value]="provincia.value">
                                     {{provincia.viewValue}} </mat-option>
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-select placeholder="Ciudad" [formControl]="ciudadControl" (ngModelChange)="ciudad = $event"
-                                name="ciudad">
+                            <mat-select placeholder="Ciudad" [formControl]="ciudadControl"
+                                (ngModelChange)="ciudad = $event" name="ciudad">
                                 <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
                                     {{ciudad.viewValue}} </mat-option>
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <input matInput placeholder="Direccion" [value]="direccion" formControlName="direccion" (ngModelChange)="direccion = $event"
-                                name="direccion">
+                            <input matInput placeholder="Direccion" [value]="direccion" formControlName="direccion"
+                                (ngModelChange)="direccion = $event" name="direccion">
                         </mat-form-field>
                     </mat-tab>
                     <mat-tab>
@@ -118,16 +120,25 @@
                             Imagen personal
                         </ng-template>
                         <br>
-                        <mat-form-field>
-                            <ngx-mat-file-input #removableInput formControlName="removablefile" (ngModelChange)="imagen = $event"
-                                placeholder="Subir imagen" [accept]="'.png, .jpg, .jpeg, .gif'"></ngx-mat-file-input>
-                            <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
-                                (click)="removableInput.clear($event)">
-                                <mat-icon>clear</mat-icon>
-                            </button>
-                            <mat-icon matSuffix>image_search</mat-icon>
-                            
-                        </mat-form-field>
+                        <div fxLayout="column">
+                            <div fxFlexFill>
+                                <mat-form-field>
+                                    <ngx-mat-file-input type="file" #removableInput formControlName="removableFile"
+                                        (ngModelChange)="imagen = $event" placeholder="Subir imagen"
+                                        [accept]="'.png, .jpg, .jpeg, .gif'" (change)="fileChangeEvent($event)"
+                                        >
+                                    </ngx-mat-file-input>
+                                    <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
+                                        (click)="removableInput.clear($event)">
+                                        <mat-icon>clear</mat-icon>
+                                    </button>
+                                    <mat-icon matSuffix>image_search</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="previsualizacion" fxLayout="column" *ngIf="tabCambiada">
+                                <img src="{{'http://localhost:4201/api/get-image/'+_id}}"> 
+                            </div>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
             </form>
@@ -143,7 +154,7 @@
     <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start" fxShow.gt-md="true"
         fxHide.lt-lg="true">
         <div style="padding-left: 35px; padding-bottom: 15px">
-            <button type="submit" mat-raised-button color="primary">Guardar datos</button>
+            <button (click)="onSubmit()" mat-raised-button color="primary">Guardar datos</button>
         </div>
     </div>
 

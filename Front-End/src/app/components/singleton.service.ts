@@ -11,6 +11,7 @@ export class SingletonService {
   estado: boolean;
   inicioSesion: boolean;
   token: string;
+  idLogueado;
 
   paginaActual(urlActual: string): boolean {
 
@@ -87,6 +88,14 @@ export class SingletonService {
     localStorage.removeItem("token");
     this.setInicioSesion(false);
     window.location.assign('/home');
+  }
+
+  setIdLogueado(id){
+    this.idLogueado = id;
+  }
+
+  getIdLogueado(){
+    return this.idLogueado;
   }
 
 } 

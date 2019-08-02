@@ -16,3 +16,14 @@
     padding-left: 35px;
     padding-top: 10px
 }
+
+.previsualizacion{
+    width: 250px;
+    height: 250px;
+    border: 2px solid black;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+}

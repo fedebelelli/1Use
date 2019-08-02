@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import provincias from './provincias.json';
 import ciudades from './ciudades-argentinas.json';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { SingletonService } from '../singleton.service';
+import { UploadService } from '../../services/upload.service';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
@@ -20,7 +21,7 @@ export interface Provincias {
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.css'],
-  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'es-LA' }]
+  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'es-LA' }, UploadService]
 })
 
 export class PerfilUsuarioComponent implements OnInit {
@@ -35,6 +36,8 @@ export class PerfilUsuarioComponent implements OnInit {
   public direccion: string;
   public imagen: string;
   public ciudad: string;
+  public _id: string;
+  public urlImagenPerfil: string;
 
   //Datos del form
   formulario = new FormGroup({
@@ -46,7 +49,7 @@ export class PerfilUsuarioComponent implements OnInit {
     fecha_nacimiento: new FormControl({ value: '', disabled: false }),
     provincia: new FormControl({ value: '', disabled: false }),
     direccion: new FormControl({ value: '', disabled: false }),
-    removablefile: new FormControl({ value: '', disabled: false }),
+    removableFile: new FormControl({ value: '', disabled: false }),
     ciudad: new FormControl({ value: '', disabled: false })
   });
 
@@ -69,10 +72,14 @@ export class PerfilUsuarioComponent implements OnInit {
   @Output() mensajeError = new EventEmitter<string>();
   enviarError(mensaje: string) { this.mensajeError.emit(mensaje) }
 
+  //Para subir archivos
+  public filesToUpload: Array<File>;
 
+  //Para mostrar o no imagen en Tab imagenes
+  public tabCambiada: boolean = false;
 
-  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router) {
-  }
+  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) 
+  { }
 
   ngOnInit() {
 
@@ -86,7 +93,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
     this._auth.user_data(this.emailLogueado).subscribe(
       res => {
-
+        this._id = res._id;
+        this.singleton.setIdLogueado(this._id);
         this.name = res.name;
 
         if (res.nombre == undefined) {
@@ -128,14 +136,13 @@ export class PerfilUsuarioComponent implements OnInit {
           this.filtrarCiudades(this.provinciaActual);
         }
 
-
         if (res.direccion == undefined) {
           this.direccion = "";
         } else this.direccion = res.direccion;
 
-        if (res.imagen == undefined) {
-          this.imagen = "asd";
-        } else this.imagen = res.removablefile;
+/*         if (res.imagen == undefined) {
+          this.imagen = res.removablefile;
+        } else this.imagen = res.removablefile; */
 
       },
       error => {
@@ -144,7 +151,7 @@ export class PerfilUsuarioComponent implements OnInit {
     )
     this.crearJSONprovincias();
     this.crearJSONciudades();
-
+    
   }
 
   openSnackBar(message: string, action: string) {
@@ -169,7 +176,6 @@ export class PerfilUsuarioComponent implements OnInit {
       }
     }
     this.ciudadesFiltradas = filtro;
-    //console.log(this.ciudadesFiltradas);
   }
 
   //Para arreglos de provincias
@@ -204,32 +210,29 @@ export class PerfilUsuarioComponent implements OnInit {
     //console.log(this.datosCiudades);
   }
 
-  /*   onSubmit() {
-      let email = localStorage.getItem("email");
-      this._auth.update_user(this.user, email).subscribe(
-        res => {
-          this.openSnackBar(res, "Aceptar");
-        },
-        err => {
-          this.openSnackBar(err.error.text, "Aceptar");
-        }
-      )
-    } */
-
   onSubmit() {
     this.updateFormularioControl();
-    let email = localStorage.getItem("email");
-
     console.log(this.formulario);
-
-    this._auth.update_user(this.formulario.value, email).subscribe(
-      res => {
-        this.openSnackBar(res, "Aceptar");
+    this._auth.update_user(this.formulario.value, this._id).subscribe(
+      response => {
+        console.log(response);
       },
       err => {
-        this.openSnackBar(err.error.text, "Aceptar");
+        console.log(err);
+        this._uploadService.makeFileRequest("http://localhost:4201/api/upload-image/" + this._id, [], this.filesToUpload, 'removablefile')
+          .then((result: any) => {
+            console.log(result);
+          });
       }
     )
+    window.location.reload();
+    this.openSnackBar("Todo legal", "Aceptar");
+  }
+
+  fileChangeEvent(fileInput: any) {
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+    this.imagen = this.filesToUpload[0].name;
+    //console.log(this.filesToUpload)
   }
 
   verificarInicioSesion(): boolean {
@@ -252,10 +255,28 @@ export class PerfilUsuarioComponent implements OnInit {
       provincia: this.provinciaActual,
       direccion: this.direccion,
       ciudad: this.ciudad,
-      removablefile: this.imagen
+      removableFile: null
     })
 
   }
 
+  obtenerIdActual(email): string {
+    let valor;
+    this._auth.user_data(email).subscribe(
+      res => {
+        console.log(res._id);
+        valor = res._id;
+        console.log(valor);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    return valor;
+  }
+
+  cambioTab(event: MatTabChangeEvent){
+    this.tabCambiada = true;
+  }
 }
 

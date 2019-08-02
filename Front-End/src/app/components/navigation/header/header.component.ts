@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit {
   paginaActual: string;
   subscriptionIniciada: boolean = false;
   usuarioIniciado = {};
+  _id;
+  mostrarImagen = false;
 
   constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
@@ -33,6 +35,8 @@ export class HeaderComponent implements OnInit {
     this.checkPage(this.paginaActual);
     this.setearInicioSesion();
     this.obtenerNombreLogueado();
+    this._id = this.singleton.getIdLogueado();
+    this.mostrarImagen = true;
   }
 
   setearInicioSesion() {
@@ -83,6 +87,7 @@ export class HeaderComponent implements OnInit {
       res => {
         //console.log(res);
         this.usuarioIniciado = res;
+        this.singleton.setIdLogueado(res._id);
       },
       err => {
         //console.log(err);

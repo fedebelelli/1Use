@@ -15,7 +15,8 @@ export class AuthService {
   private _loginUrl = "http://localhost:4201/api/login"
   private _confirmar = "http://localhost:4201/api/confirmation"
   private _userData = "http://localhost:4201/api/user-data?email="
-  private _updateUser = "http://localhost:4201/api/update-user?email="
+  private _updateUser = "http://localhost:4201/api/update-user?id="
+  private _getImgUser = "http://localhost:4201/api/get-img-name/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -44,8 +45,15 @@ export class AuthService {
     return this.http.get<any>(this._userData + email)
   }
 
-  update_user(user, email) {
-    return this.http.put<any>(this._updateUser + email, user);
+  update_user(user, _id) {
+    let params = JSON.stringify(user);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this._updateUser + _id, params, {headers: headers});
+  }
+
+  get_image(id) {
+    return this.http.get<any>(this._getImgUser + id);
   }
 
 }

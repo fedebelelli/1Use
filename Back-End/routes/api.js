@@ -9,6 +9,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart({ uploadDir: './uploads' });
+var fs = require('fs'); //Librería FileSystem para borrar archivos locales
+var path = require('path'); //Modulo físico de NodeJS que nos permite cargar rutas físicas de nuestro sistema de archivos
+
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
@@ -33,6 +38,15 @@ const transporter = nodemailer.createTransport({
         user: "one.use.pf@gmail.com",
         pass: "1usemail",
     },
+});
+
+//Coniguración CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
 });
 
 
@@ -62,7 +76,7 @@ router.post('/register', (req, res) => {
     user.save((error, registeredUser) => {
 
         if (error) {
-            console.log(error)
+            //console.log(error)
             res.status(401).send("Error en base de datos. Probar nuevamente");
         } else {
             //jwt de usuario, enviar mail con ese token, y mail con redireccion
@@ -151,17 +165,64 @@ router.get('/user-data', function (req, res) {
     })
 });
 
-router.put('/update-user', function (req, res) {
+router.post('/update-user', multipartMiddleware, function (req, res) {
 
-    var params = req.query.email;
+    var params = req.query.id;
     var user = req.body;
+    var usuario = new User();
 
-    User.findOneAndUpdate({ email: params }, user, (err, pUpdated) => {
+    usuario._id = params;
+    usuario.apellido = user.apellido;
+    usuario.ciudad = user.ciudad;
+    usuario.direccion = user.direccion;
+    usuario.fecha_nacimiento = user.fecha_nacimiento;
+    usuario.nombre = user.nombre;
+    usuario.provincia = user.provincia;
+    //usuario.removablefile = user.removablefile._fileNames;
+    usuario.telefono = user.telefono;
+
+    User.findByIdAndUpdate(params, usuario, { new: true }, (err, pUpdated) => {
         if (err) return res.status(500).send("Error en BD");
         if (!pUpdated) return res.status(500).send("Error en BD");
         return res.status(200).send("Datos guardados correctamente");
     });
 })
+
+router.post('/upload-image/:id', multipartMiddleware, function (req, res) {
+
+    var projectId = req.params.id;
+    var fileName = "asd";
+
+    if (req.files) {
+
+        var filePath = req.files.removablefile.path;
+        var fileSplit = filePath.split('\\');
+        var fileName = fileSplit[1];
+
+        User.findByIdAndUpdate(projectId, { removablefile: fileName }, { new: true }, (err, projectUpdated) => {
+            if (err) return res.status(500).send({ message: 'Imagen no subida' });
+            if (!projectUpdated) return res.status(400).send({ message: 'No existe' });
+            return res.status(200).send("Todo legal")
+        })
+    } else console.log("ERROR")
+});
+
+router.get('/get-image/:id', function (req, respuesta1) {
+    var usuario = req.params.id; //Nombre de archivo enviado como parámetro en la URL
+    User.findById(usuario, (err, res) => {
+
+        var path_file = './uploads/' + res.removablefile; //Ubicación del archivo
+
+        fs.exists(path_file, (exists) => {
+            if (exists) {
+                return respuesta1.sendFile(path.resolve(path_file));
+            }
+            else {
+                return respuesta1.status(400).send("No existe la imagen");
+            }
+        })
+    });
+});
 
 
 module.exports = router;
