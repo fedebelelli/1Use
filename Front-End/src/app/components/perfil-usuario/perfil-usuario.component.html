@@ -125,8 +125,8 @@
                                 <mat-form-field>
                                     <ngx-mat-file-input type="file" #removableInput formControlName="removableFile"
                                         (ngModelChange)="imagen = $event" placeholder="Subir imagen"
-                                        [accept]="'.png, .jpg, .jpeg, .gif'" (change)="fileChangeEvent($event)"
-                                        >
+                                        [accept]="'.png, .jpg, .jpeg, .gif'"
+                                        (change)="fileChangeEvent($event); preview($event)">
                                     </ngx-mat-file-input>
                                     <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
                                         (click)="removableInput.clear($event)">
@@ -135,9 +135,20 @@
                                     <mat-icon matSuffix>image_search</mat-icon>
                                 </mat-form-field>
                             </div>
-                            <div class="previsualizacion" fxLayout="column" *ngIf="tabCambiada">
-                                <img src="{{'http://localhost:4201/api/get-image/'+_id}}"> 
+                            <div fxLayout="row" fxLayoutGap="80px">
+                                <div fxLayout="column" *ngIf="tabCambiada" fxLayoutAlign="center center" fxLayoutGap="20px">
+                                    <p>Imagen actual</p>
+                                    <img class="previsualizacion" src="{{'http://localhost:4201/api/get-image/'+_id}}">
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="center center" [fxShow]="hayImagen">
+                                    <mat-icon>compare_arrows</mat-icon>
+                                </div>
+                                <div fxLayout="column" *ngIf="tabCambiada" fxLayoutAlign="center center" fxLayoutGap="20px" [fxShow]="hayImagen">
+                                    <p>Imagen a cambiar</p>
+                                    <img class="previsualizacion" [src]="imgURL" *ngIf="imgURL">
+                                </div>
                             </div>
+
                         </div>
                     </mat-tab>
                 </mat-tab-group>

@@ -78,8 +78,14 @@ export class PerfilUsuarioComponent implements OnInit {
   //Para mostrar o no imagen en Tab imagenes
   public tabCambiada: boolean = false;
 
-  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) 
-  { }
+
+  //Para previsualización de imagenes a subir
+  public imagePath;
+  imgURL: any;
+  public message: string;
+  hayImagen: boolean = false;
+
+  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
 
@@ -140,9 +146,9 @@ export class PerfilUsuarioComponent implements OnInit {
           this.direccion = "";
         } else this.direccion = res.direccion;
 
-/*         if (res.imagen == undefined) {
-          this.imagen = res.removablefile;
-        } else this.imagen = res.removablefile; */
+        /*         if (res.imagen == undefined) {
+                  this.imagen = res.removablefile;
+                } else this.imagen = res.removablefile; */
 
       },
       error => {
@@ -151,7 +157,7 @@ export class PerfilUsuarioComponent implements OnInit {
     )
     this.crearJSONprovincias();
     this.crearJSONciudades();
-    
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -225,14 +231,12 @@ export class PerfilUsuarioComponent implements OnInit {
           });
       }
     )
-   // window.location.reload();
-    this.openSnackBar("Todo legal", "Aceptar");
+    this.openSnackBar("Datos guardados. Actualiza la página para observalos", "Aceptar");
   }
 
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files;
     this.imagen = this.filesToUpload[0].name;
-    //console.log(this.filesToUpload)
   }
 
   verificarInicioSesion(): boolean {
@@ -275,8 +279,30 @@ export class PerfilUsuarioComponent implements OnInit {
     return valor;
   }
 
-  cambioTab(event: MatTabChangeEvent){
+  cambioTab(event: MatTabChangeEvent) {
     this.tabCambiada = true;
   }
+
+  preview(files) {
+    let imagen = files.path [1].value;
+    if (imagen.length === 0)
+      return;
+
+    var mimeType = imagen[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = imagen;
+    reader.readAsDataURL(imagen[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.hayImagen = true;
+    }
+    
+  }
 }
+
 
