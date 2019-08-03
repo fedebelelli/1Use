@@ -24,6 +24,15 @@
     border-radius: 140px;
 }
 
+.previsualizacion-icon{
+    width: 250px;
+    height: 250px;
+    border: 1px solid gray;
+    border-radius: 140px;
+    text-align: center;
+    font-size: 250px;
+}
+
 img{
     height: 100%;
     width: 100%;

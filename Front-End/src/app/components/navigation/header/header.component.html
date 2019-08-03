@@ -33,8 +33,12 @@
             Sesion</button>
         <div class="dropdown" #myDropdown=dropdown dropdown>
             <button mat-button class="spanToolbar" (click)="ngOnInit(); setearInicioSesion(); openNow()"
-                [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle>
+                [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle *ngIf="tieneNombre">
                 <mat-icon>account_circle</mat-icon> {{usuarioIniciado.nombre}}
+            </button>
+            <button mat-button class="spanToolbar" (click)="ngOnInit(); setearInicioSesion(); openNow()"
+                [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle *ngIf="!tieneNombre">
+                <mat-icon>account_circle</mat-icon> {{usuarioIniciado.name}}
             </button>
             <ul class="dropdown-menu" dropdownMenu fxLayout="row" fxLayoutAlign="center" [fxHide]=!estadoDropdown>
                 <!-- *ngIf=estadoDropdown -->
@@ -43,16 +47,18 @@
                         <svg width="150" height="150">
                             <circle cx="75" cy="75" r="70" stroke="gray" stroke-width="2" fill="white" />
                         </svg>
-                        <div class="posicion-icono">
+                        <div class="posicion-icono" *ngIf="!mostrarImagen">
                             <mat-icon class="tamaño-icono">face</mat-icon>
-                        </div> 
-<!--                         <div *ngIf="mostrarImagen">
+                        </div>
+                        <div *ngIf="mostrarImagen">
                             <img class="img-user-logged" src="{{'http://localhost:4201/api/get-image/'+_id}}">
-                            
-                        </div> -->
+                        </div>
                     </div>
-                    <div>
+                    <div *ngIf="tieneNombre">
                         <p class="bienvenida-mensaje">¡Hola, {{usuarioIniciado.nombre}}!</p>
+                    </div>
+                    <div *ngIf="!tieneNombre">
+                        <p class="bienvenida-mensaje">¡Hola, {{usuarioIniciado.name}}!</p>
                     </div>
                     <div fxFlexAlign="center" class="bienvenida-boton">
                         <button mat-raised-button color="primary">Ir a mi cuenta</button>

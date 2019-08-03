@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   usuarioIniciado = {};
   _id;
   mostrarImagen = false;
+  tieneNombre = false;
 
   constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
@@ -35,8 +36,6 @@ export class HeaderComponent implements OnInit {
     this.checkPage(this.paginaActual);
     this.setearInicioSesion();
     this.obtenerNombreLogueado();
-    //this._id = this.singleton.getIdLogueado();
-    //this.mostrarImagen = true;
   }
 
   setearInicioSesion() {
@@ -85,9 +84,15 @@ export class HeaderComponent implements OnInit {
     let email = localStorage.getItem("email");
     this._auth.user_data(email).subscribe(
       res => {
-        //console.log(res);
         this.usuarioIniciado = res;
+        if (res.nombre != undefined) {
+          this.tieneNombre = true;
+        }
+        if (res.removablefile != undefined) {
+          this.mostrarImagen = true;
+        }
         this.singleton.setIdLogueado(res._id);
+        this._id = this.singleton.getIdLogueado();
       },
       err => {
         //console.log(err);

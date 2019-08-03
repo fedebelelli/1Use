@@ -84,6 +84,7 @@ export class PerfilUsuarioComponent implements OnInit {
   imgURL: any;
   public message: string;
   hayImagen: boolean = false;
+  tieneImagen: boolean = false;
 
   constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
@@ -146,9 +147,9 @@ export class PerfilUsuarioComponent implements OnInit {
           this.direccion = "";
         } else this.direccion = res.direccion;
 
-        /*         if (res.imagen == undefined) {
-                  this.imagen = res.removablefile;
-                } else this.imagen = res.removablefile; */
+        if (res.removablefile != undefined) {
+          this.tieneImagen = true;
+        }
 
       },
       error => {
@@ -284,7 +285,7 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   preview(files) {
-    let imagen = files.path [1].value;
+    let imagen = files.path[1].value;
     if (imagen.length === 0)
       return;
 
@@ -301,7 +302,7 @@ export class PerfilUsuarioComponent implements OnInit {
       this.imgURL = reader.result;
       this.hayImagen = true;
     }
-    
+
   }
 }
 
