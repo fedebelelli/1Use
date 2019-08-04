@@ -1,5 +1,6 @@
 <section fxLayout="column" fxLayoutAlign="center center">
     <mat-horizontal-stepper #stepper>
+        <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="primerFormGroup" errorMessage="Elige una categoria para tu producto">
             <form [formGroup]="primerFormGroup">
                 <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
@@ -134,12 +135,15 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
+                <br>
 
-                <div>
-                    <button mat-button matStepperNext color="primary">Siguiente</button>
+                <div fxLayout="row" fxLayoutAlign="end" fxFlexFill>
+
+                    <button mat-raised-button matStepperNext color="primary">Siguiente</button>
                 </div>
             </form>
         </mat-step>
+        <!--DATOS DEL PRODUCTO-->
         <mat-step [stepControl]="segundoFormGroup" errorMessage="Los datos de tu productos son necesarios.">
             <form [formGroup]="segundoFormGroup">
                 <ng-template matStepLabel>Añade los datos de tu producto</ng-template>
@@ -163,31 +167,106 @@
                         required>
                 </mat-form-field>
 
-                <div>
-                    <button mat-button matStepperPrevious color="primary">Vovler</button>
-                    <button mat-button matStepperNext color="primary">Siguiente</button>
+                <div fxLayout="row" fxFlexFill>
+                    <div fxFlex>
+                        <button mat-raised-button matStepperPrevious color="primary">Vovler</button>
+                    </div>
+                    <div fxLayoutAlign="end" fxFlex>
+                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
+                    </div>
                 </div>
             </form>
         </mat-step>
+        <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="tercerFormGroup" errorMessage="La foto de tu producto es necesaria.">
             <form [formGroup]="tercerFormGroup">
                 <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
-                <mat-form-field>
-                    <input matInput placeholder="Narnia" formControlName="tercerCtrl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperPrevious color="primary">Volver</button>
-                    <button mat-button matStepperNext color="primary">Siguiente</button>
+
+                <div fxLayout="column">
+                    <div fxFlexFill>
+                        <h3>Imagenes de tu producto</h3>
+                        <br>
+                        <mat-form-field>
+                            <ngx-mat-file-input type="file" #removableInput formControlName="multiplefile" multiple
+                                placeholder="Subir imagen" [accept]="'.png, .jpg, .jpeg, .gif'">
+                            </ngx-mat-file-input>
+                            <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
+                                (click)="removableInput.clear($event)">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                            <mat-icon matSuffix>image_search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="80px">
+                        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxFlexFill>
+                    <div fxFlex>
+                        <button mat-raised-button matStepperPrevious color="primary">Vovler</button>
+                    </div>
+                    <div fxLayoutAlign="end" fxFlex>
+                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
+                    </div>
                 </div>
             </form>
         </mat-step>
+        <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publica</ng-template>
-            <p>Tu producto esta listo para ser publicado!</p>
+            <h2>Tu producto esta listo para ser publicado</h2>
+            <br>
+            <h4>Resumen de tu publicacion</h4>
             <div>
-                <button mat-button matStepperPrevious>Volver</button>
-                <button mat-button (click)="stepper.reset()">Resetear Datos</button>
-                <button mat-raised-button color="primary">Pública</button>
+                <form [formGroup]="joinGroup">
+                    <mat-form-field>
+                        <input formControlName="titulo" name="titulo" matInput placeholder="Titulo">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="descripcion" name="descripcion" matInput placeholder="Descripcion">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="categoria" name="categoria" matInput placeholder="Categoria">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="subCategoria" name="suBcategoria" matInput placeholder="Sub Categoria">
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutGap="40px" >
+                        <mat-form-field>
+                            <span matPrefix>$ &nbsp;</span>
+                            <input type="number" matInput placeholder="Precio por dia">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <span matPrefix>$ &nbsp;</span>
+                            <input type="number" matInput placeholder="Precio por semana">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <span matPrefix>$ &nbsp;</span>
+                            <input type="number" matInput placeholder="Precio por mes">
+                        </mat-form-field>
+                    </div>    
+                    <br>
+                    <h5>Imagenes</h5>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <br>
+                </form>
+
+
+
+            </div>
+
+            <div fxLayout="row" fxFlexFill>
+                <div fxFlex>
+                    <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
+                </div>
+                <div fxLayoutAlign="end" fxFlex>
+                    <button mat-raised-button color="accent" (click)="stepper.reset()"
+                        style="margin-right: 10px;">Resetear Datos</button>
+                    <button mat-raised-button color="primary">Pública</button>
+                </div>
             </div>
         </mat-step>
     </mat-horizontal-stepper>
