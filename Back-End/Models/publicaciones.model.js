@@ -20,15 +20,15 @@ const publicacionesSchema = new Schema({
     },
 
     preciodia: {
-        type: number,
+        type: String,
     },
 
     preciosemana: {
-        type: number,
+        type: String,
     },
 
     preciomes: {
-        type: number,
+        type: String,
     },
 
     foto: {
