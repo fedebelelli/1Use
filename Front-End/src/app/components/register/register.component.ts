@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 8000,
+      duration: 2000,
       panelClass: ['color-snackbar']
     });
   }

@@ -1,124 +1,139 @@
-<section>
-    <mat-horizontal-stepper  #stepper>
+<section fxLayout="column" fxLayoutAlign="center center">
+    <mat-horizontal-stepper #stepper>
         <mat-step [stepControl]="primerFormGroup" errorMessage="Elige una categoria para tu producto">
             <form [formGroup]="primerFormGroup">
                 <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
-
                 <mat-accordion>
+
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Hogar
                             </mat-panel-title>
                             <mat-panel-description>
-                                Articulos para el hogar
-                                </mat-panel-description>
+                                Articulos para el hogar.
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <mat-selection-list #shoes formControlName="primerCtrl">
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of hogarArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
                     </mat-expansion-panel>
+
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                Musica
+                                Música
                             </mat-panel-title>
                             <mat-panel-description>
-                                Instrumentos musicales, parlantes, microfonos, otros
-                                </mat-panel-description>
+                                Instrumentos musicales, parlantes, microfonos, otros.
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <mat-selection-list #shoes>
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of musicaArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
                     </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Moda
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                Indumentaria, belleza, cuidado personal, otros
-                                </mat-panel-description>
-                        </mat-expansion-panel-header>
 
-                        <mat-selection-list #shoes>
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Libros
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                Ficcion, didacticos, infantiles, otros
-                                </mat-panel-description>
-                        </mat-expansion-panel-header>
-
-                        <mat-selection-list #shoes>
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
-                    </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Tecnologia
                             </mat-panel-title>
                             <mat-panel-description>
-                                Computacion, electronica, accesorios, otros
-                                </mat-panel-description>
+                                Computación, electrónica, accesorios, otros.
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <mat-selection-list #shoes>
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of electronicaArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
                     </mat-expansion-panel>
+
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Mascotas
                             </mat-panel-title>
                             <mat-panel-description>
-                                Cadenas, ropa, otros
-                                </mat-panel-description>
+                                Accesorios, ropa, otros.
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of animalesArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Deporte
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Accesorios, indumentaria, otros.
+                            </mat-panel-description>
                         </mat-expansion-panel-header>
 
-                        <mat-selection-list #shoes>
-                            <mat-list-option *ngFor="let shoe of typesOfShoes">
-                              {{shoe}}
-                            </mat-list-option>
-                          </mat-selection-list>
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of deportesArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Belleza
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Elementos, cosas para el crack, otros
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of bellezaArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Bebés
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Elementos, cosas para el crack, otros
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of bebesArray">
+                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
+                                <mat-radio-button color="primary">
+                                    {{shoe}}
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Deporte
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            Elementos, cosas para el crack, otros
-                            </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <mat-selection-list #shoes>
-                        <mat-list-option *ngFor="let shoe of typesOfShoes">
-                          {{shoe}}
-                        </mat-list-option>
-                      </mat-selection-list>
-                </mat-expansion-panel>
-
 
                 <div>
                     <button mat-button matStepperNext color="primary">Siguiente</button>
@@ -136,13 +151,16 @@
                         formControlName="segundoCtrl" required></textarea>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por dia de alquiler" formControlName="segundoCtrl" required>
+                    <input matInput type="number" placeholder="precio por dia de alquiler" formControlName="segundoCtrl"
+                        required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por semana de alquiler" formControlName="segundoCtrl" required>
+                    <input matInput type="number" placeholder="precio por semana de alquiler"
+                        formControlName="segundoCtrl" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por mes de alquiler" formControlName="segundoCtrl" required>
+                    <input matInput type="number" placeholder="precio por mes de alquiler" formControlName="segundoCtrl"
+                        required>
                 </mat-form-field>
 
                 <div>
