@@ -47,7 +47,8 @@
     border-radius: 4px;
     transition: .2s all ease-in;
     right: 0;
-    color: black
+    color: black;
+    z-index: 900;
 }
 
 .dropdown-menu li {
