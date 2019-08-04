@@ -6,6 +6,7 @@ const User = require('../auth/auth.model');
 const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -72,6 +73,7 @@ router.post('/register', (req, res) => {
 
     let userData = req.body;
     let user = new User(userData);
+    user.password = bcrypt.hashSync(user.password);
     user.confirmed = false;
     user.save((error, registeredUser) => {
 
@@ -115,7 +117,8 @@ router.post('/login', (req, res) => {
                 res.status(401).send('Datos incorrecto')
             }
             else {
-                if (user.password !== userData.password) {
+                const compa = bcrypt.compareSync(userData.password,user.password);
+                if (!compa) {
                     res.status(401).send('Datos incorrectos')
                 }
                 else {
