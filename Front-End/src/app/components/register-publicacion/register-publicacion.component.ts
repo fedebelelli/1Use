@@ -16,6 +16,8 @@ export class RegisterPublicacionComponent implements OnInit {
   segundoFormGroup: FormGroup;
   tercerFormGroup: FormGroup;
   constructor(private _formBuilder: FormBuilder) { }
+  image;
+  joinGroup;
 
   ngOnInit() {
     this.primerFormGroup = this._formBuilder.group({
@@ -25,8 +27,18 @@ export class RegisterPublicacionComponent implements OnInit {
       segundoCtrl: ['', Validators.required]
     });
     this.tercerFormGroup = this._formBuilder.group({
-      tercerCtrl: ['', Validators.required]
+      tercerCtrl: ['', Validators.required],
+      multiplefile: ['', Validators.required]
     });
+    this.joinGroup = {
+      ...this.primerFormGroup.value,
+      ...this.segundoFormGroup.value,
+      ...this.tercerFormGroup.value
+    };
+    console.log(this.joinGroup);
+    /* (acceder a datos)
+    let hola = this.primerFormGroup.get('primerCtrl').value;
+    console.log(hola); */
   }
 
   electronicaArray: string[] = ['TV - Audio - Video', 'Celulares - Tablets', 'Computadoras', 'Notebooks', 'Videojuegos', 'Consolas', 'Cámaras y accesorios']

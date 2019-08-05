@@ -1,26 +1,35 @@
-//const cors = require('cors');
-//const authRoutes = require('../auth/auth.routes');
+/* -------------------------- Configuración general ------------------------------- */
 const express = require('express');
 const router = express.Router()
-const User = require('../auth/auth.model');
 const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart({ uploadDir: './uploads' });
-var fs = require('fs'); //Librería FileSystem para borrar archivos locales
-var path = require('path'); //Modulo físico de NodeJS que nos permite cargar rutas físicas de nuestro sistema de archivos
-
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
-
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart({ uploadDir: './uploads' });
+var multipartMiddlewarePublicaciones = multipart({ uploadDir: './publicaciones' });
+var fs = require('fs'); //Librería FileSystem para borrar archivos locales
+var path = require('path'); //Modulo físico de NodeJS que nos permite cargar rutas físicas de nuestro sistema de archivos
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+/* ----------------------------------- MODELOS ----------------------------------- */
+const User = require('../auth/auth.model');
+const Publicacion = require('../Models/publicaciones.model');
+
+
+/* ---------------------------- Métodos de configuración ------------------------- */
 mongoose.connect(db, { useNewUrlParser: true }, err => {
 
     if (err) {
@@ -41,17 +50,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-//Coniguración CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
-
-
-
 //const bodyParser = require('body-parser');
 //const bodyParserJSON = bodyParser.json();
 //const bodyParserURLEncoded = bodyParser.urlencoded({extended: true});
@@ -63,6 +61,7 @@ app.use((req, res, next) => {
 //app.use('/api', router);
 //authRoutes(router);
 
+/* ------------------------------ Rutas de usuarios ----------------------------------- */
 router.get('/', (req, res) => {
 
     res.send('From API route')
@@ -227,5 +226,27 @@ router.get('/get-image/:id', function (req, respuesta1) {
     });
 });
 
+/* ------------------------------ Rutas de publicaciones ----------------------------------- */
+router.post('/register-publicacion', multipartMiddlewarePublicaciones, function(req, res){
+    var email = req.query.email;
+    var datos = req.body;
+    var publicaciones = new Publicacion();
+
+    publicaciones.titulo = datos.titulo;
+    publicaciones.categoria = datos.categoria;
+    publicaciones.subcategoria = datos.subcategoria;
+    publicaciones.descripcion = datos.descripcion;
+    publicaciones.preciodia = datos.preciodia;
+    publicaciones.preciosemana = datos.preciosemana;
+    publicaciones.preciomes = datos.preciomes;
+    publicaciones.email = email;
+    publicaciones.fotos = null;
+
+    publicaciones.save((err, res1) =>{
+        if(err) return res.status(500).send("Error papi");
+        if(!res) return res.status(404).send("Error papi");
+        return res.status(200).send("Todo legal papi");
+    })
+})
 
 module.exports = router;
