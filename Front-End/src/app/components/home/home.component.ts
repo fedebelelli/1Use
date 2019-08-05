@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   urlActual: string;
   urlRecortada: string;
   usuarioActivo;
+  
 
    constructor(private singleton: SingletonService) { }
 

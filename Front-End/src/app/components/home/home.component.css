@@ -74,7 +74,7 @@ a.neat {
   
   
   .banner-area {
-    background: url(../../../assets/images/banner.jpg) no-repeat center center/cover; 
+    background: url(../../../assets/images/bannernew.jpg) no-repeat center center/cover; 
    /* --background-color: #fff */;
   }
   
@@ -151,7 +151,7 @@ a.neat {
   }
   
   .primary-btn span {
-    margin-left: 15px;
+    margin-left: 14px;
   }
   
   .primary-btn:hover {
