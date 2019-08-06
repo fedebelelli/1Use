@@ -68,6 +68,10 @@ export class RegisterPublicacionComponent implements OnInit {
     //Si se abre una pestaña, se selecciona un valor y luego se va a otra, se queda con el valor de categoria de la ultima pesaña abierta
   }
 
+  onFilesAdded(files: File[]){
+    this.image = files;
+  }
+
   actualizarDatos() {
 
     if (this.preciomes == undefined || this.preciomes == null) {
@@ -89,6 +93,10 @@ export class RegisterPublicacionComponent implements OnInit {
       preciodia: this.preciodia,
       preciosemana: this.preciosemana,
       preciomes: this.preciomes
+    })
+
+    this.fotoProductoGroup.patchValue({
+      multiplefile: this.image
     })
 
     this.joinGroup = {

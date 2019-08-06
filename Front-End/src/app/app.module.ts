@@ -27,7 +27,7 @@ import { SidenavListComponent } from './components/navigation/sidenav-list/siden
 import { SingletonService } from './components/singleton.service'
 import { DropdownModule } from 'angular-custom-dropdown'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MaterialModule,
     DropdownModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    NgxDropzoneModule
   ],
   providers: [appRoutingProviders, AuthService, SingletonService ],
   bootstrap: [AppComponent]
