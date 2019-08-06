@@ -32,7 +32,7 @@ export class RegisterPublicacionComponent implements OnInit {
   public message: string;
   public filesToUpload: Array<File>;
   hayImagen: boolean = false;
-  arrayReader: Array<any> = [];
+  arrayImagenes = [];
 
   ngOnInit() {
     this.categoriaFormGroup = this._formBuilder.group({
@@ -68,8 +68,19 @@ export class RegisterPublicacionComponent implements OnInit {
     //Si se abre una pestaña, se selecciona un valor y luego se va a otra, se queda con el valor de categoria de la ultima pesaña abierta
   }
 
-  onFilesAdded(files: File[]){
+  onFilesAdded(files: File[]) {
     this.image = files;
+    this.arrayImagenes = [];
+    this.arrayImagenes.length = 0;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent) => {
+        const content = (e.target as FileReader).result;
+        this.arrayImagenes.push(content);
+      };
+      reader.readAsDataURL(file);
+    });
+    //console.log(this.arrayImagenes);
   }
 
   actualizarDatos() {
@@ -105,7 +116,7 @@ export class RegisterPublicacionComponent implements OnInit {
       ...this.fotoProductoGroup.value
     };
 
-    console.log(this.joinGroup);
+    //console.log(this.joinGroup);
   }
 
 

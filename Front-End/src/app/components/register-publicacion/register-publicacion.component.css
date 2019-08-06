@@ -25,3 +25,9 @@
 .contenedor-imagenes{
     width: 970px;
 }
+
+.container-muestra-imagenes{
+    width: 250px;
+    height: 250px;
+    border: 2px gray solid;
+}

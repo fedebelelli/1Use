@@ -221,8 +221,9 @@
                         <br>
                         <div class="contenedor-imagenes">
                             <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
-                                [label]="'Clickea aquí para subir tu imágen o arrastrala'" [multiple]="true" (filesAdded)="onFilesAdded($event)"
-                                [showPreviews]="true" [preserveFiles]="true" #dropzone></ngx-dropzone>
+                                [label]="'Clickea aquí para subir tu imágen o arrastrala'" [multiple]="true"
+                                (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="true"
+                                #dropzone></ngx-dropzone>
                         </div>
                         <br>
                     </div>
@@ -285,6 +286,11 @@
                     <br>
                     <h5>Imagenes</h5>
                     <mat-divider></mat-divider>
+                    <div fxLayout="row" fxLayoutGap="20px">
+                        <div *ngFor="let imagen of arrayImagenes">
+                            <img src={{imagen}} class="container-muestra-imagenes">
+                        </div>
+                    </div>
                     <br>
                     <br>
                 </form>
