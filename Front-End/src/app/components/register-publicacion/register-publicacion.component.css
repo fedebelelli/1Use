@@ -11,3 +11,13 @@
     text-align: center;
     font-size: 250px;
 }
+
+.muestraImagen{
+    width: 250px;
+    height: 250px;
+    border: 5px solid black;
+}
+
+.posicionImagen{
+    margin-top: 15px;
+}

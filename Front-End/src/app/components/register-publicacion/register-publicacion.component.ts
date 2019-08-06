@@ -26,19 +26,26 @@ export class RegisterPublicacionComponent implements OnInit {
   preciosemana: number;
   preciomes: number;
 
+  /* Visualización de imagenes */
+  public imagePath;
+  imgURL: any;
+  public message: string;
+  public filesToUpload: Array<File>;
+  hayImagen: boolean = false;
+  arrayReader: Array<any> = [];
 
   ngOnInit() {
     this.categoriaFormGroup = this._formBuilder.group({
       categoria: [''],
-      subcategoria: [{value: ''}, Validators.required]
+      subcategoria: [{ value: '' }, Validators.required]
     });
 
     this.datosProductosGroup = this._formBuilder.group({
-      titulo: [{value: ''}, Validators.required],
-      descripcion: [{value: ''}, Validators.required],
-      preciodia: [{value: ''}, Validators.required],
-      preciosemana: [{value: ''}],
-      preciomes: [{value: ''}]
+      titulo: [{ value: '' }, Validators.required],
+      descripcion: [{ value: '' }, Validators.required],
+      preciodia: [{ value: '' }, Validators.required],
+      preciosemana: [{ value: '' }],
+      preciomes: [{ value: '' }]
     });
 
     this.fotoProductoGroup = this._formBuilder.group({
@@ -56,24 +63,24 @@ export class RegisterPublicacionComponent implements OnInit {
     this.subcategoria = evento.value;
   }
 
-  obtenerCategoria(evento){
+  obtenerCategoria(evento) {
     this.categoria = evento._element.nativeElement.title;
-    //console.log(evento._element.nativeElement.title);
+    //Si se abre una pestaña, se selecciona un valor y luego se va a otra, se queda con el valor de categoria de la ultima pesaña abierta
   }
 
   actualizarDatos() {
 
-    if(this.preciomes == undefined || this.preciomes == null){
+    if (this.preciomes == undefined || this.preciomes == null) {
       this.preciomes = 0;
     }
 
-    if(this.preciosemana == undefined || this.preciosemana == null){
+    if (this.preciosemana == undefined || this.preciosemana == null) {
       this.preciosemana = 0;
     }
-    
+
     this.categoriaFormGroup.patchValue({
-      categoria: this.categoria, 
-      subcategoria: this.subcategoria 
+      categoria: this.categoria,
+      subcategoria: this.subcategoria
     })
 
     this.datosProductosGroup.patchValue({
@@ -97,7 +104,7 @@ export class RegisterPublicacionComponent implements OnInit {
 
   /* ---------------- CARGA DE ARRAYS --------------------- */
   electronicaArray: string[] = ['TV - Audio - Video', 'Celulares - Tablets', 'Computadoras', 'Notebooks', 'Videojuegos', 'Consolas', 'Cámaras y accesorios']
-  hogarArray: string[] = ['Accesorios', 'Decoración', 'Electrodomésticos', 'Muebles', 'Jardin']
+  hogarArray: string[] = ['Accesorios (Hogar)', 'Decoración', 'Electrodomésticos', 'Muebles', 'Jardin']
   deportesArray: string[] = ['Aerobics y fitness', 'Bicicletas y ciclismo', 'Camping y pesca', 'Deportes acuaticos', 'Futbol', 'Otros deportes']
   musicaArray: string[] = ['Arte y antiguedades', 'CDs - DVDs', 'Instrumentos musicales', 'Libros y revistas']
   bellezaArray: string[] = ['Relojes - joyas - accesorios', 'Ropa y calzado', 'Salud y belleza']

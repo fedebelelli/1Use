@@ -5,7 +5,7 @@
             <form [formGroup]="categoriaFormGroup">
                 <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="obtenerCategoria(b1)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b1 title="Hogar">
                             <mat-panel-title>
                                 Hogar
@@ -15,7 +15,7 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="arrayHogar"
-                            (change)="obtenerSubCategoria($event)">
+                            (change)="obtenerSubCategoria($event); obtenerCategoria(b1)">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let hogar of hogarArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{hogar}}">
@@ -26,7 +26,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b2)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b2 title="Musica">
                             <mat-panel-title>
                                 Música
@@ -36,7 +36,7 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="musica"
-                            (change)="obtenerSubCategoria($event)">
+                            (change)="obtenerSubCategoria($event);obtenerCategoria(b2)">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let musica of musicaArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{musica}}">
@@ -47,7 +47,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b3)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b3 title="Tecnologia">
                             <mat-panel-title>
                                 Tecnologia
@@ -57,7 +57,7 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="tecnologia"
-                            (change)="obtenerSubCategoria($event)">
+                            (change)="obtenerSubCategoria($event);obtenerCategoria(b3)">
                             <div fxLayout="column" fxLayoutAlign="center start"
                                 *ngFor="let electronica of electronicaArray">
                                 <mat-selection-list fxFlexOffset="20px">
@@ -69,7 +69,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b4)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b4 title="Mascotas">
                             <mat-panel-title>
                                 Mascotas
@@ -79,7 +79,7 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="mascotas"
-                            (change)="obtenerSubCategoria($event)">
+                            (change)="obtenerSubCategoria($event);obtenerCategoria(b4)">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let mascotas of animalesArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{mascotas}}">
@@ -90,7 +90,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b5)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b5 title="Deporte">
                             <mat-panel-title>
                                 Deporte
@@ -99,8 +99,8 @@
                                 Accesorios, indumentaria, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
-                            name="deporte">
+                        <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b5)"
+                            formControlName="subcategoria" name="deporte">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let deporte of deportesArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{deporte}}">
@@ -111,7 +111,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b6)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b6 title="Belleza">
                             <mat-panel-title>
                                 Belleza
@@ -120,8 +120,8 @@
                                 Elementos, cosas para el crack, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
-                            name="belleza">
+                        <mat-radio-group (change)="obtenerSubCategoria($event);obtenerCategoria(b6)"
+                            formControlName="subcategoria" name="belleza">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let belleza of bellezaArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{belleza}}">
@@ -132,7 +132,7 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel (opened)="obtenerCategoria(b7)">
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b7 title="Bebes">
                             <mat-panel-title>
                                 Bebés
@@ -141,8 +141,8 @@
                                 Elementos, cosas para el crack, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
-                            name="bebe">
+                        <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b7)"
+                            formControlName="subcategoria" name="bebe">
                             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let bebe of bebesArray">
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{bebe}}">
