@@ -1,13 +1,12 @@
 <section fxLayout="column" fxLayoutAlign="center center">
-    <mat-horizontal-stepper #stepper>
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
         <!--CATEGORIAS PRODUCTO-->
-        <mat-step [stepControl]="primerFormGroup" errorMessage="Elige una categoria para tu producto">
-            <form [formGroup]="primerFormGroup">
+        <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoria para tu producto">
+            <form [formGroup]="categoriaFormGroup">
                 <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
                 <mat-accordion>
-
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b1)">
+                        <mat-expansion-panel-header #b1 title="Hogar">
                             <mat-panel-title>
                                 Hogar
                             </mat-panel-title>
@@ -15,17 +14,20 @@
                                 Articulos para el hogar.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of hogarArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group formControlName="subcategoria" name="arrayHogar"
+                            (change)="obtenerSubCategoria($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let hogar of hogarArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{hogar}}">
+                                        {{hogar}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b2)">
+                        <mat-expansion-panel-header #b2 title="Musica">
                             <mat-panel-title>
                                 Música
                             </mat-panel-title>
@@ -33,17 +35,20 @@
                                 Instrumentos musicales, parlantes, microfonos, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of musicaArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group formControlName="subcategoria" name="musica"
+                            (change)="obtenerSubCategoria($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let musica of musicaArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{musica}}">
+                                        {{musica}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b3)">
+                        <mat-expansion-panel-header #b3 title="Tecnologia">
                             <mat-panel-title>
                                 Tecnologia
                             </mat-panel-title>
@@ -51,17 +56,21 @@
                                 Computación, electrónica, accesorios, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of electronicaArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group formControlName="subcategoria" name="tecnologia"
+                            (change)="obtenerSubCategoria($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start"
+                                *ngFor="let electronica of electronicaArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{electronica}}">
+                                        {{electronica}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b4)">
+                        <mat-expansion-panel-header #b4 title="Mascotas">
                             <mat-panel-title>
                                 Mascotas
                             </mat-panel-title>
@@ -69,17 +78,20 @@
                                 Accesorios, ropa, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of animalesArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group formControlName="subcategoria" name="mascotas"
+                            (change)="obtenerSubCategoria($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let mascotas of animalesArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{mascotas}}">
+                                        {{mascotas}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b5)">
+                        <mat-expansion-panel-header #b5 title="Deporte">
                             <mat-panel-title>
                                 Deporte
                             </mat-panel-title>
@@ -87,18 +99,20 @@
                                 Accesorios, indumentaria, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of deportesArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
+                            name="deporte">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let deporte of deportesArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{deporte}}">
+                                        {{deporte}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b6)">
+                        <mat-expansion-panel-header #b6 title="Belleza">
                             <mat-panel-title>
                                 Belleza
                             </mat-panel-title>
@@ -106,18 +120,20 @@
                                 Elementos, cosas para el crack, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of bellezaArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
+                            name="belleza">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let belleza of bellezaArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{belleza}}">
+                                        {{belleza}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel (opened)="obtenerCategoria(b7)">
+                        <mat-expansion-panel-header #b7 title="Bebes">
                             <mat-panel-title>
                                 Bebés
                             </mat-panel-title>
@@ -125,51 +141,55 @@
                                 Elementos, cosas para el crack, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-
-                        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let shoe of bebesArray">
-                            <mat-selection-list #shoes formControlName="primerCtrl" fxFlexOffset="20px">
-                                <mat-radio-button color="primary">
-                                    {{shoe}}
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
+                        <mat-radio-group (change)="obtenerSubCategoria($event)" formControlName="subcategoria"
+                            name="bebe">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let bebe of bebesArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{bebe}}">
+                                        {{bebe}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
                     </mat-expansion-panel>
                 </mat-accordion>
                 <br>
 
                 <div fxLayout="row" fxLayoutAlign="end" fxFlexFill>
-
                     <button mat-raised-button matStepperNext color="primary">Siguiente</button>
                 </div>
             </form>
         </mat-step>
+
         <!--DATOS DEL PRODUCTO-->
-        <mat-step [stepControl]="segundoFormGroup" errorMessage="Los datos de tu productos son necesarios.">
-            <form [formGroup]="segundoFormGroup">
+        <mat-step [stepControl]="datosProductosGroup" errorMessage="Los datos de tu productos son necesarios.">
+            <form [formGroup]="datosProductosGroup">
                 <ng-template matStepLabel>Añade los datos de tu producto</ng-template>
                 <mat-form-field>
-                    <input matInput placeholder="Titulo de la Publicación" formControlName="segundoCtrl" required>
+                    <input matInput placeholder="Titulo de la Publicación" formControlName="titulo" name="titulo"
+                        (ngModelChange)="titulo = $event" required>
                 </mat-form-field>
                 <mat-form-field>
                     <textarea matInput placeholder="Descrpción del producto" cdkTextareaAutosize
-                        formControlName="segundoCtrl" required></textarea>
+                        formControlName="descripcion" name="descripcion" required
+                        (ngModelChange)="descripcion = $event"></textarea>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por dia de alquiler" formControlName="segundoCtrl"
-                        required>
+                    <input matInput type="number" placeholder="Precio por dia de alquiler" formControlName="preciodia"
+                        name="preciodia" required (ngModelChange)="preciodia = $event">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por semana de alquiler"
-                        formControlName="segundoCtrl" required>
+                    <input matInput type="number" placeholder="Precio por semana de alquiler"
+                        formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="precio por mes de alquiler" formControlName="segundoCtrl"
-                        required>
+                    <input matInput type="number" placeholder="Precio por mes de alquiler" formControlName="preciomes"
+                        optional name="preciomes" (ngModelChange)="preciomes = $event">
                 </mat-form-field>
 
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
-                        <button mat-raised-button matStepperPrevious color="primary">Vovler</button>
+                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
                     </div>
                     <div fxLayoutAlign="end" fxFlex>
                         <button mat-raised-button matStepperNext color="primary">Siguiente</button>
@@ -177,18 +197,19 @@
                 </div>
             </form>
         </mat-step>
-        <!--AGREGAR FOTO DEL PRODUCTO-->
-        <mat-step [stepControl]="tercerFormGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="tercerFormGroup">
-                <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
 
+        <!--AGREGAR FOTO DEL PRODUCTO-->
+        <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
+            <form [formGroup]="fotoProductoGroup">
+                <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
                 <div fxLayout="column">
                     <div fxFlexFill>
                         <h3>Imagenes de tu producto</h3>
                         <br>
                         <mat-form-field>
-                            <ngx-mat-file-input type="file" #removableInput formControlName="multiplefile" multiple
-                                placeholder="Subir imagen" [accept]="'.png, .jpg, .jpeg, .gif'">
+                            <ngx-mat-file-input type="file" #removableInput formControlName="multiplefile"
+                                name="multiplefile" multiple placeholder="Subir imagen"
+                                [accept]="'.png, .jpg, .jpeg, .gif'" required>
                             </ngx-mat-file-input>
                             <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
                                 (click)="removableInput.clear($event)">
@@ -205,7 +226,7 @@
                 </div>
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
-                        <button mat-raised-button matStepperPrevious color="primary">Vovler</button>
+                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
                     </div>
                     <div fxLayoutAlign="end" fxFlex>
                         <button mat-raised-button matStepperNext color="primary">Siguiente</button>
@@ -219,45 +240,49 @@
             <h2>Tu producto esta listo para ser publicado</h2>
             <br>
             <h4>Resumen de tu publicacion</h4>
+            <br>
             <div>
-                <form [formGroup]="joinGroup">
+                <form>
                     <mat-form-field>
-                        <input formControlName="titulo" name="titulo" matInput placeholder="Titulo">
+                        <input matInput placeholder="Titulo" [value]=joinGroup.titulo disabled>
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input formControlName="descripcion" name="descripcion" matInput placeholder="Descripcion">
+                        <input matInput placeholder="Descripcion" [value]=joinGroup.descripcion disabled>
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input formControlName="categoria" name="categoria" matInput placeholder="Categoria">
+                        <input matInput placeholder="Categoria" [value]=joinGroup.categoria disabled>
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input formControlName="subCategoria" name="suBcategoria" matInput placeholder="Sub Categoria">
+                        <input matInput placeholder="Sub Categoria" [value]=joinGroup.subcategoria disabled>
                     </mat-form-field>
-                    <div fxLayout="row" fxLayoutGap="40px" >
+
+                    <div fxLayout="row" fxLayoutGap="40px">
                         <mat-form-field>
                             <span matPrefix>$ &nbsp;</span>
-                            <input type="number" matInput placeholder="Precio por dia">
+                            <input type="number" matInput placeholder="Precio por dia" [value]=joinGroup.preciodia
+                                disabled>
                         </mat-form-field>
                         <mat-form-field>
                             <span matPrefix>$ &nbsp;</span>
-                            <input type="number" matInput placeholder="Precio por semana">
+                            <input type="number" matInput placeholder="Precio por semana" [value]=joinGroup.preciosemana
+                                disabled>
                         </mat-form-field>
                         <mat-form-field>
                             <span matPrefix>$ &nbsp;</span>
-                            <input type="number" matInput placeholder="Precio por mes">
+                            <input type="number" matInput placeholder="Precio por mes" [value]=joinGroup.preciomes
+                                disabled>
                         </mat-form-field>
-                    </div>    
+                    </div>
                     <br>
                     <h5>Imagenes</h5>
                     <mat-divider></mat-divider>
                     <br>
                     <br>
                 </form>
-
-
-
             </div>
-
             <div fxLayout="row" fxFlexFill>
                 <div fxFlex>
                     <button mat-raised-button color="primary" matStepperPrevious>Volver</button>

@@ -12,43 +12,97 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 })
 export class RegisterPublicacionComponent implements OnInit {
 
-  primerFormGroup: FormGroup;
-  segundoFormGroup: FormGroup;
-  tercerFormGroup: FormGroup;
+  categoriaFormGroup: FormGroup;
+  datosProductosGroup: FormGroup;
+  fotoProductoGroup: FormGroup;
   constructor(private _formBuilder: FormBuilder) { }
   image;
   joinGroup;
+  categoria: string;
+  subcategoria: string;
+  titulo: string;
+  descripcion: string;
+  preciodia: number;
+  preciosemana: number;
+  preciomes: number;
+
 
   ngOnInit() {
-    this.primerFormGroup = this._formBuilder.group({
-      primerCtrl: ['', Validators.required]
+    this.categoriaFormGroup = this._formBuilder.group({
+      categoria: [''],
+      subcategoria: [{value: ''}, Validators.required]
     });
-    this.segundoFormGroup = this._formBuilder.group({
-      segundoCtrl: ['', Validators.required]
+
+    this.datosProductosGroup = this._formBuilder.group({
+      titulo: [{value: ''}, Validators.required],
+      descripcion: [{value: ''}, Validators.required],
+      preciodia: [{value: ''}, Validators.required],
+      preciosemana: [{value: ''}],
+      preciomes: [{value: ''}]
     });
-    this.tercerFormGroup = this._formBuilder.group({
-      tercerCtrl: ['', Validators.required],
+
+    this.fotoProductoGroup = this._formBuilder.group({
       multiplefile: ['', Validators.required]
     });
+
     this.joinGroup = {
-      ...this.primerFormGroup.value,
-      ...this.segundoFormGroup.value,
-      ...this.tercerFormGroup.value
+      ...this.categoriaFormGroup.value,
+      ...this.datosProductosGroup.value,
+      ...this.fotoProductoGroup.value
     };
-    console.log(this.joinGroup);
-    /* (acceder a datos)
-    let hola = this.primerFormGroup.get('primerCtrl').value;
-    console.log(hola); */
   }
 
+  obtenerSubCategoria(evento) {
+    this.subcategoria = evento.value;
+  }
+
+  obtenerCategoria(evento){
+    this.categoria = evento._element.nativeElement.title;
+    //console.log(evento._element.nativeElement.title);
+  }
+
+  actualizarDatos() {
+
+    if(this.preciomes == undefined || this.preciomes == null){
+      this.preciomes = 0;
+    }
+
+    if(this.preciosemana == undefined || this.preciosemana == null){
+      this.preciosemana = 0;
+    }
+    
+    this.categoriaFormGroup.patchValue({
+      categoria: this.categoria, 
+      subcategoria: this.subcategoria 
+    })
+
+    this.datosProductosGroup.patchValue({
+      titulo: this.titulo,
+      descripcion: this.descripcion,
+      preciodia: this.preciodia,
+      preciosemana: this.preciosemana,
+      preciomes: this.preciomes
+    })
+
+    this.joinGroup = {
+      ...this.categoriaFormGroup.value,
+      ...this.datosProductosGroup.value,
+      ...this.fotoProductoGroup.value
+    };
+
+    console.log(this.joinGroup);
+  }
+
+
+
+  /* ---------------- CARGA DE ARRAYS --------------------- */
   electronicaArray: string[] = ['TV - Audio - Video', 'Celulares - Tablets', 'Computadoras', 'Notebooks', 'Videojuegos', 'Consolas', 'Cámaras y accesorios']
   hogarArray: string[] = ['Accesorios', 'Decoración', 'Electrodomésticos', 'Muebles', 'Jardin']
   deportesArray: string[] = ['Aerobics y fitness', 'Bicicletas y ciclismo', 'Camping y pesca', 'Deportes acuaticos', 'Futbol', 'Otros deportes']
   musicaArray: string[] = ['Arte y antiguedades', 'CDs - DVDs', 'Instrumentos musicales', 'Libros y revistas']
   bellezaArray: string[] = ['Relojes - joyas - accesorios', 'Ropa y calzado', 'Salud y belleza']
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
-  animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros']
-  herramientasArray: string[] = ['Industria','Herramientas', 'Muebles para negocios - oficinas']
-  
+  animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
+  herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
 
 }
