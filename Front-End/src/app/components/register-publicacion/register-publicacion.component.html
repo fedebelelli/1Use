@@ -9,7 +9,7 @@
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
-                <ng-template matStepLabel>Seleccionar categoría del producto</ng-template>
+                <ng-template matStepLabel>Categoría del producto</ng-template>
                 <h3>Seleccioná categoria de tu producto</h3>
                 <br>
                 <mat-accordion>
@@ -191,7 +191,7 @@
         <!--DATOS DEL PRODUCTO-->
         <mat-step [stepControl]="datosProductosGroup" errorMessage="Los datos de tu productos son necesarios.">
             <form [formGroup]="datosProductosGroup">
-                <ng-template matStepLabel>Añadir los datos del producto</ng-template>
+                <ng-template matStepLabel>Datos del producto</ng-template>
                 <h3>Completá los datos de tu producto</h3>
                 <br>
                 <mat-form-field>
@@ -233,7 +233,7 @@
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
             <form [formGroup]="fotoProductoGroup">
-                <ng-template matStepLabel>Agregar foto del producto</ng-template>
+                <ng-template matStepLabel>Fotos del producto</ng-template>
                 <div fxLayout="column">
                     <div>
                         <!--  <h3>Imagenes de tu producto</h3>
@@ -249,7 +249,7 @@
                             </button>
                             <mat-icon matSuffix>image_search</mat-icon>
                         </mat-form-field> -->
-                        <h3>Imágenes de tu producto</h3>
+                        <h3>Carga las imágenes de tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
                             <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
@@ -276,7 +276,7 @@
         <!--TIPO DE ALQUILER-->
         <mat-step [stepControl]="tipoAlquilerGroup" errorMessage="Debes seleccionar el tipo de alquiler">
             <form [formGroup]="tipoAlquilerGroup">
-                <ng-template matStepLabel>Seleccionar tipo de alquiler del producto</ng-template>
+                <ng-template matStepLabel>Tipo de alquiler del producto</ng-template>
                 <h3>Selecioná el tipo de alquiler de tu producto</h3>
                 <br>
                 <div fxLayout="column">
