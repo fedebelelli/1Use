@@ -17,6 +17,7 @@ export class AuthService {
   private _userData = "http://localhost:4201/api/user-data?email="
   private _updateUser = "http://localhost:4201/api/update-user?id="
   private _getImgUser = "http://localhost:4201/api/get-img-name/"
+  private _registerPublicacion = "http://localhost:4201/api/register-publicacion?email="
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -26,15 +27,11 @@ export class AuthService {
 
 
   registerUser(user) {
-
     return this.http.post<any>(this._registerUrl, user)
-
   }
 
   loginUser(user) {
-
     return this.http.post<any>(this._loginUrl, user)
-
   }
 
   confirmar(token) {
@@ -49,11 +46,15 @@ export class AuthService {
     let params = JSON.stringify(user);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post<any>(this._updateUser + _id, params, {headers: headers});
+    return this.http.post<any>(this._updateUser + _id, params, { headers: headers });
   }
 
   get_image(id) {
     return this.http.get<any>(this._getImgUser + id);
+  }
+
+  registrarPublicacion(email, publicacion) {
+    return this.http.post<any>(this._registerPublicacion + email, publicacion);
   }
 
 }

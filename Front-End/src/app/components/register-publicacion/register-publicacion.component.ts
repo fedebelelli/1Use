@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuthService } from 'src/app/services/auth.service';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-register-publicacion ',
@@ -8,14 +10,13 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
   styleUrls: ['./register-publicacion.component.css'],
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
-  }]
+  }, UploadService]
 })
 export class RegisterPublicacionComponent implements OnInit {
 
   categoriaFormGroup: FormGroup;
   datosProductosGroup: FormGroup;
   fotoProductoGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder) { }
   image;
   joinGroup;
   categoria: string;
@@ -25,6 +26,7 @@ export class RegisterPublicacionComponent implements OnInit {
   preciodia: number;
   preciosemana: number;
   preciomes: number;
+  _id;
 
   /* Visualización de imagenes */
   public imagePath;
@@ -33,6 +35,8 @@ export class RegisterPublicacionComponent implements OnInit {
   public filesToUpload: Array<File>;
   hayImagen: boolean = false;
   arrayImagenes = [];
+
+  constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService) { }
 
   ngOnInit() {
     this.categoriaFormGroup = this._formBuilder.group({
@@ -65,7 +69,6 @@ export class RegisterPublicacionComponent implements OnInit {
 
   obtenerCategoria(evento) {
     this.categoria = evento._element.nativeElement.title;
-    //Si se abre una pestaña, se selecciona un valor y luego se va a otra, se queda con el valor de categoria de la ultima pesaña abierta
   }
 
   onFilesAdded(files: File[]) {
@@ -116,8 +119,26 @@ export class RegisterPublicacionComponent implements OnInit {
       ...this.fotoProductoGroup.value
     };
 
-    //console.log(this.joinGroup);
   }
+
+  onSubmit() {
+
+    let email = localStorage.getItem("email");
+    this.categoria = this.joinGroup.categoria;
+    this.titulo = this.joinGroup.titulo;
+
+    this._auth.registrarPublicacion(email, this.joinGroup).subscribe(
+      response => {
+      },
+      err => {
+        this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
+          .then((result: any) => {
+            console.log(result);
+          });
+      }
+    )
+  }
+
 
 
 

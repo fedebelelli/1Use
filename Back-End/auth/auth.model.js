@@ -63,17 +63,17 @@ const userSchema = new Schema({
     },
 
     numero: {
-        type: Number
+        type: String
     },
 
     piso: {
-        type: Number
+        type: String
     },
     departamento: {
         type: String
     },
     codigoPostal: {
-        type: Number
+        type: String
     }
 
 }, {

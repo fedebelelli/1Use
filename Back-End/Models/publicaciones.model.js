@@ -38,6 +38,9 @@ const publicacionesSchema = new Schema({
     email: {
         type: String,
     },
+    multiplefile: {
+        type: String,
+    }
 }, {
         timestamps: true
     });

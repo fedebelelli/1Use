@@ -116,7 +116,7 @@ router.post('/login', (req, res) => {
                 res.status(401).send('Datos incorrecto')
             }
             else {
-                const compa = bcrypt.compareSync(userData.password,user.password);
+                const compa = bcrypt.compareSync(userData.password, user.password);
                 if (!compa) {
                     res.status(401).send('Datos incorrectos')
                 }
@@ -227,7 +227,7 @@ router.get('/get-image/:id', function (req, respuesta1) {
 });
 
 /* ------------------------------ Rutas de publicaciones ----------------------------------- */
-router.post('/register-publicacion', multipartMiddlewarePublicaciones, function(req, res){
+router.post('/register-publicacion', function (req, res) {
     var email = req.query.email;
     var datos = req.body;
     var publicaciones = new Publicacion();
@@ -240,13 +240,43 @@ router.post('/register-publicacion', multipartMiddlewarePublicaciones, function(
     publicaciones.preciosemana = datos.preciosemana;
     publicaciones.preciomes = datos.preciomes;
     publicaciones.email = email;
-    publicaciones.fotos = null;
+    publicaciones.multiplefile = null;
 
-    publicaciones.save((err, res1) =>{
-        if(err) return res.status(500).send("Error papi");
-        if(!res) return res.status(404).send("Error papi");
+    publicaciones.save((err, res1) => {
+        if (err) return res.status(500).send("Error papi");
+        if (!res) return res.status(404).send("Error papi");
         return res.status(200).send("Todo legal papi");
     })
 })
+
+router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddlewarePublicaciones, function (req, res) {
+
+    var email = req.params.email;
+    var titulo = req.params.titulo;
+    var categoria = req.params.categoria;
+    var fileName = "asd";
+
+    if (req.files) {
+        let nombreFinal = "";
+        for (let i = 0; i < req.files.multiplefile.length; i++) {
+            var filePath = req.files.multiplefile[i].path;
+            var fileSplit = filePath.split('\\');
+            var fileName = fileSplit[1];
+            if (i == 0) nombreFinal += fileName
+            else nombreFinal += "," + fileName;
+        }
+
+        console.log(nombreFinal);
+        console.log(email+" "+titulo+" "+categoria)
+
+        Publicacion.findOneAndUpdate({email: email, titulo: titulo, categoria: categoria}, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
+            if (err) return res.status(500).send({ message: 'Imagen no subida' });
+            if (!projectUpdated) return res.status(400).send({ message: 'No existe' });
+            return res.status(200).send({message: "ok"})
+        }) 
+
+    } else console.log("ERROR")
+
+});
 
 module.exports = router;
