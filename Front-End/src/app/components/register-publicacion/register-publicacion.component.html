@@ -1,9 +1,15 @@
+<div class="text-center">
+    <br>
+    <h2>Publicación de tu anuncio</h2>
+    <br>
+</div>
+
 <section fxLayout="column" fxLayoutAlign="center center">
     <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
         <!--CATEGORIAS PRODUCTO-->
-        <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoria para tu producto">
+        <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
-                <ng-template matStepLabel>Selecciona la categoria de tu producto</ng-template>
+                <ng-template matStepLabel>Seleccionar categoría del producto</ng-template>
                 <mat-accordion>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b1 title="Hogar">
@@ -11,7 +17,7 @@
                                 Hogar
                             </mat-panel-title>
                             <mat-panel-description>
-                                Articulos para el hogar.
+                                Artículos para el hogar.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="arrayHogar"
@@ -32,7 +38,7 @@
                                 Música
                             </mat-panel-title>
                             <mat-panel-description>
-                                Instrumentos musicales, parlantes, microfonos, otros.
+                                Instrumentos musicales, parlantes, micrófonos, otros.
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group formControlName="subcategoria" name="musica"
@@ -50,7 +56,7 @@
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b3 title="Tecnologia">
                             <mat-panel-title>
-                                Tecnologia
+                                Tecnología
                             </mat-panel-title>
                             <mat-panel-description>
                                 Computación, electrónica, accesorios, otros.
@@ -117,7 +123,7 @@
                                 Belleza
                             </mat-panel-title>
                             <mat-panel-description>
-                                Elementos, cosas para el crack, otros
+                                Maquillaje, cremas, cuidado personal, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group (change)="obtenerSubCategoria($event);obtenerCategoria(b6)"
@@ -131,14 +137,13 @@
                             </div>
                         </mat-radio-group>
                     </mat-expansion-panel>
-
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b7 title="Bebes">
                             <mat-panel-title>
                                 Bebés
                             </mat-panel-title>
                             <mat-panel-description>
-                                Elementos, cosas para el crack, otros
+                                Cunas, cochecitos, otros
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b7)"
@@ -147,6 +152,26 @@
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{bebe}}">
                                         {{bebe}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header #b8 title="Otros">
+                            <mat-panel-title>
+                                Otros
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Otra categoría en la que no se encuentre tu producto
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b8)"
+                            formControlName="subcategoria" name="otro">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let otro of otrosArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{otro}}">
+                                        {{otro}}
                                     </mat-radio-button>
                                 </mat-selection-list>
                             </div>
@@ -164,9 +189,9 @@
         <!--DATOS DEL PRODUCTO-->
         <mat-step [stepControl]="datosProductosGroup" errorMessage="Los datos de tu productos son necesarios.">
             <form [formGroup]="datosProductosGroup">
-                <ng-template matStepLabel>Añade los datos de tu producto</ng-template>
+                <ng-template matStepLabel>Añadir los datos del producto</ng-template>
                 <mat-form-field>
-                    <input matInput placeholder="Titulo de la Publicación" formControlName="titulo" name="titulo"
+                    <input matInput placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
                         (ngModelChange)="titulo = $event" required>
                 </mat-form-field>
                 <mat-form-field>
@@ -175,14 +200,17 @@
                         (ngModelChange)="descripcion = $event"></textarea>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="Precio por dia de alquiler" formControlName="preciodia"
+                    <span matPrefix>$ &nbsp;</span>
+                    <input matInput type="number" placeholder="Precio por día de alquiler" formControlName="preciodia"
                         name="preciodia" required (ngModelChange)="preciodia = $event">
                 </mat-form-field>
                 <mat-form-field>
+                    <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por semana de alquiler"
                         formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event">
                 </mat-form-field>
                 <mat-form-field>
+                    <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por mes de alquiler" formControlName="preciomes"
                         optional name="preciomes" (ngModelChange)="preciomes = $event">
                 </mat-form-field>
@@ -201,7 +229,7 @@
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
             <form [formGroup]="fotoProductoGroup">
-                <ng-template matStepLabel>Agrega foto de tu producto</ng-template>
+                <ng-template matStepLabel>Agregar foto del producto</ng-template>
                 <div fxLayout="column">
                     <div>
                         <!--  <h3>Imagenes de tu producto</h3>
@@ -217,7 +245,7 @@
                             </button>
                             <mat-icon matSuffix>image_search</mat-icon>
                         </mat-form-field> -->
-                        <h3>Imagenes de tu producto</h3>
+                        <h3>Imágenes de tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
                             <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
@@ -243,33 +271,33 @@
         </mat-step>
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
-            <ng-template matStepLabel>Publica</ng-template>
+            <ng-template matStepLabel>Publicar</ng-template>
             <h2>Tu producto esta listo para ser publicado</h2>
             <br>
-            <h4>Resumen de tu publicacion</h4>
+            <h4>Resumen de tu publicación</h4>
             <br>
             <div>
                 <form>
                     <mat-form-field>
-                        <input matInput placeholder="Titulo" [value]=joinGroup.titulo disabled>
+                        <input matInput placeholder="Título" [value]=joinGroup.titulo disabled>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input matInput placeholder="Descripcion" [value]=joinGroup.descripcion disabled>
+                        <input matInput placeholder="Descripción" [value]=joinGroup.descripcion disabled>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input matInput placeholder="Categoria" [value]=joinGroup.categoria disabled>
+                        <input matInput placeholder="Categoría" [value]=joinGroup.categoria disabled>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input matInput placeholder="Sub Categoria" [value]=joinGroup.subcategoria disabled>
+                        <input matInput placeholder="Sub Categoría" [value]=joinGroup.subcategoria disabled>
                     </mat-form-field>
 
                     <div fxLayout="row" fxLayoutGap="40px">
                         <mat-form-field>
                             <span matPrefix>$ &nbsp;</span>
-                            <input type="number" matInput placeholder="Precio por dia" [value]=joinGroup.preciodia
+                            <input type="number" matInput placeholder="Precio por día" [value]=joinGroup.preciodia
                                 disabled>
                         </mat-form-field>
                         <mat-form-field>
@@ -284,12 +312,14 @@
                         </mat-form-field>
                     </div>
                     <br>
-                    <h5>Imagenes</h5>
+                    <h5>Imágenes</h5>
                     <mat-divider></mat-divider>
-                    <div fxLayout="row" fxLayoutGap="20px">
-                        <div *ngFor="let imagen of arrayImagenes">
-                            <img src={{imagen}} class="container-muestra-imagenes">
-                        </div>
+                    <div class="contenedor-imagenes">
+                        <ul>
+                            <li *ngFor="let imagen of arrayImagenes" class="contenedor-imagen-final">
+                                <img src={{imagen}} class="container-muestra-imagenes">
+                            </li>
+                        </ul>
                     </div>
                     <br>
                     <br>

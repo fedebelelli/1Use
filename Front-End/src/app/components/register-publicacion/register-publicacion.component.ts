@@ -130,5 +130,6 @@ export class RegisterPublicacionComponent implements OnInit {
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
   herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
+  otrosArray: string[] = ['Otra categoria']
 
 }

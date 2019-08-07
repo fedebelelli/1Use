@@ -36,6 +36,11 @@ export class PerfilUsuarioComponent implements OnInit {
   public direccion: string;
   public imagen: string;
   public ciudad: string;
+  public calle: String;
+  public numero: Number;
+  public piso: Number;
+  public departamento: String;
+  public codigoPostal: Number;
   public _id: string;
   public urlImagenPerfil: string;
 
@@ -50,7 +55,12 @@ export class PerfilUsuarioComponent implements OnInit {
     provincia: new FormControl({ value: '', disabled: false }),
     direccion: new FormControl({ value: '', disabled: false }),
     removableFile: new FormControl({ value: '', disabled: false }),
-    ciudad: new FormControl({ value: '', disabled: false })
+    ciudad: new FormControl({ value: '', disabled: false }),
+    calle: new FormControl({ value: '', disabled: false }),
+    numero: new FormControl({ value: '', disabled: false }),
+    piso: new FormControl({ value: '', disabled: false }),
+    departamento: new FormControl({ value: '', disabled: false }),
+    codigoPostal: new FormControl({ value: '', disabled: false })
   });
 
 
@@ -143,9 +153,25 @@ export class PerfilUsuarioComponent implements OnInit {
           this.filtrarCiudades(this.provinciaActual);
         }
 
-        if (res.direccion == undefined) {
-          this.direccion = "";
-        } else this.direccion = res.direccion;
+        if (res.calle == undefined) {
+          this.calle = "";
+        } else this.calle = res.calle;
+
+        if (res.numero == undefined) {
+          this.numero = null;
+        } else this.numero = res.numero;
+
+        if (res.piso == undefined) {
+          this.piso = null;
+        } else this.piso = res.piso;
+
+        if (res.departamento == undefined) {
+          this.departamento = "";
+        } else this.departamento = res.departamento;
+
+        if (res.codigoPostal == undefined) {
+          this.codigoPostal = null;
+        } else this.codigoPostal = res.codigoPostal;
 
         if (res.removablefile != undefined) {
           this.tieneImagen = true;

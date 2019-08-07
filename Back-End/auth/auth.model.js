@@ -46,10 +46,6 @@ const userSchema = new Schema({
         type: String,
     },
 
-    direccion: {
-        type: String,
-    },
-
     ciudad: {
         type: String,
     },
@@ -60,6 +56,24 @@ const userSchema = new Schema({
 
     removablefile: {
         type: String
+    },
+
+    calle: {
+        type: String
+    },
+
+    numero: {
+        type: Number
+    },
+
+    piso: {
+        type: Number
+    },
+    departamento: {
+        type: String
+    },
+    codigoPostal: {
+        type: Number
     }
 
 }, {
