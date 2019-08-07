@@ -10,6 +10,8 @@
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
                 <ng-template matStepLabel>Seleccionar categoría del producto</ng-template>
+                <h3>Seleccioná categoria de tu producto</h3>
+                <br>
                 <mat-accordion>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b1 title="Hogar">
@@ -190,6 +192,8 @@
         <mat-step [stepControl]="datosProductosGroup" errorMessage="Los datos de tu productos son necesarios.">
             <form [formGroup]="datosProductosGroup">
                 <ng-template matStepLabel>Añadir los datos del producto</ng-template>
+                <h3>Completá los datos de tu producto</h3>
+                <br>
                 <mat-form-field>
                     <input matInput placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
                         (ngModelChange)="titulo = $event" required>
@@ -269,6 +273,81 @@
                 </div>
             </form>
         </mat-step>
+        <!--TIPO DE ALQUILER-->
+        <mat-step [stepControl]="tipoAlquilerGroup" errorMessage="Debes seleccionar el tipo de alquiler">
+            <form [formGroup]="tipoAlquilerGroup">
+                <ng-template matStepLabel>Seleccionar tipo de alquiler del producto</ng-template>
+                <h3>Selecioná el tipo de alquiler de tu producto</h3>
+                <br>
+                <div fxLayout="column">
+                    <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
+                        <div fxLayout="column" fxLayoutAlign="center start">
+                            <mat-selection-list fxFlexOffset="20px">
+                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo1">
+                                    Alquiler tipo 1 (explicar mejor)
+                                </mat-radio-button>
+                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo2">
+                                    Alquiler tipo 2 (explicar mejor)
+                                </mat-radio-button>
+                            </mat-selection-list>
+                        </div>
+                    </mat-radio-group>
+                    <br>
+                </div>
+                <div fxLayout="row" fxFlexFill>
+                    <div fxFlex>
+                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
+                    </div>
+                    <div fxLayoutAlign="end" fxFlex>
+                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <!--DESTACACION DEL PRODUCTO-->
+        <mat-step [stepControl]="destacionProductoGroup" [optional]="true">
+            <form [formGroup]="destacionProductoGroup">
+                <ng-template matStepLabel>Destacar producto</ng-template>
+                <div fxLayout="column">
+                    <div>
+                        <h3>Destacá tu producto</h3>
+                        <br>
+                        <div class="contenedor-imagenes">
+                            <p>Destacar tu producto te permite que este aparezca en las primeras ubicaciones
+                                de las busquedas relacionadas con las categorias de tu producto por una semana,
+                                al termino de la semana, deberas renovar el pago para seguir estando en las primeras
+                                ubicaciones de busquedas para poder tener mas chance de que el publico encuentre tu
+                                producto
+                            </p>
+                            <mat-radio-group formControlName="destacar" (change)="obtenerDestacacion($event)">
+                                <div fxLayout="column" fxLayoutAlign="center start">
+                                    <mat-selection-list fxFlexOffset="20px">
+                                        <mat-radio-button class="radioButton" color="primary" value="SI">
+                                            SI
+                                        </mat-radio-button>
+                                        <mat-radio-button class="radioButton" color="primary" value="NO">
+                                            NO
+                                        </mat-radio-button>
+                                    </mat-selection-list>
+                                </div>
+                            </mat-radio-group>
+                            <div *ngIf="seDestaca" fxShow="true">
+                                <img src="../../../assets/images/mercadopago.PNG">
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div fxLayout="row" fxFlexFill>
+                    <div fxFlex>
+                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
+                    </div>
+                    <div fxLayoutAlign="end" fxFlex>
+                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publicar</ng-template>
@@ -292,6 +371,12 @@
 
                     <mat-form-field>
                         <input matInput placeholder="Sub Categoría" [value]=joinGroup.subcategoria disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Tipo de Alquiler" [value]=joinGroup.tipoAlquiler disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Publicación Destacada" [value]=joinGroup.destacar disabled>
                     </mat-form-field>
 
                     <div fxLayout="row" fxLayoutGap="40px">

@@ -17,6 +17,8 @@ export class RegisterPublicacionComponent implements OnInit {
   categoriaFormGroup: FormGroup;
   datosProductosGroup: FormGroup;
   fotoProductoGroup: FormGroup;
+  destacionProductoGroup: FormGroup;
+  tipoAlquilerGroup: FormGroup;
   image;
   joinGroup;
   categoria: string;
@@ -26,7 +28,12 @@ export class RegisterPublicacionComponent implements OnInit {
   preciodia: number;
   preciosemana: number;
   preciomes: number;
+  destacar: String;
+  seDestaca: Boolean = false;
+  tipoAlquiler: String;
+  
   _id;
+
 
   /* Visualización de imagenes */
   public imagePath;
@@ -35,6 +42,7 @@ export class RegisterPublicacionComponent implements OnInit {
   public filesToUpload: Array<File>;
   hayImagen: boolean = false;
   arrayImagenes = [];
+
 
   constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService) { }
 
@@ -55,6 +63,13 @@ export class RegisterPublicacionComponent implements OnInit {
     this.fotoProductoGroup = this._formBuilder.group({
       multiplefile: ['', Validators.required]
     });
+    this.destacionProductoGroup = this._formBuilder.group({
+      destacar: [{ value: '' }]
+
+    });
+    this.tipoAlquilerGroup = this._formBuilder.group({
+      tipoAlquiler:[{value: ''}]
+    });
 
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
@@ -69,6 +84,17 @@ export class RegisterPublicacionComponent implements OnInit {
 
   obtenerCategoria(evento) {
     this.categoria = evento._element.nativeElement.title;
+  }
+  obtenerDestacacion(evento) {
+    this.destacar = evento.value;
+    if(this.destacar == 'SI'){
+      this.seDestaca = true;
+    }else{
+      this.seDestaca = false;
+    }
+  }
+  obtenerTipoAlquiler(evento) {
+    this.tipoAlquiler = evento.value;
   }
 
   onFilesAdded(files: File[]) {
@@ -113,10 +139,21 @@ export class RegisterPublicacionComponent implements OnInit {
       multiplefile: this.image
     })
 
+    this.tipoAlquilerGroup.patchValue({
+      tipoAlquiler: this.tipoAlquiler
+    })
+
+    this.destacionProductoGroup.patchValue({
+      destacar: this.destacar
+    })
+
+
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
       ...this.datosProductosGroup.value,
-      ...this.fotoProductoGroup.value
+      ...this.fotoProductoGroup.value,
+      ...this.destacionProductoGroup.value,
+      ...this.tipoAlquilerGroup.value
     };
 
   }
