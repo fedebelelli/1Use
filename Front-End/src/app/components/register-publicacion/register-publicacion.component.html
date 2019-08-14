@@ -5,7 +5,7 @@
 </div>
 
 <section fxLayout="column" fxLayoutAlign="center center">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
@@ -232,27 +232,15 @@
 
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="fotoProductoGroup">
+            <form [formGroup]="fotoProductoGroup" (change)="pasoImagen()">
                 <ng-template matStepLabel>Fotos del producto</ng-template>
                 <div fxLayout="column">
                     <div>
-                        <!--  <h3>Imagenes de tu producto</h3>
-                        <br>
-                        <mat-form-field>
-                            <ngx-mat-file-input type="file" #removableInput formControlName="multiplefile"
-                                name="multiplefile" multiple placeholder="Subir imagen"
-                                [accept]="'.png, .jpg, .jpeg, .gif'" required>
-                            </ngx-mat-file-input>
-                            <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
-                                (click)="removableInput.clear($event)">
-                                <mat-icon>clear</mat-icon>
-                            </button>
-                            <mat-icon matSuffix>image_search</mat-icon>
-                        </mat-form-field> -->
                         <h3>Carga las imágenes de tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
-                            <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
+                            <ngx-dropzone
+                                [accept]="'image/png,image/jpeg,image/gif'"
                                 [label]="'Clickea aquí para subir tu imágen o arrastrala'" [multiple]="true"
                                 (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="true"
                                 #dropzone></ngx-dropzone>
@@ -415,7 +403,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 </div>
                 <div fxLayoutAlign="end" fxFlex>
-                    <button mat-raised-button color="accent" (click)="stepper.reset()"
+                    <button mat-raised-button color="accent" (click)="resetearDatos()"
                         style="margin-right: 10px;">Resetear Datos</button>
                     <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
                 </div>

@@ -31,7 +31,8 @@ export class RegisterPublicacionComponent implements OnInit {
   destacar: String;
   seDestaca: Boolean = false;
   tipoAlquiler: String;
-  
+
+
   _id;
 
 
@@ -49,7 +50,7 @@ export class RegisterPublicacionComponent implements OnInit {
   ngOnInit() {
     this.categoriaFormGroup = this._formBuilder.group({
       categoria: [''],
-      subcategoria: [{ value: '' }, Validators.required]
+      subcategoria: ['', Validators.required]
     });
 
     this.datosProductosGroup = this._formBuilder.group({
@@ -61,20 +62,22 @@ export class RegisterPublicacionComponent implements OnInit {
     });
 
     this.fotoProductoGroup = this._formBuilder.group({
-      multiplefile: ['', Validators.required]
+      multiplefile: [{ value: '' }, Validators.required]
     });
     this.destacionProductoGroup = this._formBuilder.group({
       destacar: [{ value: '' }]
 
     });
     this.tipoAlquilerGroup = this._formBuilder.group({
-      tipoAlquiler:[{value: ''}]
+      tipoAlquiler: [{ value: '' }, Validators.required]
     });
 
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
       ...this.datosProductosGroup.value,
-      ...this.fotoProductoGroup.value
+      ...this.fotoProductoGroup.value,
+      ...this.destacionProductoGroup.value,
+      ...this.tipoAlquilerGroup.value
     };
   }
 
@@ -87,9 +90,9 @@ export class RegisterPublicacionComponent implements OnInit {
   }
   obtenerDestacacion(evento) {
     this.destacar = evento.value;
-    if(this.destacar == 'SI'){
+    if (this.destacar == 'SI') {
       this.seDestaca = true;
-    }else{
+    } else {
       this.seDestaca = false;
     }
   }
@@ -109,7 +112,19 @@ export class RegisterPublicacionComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     });
-    //console.log(this.arrayImagenes);
+
+  }
+
+  pasoImagen() {
+    if (this.arrayImagenes.length = 0) {
+      this.fotoProductoGroup.patchValue({
+        multiplefile: [{ value: "" }, Validators.required]
+      })
+    } else {
+      this.fotoProductoGroup.patchValue({
+        multiplefile: [{ value: this.arrayImagenes }, Validators.required]
+      })
+    }
   }
 
   actualizarDatos() {
@@ -137,6 +152,8 @@ export class RegisterPublicacionComponent implements OnInit {
 
     this.fotoProductoGroup.patchValue({
       multiplefile: this.image
+
+
     })
 
     this.tipoAlquilerGroup.patchValue({
@@ -155,6 +172,35 @@ export class RegisterPublicacionComponent implements OnInit {
       ...this.destacionProductoGroup.value,
       ...this.tipoAlquilerGroup.value
     };
+
+  }
+  resetearDatos() {
+    this.categoriaFormGroup.patchValue({
+      categoria: [{ value: '' }],
+      subcategoria: [{ value: '' }]
+    })
+
+    this.datosProductosGroup.patchValue({
+      titulo: [{ value: '' }],
+      descripcion: [{ value: '' }],
+      preciodia: [{ value: '' }],
+      preciosemana: [{ value: '' }],
+      preciomes: [{ value: '' }]
+    })
+
+    this.fotoProductoGroup.patchValue({
+      multiplefile:[{ value: '' }]
+
+
+    })
+
+    this.tipoAlquilerGroup.patchValue({
+      tipoAlquiler: [{ value: '' }]
+    })
+
+    this.destacionProductoGroup.patchValue({
+      destacar: [{ value: '' }]
+    })
 
   }
 
