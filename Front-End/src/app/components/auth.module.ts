@@ -10,6 +10,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { ConfirmaComponent } from './confirma/confirma.component';
 import { RegisterPublicacionComponent } from './register-publicacion/register-publicacion.component';
 
+
 @NgModule({
   declarations: [RegisterComponent, LoginComponent, ConfirmaComponent, RegisterPublicacionComponent],
   imports: [
