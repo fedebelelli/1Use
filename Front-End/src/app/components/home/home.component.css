@@ -211,3 +211,26 @@ html {
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: transparent;
 }
+
+
+/* SWIPPER */
+.swiper-slide {
+  color: black;
+  background-color: #fff;
+  height: 400px !important;
+}
+
+.swiper-slide-active {
+  color: black;
+  background-color: #fff;
+}
+
+.swiper-container {
+  height: 400px !important;
+}
+
+.img-carrousel{
+  height: 100%;
+  width: 100%
+}
+
