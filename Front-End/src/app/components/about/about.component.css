@@ -27,3 +27,15 @@
 .bloque-herramientas-lt-md{
     width: 100%;
 }
+
+mat-progress-bar{
+    height: 20px;
+}
+
+.mat-progress-bar .mat-progress-bar-fill::after{
+    content: 'HOLIS';
+}
+
+.progress-type{
+    color: white
+}

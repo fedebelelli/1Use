@@ -24,77 +24,146 @@
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h4>Herramienta1</h4>
+                                <h4>Angular</h4>
+                                <img src="https://angular.io/assets/images/logos/angular/angular.png"
+                                    style="height: 20px; width: 20px; margin-left: 10px">
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <p>ChamuyoHerramienta1</p>
+                        <p class="text-justify">
+                            Angular, es un framework para aplicaciones web desarrollado en
+                            TypeScript, de código abierto,
+                            mantenido por Google, que se utiliza para crear y mantener aplicaciones web de una sola
+                            página.</p>
                     </mat-expansion-panel>
 
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h4>Herramienta2</h4>
+                                <h4>Angular Material</h4>
+                                <img src="https://www341.lunapic.com/editor/working/156596670924518776?7492717500"
+                                    style="height: 20px; width: 20px; margin-left: 10px">
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <p class="text-justify">
-                            ChamuyoHerramienta2
+                            Angular Material es una librería de componentes web con un diseño Material design, una guía
+                            de estilo creada por Google para Android y para sus aplicaciones.
+                        </p>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title fxLayout="row">
+                                <h4>ExpressJS</h4>
+                                <img src="../../../assets/images/expressjs.png"
+                                    style="height: 15px; width: 65px; margin-left: 10px">
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p class="text-justify">
+                            Express es una infraestructura de aplicaciones web Node.js mínima y flexible que proporciona
+                            un conjunto sólido de características para las aplicaciones web y móviles.
                         </p>
                     </mat-expansion-panel>
 
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h4>Herramienta3</h4>
+                                <h4>MongoDB</h4>
+                                <img src="https://logos-download.com/wp-content/uploads/2016/09/MongoDB_logo_Mongo_DB.png"
+                                    style="height: 20px; width: 95px; margin-left: 10px">
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <p class="text-justify">
-                            ChamuyoHerramienta3
+                            MongoDB es un sistema de base de datos NoSQL orientado a documentos de código abierto. En
+                            lugar de guardar los datos en tablas, MongoDB guarda estructuras de datos BSON con un
+                            esquema dinámico, haciendo que la integración de los
+                            datos en ciertas aplicaciones sea más fácil y rápida.
                         </p>
                     </mat-expansion-panel>
 
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <h4>Herramienta4</h4>
+                                <h4>NodeJS</h4>
+                                <img src="https://nodejs.org/static/images/logos/nodejs-new-black.png"
+                                    style="height: 25px; width: 50px; margin-left: 10px">
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <p class="text-justify">
-                            ChamuyoHerramienta4
+                            Node.js es un entorno en tiempo de ejecución multiplataforma, de código abierto, para la
+                            capa del servidor basado en el lenguaje de programación ECMAScript, asíncrono, con E/S de
+                            datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
                         </p>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <h4>Herramienta5</h4>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p class="text-justify">
-                            ChamuyoHerramienta5
-                        </p>
-                    </mat-expansion-panel>
-
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <h4>Herramienta6</h4>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p class="text-justify">
-                            ChamuyoHerramienta6
-                        </p>
-                    </mat-expansion-panel>
                 </mat-accordion>
             </div>
         </div>
         <!--HERRAMIENTAS END -->
         <!--VALORES START-->
+
         <div fxFlex.gt-md fxFlexAlign.gt-md="end" ngClass.gt-sm="bloque-nuestros-valores"
             ngClass.lt-lg="bloque-nuestros-valores-lt-md">
             <div class="heading-part mb_20 mt_40 ">
                 <h2 class="main_title">Nuestros Valores</h2>
             </div>
-            <div id="p_line">
+
+            <div>
+                <mat-progress-bar mode="determinate" color="accent" [value]=progress1></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Creatividad</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="primary" [value]=progress2></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Transparencia</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="warn" [value]=progress3></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Honestidad</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="accent" [value]=progress4></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Responsabilidad Social</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="primary" [value]=progress5></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Excelencia</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="warn" [value]=progress6></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Pasión</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="accent" [value]=progress7></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Seguridad</span>
+                </div>
+            </div>
+
+            <div>
+                <mat-progress-bar mode="determinate" color="primary" [value]=progress8></mat-progress-bar>
+                <div style="position:relative; top: -22px; left: 30px;">
+                    <span class="progress-type">Respeto</span>
+                </div>
+            </div>
+
+            <!-- <div id="p_line">
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                         aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span>
@@ -145,7 +214,7 @@
                             Complete (warning)</span> </div>
                     <span class="progress-type">Respeto</span>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!--VALORES END -->
     </div>
