@@ -29,6 +29,14 @@ import { DropdownModule } from 'angular-custom-dropdown'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PublicacionExitoComponent } from './components/publicacion-exito/publicacion-exito.component';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 @NgModule({
   declarations: [
@@ -62,9 +70,10 @@ import { PublicacionExitoComponent } from './components/publicacion-exito/public
     MaterialModule,
     DropdownModule,
     MaterialFileInputModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    SwiperModule
   ],
-  providers: [appRoutingProviders, AuthService, SingletonService ],
+  providers: [appRoutingProviders, AuthService, SingletonService, {provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
