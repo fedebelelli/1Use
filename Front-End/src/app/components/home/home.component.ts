@@ -23,15 +23,6 @@ export class HomeComponent implements OnInit {
   urlRecortada: string;
   usuarioActivo;
 
-  public slides = [
-    'First slide',
-    'Second slide',
-    'Third slide',
-    'Fourth slide',
-    'Fifth slide',
-    'Sixth slide'
-  ];
-
   constructor(private singleton: SingletonService) { }
 
 

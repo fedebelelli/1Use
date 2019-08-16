@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AuthService } from 'src/app/services/auth.service';
 import { UploadService } from 'src/app/services/upload.service';
+import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register-publicacion ',
@@ -13,6 +15,8 @@ import { UploadService } from 'src/app/services/upload.service';
   }, UploadService]
 })
 export class RegisterPublicacionComponent implements OnInit {
+
+  @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
 
   categoriaFormGroup: FormGroup;
   datosProductosGroup: FormGroup;
@@ -42,10 +46,10 @@ export class RegisterPublicacionComponent implements OnInit {
   public message: string;
   public filesToUpload: Array<File>;
   hayImagen: boolean = false;
-  arrayImagenes = [];
+  arrayImagenes = null;
 
 
-  constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService) { }
+  constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.categoriaFormGroup = this._formBuilder.group({
@@ -101,21 +105,39 @@ export class RegisterPublicacionComponent implements OnInit {
   }
 
   onFilesAdded(files: File[]) {
-    this.image = files;
-    this.arrayImagenes = [];
-    this.arrayImagenes.length = 0;
-    files.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent) => {
-        const content = (e.target as FileReader).result;
-        this.arrayImagenes.push(content);
-      };
-      reader.readAsDataURL(file);
-    });
-
+    if (files.length > 5) {
+      this._snackBar.open("No se pueden ingresar más de 5 imágenes","Aceptar")
+      this.image = [];
+      this.arrayImagenes=[];
+    }
+    else {
+      this.image = files;
+      this.arrayImagenes = [];
+      this.arrayImagenes.length = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent) => {
+          const content = (e.target as FileReader).result;
+          this.arrayImagenes.push(content);
+        };
+        reader.readAsDataURL(file);
+      });
+      this.fotoProductoGroup.patchValue({
+        multiplefile: [{ value: this.arrayImagenes }, Validators.required]
+      })
+    }
   }
 
-  pasoImagen() {
+  checkCantidad(){
+    if(this.arrayImagenes.length > 5){
+      this.fotoProductoGroup.patchValue({
+        multiplefile: [{ value: "" }, Validators.required]
+      })
+    }
+  }
+
+  /* Solo va a servir si se quieren agregar más imágenes al cuadrado, además de la que ya están
+   pasoImagen() {
     if (this.arrayImagenes.length = 0) {
       this.fotoProductoGroup.patchValue({
         multiplefile: [{ value: "" }, Validators.required]
@@ -125,7 +147,8 @@ export class RegisterPublicacionComponent implements OnInit {
         multiplefile: [{ value: this.arrayImagenes }, Validators.required]
       })
     }
-  }
+  } */
+
 
   actualizarDatos() {
 
@@ -204,7 +227,7 @@ export class RegisterPublicacionComponent implements OnInit {
       ...this.tipoAlquilerGroup.value
     };
   }
-   
+
   onSubmit() {
 
     let email = localStorage.getItem("email");
@@ -237,5 +260,21 @@ export class RegisterPublicacionComponent implements OnInit {
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
   herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
   otrosArray: string[] = ['Otra categoria']
+
+
+  //SWIPER
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 5
+  };
+
+  //Snackbar
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['color-snackbar']
+    });
+  }
 
 }

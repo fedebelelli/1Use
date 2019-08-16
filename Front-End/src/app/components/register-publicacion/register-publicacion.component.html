@@ -6,6 +6,7 @@
 
 <section fxLayout="column" fxLayoutAlign="center center">
     <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+        <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
@@ -232,17 +233,16 @@
 
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="fotoProductoGroup" (change)="pasoImagen()">
+            <form [formGroup]="fotoProductoGroup" (change)="checkCantidad()"> <!-- (change)="pasoImagen()" -->
                 <ng-template matStepLabel>Fotos del producto</ng-template>
-                <div fxLayout="column">
+                <div fxLayout="column" fxLayoutAlign="center center">
                     <div>
-                        <h3>Carga las imágenes de tu producto</h3>
+                        <h3 style="text-align: center">Carga las imágenes de tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
-                            <ngx-dropzone
-                                [accept]="'image/png,image/jpeg,image/gif'"
+                            <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
                                 [label]="'Clickea aquí para subir tu imágen o arrastrala'" [multiple]="true"
-                                (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="true"
+                                (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="false"
                                 #dropzone></ngx-dropzone>
                         </div>
                         <br>
@@ -339,7 +339,7 @@
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publicar</ng-template>
-            <h2>Tu producto está listo para ser publicado</h2>
+            <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
             <br>
             <h4>Resumen de tu publicación</h4>
             <br>
@@ -387,12 +387,21 @@
                     <br>
                     <h5>Imágenes</h5>
                     <mat-divider></mat-divider>
-                    <div class="contenedor-imagenes">
+                    <!-- <div class="contenedor-imagenes">
                         <ul>
                             <li *ngFor="let imagen of arrayImagenes" class="contenedor-imagen-final">
                                 <img src={{imagen}} class="container-muestra-imagenes">
                             </li>
                         </ul>
+                    </div> -->
+                    <div style="margin-top: 30px">
+                        <swiper class="swiper-container" [config]="config">
+                            <div *ngFor="let imagen of arrayImagenes">
+                                <div class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+                                    <img src={{imagen}} class="img-carrousel">
+                                </div>
+                            </div>
+                        </swiper>
                     </div>
                     <br>
                     <br>
@@ -403,7 +412,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 </div>
                 <div fxLayoutAlign="end" fxFlex>
-                    <button mat-raised-button color="accent" (click)="resetearDatos(); stepper.reset(); dropzone.reset()"
+                    <button mat-raised-button color="accent"
+                        (click)="resetearDatos(); stepper.reset(); dropzone.reset()"
                         style="margin-right: 10px;">Resetear Datos</button>
                     <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
                 </div>
