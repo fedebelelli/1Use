@@ -339,7 +339,7 @@
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publicar</ng-template>
-            <h2>Tu producto esta listo para ser publicado</h2>
+            <h2>Tu producto está listo para ser publicado</h2>
             <br>
             <h4>Resumen de tu publicación</h4>
             <br>
@@ -403,7 +403,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 </div>
                 <div fxLayoutAlign="end" fxFlex>
-                    <button mat-raised-button color="accent" (click)="resetearDatos()"
+                    <button mat-raised-button color="accent" (click)="resetearDatos(); stepper.reset(); dropzone.reset()"
                         style="margin-right: 10px;">Resetear Datos</button>
                     <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
                 </div>

@@ -28,6 +28,7 @@ import { SingletonService } from './components/singleton.service'
 import { DropdownModule } from 'angular-custom-dropdown'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PublicacionExitoComponent } from './components/publicacion-exito/publicacion-exito.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ConfirmaComponent,
     HeaderComponent,
     FooterComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    PublicacionExitoComponent
   ],
   imports: [
     BrowserModule,

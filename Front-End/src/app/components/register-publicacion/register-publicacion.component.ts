@@ -28,7 +28,7 @@ export class RegisterPublicacionComponent implements OnInit {
   preciodia: number;
   preciosemana: number;
   preciomes: number;
-  destacar: String;
+  destacar: String = 'NO';
   seDestaca: Boolean = false;
   tipoAlquiler: String;
 
@@ -65,7 +65,7 @@ export class RegisterPublicacionComponent implements OnInit {
       multiplefile: [{ value: '' }, Validators.required]
     });
     this.destacionProductoGroup = this._formBuilder.group({
-      destacar: [{ value: '' }]
+      destacar: [{ value: "" }]
 
     });
     this.tipoAlquilerGroup = this._formBuilder.group({
@@ -175,35 +175,36 @@ export class RegisterPublicacionComponent implements OnInit {
 
   }
   resetearDatos() {
-    this.categoriaFormGroup.patchValue({
-      categoria: [{ value: '' }],
-      subcategoria: [{ value: '' }]
-    })
+    this.categoriaFormGroup.reset()
 
-    this.datosProductosGroup.patchValue({
-      titulo: [{ value: '' }],
-      descripcion: [{ value: '' }],
-      preciodia: [{ value: '' }],
-      preciosemana: [{ value: '' }],
-      preciomes: [{ value: '' }]
-    })
+    this.datosProductosGroup.reset()
 
-    this.fotoProductoGroup.patchValue({
-      multiplefile:[{ value: '' }]
+    this.fotoProductoGroup.reset()
 
+    this.tipoAlquilerGroup.reset()
 
-    })
+    this.destacionProductoGroup.reset()
 
-    this.tipoAlquilerGroup.patchValue({
-      tipoAlquiler: [{ value: '' }]
-    })
+    this.categoria = '';
+    this.subcategoria = '';
+    this.titulo = '';
+    this.descripcion = '';
+    this.preciodia = null;
+    this.preciosemana = null;
+    this.preciomes = null;
+    this.image = '';
+    this.tipoAlquiler = ''
+    this.destacar = 'NO'
 
-    this.destacionProductoGroup.patchValue({
-      destacar: [{ value: '' }]
-    })
-
+    this.joinGroup = {
+      ...this.categoriaFormGroup.value,
+      ...this.datosProductosGroup.value,
+      ...this.fotoProductoGroup.value,
+      ...this.destacionProductoGroup.value,
+      ...this.tipoAlquilerGroup.value
+    };
   }
-
+   
   onSubmit() {
 
     let email = localStorage.getItem("email");
@@ -217,6 +218,7 @@ export class RegisterPublicacionComponent implements OnInit {
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
             console.log(result);
+            window.location.assign("/publicacion-exito");
           });
       }
     )

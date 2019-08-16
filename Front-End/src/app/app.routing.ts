@@ -12,6 +12,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 import { ConfirmaComponent } from './components/confirma/confirma.component';
 import { RegisterPublicacionComponent } from './components/register-publicacion/register-publicacion.component';
+import{PublicacionExitoComponent} from './components/publicacion-exito/publicacion-exito.component';
 const appRoutes: Routes = [
 
     {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     {path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent},
     {path: 'confirma', component: ConfirmaComponent},
     {path: 'register-publicacion', component: RegisterPublicacionComponent},
+    {path: 'publicacion-exito', component: PublicacionExitoComponent},
     {path: '*', component: ErrorComponent},
 
 
