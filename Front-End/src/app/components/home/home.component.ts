@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SingletonService } from '../singleton.service';
 import { CategoriasComponent } from '../../components/categorias/categorias.component';
-import { SwiperComponent, SwiperConfigInterface} from 'ngx-swiper-wrapper';
+import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @NgModule({
   imports: [CategoriasComponent]
@@ -30,8 +30,17 @@ export class HomeComponent implements OnInit {
 
   }
 
-  //SWIPER
+  checkPagina() {
+    if (this.singleton.getInicioSesion()) {
+      this.singleton.paginaActual("/register-publicacion")
+      window.location.assign("/register-publicacion");
+    } else {
+      window.location.assign("/login");
+    }
+  }
 
+
+  //SWIPER
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -41,7 +50,7 @@ export class HomeComponent implements OnInit {
     scrollbar: false,
     navigation: true,
     pagination: false,
-    autoplay: { delay: 5000},
+    autoplay: { delay: 5000 },
   };
 
 

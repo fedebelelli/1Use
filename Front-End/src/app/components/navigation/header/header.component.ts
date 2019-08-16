@@ -82,22 +82,25 @@ export class HeaderComponent implements OnInit {
 
   obtenerNombreLogueado() {
     let email = localStorage.getItem("email");
-    this._auth.user_data(email).subscribe(
-      res => {
-        this.usuarioIniciado = res;
-        if (res.nombre != undefined) {
-          this.tieneNombre = true;
+    if (email != undefined || email != null) {
+      this._auth.user_data(email).subscribe(
+        res => {
+          this.usuarioIniciado = res;
+          if (res.nombre != undefined) {
+            this.tieneNombre = true;
+          }
+          if (res.removablefile != undefined) {
+            this.mostrarImagen = true;
+          }
+          this.singleton.setIdLogueado(res._id);
+          this._id = this.singleton.getIdLogueado();
+        },
+        err => {
+          //console.log(err);
         }
-        if (res.removablefile != undefined) {
-          this.mostrarImagen = true;
-        }
-        this.singleton.setIdLogueado(res._id);
-        this._id = this.singleton.getIdLogueado();
-      },
-      err => {
-        //console.log(err);
-      }
-    )
+      ) 
+    }
+
   }
 
 

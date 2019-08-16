@@ -455,11 +455,7 @@ function owl_carousel () {
 
     });
    
-    $( window ).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-        owl_carousel ();
-        left_colunm_swetch ();      
-    });
+    
    
     $( window ).resize(function() {
         left_colunm_swetch ();

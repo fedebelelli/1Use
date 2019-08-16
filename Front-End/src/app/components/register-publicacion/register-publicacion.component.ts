@@ -106,9 +106,12 @@ export class RegisterPublicacionComponent implements OnInit {
 
   onFilesAdded(files: File[]) {
     if (files.length > 5) {
-      this._snackBar.open("No se pueden ingresar más de 5 imágenes","Aceptar")
+      this._snackBar.open("No se pueden ingresar más de 5 imágenes", "Aceptar")
       this.image = [];
-      this.arrayImagenes=[];
+      this.arrayImagenes = [];
+      this.fotoProductoGroup.patchValue({
+        multiplefile: [{ value: "" }, Validators.required]
+      })
     }
     else {
       this.image = files;
@@ -128,8 +131,8 @@ export class RegisterPublicacionComponent implements OnInit {
     }
   }
 
-  checkCantidad(){
-    if(this.arrayImagenes.length > 5){
+  checkCantidad() {
+    if (this.arrayImagenes.length > 5) {
       this.fotoProductoGroup.patchValue({
         multiplefile: [{ value: "" }, Validators.required]
       })

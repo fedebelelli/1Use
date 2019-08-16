@@ -31,7 +31,7 @@
         <button mat-button class="spanToolbar" [routerLink]="['/login']"
             (click)="checkPage('/login'); setearInicioSesion()" [fxShow]=!inicioSesion>Iniciar
             Sesion</button>
-        <div class="dropdown" #myDropdown=dropdown dropdown>
+        <div class="dropdown" #myDropdown=dropdown dropdown *ngIf="mostrarImagen">
             <button mat-button class="spanToolbar" (click)="ngOnInit(); setearInicioSesion(); openNow()"
                 [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle *ngIf="tieneNombre">
                 <mat-icon>account_circle</mat-icon> {{usuarioIniciado.nombre}}

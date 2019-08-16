@@ -47,6 +47,10 @@ export class SingletonService {
       this.estado = false;
     }
 
+    if (urlActual == "/register-publicacion") {
+      this.estado = false;
+    }
+
     if (urlActual == "/confirmacionemail") {
       this.estado = false;
     }
