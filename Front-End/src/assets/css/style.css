@@ -3378,6 +3378,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
+    width: 80%;
 }
 
 .single-product .icon {
