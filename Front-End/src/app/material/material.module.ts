@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatVideoModule } from 'mat-video';
 import {
   MatButtonModule,
   MatButtonToggleModule,
@@ -65,7 +66,8 @@ const MaterialComponents = [
   MatSortModule,
   MatPaginatorModule,
   MatDividerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatVideoModule
 ]
 
 @NgModule({ imports: [MaterialComponents], exports: [MaterialComponents] })
