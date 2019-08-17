@@ -36,11 +36,11 @@ export class PerfilUsuarioComponent implements OnInit {
   public direccion: string;
   public imagen: string;
   public ciudad: string;
-  public calle: String;
-  public numero: Number;
-  public piso: Number;
-  public departamento: String;
-  public codigoPostal: Number;
+  public calle: string;
+  public numero: number;
+  public piso: number;
+  public departamento: string;
+  public codigoPostal: number;
   public _id: string;
   public urlImagenPerfil: string;
 
@@ -245,7 +245,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   onSubmit() {
     this.updateFormularioControl();
-    console.log(this.formulario);
+    console.log(this.formulario.value);
     this._auth.update_user(this.formulario.value, this._id).subscribe(
       response => {
         console.log(response);
@@ -286,7 +286,12 @@ export class PerfilUsuarioComponent implements OnInit {
       provincia: this.provinciaActual,
       direccion: this.direccion,
       ciudad: this.ciudad,
-      removableFile: null
+      removableFile: null,
+      calle: this.calle,
+      numero: this.numero,
+      piso: this.piso,
+      departamento: this.departamento,
+      codigoPostal: this.codigoPostal
     })
 
   }

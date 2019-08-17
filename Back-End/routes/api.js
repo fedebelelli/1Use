@@ -174,14 +174,18 @@ router.post('/update-user', multipartMiddleware, function (req, res) {
     var usuario = new User();
 
     usuario._id = params;
-    usuario.apellido = user.apellido;
-    usuario.ciudad = user.ciudad;
-    usuario.direccion = user.direccion;
-    usuario.fecha_nacimiento = user.fecha_nacimiento;
     usuario.nombre = user.nombre;
-    usuario.provincia = user.provincia;
-    //usuario.removablefile = user.removablefile._fileNames;
+    usuario.apellido = user.apellido;
     usuario.telefono = user.telefono;
+    usuario.fecha_nacimiento = user.fecha_nacimiento;
+    usuario.provincia = user.provincia;
+    usuario.ciudad = user.ciudad;
+    //usuario.removablefile = user.removablefile._fileNames;
+    usuario.calle = user.calle;
+    usuario.numero = user.numero;
+    usuario.piso = user.piso;
+    usuario.departamento = user.departamento;
+    usuario.codigoPostal = user.codigoPostal;
 
     User.findByIdAndUpdate(params, usuario, { new: true }, (err, pUpdated) => {
         if (err) return res.status(500).send("Error en BD");

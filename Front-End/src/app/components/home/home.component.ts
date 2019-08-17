@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SingletonService } from '../singleton.service';
 import { CategoriasComponent } from '../../components/categorias/categorias.component';
 import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AuthService } from 'src/app/services/auth.service';
 
 @NgModule({
   imports: [CategoriasComponent]
@@ -22,8 +23,9 @@ export class HomeComponent implements OnInit {
   urlActual: string;
   urlRecortada: string;
   usuarioActivo;
+  usuario;
 
-  constructor(private singleton: SingletonService) { }
+  constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
 
   ngOnInit() {
@@ -32,11 +34,69 @@ export class HomeComponent implements OnInit {
 
   checkPagina() {
     if (this.singleton.getInicioSesion()) {
-      this.singleton.paginaActual("/register-publicacion")
-      window.location.assign("/register-publicacion");
+      this._auth.user_data(localStorage.getItem("email")).subscribe(
+        res => {
+          this.usuario = res;
+          if (this.checkUsuarioCompleto(this.usuario)) {
+            this.singleton.paginaActual("/register-publicacion");
+            window.location.assign("/register-publicacion");
+          } else {
+            window.location.assign("/perfil");
+          }
+        },
+        err => {
+          console.log(err);
+        }
+      )
     } else {
       window.location.assign("/login");
     }
+  }
+
+  checkUsuarioCompleto(user): boolean {
+    if (user.name == undefined) {
+      return false;
+    }
+    if (user.email == undefined) {
+      return false;
+    }
+    if (user.apellido == undefined) {
+      return false;
+    }
+    if (user.ciudad == undefined) {
+      return false;
+    }
+    if (user.direccion == undefined) {
+      return false;
+    }
+    if (user.nombre == undefined) {
+      return false;
+    }
+    if (user.provincia == undefined) {
+      return false;
+    }
+    if (user.telefono == undefined) {
+      return false;
+    }
+    if (user.removablefile == undefined) {
+      return false;
+    }
+    if (user.calle == undefined) {
+      return false;
+    }
+    if (user.codigoPostal == undefined) {
+      return false;
+    }
+    if (user.departamento == undefined) {
+      return false;
+    }
+    if (user.numero == undefined) {
+      return false;
+    }
+    if (user.piso == undefined) {
+      return false;
+    }
+    return true;
   }
 
 

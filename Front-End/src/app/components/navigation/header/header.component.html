@@ -68,7 +68,7 @@
                 <div fxLayout="column">
                     <li><a class="neat" rel="noopener"> Mis publicaciones</a></li>
                     <li><a class="neat" rel="noopener"> Mis alquileres</a></li>
-                    <li><a class="neat" rel="noopener" routerLink="/perfil"> Mis datos</a></li>
+                    <li><a class="neat" rel="noopener" (click)="ngOnInit();setearInicioSesion(); openNow()" routerLink="/perfil"> Mis datos</a></li>
                     <li><a class="neat" rel="noopener" (click)="cerrarSesion()"> Cerrar sesión</a></li>
                 </div>
             </ul>

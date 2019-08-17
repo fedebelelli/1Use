@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class SingletonService {
   inicioSesion: boolean;
   token: string;
   idLogueado;
+  usuario;
 
   paginaActual(urlActual: string): boolean {
 
