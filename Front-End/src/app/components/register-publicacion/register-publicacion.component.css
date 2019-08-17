@@ -26,6 +26,10 @@
     width: 1100px;
 }
 
+.contenedor-imagenes-lt-md {
+    width: 360px;
+}
+
 .container-muestra-imagenes {
     width: 250px;
     height: 250px;
