@@ -13,6 +13,7 @@ import { ConfirmacionEmailComponent } from './components/confirmacionemail/confi
 import { ConfirmaComponent } from './components/confirma/confirma.component';
 import { RegisterPublicacionComponent } from './components/register-publicacion/register-publicacion.component';
 import{PublicacionExitoComponent} from './components/publicacion-exito/publicacion-exito.component';
+import{DestacacionPublicacionComponent} from './components/destacacion-publicacion/destacacion-publicacion.component';
 const appRoutes: Routes = [
 
     {path: '', component: HomeComponent},
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     {path: 'confirma', component: ConfirmaComponent},
     {path: 'register-publicacion', component: RegisterPublicacionComponent},
     {path: 'publicacion-exito', component: PublicacionExitoComponent},
+    {path: 'destacacion-publicacion', component: DestacacionPublicacionComponent},
     {path: '*', component: ErrorComponent},
 
 

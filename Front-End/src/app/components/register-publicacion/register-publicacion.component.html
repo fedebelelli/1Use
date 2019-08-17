@@ -5,7 +5,7 @@
 </div>
 
 <section fxLayout="column" fxLayoutAlign="center center">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -233,7 +233,8 @@
 
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="fotoProductoGroup" (change)="checkCantidad()"> <!-- (change)="pasoImagen()" -->
+            <form [formGroup]="fotoProductoGroup" (change)="checkCantidad()">
+                <!-- (change)="pasoImagen()" -->
                 <ng-template matStepLabel>Fotos del producto</ng-template>
                 <div fxLayout="column" fxLayoutAlign="center center">
                     <div>
@@ -319,11 +320,8 @@
                                     </mat-selection-list>
                                 </div>
                             </mat-radio-group>
-                            <div *ngIf="seDestaca" fxShow="true">
-                                <img src="../../../assets/images/mercadopago.PNG">
-                            </div>
+                            <br>
                         </div>
-                        <br>
                     </div>
                 </div>
                 <div fxLayout="row" fxFlexFill>
@@ -415,7 +413,11 @@
                     <button mat-raised-button color="accent"
                         (click)="resetearDatos(); stepper.reset(); dropzone.reset()"
                         style="margin-right: 10px;">Resetear Datos</button>
-                    <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
+                    
+                    <button mat-raised-button color="primary" *ngIf="!seDestaca" (click)="onSubmit()">Publicar</button>
+                    <button mat-raised-button color="primary" *ngIf="seDestaca" (click)="onSubmit()"
+                        routerLink='/destacacion-publicacion'>
+                        Continuar con el pago</button>
                 </div>
             </div>
         </mat-step>

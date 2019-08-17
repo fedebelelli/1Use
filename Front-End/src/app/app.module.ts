@@ -32,6 +32,7 @@ import { PublicacionExitoComponent } from './components/publicacion-exito/public
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { DestacacionPublicacionComponent } from './components/destacacion-publicacion/destacacion-publicacion.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -55,7 +56,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HeaderComponent,
     FooterComponent,
     SidenavListComponent,
-    PublicacionExitoComponent
+    PublicacionExitoComponent,
+    DestacacionPublicacionComponent
   ],
   imports: [
     BrowserModule,
