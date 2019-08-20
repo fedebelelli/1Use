@@ -305,4 +305,17 @@ router.delete('/delete-publicacion/:id', function (req, res) {
     })
 })
 
+router.get('/get-one-publicacion/:id', function (req, res) {
+    var id = req.params.id;
+    Publicacion.findById(id, (err, publicaciones) => {
+
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!publicaciones) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ publicaciones });
+
+    })
+})
+
 module.exports = router;

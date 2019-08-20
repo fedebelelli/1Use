@@ -47,10 +47,10 @@
             <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md" *ngFor="let publicacion of publicaciones">
                 <mat-card class="example-card" *ngIf="hayPublicaciones">
                     <mat-card-header>
-                        <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;"> {{publicacion.titulo}} </a></mat-card-title>
+                        <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;" routerLink="/publicaciones/{{publicacion._id}}"> {{publicacion.titulo}} </a></mat-card-title>
                         <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}}, {{publicacion.subcategoria}} </mat-card-subtitle>
                     </mat-card-header>
-                    <img class="container-muestra-imagenes" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                    <img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">
                     <mat-card-content style="text-align: left; font-size: 12px">
                         <!-- <p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
                         <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>

@@ -6,7 +6,7 @@
 
 <!--VERSIÓN XL-->
 <section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
