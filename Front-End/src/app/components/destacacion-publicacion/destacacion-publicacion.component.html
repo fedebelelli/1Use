@@ -5,27 +5,37 @@
     <br>
 </div>
 <mat-divider></mat-divider>
-
-<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+<br>
+<div fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="tamaño-card">
         <mat-card-header>
-            <div mat-card-avatar class="plata" ></div>
-            
+            <div mat-card-avatar class="plata"></div>
+
             <mat-card-title>Destacacion PLATINIUM</mat-card-title>
             <br>
             <br>
+
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-divider></mat-divider>
+        <div fxLayoutAlign="center center">
+            <img mat-card-image src="../../../assets/images/silver.png">
+        </div>
         <mat-card-content>
             <p>
-                Con tu cuenta <b>PLATINIUM</b> podras tener tu publicacion una semana destacada, lo que permitira que aparezca
+                Con tu cuenta <b>PLATINIUM</b> podras tener tu publicacion una semana destacada, lo que permitira que
+                aparezca
                 en las primeras
                 posiciones en las busquedas.
             </p>
+            <br>
+            <p>
+                <b>PRECIO PLATINUM: $200</b>
+            </p>
         </mat-card-content>
+        <mat-divider></mat-divider>
         <mat-card-actions>
             <div fxLayout fxLayoutAlign="center center">
-                <button mat-fab color="primary">ELEGIR</button>
+                <button mat-fab color="primary"  [routerLink]="['/about']">ELEGIR</button>
             </div>
         </mat-card-actions>
     </mat-card>
@@ -36,17 +46,25 @@
             <br>
             <br>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-divider></mat-divider>
+        <div fxLayoutAlign="center center">
+            <img mat-card-image src="../../../assets/images/gold.png">
+        </div>
         <mat-card-content>
             <p>
                 Con tu cuenta <b>GOLD</b> podras tener tu publicacion una mes destacada, lo que permitira que aparezca
                 en las primeras
                 posiciones en las busquedas.
             </p>
+            <br>
+            <p>
+                <b>PRECIO GOLD: $300</b>
+            </p>
         </mat-card-content>
+        <mat-divider></mat-divider>
         <mat-card-actions>
             <div fxLayout fxLayoutAlign="center center">
-                <button mat-fab color="primary">ELEGIR</button>
+                <button mat-fab color="primary"  [routerLink]="['/about']">ELEGIR</button>
             </div>
         </mat-card-actions>
     </mat-card>

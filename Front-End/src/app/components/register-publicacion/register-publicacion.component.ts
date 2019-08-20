@@ -244,7 +244,12 @@ export class RegisterPublicacionComponent implements OnInit {
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
             console.log(result);
-            window.location.assign("/publicacion-exito");
+            if(this.seDestaca){
+              window.location.assign("/destacacion-publicacion");
+            }else{
+              window.location.assign("/publicacion-exito");
+            }
+            
           });
       }
     )
