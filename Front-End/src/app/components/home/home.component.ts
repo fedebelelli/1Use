@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
     scrollbar: false,
     navigation: true,
     pagination: false,
-    autoplay: { delay: 5000 },
+    autoplay: { delay: 28000 },
   };
 
 

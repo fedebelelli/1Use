@@ -17,7 +17,7 @@ import { DestacacionPublicacionComponent } from './components/destacacion-public
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
 import { MisPublicacionesComponent } from './components//mi-cuenta/mis-publicaciones/mis-publicaciones.component';
 import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/mis-alquileres.component';
-
+import {ConfirmacionDestacacionComponent} from './components/confirmacion-destacacion/confirmacion-destacacion.component';
 const appRoutes: Routes = [
 
     { path: '', component: HomeComponent },
@@ -37,6 +37,7 @@ const appRoutes: Routes = [
     { path: 'mi-cuenta/perfil', component: PerfilUsuarioComponent },
     { path: 'mi-cuenta/mis-alquileres', component: MisAlquileresComponent },
     { path: 'mi-cuenta/mis-publicaciones', component: MisPublicacionesComponent },
+    { path: 'confirmacion-destacacion', component: ConfirmacionDestacacionComponent },
     { path: '*', component: ErrorComponent },
 
 
