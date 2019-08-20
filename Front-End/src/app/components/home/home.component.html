@@ -1,6 +1,12 @@
 <section>
   <swiper class="swiper-container" [config]="config">
     <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <mat-video [autoplay]="true" [preload]="true" [overlay]="false" [loop]= "true" [keyboard]="false"
+          src="../../../assets/images/homeVideo.mp4"></mat-video>
+      </div>
+    </div>
+    <div class="swiper-slide">
       <div class="banner-area relative">
         <div class="overlay overlay-bg"></div>
         <div class="container">
@@ -18,24 +24,29 @@
       </div>
     </div>
     <div class="swiper-slide">
-      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-        <img class="img-carrousel" src="../../../assets/images/Carrousel Home/WIN_20190815_19_00_47_Pro.jpg">
+      <div class="banner-area1 relative">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+          <div class="row fullscreen justify-content-center align-items-center" style="height: 400px;">
+            <div class="col-lg-8">
+              <div class="banner-content text-center">
+                <p class="text-uppercase text-white">Conocé todas las categorías disponibles en nuestra web</p>
+                <h1 class=" text-white">Comenzá ahora!</h1>
+                <a class="primary-btn banner-btn text-white">Ver Categoría</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <!-- <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
         <iframe width="1518" height="450" src="https://www.youtube.com/embed/b13mQgTU2_Y?autoplay=1&disablekb=1&fs=0&loop=1&controls=0" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div> -->
-    <div class="swiper-slide">
-      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-        <img class="img-carrousel" src="../../../assets/images/Carrousel Home/WIN_20190815_19_00_58_Pro.jpg">
-      </div>
-    </div>
   </swiper>
-
-
   <div>
     <app-categorias></app-categorias>
   </div>

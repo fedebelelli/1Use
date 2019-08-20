@@ -36,6 +36,7 @@ import { DestacacionPublicacionComponent } from './components/destacacion-public
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
 import { MisPublicacionesComponent } from './components//mi-cuenta/mis-publicaciones/mis-publicaciones.component';
 import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/mis-alquileres.component';
+import { ConfirmacionDestacacionComponent } from './components/confirmacion-destacacion/confirmacion-destacacion.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -63,7 +64,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DestacacionPublicacionComponent,
     MiCuentaComponent,
     MisPublicacionesComponent,
-    MisAlquileresComponent
+    MisAlquileresComponent,
+    ConfirmacionDestacacionComponent,
+    
   ],
   imports: [
     BrowserModule,

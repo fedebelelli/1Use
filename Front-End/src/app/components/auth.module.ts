@@ -9,12 +9,13 @@ import { AuthService } from '../services/auth.service';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ConfirmaComponent } from './confirma/confirma.component';
 import { RegisterPublicacionComponent } from './register-publicacion/register-publicacion.component';
+import { ConfirmacionDestacacionComponent } from './confirmacion-destacacion/confirmacion-destacacion.component';
 
 
 
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent, ConfirmaComponent, RegisterPublicacionComponent],
+  declarations: [RegisterComponent, LoginComponent, ConfirmaComponent, RegisterPublicacionComponent, ConfirmacionDestacacionComponent],
   imports: [
     CommonModule,
     FormsModule,
