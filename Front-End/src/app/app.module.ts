@@ -7,7 +7,7 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { PerfilUsuarioComponent } from './components/mi-cuenta/perfil-usuario/perfil-usuario.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
@@ -16,10 +16,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { AuthRoutingModule } from './components/auth-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoriasComponent } from './components/categorias/categorias.component'; 
+import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ConfirmacionEmailComponent } from './components/confirmacionemail/confirmacionemail.component';
 import { ConfirmaComponent } from './components/confirma/confirma.component';
-import {RegisterPublicacionComponent} from './components/register-publicacion/register-publicacion.component';
+import { RegisterPublicacionComponent } from './components/register-publicacion/register-publicacion.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { FooterComponent } from './components/navigation/footer/footer.component';
@@ -33,6 +33,9 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { DestacacionPublicacionComponent } from './components/destacacion-publicacion/destacacion-publicacion.component';
+import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
+import { MisPublicacionesComponent } from './components//mi-cuenta/mis-publicaciones/mis-publicaciones.component';
+import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/mis-alquileres.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -57,7 +60,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FooterComponent,
     SidenavListComponent,
     PublicacionExitoComponent,
-    DestacacionPublicacionComponent
+    DestacacionPublicacionComponent,
+    MiCuentaComponent,
+    MisPublicacionesComponent,
+    MisAlquileresComponent
   ],
   imports: [
     BrowserModule,
@@ -68,14 +74,14 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AuthRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     MaterialModule,
     DropdownModule,
     MaterialFileInputModule,
     NgxDropzoneModule,
     SwiperModule
   ],
-  providers: [appRoutingProviders, AuthService, SingletonService, {provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG } ],
+  providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

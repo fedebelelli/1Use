@@ -1,0 +1,39 @@
+<div fxLayout="row" fxFlexFill>
+    <div fxLayout fxFlexOrder="1" ngClass.lt-lg="toolbar-div-lt-md">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta/perfil']">
+                    <!-- [routerLink]="['/perfil']" -->
+                    <mat-icon>account_circle</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mi Perfil</span>
+                </a>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta/mis-publicaciones']">
+                    <!-- [routerLink]="['/mis-publicaciones']" -->
+                    <mat-icon>book</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mis Publicaciones</span>
+                </a>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta/mis-alquileres']">
+                    <!-- [routerLink]="['mis-alquileres']"  -->
+                    <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-lg="true">Mis Alquileres</span>
+                </a>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+                <a [routerLink]="['/home']" fxFlexAlign.lt-lg="flex-end">
+                    <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
+                </a>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+    </div>
+    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
+        fxLayoutAlign.lt-lg="center center">
+        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
+            <!--CONTENIDO AQUÍ-->
+        </div>
+    </div>
+</div>

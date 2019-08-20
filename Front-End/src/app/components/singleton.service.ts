@@ -61,6 +61,18 @@ export class SingletonService {
       this.estado = false;
     }
 
+    if (urlActual == "/mi-cuenta") {
+      this.estado = false;
+    }
+
+    if (urlActual == "/mis-publicaciones") {
+      this.estado = false;
+    }
+
+    if (urlActual == "/mis-alquileres") {
+      this.estado = false;
+    }
+
     return this.estado;
   }
 
@@ -90,17 +102,17 @@ export class SingletonService {
   }
 
   cerrarSesion() {
-    localStorage.removeItem("email"); 
+    localStorage.removeItem("email");
     localStorage.removeItem("token");
     this.setInicioSesion(false);
     window.location.assign('/home');
   }
 
-  setIdLogueado(id){
+  setIdLogueado(id) {
     this.idLogueado = id;
   }
 
-  getIdLogueado(){
+  getIdLogueado() {
     return this.idLogueado;
   }
 

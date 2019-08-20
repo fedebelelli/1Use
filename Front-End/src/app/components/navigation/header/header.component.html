@@ -61,14 +61,14 @@
                         <p class="bienvenida-mensaje">¡Hola, {{usuarioIniciado.name}}!</p>
                     </div>
                     <div fxFlexAlign="center" class="bienvenida-boton">
-                        <button mat-raised-button color="primary">Ir a mi cuenta</button>
+                        <button mat-raised-button color="primary" (click)="checkPage('/mi-cuenta'); myDropdown.close()" routerLink="/mi-cuenta">Ir a mi cuenta</button>
                     </div>
                 </div>
                 <mat-divider [vertical]="true"></mat-divider>
                 <div fxLayout="column">
-                    <li><a class="neat" rel="noopener"> Mis publicaciones</a></li>
-                    <li><a class="neat" rel="noopener"> Mis alquileres</a></li>
-                    <li><a class="neat" rel="noopener" (click)="checkPage('/perfil')" routerLink="/perfil"> Mis datos</a></li>
+                    <li><a class="neat" rel="noopener" (click)="checkPage('/mis-publicaciones')" routerLink="/mi-cuenta/mis-publicaciones"> Mis publicaciones</a></li>
+                    <li><a class="neat" rel="noopener" (click)="checkPage('/mis-alquileres')" routerLink="/mi-cuenta/mis-alquileres"> Mis alquileres</a></li>
+                    <li><a class="neat" rel="noopener" (click)="checkPage('/perfil')" routerLink="/mi-cuenta/perfil"> Mis datos</a></li>
                     <li><a class="neat" rel="noopener" (click)="cerrarSesion()"> Cerrar sesión</a></li>
                 </div>
             </ul>

@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import provincias from './provincias.json';
 import ciudades from './ciudades-argentinas.json';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import { SingletonService } from '../singleton.service';
-import { UploadService } from '../../services/upload.service';
+import { SingletonService } from '../../singleton.service';
+import { UploadService } from '../../../services/upload.service';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');

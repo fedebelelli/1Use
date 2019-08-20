@@ -2,19 +2,22 @@
     <div fxLayout fxFlexOrder="1" ngClass.lt-lg="toolbar-div-lt-md">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <a [routerLink]="['/perfil']">
+                <a [routerLink]="['/mi-cuenta/perfil']">
+                    <!-- [routerLink]="['/perfil']" -->
                     <mat-icon>account_circle</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mi Perfil</span>
                 </a>
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a [routerLink]="['/home']">
+                <a [routerLink]="['/mi-cuenta/mis-publicaciones']">
+                    <!-- [routerLink]="['/mis-publicaciones']" -->
                     <mat-icon>book</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mis Publicaciones</span>
                 </a>
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a [routerLink]="['/home']">
+                <a [routerLink]="['/mi-cuenta/mis-alquileres']">
+                    <!-- [routerLink]="['mis-alquileres']"  -->
                     <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-lg="true">Mis Alquileres</span>
                 </a>
             </mat-toolbar-row>
@@ -25,6 +28,7 @@
                 </a>
             </mat-toolbar-row>
         </mat-toolbar>
+
     </div>
     <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
         fxLayoutAlign.lt-lg="center center">
@@ -113,8 +117,8 @@
                                     (ngModelChange)="calle = $event" name="calle" required>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput type="number" placeholder="Número" [value]="numero" formControlName="numero"
-                                    (ngModelChange)="numero = $event" name="numero" required>
+                                <input matInput type="number" placeholder="Número" [value]="numero"
+                                    formControlName="numero" (ngModelChange)="numero = $event" name="numero" required>
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="40px">
@@ -124,13 +128,15 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <input matInput placeholder="Departamento" [value]="departamento"
-                                    formControlName="departamento" (ngModelChange)="departamento = $event" name="departamento">
+                                    formControlName="departamento" (ngModelChange)="departamento = $event"
+                                    name="departamento">
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="40px">
                             <mat-form-field>
                                 <input matInput type="number" placeholder="Código Postal" [value]="codigoPostal"
-                                    formControlName="codigoPostal" (ngModelChange)="codigoPostal = $event" name="codigoPostal" required>
+                                    formControlName="codigoPostal" (ngModelChange)="codigoPostal = $event"
+                                    name="codigoPostal" required>
                             </mat-form-field>
                         </div>
                     </mat-tab>
@@ -186,13 +192,11 @@
         </div>
     </div>
 
-    <div fxLayout="column" style="width:100%" fxFlexOrder="3" fxLayoutAlign="end start" fxShow.gt-md="true"
-        fxHide.lt-lg="true">
+    <div fxLayout="column" style="width:100%; margin-left: 35px" fxFlexOrder="3" fxLayoutAlign="end start"
+        fxShow.gt-md="true" fxHide.lt-lg="true">
         <div style="padding-left: 35px; padding-bottom: 15px">
             <button (click)="onSubmit()" mat-raised-button color="primary">Guardar datos</button>
         </div>
     </div>
-
-
 
 </div>

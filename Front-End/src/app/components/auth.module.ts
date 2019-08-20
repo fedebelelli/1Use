@@ -12,6 +12,7 @@ import { RegisterPublicacionComponent } from './register-publicacion/register-pu
 
 
 
+
 @NgModule({
   declarations: [RegisterComponent, LoginComponent, ConfirmaComponent, RegisterPublicacionComponent],
   imports: [
