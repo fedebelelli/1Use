@@ -18,6 +18,8 @@ export class AuthService {
   private _updateUser = "http://localhost:4201/api/update-user?id="
   private _getImgUser = "http://localhost:4201/api/get-img-name/"
   private _registerPublicacion = "http://localhost:4201/api/register-publicacion?email="
+  private _getPublicacion = "http://localhost:4201/api/get-publicacion/"
+  private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -55,6 +57,14 @@ export class AuthService {
 
   registrarPublicacion(email, publicacion) {
     return this.http.post<any>(this._registerPublicacion + email, publicacion);
+  }
+
+  get_publicacion(email) {
+    return this.http.get<any>(this._getPublicacion + email);
+  }
+
+  delete_publicacion(id){
+    return this.http.delete<any>(this._deletePublicacion + id);
   }
 
 }

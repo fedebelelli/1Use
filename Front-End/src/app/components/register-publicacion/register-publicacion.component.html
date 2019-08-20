@@ -428,7 +428,7 @@
 
 <!--VERSIÓN MOBILE-->
 <section fxShow.lt-md="true" fxHide.gt-md="true">
-    <mat-vertical-stepper #stepper (selectionChange)="actualizarDatos()">
+    <mat-vertical-stepper #stepper (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">

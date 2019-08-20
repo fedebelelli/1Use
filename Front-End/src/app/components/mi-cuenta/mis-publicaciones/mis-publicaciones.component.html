@@ -1,5 +1,5 @@
 <div fxLayout="row" fxFlexFill>
-    <div fxLayout fxFlexOrder="1" ngClass.lt-lg="toolbar-div-lt-md">
+    <div fxLayout ngClass.lt-lg="toolbar-div-lt-md">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
                 <a [routerLink]="['/mi-cuenta/perfil']">
@@ -30,32 +30,39 @@
         </mat-toolbar>
 
     </div>
-    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
-        fxLayoutAlign.lt-lg="center center">
-        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
 
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                    alt="Photo of a Shiba Inu">
-                <mat-card-content>
-                    <p>
-                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                        bred for hunting.
-                    </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
-            </mat-card>
+    <div fxLayout="column" >
 
+        <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
+            <p style="font-size: 25px;margin-bottom: 8px; "> Mis publicaciones <button mat-mini-fab color="primary" routerLink="/register-publicacion">+</button> </p> 
+            <mat-divider fxFlexFill></mat-divider>
+        </div>
 
+        <div class="contenedor-imagenes">
+
+            <div *ngIf="!hayPublicaciones">
+                {{titulo}}
+            </div>
+
+            <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md" *ngFor="let publicacion of publicaciones">
+                <mat-card class="example-card" *ngIf="hayPublicaciones">
+                    <mat-card-header>
+                        <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;"> {{publicacion.titulo}} </a></mat-card-title>
+                        <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}}, {{publicacion.subcategoria}} </mat-card-subtitle>
+                    </mat-card-header>
+                    <img class="container-muestra-imagenes" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                    <mat-card-content style="text-align: left; font-size: 12px">
+                        <!-- <p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
+                        <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>
+                        <p> <b>Precio por semana:</b> ${{publicacion.preciosemana}} </p>
+                        <p> <b>Precio por mes:</b> ${{publicacion.preciomes}} </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary">Editar</button>
+                        <button mat-raised-button color="warn" (click)="deletePublicacion(publicacion)">Eliminar</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>

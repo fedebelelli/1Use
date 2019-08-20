@@ -270,17 +270,39 @@ router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddle
             else nombreFinal += "," + fileName;
         }
 
-        console.log(nombreFinal);
-        console.log(email+" "+titulo+" "+categoria)
-
-        Publicacion.findOneAndUpdate({email: email, titulo: titulo, categoria: categoria}, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
+        Publicacion.findOneAndUpdate({ email: email, titulo: titulo, categoria: categoria }, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
             if (err) return res.status(500).send({ message: 'Imagen no subida' });
             if (!projectUpdated) return res.status(400).send({ message: 'No existe' });
-            return res.status(200).send({message: "ok"})
-        }) 
+            return res.status(200).send({ message: "ok" })
+        })
 
     } else console.log("ERROR")
 
 });
+
+router.get('/get-publicacion/:email', function (req, res) {
+    var email = req.params.email;
+    Publicacion.find({ email: email }).exec((err, publicaciones) => {
+
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!publicaciones) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ publicaciones });
+
+    })
+})
+
+router.delete('/delete-publicacion/:id', function (req, res) {
+    var id = req.params.id;
+    Publicacion.findByIdAndRemove(id, (err, eliminado) => {
+        if (err) return res.status(500).send({ message: 'Error al eliminar' });
+
+        if (!eliminado) return res.status(404).send({ message: 'Error' });
+
+        return res.status(200).send("Todo ok")
+
+    })
+})
 
 module.exports = router;
