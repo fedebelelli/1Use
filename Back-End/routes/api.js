@@ -261,14 +261,16 @@ router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddle
     var fileName = "asd";
 
     if (req.files) {
-        let nombreFinal = "";
+        let nombre = "";
         for (let i = 0; i < req.files.multiplefile.length; i++) {
             var filePath = req.files.multiplefile[i].path;
             var fileSplit = filePath.split('\\');
             var fileName = fileSplit[1];
-            if (i == 0) nombreFinal += fileName
-            else nombreFinal += "," + fileName;
+            if (i == 0) nombre += '{"imagen'+i+'":'+'"'+fileName+'",'
+            else nombre += '"imagen'+i+'":"'+fileName + '",';
         }
+        let nombreFinal = nombre.slice(0,-1);
+        nombreFinal += "}";
 
         Publicacion.findOneAndUpdate({ email: email, titulo: titulo, categoria: categoria }, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
             if (err) return res.status(500).send({ message: 'Imagen no subida' });
@@ -317,5 +319,21 @@ router.get('/get-one-publicacion/:id', function (req, res) {
 
     })
 })
+
+router.get('/get-image-publicacion/:imagen', function (req, respuesta1) {
+    var imagen = req.params.imagen; //Nombre de archivo enviado como parámetro en la URL
+
+    //var cantidad_archivos = (res.multiplefile.match(/,/g) || []).length;
+    var path_file = './publicaciones/' + imagen; //Ubicación del archivo
+
+    fs.exists(path_file, (exists) => {
+        if (exists) {
+            return respuesta1.sendFile(path.resolve(path_file));
+        }
+        else {
+            return respuesta1.status(400).send("No existe la imagen");
+        }
+    })
+});
 
 module.exports = router;

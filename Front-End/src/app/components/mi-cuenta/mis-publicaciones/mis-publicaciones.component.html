@@ -31,10 +31,11 @@
 
     </div>
 
-    <div fxLayout="column" >
+    <div fxLayout="column">
 
         <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
-            <p style="font-size: 25px;margin-bottom: 8px; "> Mis publicaciones <button mat-mini-fab color="primary" routerLink="/register-publicacion">+</button> </p> 
+            <p style="font-size: 25px;margin-bottom: 8px; "> Mis publicaciones <button mat-mini-fab color="primary"
+                    routerLink="/register-publicacion">+</button> </p>
             <mat-divider fxFlexFill></mat-divider>
         </div>
 
@@ -44,13 +45,23 @@
                 {{titulo}}
             </div>
 
-            <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md" *ngFor="let publicacion of publicaciones">
+            <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md"
+                *ngFor="let publicacion of publicaciones; let indice1 = index">
                 <mat-card class="example-card" *ngIf="hayPublicaciones">
                     <mat-card-header>
-                        <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;" routerLink="/publicaciones/{{publicacion._id}}"> {{publicacion.titulo}} </a></mat-card-title>
-                        <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}}, {{publicacion.subcategoria}} </mat-card-subtitle>
+                        <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;"
+                                routerLink="/publicaciones/{{publicacion._id}}"> {{publicacion.titulo}} </a>
+                        </mat-card-title>
+                        <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}},
+                            {{publicacion.subcategoria}} </mat-card-subtitle>
                     </mat-card-header>
-                    <img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">
+                    <!-- <img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">  -->
+                    <swiper class="swiper-container" [config]="config">
+                        <div class="swiper-slide" *ngFor="let img of publicacion.multiplefile; let indice2 = index">
+                            <img class="container-muestra-imagenes" style="width: 248px"
+                                src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                        </div>
+                    </swiper>
                     <mat-card-content style="text-align: left; font-size: 12px">
                         <!-- <p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
                         <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>
@@ -59,7 +70,8 @@
                     </mat-card-content>
                     <mat-card-actions>
                         <button mat-raised-button color="primary">Editar</button>
-                        <button mat-raised-button color="warn" (click)="deletePublicacion(publicacion)">Eliminar</button>
+                        <button mat-raised-button color="warn"
+                            (click)="deletePublicacion(publicacion)">Eliminar</button>
                     </mat-card-actions>
                 </mat-card>
             </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-mis-publicaciones',
@@ -13,6 +14,10 @@ export class MisPublicacionesComponent implements OnInit {
   publicaciones = [];
   titulo: string;
   hayPublicaciones: boolean;
+  imagen;
+  imagenJSON;
+  arrayJSON = [];
+  arrayImagen = [];
 
   ngOnInit() {
     this._auth.get_publicacion(localStorage.getItem("email")).subscribe(
@@ -20,6 +25,18 @@ export class MisPublicacionesComponent implements OnInit {
         //console.log(err);
         this.hayPublicaciones = true;
         this.publicaciones = err.publicaciones;
+        for (let i = 0; i < this.publicaciones.length; i++) {
+          this.imagen = this.publicaciones[i].multiplefile;
+          this.imagenJSON = JSON.parse(this.imagen); //CREA JSON CONVERTIDO DE STRING
+          for (let j in this.imagenJSON) {
+            this.arrayJSON.push(this.imagenJSON[j]);
+          }
+          this.publicaciones[i].multiplefile = this.arrayJSON;
+          this.arrayJSON = [];
+        }
+
+        console.log(this.publicaciones);
+
       },
       res => {
         //console.log(res);
@@ -29,7 +46,7 @@ export class MisPublicacionesComponent implements OnInit {
     )
   }
 
-  deletePublicacion(publicacion){
+  deletePublicacion(publicacion) {
     this._auth.delete_publicacion(publicacion._id).subscribe(
       err => {
         console.log("Por err");
@@ -41,4 +58,16 @@ export class MisPublicacionesComponent implements OnInit {
       }
     )
   }
+
+  //SWIPER
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+  };
+
 }
