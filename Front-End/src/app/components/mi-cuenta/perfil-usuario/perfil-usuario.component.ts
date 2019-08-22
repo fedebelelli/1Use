@@ -30,6 +30,7 @@ export class PerfilUsuarioComponent implements OnInit {
   public nombre: string;
   public apellido: string;
   public email: string;
+  public codArea: number;
   public telefono: number;
   public fechaNacimiento: Date;
   public provinciaActual: string;
@@ -43,6 +44,10 @@ export class PerfilUsuarioComponent implements OnInit {
   public codigoPostal: number;
   public _id: string;
   public urlImagenPerfil: string;
+  public barrio: String;
+  public numCodArea: String;
+  public maxTelefono: number = 10;
+
 
   //Datos del form
   formulario = new FormGroup({
@@ -50,12 +55,14 @@ export class PerfilUsuarioComponent implements OnInit {
     nombre: new FormControl({ value: '', disabled: false }),
     apellido: new FormControl({ value: '', disabled: false }),
     email: new FormControl({ value: '', disabled: true }),
+    codArea: new FormControl({ value: '', disabled: false }),
     telefono: new FormControl({ value: '', disabled: false }),
     fecha_nacimiento: new FormControl({ value: '', disabled: false }),
     provincia: new FormControl({ value: '', disabled: false }),
     direccion: new FormControl({ value: '', disabled: false }),
     removableFile: new FormControl({ value: '', disabled: false }),
     ciudad: new FormControl({ value: '', disabled: false }),
+    barrio: new FormControl({ value: '', disabled: false }),
     calle: new FormControl({ value: '', disabled: false }),
     numero: new FormControl({ value: '', disabled: false }),
     piso: new FormControl({ value: '', disabled: false }),
@@ -96,7 +103,7 @@ export class PerfilUsuarioComponent implements OnInit {
   hayImagen: boolean = false;
   tieneImagen: boolean = false;
 
-  constructor(private _auth: AuthService,private singletoon:SingletonService ,private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
+  constructor(private _auth: AuthService, private singletoon: SingletonService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
 
@@ -123,6 +130,10 @@ export class PerfilUsuarioComponent implements OnInit {
         } else this.apellido = res.apellido;
 
         this.email = res.email;
+
+        if (res.codArea == undefined) {
+          this.codArea = null;
+        } else this.codArea = res.codArea;
 
         if (res.telefono == undefined) {
           this.telefono = null;
@@ -152,6 +163,10 @@ export class PerfilUsuarioComponent implements OnInit {
           this.provinciaActual = res.provincia;
           this.filtrarCiudades(this.provinciaActual);
         }
+        if (res.barrio == undefined) {
+          this.barrio = "";
+        } else this.barrio = res.barrio;
+
 
         if (res.calle == undefined) {
           this.calle = "";
@@ -193,7 +208,7 @@ export class PerfilUsuarioComponent implements OnInit {
       panelClass: ['color-snackbar']
     });
   }
-  cerrarSesion(){
+  cerrarSesion() {
     this.singletoon.cerrarSesion();
   }
 
@@ -284,10 +299,12 @@ export class PerfilUsuarioComponent implements OnInit {
       nombre: this.nombre,
       apellido: this.apellido,
       email: this.email,
+      codArea: this.codArea,
       telefono: this.telefono,
       fecha_nacimiento: this.fechaNacimiento,
       provincia: this.provinciaActual,
       direccion: this.direccion,
+      barrio: this.barrio,
       ciudad: this.ciudad,
       removableFile: null,
       calle: this.calle,
@@ -316,6 +333,27 @@ export class PerfilUsuarioComponent implements OnInit {
 
   cambioTab(event: MatTabChangeEvent) {
     this.tabCambiada = true;
+  }
+  obtenerMaxTelefono(evento) {
+    this.numCodArea = evento.target.value;
+    let cantidad = this.numCodArea.length;
+    if(cantidad == 0){
+      this.maxTelefono = 10;
+    }
+    if(cantidad == 1){
+      this.maxTelefono = 9;
+    }
+    if(cantidad == 2){
+      this.maxTelefono = 8;
+    }
+    if(cantidad == 3){
+      this.maxTelefono = 7;
+    }
+    if(cantidad == 4){
+      this.maxTelefono = 6;
+    }
+
+
   }
 
   preview(files) {

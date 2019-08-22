@@ -41,6 +41,9 @@ const userSchema = new Schema({
     fecha_nacimiento: {
         type: Date,
     },
+    codArea: {
+        type: String,
+    },
 
     telefono: {
         type: String,
@@ -57,7 +60,9 @@ const userSchema = new Schema({
     removablefile: {
         type: String
     },
-
+    barrio: {
+        type: String
+    },
     calle: {
         type: String
     },

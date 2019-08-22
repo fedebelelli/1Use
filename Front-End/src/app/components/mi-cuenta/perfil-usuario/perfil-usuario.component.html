@@ -78,13 +78,25 @@
                             <input [value]="email" formControlName="email" name="email" matInput placeholder="Email"
                                 (ngModelChange)="email = $event" email disabled="true">
                         </mat-form-field>
+                        <div fxLayout="row" fxLayoutGap="10px">
 
-                        <mat-form-field>
-                            <input type="number" [value]="telefono" formControlName="telefono" name="telefono" matInput
-                                (ngModelChange)="telefono = $event" placeholder="Teléfono">
+                            <mat-form-field>
+                                <span matPrefix>+549 &nbsp;</span>
+                                <input matInput #codAreaa maxlength="4" [value]="codArea"
+                                    formControlName="codArea" name="codArea" (ngModelChange)="codArea = $event"
+                                    placeholder="CodArea" style="width: 70px !important;"
+                                    (keyup)="obtenerMaxTelefono($event)">
+                                <mat-hint align="end">{{codAreaa.value.length}} / 4</mat-hint>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                            <input [value]="telefono" formControlName="telefono" name="telefono" matInput
+                                (ngModelChange)="telefono = $event" placeholder="Teléfono" #telefonoo
+                                [maxlength]=maxTelefono style="width: 100px !important;">
+                            <mat-hint align="end">{{telefonoo.value.length}} / {{maxTelefono}}</mat-hint>
                             <mat-icon matSuffix>phone</mat-icon>
-                        </mat-form-field>
-
+                            </mat-form-field>
+                        </div>
                         <mat-form-field>
                             <input matInput placeholder="Fecha de nacimiento" [matDatepicker]="picker" [max]="maxDate"
                                 (ngModelChange)="fechaNacimiento = $event" ngModel formControlName="fecha_nacimiento"
@@ -116,6 +128,10 @@
                                 <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad.value">
                                     {{ciudad.viewValue}} </mat-option>
                             </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Barrio" [value]="barrio" formControlName="barrio"
+                                (ngModelChange)="barrio = $event" name="barrio" required>
                         </mat-form-field>
                         <div fxLayout="row" fxLayoutGap="40px">
                             <mat-form-field>

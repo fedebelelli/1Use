@@ -176,10 +176,12 @@ router.post('/update-user', multipartMiddleware, function (req, res) {
     usuario._id = params;
     usuario.nombre = user.nombre;
     usuario.apellido = user.apellido;
+    usuario.codArea = user.codArea;
     usuario.telefono = user.telefono;
     usuario.fecha_nacimiento = user.fecha_nacimiento;
     usuario.provincia = user.provincia;
     usuario.ciudad = user.ciudad;
+    usuario.barrio = user.barrio;
     //usuario.removablefile = user.removablefile._fileNames;
     usuario.calle = user.calle;
     usuario.numero = user.numero;

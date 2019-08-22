@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SingletonService } from '../singleton.service';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -11,9 +12,11 @@ export class MiCuentaComponent implements OnInit {
   alquileres: boolean = false;
   perfil: boolean = false;
 
-  constructor() { }
+  constructor(private singleton:SingletonService) { }
 
   ngOnInit() {
   }
-
+cerrarSesion(){
+  this.singleton.cerrarSesion();
+}
 }

@@ -30,7 +30,7 @@
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a [routerLink]="['/home']" fxFlexAlign.lt-lg="flex-end">
+                <a fxFlexAlign.lt-lg="flex-end" (click)="cerrarSesion()">
                     <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
                 </a>
             </mat-toolbar-row>
