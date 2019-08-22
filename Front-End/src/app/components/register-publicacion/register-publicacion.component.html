@@ -255,7 +255,7 @@
                         <button mat-raised-button matStepperPrevious color="primary">Volver</button>
                     </div>
                     <div fxLayoutAlign="center" fxFlex>
-                        <button mat-raised-button color="accent" (click)="dropzone.reset()">Resetear</button>
+                        <button mat-raised-button color="accent" (click)="dropzone.reset()">Volver a cargar</button>
                     </div>
                     <div fxLayoutAlign="end" fxFlex>
                         <button mat-raised-button matStepperNext color="primary">Siguiente</button>
@@ -412,8 +412,8 @@
                 </div>
                 <div fxLayoutAlign="end" fxFlex>
                     <button mat-raised-button color="accent"
-                        (click)="resetearDatos(); stepper.reset(); dropzone.reset()"
-                        style="margin-right: 10px;">Resetear Datos</button>
+                        (click)="resetearDatos();stepper.reset();dropzone.reset()" style="margin-right: 10px;">Volver
+                        a comenzar</button>
 
                     <button mat-raised-button color="primary" *ngIf="!seDestaca" (click)="onSubmit()">Publicar</button>
                     <button mat-raised-button color="primary" *ngIf="seDestaca" (click)="onSubmit()"
@@ -426,9 +426,13 @@
 </section>
 
 
+
+
+
+
 <!--VERSIÓN MOBILE-->
 <section fxShow.lt-md="true" fxHide.gt-md="true">
-    <mat-vertical-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+    <mat-vertical-stepper #stepperM (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -642,7 +646,7 @@
                             <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
                                 [label]="'Clickea aquí para subir tu imágen'" [multiple]="true"
                                 (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="false"
-                                #dropzone></ngx-dropzone>
+                                #dropzoneM></ngx-dropzone>
                         </div>
                         <br>
                     </div>
@@ -652,7 +656,7 @@
                         <button mat-raised-button matStepperPrevious color="primary">Volver</button>
                     </div>
                     <div fxLayoutAlign="center" fxFlex>
-                        <button mat-raised-button color="accent" (click)="dropzone.reset()">Resetear</button>
+                        <button mat-raised-button color="accent" (click)="dropzoneM.reset()">Resetear</button>
                     </div>
                     <div fxLayoutAlign="end" fxFlex>
                         <button mat-raised-button matStepperNext color="primary">Siguiente</button>
@@ -806,18 +810,17 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlexFill *ngIf="!seDestaca">
                 <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 <button mat-raised-button color="accent"
-                    (click)="resetearDatos(); stepper.reset(); dropzone.reset()">Resetear Datos</button>
+                    (click)="resetearDatos(); stepperM.reset(); dropzoneM.reset()">Volver a comenzar</button>
                 <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexFill *ngIf="seDestaca">
-                    <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
-                    <button mat-raised-button color="accent"
-                        (click)="resetearDatos(); stepper.reset(); dropzone.reset()">Resetear Datos</button>
-                    <button mat-raised-button color="primary"  (click)="onSubmit()"
-                        routerLink='/destacacion-publicacion'>
-                        Continuar</button>
-                </div>
+                <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
+                <button mat-raised-button color="accent"
+                    (click)="resetearDatos();stepperM.reset();dropzoneM.reset()">Volver a comenzar</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()" routerLink='/destacacion-publicacion'>
+                    Continuar</button>
+            </div>
         </mat-step>
     </mat-vertical-stepper>
 </section>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SingletonService } from '../../singleton.service';
 
 @Component({
   selector: 'app-mis-alquileres',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MisAlquileresComponent implements OnInit {
 
-  constructor() { }
+  constructor(private singleton:SingletonService) { }
 
   ngOnInit() {
+  }
+  cerrarSesion() {
+    this.singleton.cerrarSesion();
   }
 
 }

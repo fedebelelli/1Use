@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SingletonService } from '../../singleton.service';
 
 @Component({
   selector: 'app-mis-publicaciones',
@@ -9,7 +10,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 })
 export class MisPublicacionesComponent implements OnInit {
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private singleton:SingletonService) { }
 
   publicaciones = [];
   titulo: string;
@@ -41,6 +42,9 @@ export class MisPublicacionesComponent implements OnInit {
         this.hayPublicaciones = false;
       }
     )
+  }
+  cerrarSesion(){
+    this.singleton.cerrarSesion();
   }
 
   deletePublicacion(publicacion) {

@@ -96,7 +96,7 @@ export class PerfilUsuarioComponent implements OnInit {
   hayImagen: boolean = false;
   tieneImagen: boolean = false;
 
-  constructor(private _auth: AuthService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
+  constructor(private _auth: AuthService,private singletoon:SingletonService ,private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
 
@@ -192,6 +192,9 @@ export class PerfilUsuarioComponent implements OnInit {
       duration: 8000,
       panelClass: ['color-snackbar']
     });
+  }
+  cerrarSesion(){
+    this.singletoon.cerrarSesion();
   }
 
   onSelectionChanged({ value }) {

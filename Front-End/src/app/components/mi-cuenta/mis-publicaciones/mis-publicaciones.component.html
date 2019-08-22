@@ -2,6 +2,12 @@
     <div fxLayout ngClass.lt-lg="toolbar-div-lt-md">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta']">
+                    <!-- [routerLink]="['/perfil']" -->
+                    <mat-icon>insert_emoticon</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mi Cuenta</span>
+                </a>
+            </mat-toolbar-row>
+            <mat-toolbar-row>
                 <a [routerLink]="['/mi-cuenta/perfil']">
                     <!-- [routerLink]="['/perfil']" -->
                     <mat-icon>account_circle</mat-icon><span class="iconitos" fxHide.lt-lg="true">Mi Perfil</span>
@@ -23,7 +29,7 @@
             </mat-toolbar-row>
 
             <mat-toolbar-row>
-                <a [routerLink]="['/home']" fxFlexAlign.lt-lg="flex-end">
+                <a fxFlexAlign.lt-lg="flex-end" (click)="cerrarSesion()">
                     <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
                 </a>
             </mat-toolbar-row>
@@ -57,7 +63,8 @@
                     </mat-card-header>
                     <!-- <img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">  -->
                     <swiper class="swiper-container" [config]="config">
-                        <div  *ngFor="let img of publicacion.multiplefile; let indice2 = index" style="width: 100% !important">
+                        <div *ngFor="let img of publicacion.multiplefile; let indice2 = index"
+                            style="width: 100% !important">
                             <img class="container-muestra-imagenes"
                                 src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
                         </div>
