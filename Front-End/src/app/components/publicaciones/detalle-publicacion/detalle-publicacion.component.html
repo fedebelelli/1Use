@@ -1,9 +1,107 @@
 <section>
-    <h2> {{titulo}} </h2>
-    <p><b>Categoría: </b> {{categoria}} </p>
-    <p><b>Subcategoría: </b> {{subcategoria}} </p>
-    <p><b>Precio por día: </b> {{preciodia}} </p>
-    <p><b>Precio por semana: </b> {{preciosemana}} </p>
-    <p><b>Precio por mes: </b> {{preciomes}} </p>
-    <p><b>Descripción: </b> {{descripcion}} </p>
+    <div class="chips">
+        <mat-chip-list>
+            <mat-chip color="primary" selected>{{categoria}}</mat-chip>
+            <mat-chip color="primary" selected>{{subcategoria}}</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="contenedor-principal">
+        <!--Contenedor blanco-->
+        <div fxLayout="row" fxLayoutAlign="center" fxFlexFill>
+
+
+            <!--Contenedor fotos + descripción-->
+            <div fxFlex="568px">
+                <div class="contenedor-1">
+
+                    <swiper class="swiper-container" [config]="config" fxFlexAlign="center">
+                        <div *ngFor="let img of publicacion.multiplefile; let indice2 = index">
+                            <img class="container-muestra-imagenes"
+                                src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                        </div>
+                    </swiper>
+                </div>
+                <mat-divider style="margin-top: 10px;"></mat-divider>
+                <div class="descripcion">
+                    <h3>Descripción </h3>
+                    <br>
+                    <p style="text-align: justify; font-size: 17px;">{{descripcion}} </p>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="preguntasRespuestas">
+                    <h3>Preguntas y respuestas</h3>
+                    <br><br>
+                    <mat-form-field>
+                        <textarea #message maxlength="256" style="min-height: 0px;" matInput
+                            placeholder="Escribir una pregunta..."></textarea>
+                        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                    </mat-form-field>
+                    <button class="btnPreguntar" mat-raised-button color="primary">Preguntar</button>
+                </div>
+                <div class="ultimasPreguntas">
+                    <h3><b>Últimas preguntas</b></h3>
+                    <br>
+                    <div *ngFor="let cantidad of preguntas">
+                        <!--Pregunta-->
+                        <div fxLayout="row" style="margin-bottom: 10px; margin-left: 10px">
+                            <div fxLayoutAlign="center center">
+                                <mat-icon>chat</mat-icon>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <p>Esta es una pregunta de prueba de un usuario!</p>
+                            </div>
+                        </div>
+                        <!--Respuesta-->
+                        <div fxLayout="row" style="margin-bottom: 30px; margin-left: 10px">
+                            <div fxLayoutAlign="center center">
+                                <mat-icon>comment</mat-icon>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <p>Esta es una respuesta de prueba de un usuario!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-divider vertical="true"></mat-divider>
+
+
+            <!--Contenedor de precio + Alquilar-->
+            <div fxLayout="column" fxFlexAlign="start" fxFlex="500px">
+                <div class="contenedor-2">
+                    <h2 fxFlexAlign="center"> <b>{{titulo}}</b> </h2>
+                    <br>
+                    <h2 fxFlexAlign="start"><b>${{preciodia}}</b></h2>
+                    <br>
+                    <p fxFlexAlign="start"><b>Precio por semana: </b> ${{preciosemana}} </p>
+                    <p fxFlexAlign="start"><b>Precio por mes: </b> ${{preciomes}} </p>
+                    <br>
+                    <br>
+                    <div class="btnAlquilar">
+                        <button style="width: 300px;" mat-raised-button color="primary">Alquilar</button>
+                    </div>
+                </div>
+                <br>
+                <mat-divider></mat-divider>
+                <div class="tipoAlquiler">
+                    <h3>Tipo de alquiler</h3>
+                    <br>
+                    <p style="text-align: justify; margin-left: 23px">Este producto se encuentra asegurado ante
+                        incidentes.</p>
+                    <br>
+                    <a style="color: cornflowerblue">Más información</a>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="mediosPago">
+                    <h3>Medios de pago</h3>
+                    <br>
+                    <img src="../../../../assets/images/mediosPago.PNG">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </section>

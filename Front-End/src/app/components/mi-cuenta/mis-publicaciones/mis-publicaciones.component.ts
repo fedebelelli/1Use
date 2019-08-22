@@ -22,7 +22,6 @@ export class MisPublicacionesComponent implements OnInit {
   ngOnInit() {
     this._auth.get_publicacion(localStorage.getItem("email")).subscribe(
       err => {
-        //console.log(err);
         this.hayPublicaciones = true;
         this.publicaciones = err.publicaciones;
         for (let i = 0; i < this.publicaciones.length; i++) {
@@ -34,8 +33,6 @@ export class MisPublicacionesComponent implements OnInit {
           this.publicaciones[i].multiplefile = this.arrayJSON;
           this.arrayJSON = [];
         }
-
-        console.log(this.publicaciones);
 
       },
       res => {

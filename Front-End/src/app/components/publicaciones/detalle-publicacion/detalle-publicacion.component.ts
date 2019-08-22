@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-detalle-publicacion',
@@ -17,14 +18,19 @@ export class DetallePublicacionComponent implements OnInit {
   descripcion;
   categoria;
   subcategoria;
+  publicacion;
+  JSON;
+  JSONfinal;
+  arrayJSON = [];
+  preguntas = [1,2,3];
 
   ngOnInit() {
     var urlActual = window.location.href;
     var id = urlActual.substr(36);
-    
+
     this._auth.get_publicacion_id(id).subscribe(
       err => {
-        console.log(err.publicaciones);
+
         this.titulo = err.publicaciones.titulo;
         this.preciodia = err.publicaciones.preciodia;
         this.preciomes = err.publicaciones.preciomes;
@@ -32,9 +38,31 @@ export class DetallePublicacionComponent implements OnInit {
         this.descripcion = err.publicaciones.descripcion;
         this.categoria = err.publicaciones.categoria;
         this.subcategoria = err.publicaciones.subcategoria;
+
+        //Para mostrar las imagenes
+        this.publicacion = err.publicaciones;
+        this.JSON = err.publicaciones.multiplefile;
+        this.JSONfinal = JSON.parse(this.JSON); //CREA JSON CONVERTIDO DE STRING
+        for (let j in this.JSONfinal) {
+          this.arrayJSON.push(this.JSONfinal[j]);
+        }
+        this.publicacion.multiplefile = this.arrayJSON;
+
       },
       res => {
       })
   }
+
+  
+    //SWIPER
+    public config: SwiperConfigInterface = {
+      a11y: true,
+      direction: 'horizontal',
+      slidesPerView: 1,
+      keyboard: true,
+      mousewheel: false,
+      scrollbar: false,
+      navigation: true,
+    };
 
 }

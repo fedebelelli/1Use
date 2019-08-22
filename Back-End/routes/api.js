@@ -323,7 +323,6 @@ router.get('/get-one-publicacion/:id', function (req, res) {
 router.get('/get-image-publicacion/:imagen', function (req, respuesta1) {
     var imagen = req.params.imagen; //Nombre de archivo enviado como parámetro en la URL
 
-    //var cantidad_archivos = (res.multiplefile.match(/,/g) || []).length;
     var path_file = './publicaciones/' + imagen; //Ubicación del archivo
 
     fs.exists(path_file, (exists) => {
