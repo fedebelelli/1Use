@@ -47,7 +47,7 @@ export class MisPublicacionesComponent implements OnInit {
     this.singleton.cerrarSesion();
   }
 
-  deletePublicacion(publicacion) {
+  deshabilitarPublicacion(publicacion) {
     publicacion.estado = 'INACTIVA';
 
     this._auth.update_publicacion(publicacion._id, publicacion).subscribe(
