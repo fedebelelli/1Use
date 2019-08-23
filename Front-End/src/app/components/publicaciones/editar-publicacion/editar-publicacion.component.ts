@@ -19,7 +19,6 @@ export class EditarPublicacionComponent implements OnInit {
   categoriaFormGroup: FormGroup;
   datosProductosGroup: FormGroup;
   fotoProductoGroup: FormGroup;
-  destacionProductoGroup: FormGroup;
   tipoAlquilerGroup: FormGroup;
 
 
@@ -32,8 +31,6 @@ export class EditarPublicacionComponent implements OnInit {
   preciodia: number;
   preciosemana: number;
   preciomes: number;
-  destacar: String = 'NO';
-  seDestaca: Boolean = false;
   tipoAlquiler: String;
 
 
@@ -73,10 +70,7 @@ export class EditarPublicacionComponent implements OnInit {
     this.fotoProductoGroup = this._formBuilder.group({
       multiplefile: [{ value: '' }, Validators.required]
     });
-    this.destacionProductoGroup = this._formBuilder.group({
-      destacar: [{ value: "" }]
 
-    });
     this.tipoAlquilerGroup = this._formBuilder.group({
       tipoAlquiler: [{ value: '' }, Validators.required]
     });
@@ -85,7 +79,6 @@ export class EditarPublicacionComponent implements OnInit {
       ...this.categoriaFormGroup.value,
       ...this.datosProductosGroup.value,
       ...this.fotoProductoGroup.value,
-      ...this.destacionProductoGroup.value,
       ...this.tipoAlquilerGroup.value
     };
 
@@ -106,7 +99,6 @@ export class EditarPublicacionComponent implements OnInit {
         this.preciomes = this.publicacion.preciomes
         this.image = this.publicacion.multiplefile
         this.tipoAlquiler = this.publicacion.tipoAlquiler
-        this.destacar = this.publicacion.destacar
 
         this.categoriaFormGroup = this._formBuilder.group({
           categoria: [this.publicacion.categoria],
@@ -124,10 +116,7 @@ export class EditarPublicacionComponent implements OnInit {
         this.fotoProductoGroup = this._formBuilder.group({
           multiplefile: [{ value: this.publicacion.multiplefile }, Validators.required]
         });
-        this.destacionProductoGroup = this._formBuilder.group({
-          destacar: [{ value: this.publicacion.destacar }]
 
-        });
         this.tipoAlquilerGroup = this._formBuilder.group({
           tipoAlquiler: [{ value: this.publicacion.tipoAlquiler }, Validators.required]
         });
@@ -136,7 +125,6 @@ export class EditarPublicacionComponent implements OnInit {
           ...this.categoriaFormGroup.value,
           ...this.datosProductosGroup.value,
           ...this.fotoProductoGroup.value,
-          ...this.destacionProductoGroup.value,
           ...this.tipoAlquilerGroup.value
         };
       },
@@ -155,14 +143,6 @@ export class EditarPublicacionComponent implements OnInit {
     this.categoria = evento._element.nativeElement.title;
   }
 
-  obtenerDestacacion(evento) {
-    this.destacar = evento.value;
-    if (this.destacar == 'SI') {
-      this.seDestaca = true;
-    } else {
-      this.seDestaca = false;
-    }
-  }
   obtenerTipoAlquiler(evento) {
     this.tipoAlquiler = evento.value;
   }
@@ -249,16 +229,11 @@ export class EditarPublicacionComponent implements OnInit {
       tipoAlquiler: this.tipoAlquiler
     })
 
-    this.destacionProductoGroup.patchValue({
-      destacar: this.destacar
-    })
-
 
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
       ...this.datosProductosGroup.value,
       ...this.fotoProductoGroup.value,
-      ...this.destacionProductoGroup.value,
       ...this.tipoAlquilerGroup.value
     };
 
@@ -274,7 +249,6 @@ export class EditarPublicacionComponent implements OnInit {
 
     this.tipoAlquilerGroup.reset()
 
-    this.destacionProductoGroup.reset()
 
     this.categoria = '';
     this.subcategoria = '';
@@ -285,13 +259,11 @@ export class EditarPublicacionComponent implements OnInit {
     this.preciomes = null;
     this.image = '';
     this.tipoAlquiler = ''
-    this.destacar = 'NO'
 
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
       ...this.datosProductosGroup.value,
       ...this.fotoProductoGroup.value,
-      ...this.destacionProductoGroup.value,
       ...this.tipoAlquilerGroup.value
     };
   }
@@ -308,12 +280,7 @@ export class EditarPublicacionComponent implements OnInit {
       err => {
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
-            if (this.seDestaca) {
-              window.location.assign("/destacacion-publicacion");
-            } else {
               window.location.assign("/publicacion-exito");
-            }
-
           });
       }
     )

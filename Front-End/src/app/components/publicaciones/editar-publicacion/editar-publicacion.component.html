@@ -5,8 +5,8 @@
 </div>
 
 <!--VERSIÓN XL-->
-<section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+<section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true" style="margin-bottom: 20px">
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -242,7 +242,7 @@
                         <h3 style="text-align: center">Carga las imágenes de tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
-                            <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'" 
+                            <ngx-dropzone [accept]="'image/png,image/jpeg,image/gif'"
                                 [label]="'Clickea aquí para subir tu imágen o arrastrala'" [multiple]="true"
                                 (filesAdded)="onFilesAdded($event)" [showPreviews]="true" [preserveFiles]="false"
                                 #dropzone></ngx-dropzone>
@@ -294,51 +294,10 @@
                 </div>
             </form>
         </mat-step>
-        <!--DESTACACION DEL PRODUCTO-->
-        <mat-step [stepControl]="destacionProductoGroup" [optional]="true">
-            <form [formGroup]="destacionProductoGroup">
-                <ng-template matStepLabel>Destacar producto</ng-template>
-                <div fxLayout="column">
-                    <div>
-                        <h3>Destacá tu producto</h3>
-                        <br>
-                        <div class="contenedor-imagenes">
-                            <p>Destacar tu producto te permite que este aparezca en las primeras ubicaciones
-                                de las busquedas relacionadas con las categorias de tu producto por una semana,
-                                al termino de la semana, deberas renovar el pago para seguir estando en las primeras
-                                ubicaciones de busquedas para poder tener mas chance de que el publico encuentre tu
-                                producto
-                            </p>
-                            <mat-radio-group formControlName="destacar" (change)="obtenerDestacacion($event)">
-                                <div fxLayout="column" fxLayoutAlign="center start">
-                                    <mat-selection-list fxFlexOffset="20px">
-                                        <mat-radio-button class="radioButton" color="primary" value="SI">
-                                            SI
-                                        </mat-radio-button>
-                                        <mat-radio-button class="radioButton" color="primary" value="NO">
-                                            NO
-                                        </mat-radio-button>
-                                    </mat-selection-list>
-                                </div>
-                            </mat-radio-group>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                <div fxLayout="row" fxFlexFill>
-                    <div fxFlex>
-                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
-                    </div>
-                    <div fxLayoutAlign="end" fxFlex>
-                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
-                    </div>
-                </div>
-            </form>
-        </mat-step>
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publicar</ng-template>
-            <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
+            <h2 class="mt-30 center">Tu publicación está lista para ser editada</h2>
             <br>
             <h4>Resumen de tu publicación</h4>
             <br>
@@ -361,9 +320,6 @@
                     </mat-form-field>
                     <mat-form-field>
                         <input matInput placeholder="Tipo de Alquiler" [value]=joinGroup.tipoAlquiler disabled>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Publicación Destacada" [value]=joinGroup.destacar disabled>
                     </mat-form-field>
 
                     <div fxLayout="row" fxLayoutGap="40px">
@@ -415,10 +371,7 @@
                         style="margin-right: 10px;">Volver
                         a comenzar</button>
 
-                    <button mat-raised-button color="primary" *ngIf="!seDestaca" (click)="onSubmit()">Publicar</button>
-                    <button mat-raised-button color="primary" *ngIf="seDestaca" (click)="onSubmit()"
-                        routerLink='/destacacion-publicacion'>
-                        Continuar con el pago</button>
+                    <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
                 </div>
             </div>
         </mat-step>
@@ -695,51 +648,10 @@
                 </div>
             </form>
         </mat-step>
-        <!--DESTACACION DEL PRODUCTO-->
-        <mat-step [stepControl]="destacionProductoGroup" [optional]="true">
-            <form [formGroup]="destacionProductoGroup">
-                <ng-template matStepLabel>Destacar producto</ng-template>
-                <div fxLayout="column">
-                    <div>
-                        <h3>Destacá tu producto</h3>
-                        <br>
-                        <div style="text-align: justify">
-                            <p>Destacar tu producto te permite que este aparezca en las primeras ubicaciones
-                                de las busquedas relacionadas con las categorias de tu producto por una semana,
-                                al termino de la semana, deberas renovar el pago para seguir estando en las primeras
-                                ubicaciones de busquedas para poder tener mas chance de que el publico encuentre tu
-                                producto
-                            </p>
-                            <mat-radio-group formControlName="destacar" (change)="obtenerDestacacion($event)">
-                                <div fxLayout="column" fxLayoutAlign="center start">
-                                    <mat-selection-list fxFlexOffset="20px">
-                                        <mat-radio-button class="radioButton" color="primary" value="SI">
-                                            SI
-                                        </mat-radio-button>
-                                        <mat-radio-button class="radioButton" color="primary" value="NO">
-                                            NO
-                                        </mat-radio-button>
-                                    </mat-selection-list>
-                                </div>
-                            </mat-radio-group>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                <div fxLayout="row" fxFlexFill>
-                    <div fxFlex>
-                        <button mat-raised-button matStepperPrevious color="primary">Volver</button>
-                    </div>
-                    <div fxLayoutAlign="end" fxFlex>
-                        <button mat-raised-button matStepperNext color="primary">Siguiente</button>
-                    </div>
-                </div>
-            </form>
-        </mat-step>
         <!--PUBLICACION/RESUMEN DEL PRODUCTO-->
         <mat-step>
             <ng-template matStepLabel>Publicar</ng-template>
-            <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
+            <h2 class="mt-30 center">Tu publicación está lista para ser editada</h2>
             <br>
             <h4>Resumen de tu publicación</h4>
             <br>
@@ -762,9 +674,6 @@
                     </mat-form-field>
                     <mat-form-field>
                         <input matInput placeholder="Tipo de Alquiler" [value]=joinGroup.tipoAlquiler disabled>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Publicación Destacada" [value]=joinGroup.destacar disabled>
                     </mat-form-field>
 
                     <div fxLayout="row" fxLayoutGap="40px">
@@ -807,20 +716,13 @@
                     <br>
                 </form>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlexFill *ngIf="!seDestaca">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlexFill>
                 <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 <button mat-raised-button color="accent"
                     (click)="resetearDatos(); stepperM.reset(); dropzoneM.reset()">Volver a comenzar</button>
                 <button mat-raised-button color="primary" (click)="onSubmit()">Publicar</button>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexFill *ngIf="seDestaca">
-                <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
-                <button mat-raised-button color="accent"
-                    (click)="resetearDatos();stepperM.reset();dropzoneM.reset()">Volver a comenzar</button>
-                <button mat-raised-button color="primary" (click)="onSubmit()" routerLink='/destacacion-publicacion'>
-                    Continuar</button>
-            </div>
         </mat-step>
     </mat-vertical-stepper>
 </section>

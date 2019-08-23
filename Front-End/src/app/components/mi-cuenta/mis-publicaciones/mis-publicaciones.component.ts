@@ -73,6 +73,10 @@ export class MisPublicacionesComponent implements OnInit {
     )
   }
 
+  cambioTab(evento){
+    this.ngOnInit();
+  }
+
   //SWIPER
   public config: SwiperConfigInterface = {
     a11y: true,
