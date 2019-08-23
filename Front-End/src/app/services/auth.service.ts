@@ -21,6 +21,7 @@ export class AuthService {
   private _getPublicacion = "http://localhost:4201/api/get-publicacion/"
   private _getPublicacionId = "http://localhost:4201/api/get-one-publicacion/"
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
+  private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -70,6 +71,10 @@ export class AuthService {
 
   get_publicacion_id(id) {
     return this.http.get<any>(this._getPublicacionId + id);
+  }
+
+  update_publicacion(id, publicacion){
+    return this.http.put<any>(this._updatePublicacion + id, publicacion);
   }
 
 }

@@ -40,6 +40,12 @@ const publicacionesSchema = new Schema({
     },
     multiplefile: {
         type: String,
+    },
+    tipoAlquiler: {
+        type: String,
+    },
+    destacar: {
+        type: String,
     }
 }, {
         timestamps: true

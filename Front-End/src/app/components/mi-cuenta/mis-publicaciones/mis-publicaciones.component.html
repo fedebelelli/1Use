@@ -76,7 +76,7 @@
                         <p> <b>Precio por mes:</b> ${{publicacion.preciomes}} </p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-raised-button color="primary">Editar</button>
+                        <button mat-raised-button color="primary" routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
                         <button mat-raised-button color="warn"
                             (click)="deletePublicacion(publicacion)">Eliminar</button>
                     </mat-card-actions>

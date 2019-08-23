@@ -247,6 +247,8 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.preciomes = datos.preciomes;
     publicaciones.email = email;
     publicaciones.multiplefile = null;
+    publicaciones.tipoAlquiler = datos.tipoAlquiler;
+    publicaciones.destacar = datos.destacar;
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
