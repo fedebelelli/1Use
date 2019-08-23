@@ -48,6 +48,11 @@ export class EditarPublicacionComponent implements OnInit {
   /* Publicación de BD */
   publicacion;
   modoMobile: boolean = false;
+  imagenJSON;
+  imagen;
+  arrayJSON = [];
+  mantenerImg: boolean = false;
+  nuevasImagenes: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService, private _snackBar: MatSnackBar) { }
 
@@ -90,15 +95,15 @@ export class EditarPublicacionComponent implements OnInit {
 
         this.publicacion = err.publicaciones;
 
-        this.categoria = this.publicacion.categoria
-        this.subcategoria = this.publicacion.subcategoria
-        this.titulo = this.publicacion.titulo
-        this.descripcion = this.publicacion.descripcion
-        this.preciodia = this.publicacion.preciodia
-        this.preciosemana = this.publicacion.preciosemana
-        this.preciomes = this.publicacion.preciomes
-        this.image = this.publicacion.multiplefile
-        this.tipoAlquiler = this.publicacion.tipoAlquiler
+        this.categoria = err.publicaciones.categoria
+        this.subcategoria = err.publicaciones.subcategoria
+        this.titulo = err.publicaciones.titulo
+        this.descripcion = err.publicaciones.descripcion
+        this.preciodia = err.publicaciones.preciodia
+        this.preciosemana = err.publicaciones.preciosemana
+        this.preciomes = err.publicaciones.preciomes
+        this.image = err.publicaciones.multiplefile
+        this.tipoAlquiler = err.publicaciones.tipoAlquiler
 
         this.categoriaFormGroup = this._formBuilder.group({
           categoria: [this.publicacion.categoria],
@@ -127,6 +132,13 @@ export class EditarPublicacionComponent implements OnInit {
           ...this.fotoProductoGroup.value,
           ...this.tipoAlquilerGroup.value
         };
+
+        this.imagenJSON = JSON.parse(err.publicaciones.multiplefile); //CREA JSON CONVERTIDO DE STRING
+        for (let j in this.imagenJSON) {
+          this.arrayJSON.push(this.imagenJSON[j]);
+        }
+        this.publicacion.multiplefile = this.arrayJSON;
+
       },
       res => {
 
@@ -174,28 +186,6 @@ export class EditarPublicacionComponent implements OnInit {
     }
   }
 
-  checkCantidad() {
-    if (this.arrayImagenes.length > 5) {
-      this.fotoProductoGroup.patchValue({
-        multiplefile: [{ value: "" }, Validators.required]
-      })
-    }
-  }
-
-  /* Solo va a servir si se quieren agregar más imágenes al cuadrado, además de la que ya están
-   pasoImagen() {
-    if (this.arrayImagenes.length = 0) {
-      this.fotoProductoGroup.patchValue({
-        multiplefile: [{ value: "" }, Validators.required]
-      })
-    } else {
-      this.fotoProductoGroup.patchValue({
-        multiplefile: [{ value: this.arrayImagenes }, Validators.required]
-      })
-    }
-  } */
-
-
   actualizarDatos() {
 
     if (this.preciomes == undefined || this.preciomes == null) {
@@ -221,8 +211,6 @@ export class EditarPublicacionComponent implements OnInit {
 
     this.fotoProductoGroup.patchValue({
       multiplefile: this.image
-
-
     })
 
     this.tipoAlquilerGroup.patchValue({
@@ -268,20 +256,33 @@ export class EditarPublicacionComponent implements OnInit {
     };
   }
 
-  onSubmit() {
+  mantenerImagen(dropzone, btnDropzone) {
+    if (this.mantenerImg == false) {
+      this.image = this.arrayJSON;
+      this.mantenerImg = true;
+      dropzone.disabled = true;
+      btnDropzone.disabled = true;
+    } else {
+      this.mantenerImg = false;
+      dropzone.disabled = false;
+      btnDropzone.disabled = false;
+    }
+  }
 
+  onSubmit() {
     let email = localStorage.getItem("email");
     this.categoria = this.joinGroup.categoria;
     this.titulo = this.joinGroup.titulo;
 
-    this._auth.registrarPublicacion(email, this.joinGroup).subscribe(
+    this._auth.update_publicacion(this.publicacion._id, this.joinGroup).subscribe(
       response => {
-      },
-      err => {
+        console.log(response);
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
-              window.location.assign("/publicacion-exito");
+            window.location.assign("/publicacion-exito");
           });
+      },
+      err => {
       }
     )
   }
@@ -328,5 +329,7 @@ export class EditarPublicacionComponent implements OnInit {
     }
 
   }
+
+
 
 }

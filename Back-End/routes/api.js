@@ -325,7 +325,7 @@ router.post('/update-publicacion/:id',multipartMiddlewarePublicaciones, function
 
         if (!eliminado) return res.status(404).send({ message: 'Error' });
 
-        return res.status(200).send("Todo ok")
+        return res.status(200).send({ message: "Todo ok"})
 
     })
 })
