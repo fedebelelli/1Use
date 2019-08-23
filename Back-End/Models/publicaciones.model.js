@@ -46,6 +46,9 @@ const publicacionesSchema = new Schema({
     },
     destacar: {
         type: String,
+    },
+    estado: {
+        type: String,
     }
 }, {
         timestamps: true

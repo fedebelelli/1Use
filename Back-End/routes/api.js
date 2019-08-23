@@ -249,6 +249,7 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.multiplefile = null;
     publicaciones.tipoAlquiler = datos.tipoAlquiler;
     publicaciones.destacar = datos.destacar;
+    publicaciones.estado = 'ACTIVO'
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
