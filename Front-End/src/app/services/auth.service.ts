@@ -74,7 +74,9 @@ export class AuthService {
   }
 
   update_publicacion(id, publicacion){
-    return this.http.put<any>(this._updatePublicacion + id, publicacion);
+    let params = JSON.stringify(publicacion);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
   }
 
 }

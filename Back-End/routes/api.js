@@ -249,7 +249,7 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.multiplefile = null;
     publicaciones.tipoAlquiler = datos.tipoAlquiler;
     publicaciones.destacar = datos.destacar;
-    publicaciones.estado = 'ACTIVO'
+    publicaciones.estado = 'ACTIVA'
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
@@ -271,10 +271,10 @@ router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddle
             var filePath = req.files.multiplefile[i].path;
             var fileSplit = filePath.split('\\');
             var fileName = fileSplit[1];
-            if (i == 0) nombre += '{"imagen'+i+'":'+'"'+fileName+'",'
-            else nombre += '"imagen'+i+'":"'+fileName + '",';
+            if (i == 0) nombre += '{"imagen' + i + '":' + '"' + fileName + '",'
+            else nombre += '"imagen' + i + '":"' + fileName + '",';
         }
-        let nombreFinal = nombre.slice(0,-1);
+        let nombreFinal = nombre.slice(0, -1);
         nombreFinal += "}";
 
         Publicacion.findOneAndUpdate({ email: email, titulo: titulo, categoria: categoria }, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
@@ -300,9 +300,27 @@ router.get('/get-publicacion/:email', function (req, res) {
     })
 })
 
-router.delete('/delete-publicacion/:id', function (req, res) {
+router.post('/update-publicacion/:id',multipartMiddlewarePublicaciones, function (req, res) {
     var id = req.params.id;
-    Publicacion.findByIdAndRemove(id, (err, eliminado) => {
+    var datos = req.body;
+    var publicaciones = new Publicacion();
+
+    publicaciones._id = id;
+    publicaciones.titulo = datos.titulo;
+    publicaciones.categoria = datos.categoria;
+    publicaciones.subcategoria = datos.subcategoria;
+    publicaciones.descripcion = datos.descripcion;
+    publicaciones.preciodia = datos.preciodia;
+    publicaciones.preciosemana = datos.preciosemana;
+    publicaciones.preciomes = datos.preciomes;
+    publicaciones.email = datos.email;
+    //publicaciones.multiplefile = null;
+    publicaciones.tipoAlquiler = datos.tipoAlquiler;
+    publicaciones.destacar = datos.destacar;
+    publicaciones.estado = datos.estado;
+
+
+    Publicacion.findByIdAndUpdate(id, publicaciones, { new: true }, (err, eliminado) => {
         if (err) return res.status(500).send({ message: 'Error al eliminar' });
 
         if (!eliminado) return res.status(404).send({ message: 'Error' });

@@ -48,13 +48,26 @@ export class MisPublicacionesComponent implements OnInit {
   }
 
   deletePublicacion(publicacion) {
-    this._auth.delete_publicacion(publicacion._id).subscribe(
+    publicacion.estado = 'INACTIVA';
+
+    this._auth.update_publicacion(publicacion._id, publicacion).subscribe(
       err => {
-        console.log("Por err");
         this.ngOnInit();
       },
       res => {
-        console.log("Por res");
+        this.ngOnInit();
+      }
+    )
+  }
+
+  habilitarPublicacion(publicacion) {
+    publicacion.estado = 'ACTIVA';
+
+    this._auth.update_publicacion(publicacion._id, publicacion).subscribe(
+      err => {
+        this.ngOnInit();
+      },
+      res => {
         this.ngOnInit();
       }
     )
