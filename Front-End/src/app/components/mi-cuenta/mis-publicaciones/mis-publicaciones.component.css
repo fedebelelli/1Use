@@ -42,3 +42,11 @@
     height: 250px;
     border: 2px black solid;
 }
+
+.container-gt-md{
+    width: 100%;
+}
+
+.container-lt-md{
+    width: 86%;
+}

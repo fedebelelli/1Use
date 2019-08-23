@@ -73,6 +73,17 @@ export class MisPublicacionesComponent implements OnInit {
     )
   }
 
+  eliminarPublicacion(publicacion){
+    this._auth.delete_publicacion(publicacion._id).subscribe(
+      err => {
+        this.ngOnInit();
+      },
+      res => {
+        this.ngOnInit();
+      }
+    )
+  }
+
   cambioTab(evento){
     this.ngOnInit();
   }

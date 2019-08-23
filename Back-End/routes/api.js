@@ -300,7 +300,7 @@ router.get('/get-publicacion/:email', function (req, res) {
     })
 })
 
-router.post('/update-publicacion/:id',multipartMiddlewarePublicaciones, function (req, res) {
+router.post('/update-publicacion/:id', multipartMiddlewarePublicaciones, function (req, res) {
     var id = req.params.id;
     var datos = req.body;
     var publicaciones = new Publicacion();
@@ -325,7 +325,19 @@ router.post('/update-publicacion/:id',multipartMiddlewarePublicaciones, function
 
         if (!eliminado) return res.status(404).send({ message: 'Error' });
 
-        return res.status(200).send({ message: "Todo ok"})
+        return res.status(200).send({ message: "Todo ok" })
+
+    })
+})
+
+router.delete('/delete-publicacion/:id', function (req, res) {
+    var id = req.params.id;
+    Publicacion.findByIdAndDelete(id, (err, eliminado) => {
+        if (err) return res.status(500).send({ message: 'Error al eliminar' });
+
+        if (!eliminado) return res.status(404).send({ message: 'Error' });
+
+        return res.status(200).send({ message: "Todo ok" })
 
     })
 })

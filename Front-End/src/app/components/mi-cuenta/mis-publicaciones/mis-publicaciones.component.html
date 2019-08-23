@@ -37,7 +37,7 @@
 
     </div>
 
-    <div fxLayout="column" style="width: 100%">
+    <div fxLayout="column" ngClass.gt-md="container-gt-md" ngClass.lt-md="container-lt-md">
 
         <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
             <p style="font-size: 25px;margin-bottom: 8px; "> Mis publicaciones <button mat-mini-fab color="primary"
@@ -81,10 +81,12 @@
                                 <mat-card-content style="text-align: left; font-size: 12px">
                                     <!-- <p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
                                     <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>
-                                    <p> <b>Precio por semana:</b> ${{publicacion.preciosemana}} </p>
-                                    <p> <b>Precio por mes:</b> ${{publicacion.preciomes}} </p>
+                                    <p> <b>Destacado:</b> {{publicacion.destacar}} </p>
+                                    <p> <b>Vigente hasta:</b> implementar fecha </p>
                                 </mat-card-content>
                                 <mat-card-actions>
+                                    <button mat-raised-button color="primary" routerLink="/destacacion-publicacion"
+                                        *ngIf="publicacion.destacar == 'NO'">Destacar</button>
                                     <button mat-raised-button color="primary"
                                         routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
                                     <button mat-raised-button color="warn"
@@ -137,8 +139,10 @@
                                 <mat-card-actions>
                                     <button mat-raised-button color="primary"
                                         routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
-                                    <button mat-raised-button color="warn"
+                                    <button mat-raised-button color="primary"
                                         (click)="habilitarPublicacion(publicacion)">Habilitar</button>
+                                    <button mat-raised-button color="warn"
+                                        (click)="eliminarPublicacion(publicacion)">Eliminar</button>
                                 </mat-card-actions>
                             </mat-card>
                         </div>
