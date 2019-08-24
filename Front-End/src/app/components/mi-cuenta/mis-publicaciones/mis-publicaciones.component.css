@@ -50,3 +50,7 @@
 .container-lt-md{
     width: 86%;
 }
+
+.mat-tab-labels{
+    justify-content: center !important
+}

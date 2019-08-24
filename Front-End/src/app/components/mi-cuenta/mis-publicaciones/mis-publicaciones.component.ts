@@ -10,7 +10,7 @@ import { SingletonService } from '../../singleton.service';
 })
 export class MisPublicacionesComponent implements OnInit {
 
-  constructor(private _auth: AuthService, private singleton:SingletonService) { }
+  constructor(private _auth: AuthService, private singleton: SingletonService) { }
 
   publicaciones = [];
   titulo: string;
@@ -21,6 +21,13 @@ export class MisPublicacionesComponent implements OnInit {
   arrayImagen = [];
 
   ngOnInit() {
+
+    /* PARA OBTENER FECHAS EN FORMATO AR
+        this.date = new Date();
+        this.date.setDate(this.date.getDate() + 30);
+        this.newDate = this.date.toLocaleString()
+        this.newDate = this.newDate.slice(0,10)
+     */
     this._auth.get_publicacion(localStorage.getItem("email")).subscribe(
       err => {
         this.hayPublicaciones = true;
@@ -42,8 +49,9 @@ export class MisPublicacionesComponent implements OnInit {
         this.hayPublicaciones = false;
       }
     )
+
   }
-  cerrarSesion(){
+  cerrarSesion() {
     this.singleton.cerrarSesion();
   }
 
@@ -73,7 +81,7 @@ export class MisPublicacionesComponent implements OnInit {
     )
   }
 
-  eliminarPublicacion(publicacion){
+  eliminarPublicacion(publicacion) {
     this._auth.delete_publicacion(publicacion._id).subscribe(
       err => {
         this.ngOnInit();
@@ -84,7 +92,7 @@ export class MisPublicacionesComponent implements OnInit {
     )
   }
 
-  cambioTab(evento){
+  cambioTab(evento) {
     this.ngOnInit();
   }
 

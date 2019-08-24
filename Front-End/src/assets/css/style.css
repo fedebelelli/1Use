@@ -8,6 +8,10 @@
 @import url("font-awesome.min.css");
 /* =====  INDEX OF STYLES ===== */
 
+.mat-tab-labels{
+    justify-content: center
+}
+
 /*
 01 ===== BASIC  =====
   1.1 General
