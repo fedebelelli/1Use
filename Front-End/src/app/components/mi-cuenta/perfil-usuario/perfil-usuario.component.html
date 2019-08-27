@@ -1,6 +1,6 @@
 <div fxLayout="row" fxFlexFill>
     <div fxLayout fxFlexOrder="1" ngClass.lt-lg="toolbar-div-lt-md">
-        <mat-toolbar color="primary">
+        <mat-toolbar>
             <mat-toolbar-row>
                 <a [routerLink]="['/mi-cuenta']">
                     <!-- [routerLink]="['/perfil']" -->
@@ -38,7 +38,7 @@
     </div>
     <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
         fxLayoutAlign.lt-lg="center center">
-        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
+        <div class="contenedorDeDatos" ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
             <h3>Datos de tu cuenta</h3>
             <hr>
             <br>
@@ -196,7 +196,7 @@
                                 </div>
                                 <div fxLayout="column" *ngIf="tabCambiada" fxLayoutAlign="center center"
                                     fxLayoutGap="20px" [fxShow]="hayImagen">
-                                    <p>Imagen a cambiar</p>
+                                    <p>Imágen a cambiar</p>
                                     <img class="previsualizacion" [src]="imgURL" *ngIf="imgURL">
                                 </div>
                             </div>

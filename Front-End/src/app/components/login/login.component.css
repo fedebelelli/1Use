@@ -5,3 +5,7 @@ mat-form-field {
 .input-sm{
     width: 80%;
 }
+mat-form-field{
+    font-size: 18px;
+    margin-top: 15px;
+}

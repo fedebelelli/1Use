@@ -6,7 +6,7 @@
 
 <!--VERSIÓN XL-->
 <section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" >
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -267,7 +267,7 @@
         <mat-step [stepControl]="tipoAlquilerGroup" errorMessage="Debes seleccionar el tipo de alquiler">
             <form [formGroup]="tipoAlquilerGroup">
                 <ng-template matStepLabel>Tipo de alquiler del producto</ng-template>
-                <h3>Selecioná el tipo de alquiler de tu producto</h3>
+                <h3>Seleccioná el tipo de alquiler de tu producto</h3>
                 <br>
                 <div fxLayout="column">
                     <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
@@ -303,10 +303,10 @@
                         <h3>Destacá tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
-                            <p>Destacar tu producto te permite que este aparezca en las primeras ubicaciones
-                                de las busquedas relacionadas con las categorias de tu producto por una semana,
+                            <p id="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras ubicaciones
+                                de las busquedas relacionadas con las categorí  as de tu producto por una semana,
                                 al termino de la semana, deberas renovar el pago para seguir estando en las primeras
-                                ubicaciones de busquedas para poder tener mas chance de que el publico encuentre tu
+                                ubicaciones de búsquedas para poder tener mas chance de que el público encuentre tu
                                 producto
                             </p>
                             <mat-radio-group formControlName="destacar" (change)="obtenerDestacacion($event)">
@@ -340,7 +340,7 @@
             <ng-template matStepLabel>Publicar</ng-template>
             <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
             <br>
-            <h4>Resumen de tu publicación</h4>
+            <h4>Resúmen de tu publicación</h4>
             <br>
             <div>
                 <form>
@@ -668,7 +668,7 @@
         <mat-step [stepControl]="tipoAlquilerGroup" errorMessage="Debes seleccionar el tipo de alquiler">
             <form [formGroup]="tipoAlquilerGroup">
                 <ng-template matStepLabel>Tipo de alquiler del producto</ng-template>
-                <h4 style="text-align: center">Selecioná el tipo de alquiler de tu producto</h4>
+                <h4 style="text-align: center">Seleccioná el tipo de alquiler de tu producto</h4>
                 <br>
                 <div fxLayout="column">
                     <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
@@ -704,10 +704,10 @@
                         <h3>Destacá tu producto</h3>
                         <br>
                         <div style="text-align: justify">
-                            <p>Destacar tu producto te permite que este aparezca en las primeras ubicaciones
-                                de las busquedas relacionadas con las categorias de tu producto por una semana,
+                            <p class="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras ubicaciones
+                                de las busquedas relacionadas con las categorías de tu producto por una semana,
                                 al termino de la semana, deberas renovar el pago para seguir estando en las primeras
-                                ubicaciones de busquedas para poder tener mas chance de que el publico encuentre tu
+                                ubicaciones de búsquedas para poder tener mas chance de que el público encuentre tu
                                 producto
                             </p>
                             <mat-radio-group formControlName="destacar" (change)="obtenerDestacacion($event)">
@@ -741,7 +741,7 @@
             <ng-template matStepLabel>Publicar</ng-template>
             <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
             <br>
-            <h4>Resumen de tu publicación</h4>
+            <h4>Resúmen de tu publicación</h4>
             <br>
             <div>
                 <form>

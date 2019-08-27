@@ -54,3 +54,33 @@
 .mat-tab-labels{
     justify-content: center !important
 }
+.iconitos {
+    display: inline;
+    margin-left: 10px;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    transition: all 0.25s ease 0s;
+    -moz-transition: all 0.25s ease 0s;
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+}
+
+a:hover, a:focus {
+    color: rgb(253, 187, 48);
+    text-decoration: none;
+    transition: all 0.25s ease 0s;
+    -moz-transition: all 0.25s ease 0s;
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+}
+
+a, a:focus, a:active, a:link, img {
+    outline: none;
+    text-decoration: none;
+}
+mat-toolbar{
+    background: rgb(215,215,215);
+}
