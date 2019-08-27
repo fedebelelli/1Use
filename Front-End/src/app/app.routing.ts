@@ -20,7 +20,7 @@ import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/m
 import {ConfirmacionDestacacionComponent} from './components/confirmacion-destacacion/confirmacion-destacacion.component';
 import { DetallePublicacionComponent } from './components/publicaciones/detalle-publicacion/detalle-publicacion.component';
 import { EditarPublicacionComponent } from './components/publicaciones/editar-publicacion/editar-publicacion.component';
-
+import { BusquedaComponent } from './components/busqueda/busqueda.component';
 
 const appRoutes: Routes = [
 
@@ -29,6 +29,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'busqueda', component: BusquedaComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'auth', loadChildren: './components/auth.module#AuthModule' },
     { path: 'categorias', component: CategoriasComponent },
