@@ -1,0 +1,41 @@
+<section>
+    <div fxLayout="row" fxLayoutAlign="center" class="container-total">
+
+        <div fxLayout="column" fxLayoutAlign="start center" fxFlex="500px" style="padding-left: 215px">
+            <div>
+                <p><b>Subcategorías</b></p>
+                <div *ngFor="let subcategoria of subcategorias">
+                    <a style="color: black"> {{subcategoria}} </a>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center" fxFlex="1036px">
+            <h3 style="text-align: center;  margin-right: 150px;"> {{titulo}} </h3>
+            <div *ngIf="encontrado" class="contenedor-info">
+                <div *ngFor="let publicacion of publicaciones" class="publicacion">
+                    <div fxLayout="row">
+                        <div>
+                            <img class="container-img"
+                                src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[0]}}">
+                        </div>
+
+                        <div style="margin-bottom: 10px">
+                            <a style="color: black; font-size: 18px" routerLink="/publicaciones/{{publicacion._id}}">
+                                {{publicacion.titulo}}
+                            </a>
+                            <p> ${{publicacion.preciodia}} </p>
+                            <p> Subcategoria: {{publicacion.subcategoria}} </p>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>

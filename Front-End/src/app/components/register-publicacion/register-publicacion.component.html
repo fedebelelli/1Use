@@ -6,7 +6,7 @@
 
 <!--VERSIÓN XL-->
 <section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" >
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -162,6 +162,27 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
+                        <mat-expansion-panel-header #b9 title="Herramientas">
+                            <mat-panel-title>
+                                Herramientas
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Máquinas, Accesorios, etc
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b9)"
+                            formControlName="subcategoria" name="herramienta">
+                            <div fxLayout="column" fxLayoutAlign="center start"
+                                *ngFor="let herramienta of herramientasArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{herramienta}}">
+                                        {{herramienta}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b8 title="Otros">
                             <mat-panel-title>
                                 Otros
@@ -303,8 +324,9 @@
                         <h3>Destacá tu producto</h3>
                         <br>
                         <div class="contenedor-imagenes">
-                            <p id="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras ubicaciones
-                                de las busquedas relacionadas con las categorí  as de tu producto por una semana,
+                            <p id="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras
+                                ubicaciones
+                                de las busquedas relacionadas con las categorí as de tu producto por una semana,
                                 al termino de la semana, deberas renovar el pago para seguir estando en las primeras
                                 ubicaciones de búsquedas para poder tener mas chance de que el público encuentre tu
                                 producto
@@ -411,8 +433,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious>Volver</button>
                 </div>
                 <div fxLayoutAlign="end" fxFlex>
-                    <button mat-raised-button color="accent"
-                        (click)="resetearDatos();stepper.reset();dropzone.reset()" style="margin-right: 10px;">Volver
+                    <button mat-raised-button color="accent" (click)="resetearDatos();stepper.reset();dropzone.reset()"
+                        style="margin-right: 10px;">Volver
                         a comenzar</button>
 
                     <button mat-raised-button color="primary" *ngIf="!seDestaca" (click)="onSubmit()">Publicar</button>
@@ -567,6 +589,24 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
+                        <mat-expansion-panel-header #b9 title="Herramientas">
+                            <mat-panel-title>
+                                Herramientas
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b9)"
+                            formControlName="subcategoria" name="herramienta">
+                            <div fxLayout="column" fxLayoutAlign="center start"
+                                *ngFor="let herramienta of herramientasArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{herramienta}}">
+                                        {{herramienta}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b8 title="Otros">
                             <mat-panel-title>
                                 Otros
@@ -704,7 +744,8 @@
                         <h3>Destacá tu producto</h3>
                         <br>
                         <div style="text-align: justify">
-                            <p class="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras ubicaciones
+                            <p class="formatoLetra">Destacar tu producto te permite que este aparezca en las primeras
+                                ubicaciones
                                 de las busquedas relacionadas con las categorías de tu producto por una semana,
                                 al termino de la semana, deberas renovar el pago para seguir estando en las primeras
                                 ubicaciones de búsquedas para poder tener mas chance de que el público encuentre tu

@@ -7,7 +7,7 @@
 <!--VERSIÓN XL-->
 <section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true"
     style="margin-bottom: 20px">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos();" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -163,6 +163,26 @@
                         </mat-radio-group>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
+                            <mat-expansion-panel-header #b9 title="Herramientas">
+                                <mat-panel-title>
+                                    Herramientas
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Máquinas, Accesorios, etc
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b9)"
+                                formControlName="subcategoria" name="herramienta">
+                                <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let herramienta of herramientasArray">
+                                    <mat-selection-list fxFlexOffset="20px">
+                                        <mat-radio-button color="primary" value="{{herramienta}}">
+                                            {{herramienta}}
+                                        </mat-radio-button>
+                                    </mat-selection-list>
+                                </div>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b8 title="Otros">
                             <mat-panel-title>
                                 Otros
@@ -257,7 +277,7 @@
                         </div>
 
                         <div class="chkImagen">
-                            <mat-checkbox (change)="mantenerImagen(dropzone, btnDropzone)">Mantener las imágenes de mi
+                            <mat-checkbox #img (change)="mantenerImagen(dropzone, btnDropzone)">Mantener las imágenes de mi
                                 publicación
                             </mat-checkbox>
                         </div>
@@ -415,7 +435,7 @@
 
 <!--VERSIÓN MOBILE-->
 <section fxShow.lt-md="true" fxHide.gt-md="true" *ngIf="modoMobile">
-    <mat-vertical-stepper #stepperM (selectionChange)="actualizarDatos()">
+    <mat-vertical-stepper #stepperM (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -549,6 +569,23 @@
                             </div>
                         </mat-radio-group>
                     </mat-expansion-panel>
+                    <mat-expansion-panel>
+                            <mat-expansion-panel-header #b9 title="Herramientas">
+                                <mat-panel-title>
+                                    Herramientas
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group (change)="obtenerSubCategoria($event); obtenerCategoria(b9)"
+                                formControlName="subcategoria" name="herramienta">
+                                <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let herramienta of herramientasArray">
+                                    <mat-selection-list fxFlexOffset="20px">
+                                        <mat-radio-button color="primary" value="{{herramienta}}">
+                                            {{herramienta}}
+                                        </mat-radio-button>
+                                    </mat-selection-list>
+                                </div>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b8 title="Otros">
                             <mat-panel-title>

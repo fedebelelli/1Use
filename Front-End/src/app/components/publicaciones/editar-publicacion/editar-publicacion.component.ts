@@ -53,6 +53,7 @@ export class EditarPublicacionComponent implements OnInit {
   arrayJSON = [];
   mantenerImg: boolean = false;
   nuevasImagenes: boolean = false;
+  imagenBD;
 
   constructor(private _formBuilder: FormBuilder, private _auth: AuthService, private _uploadService: UploadService, private _snackBar: MatSnackBar) { }
 
@@ -102,7 +103,7 @@ export class EditarPublicacionComponent implements OnInit {
         this.preciodia = err.publicaciones.preciodia
         this.preciosemana = err.publicaciones.preciosemana
         this.preciomes = err.publicaciones.preciomes
-        this.image = err.publicaciones.multiplefile
+        this.imagenBD = err.publicaciones.multiplefile
         this.tipoAlquiler = err.publicaciones.tipoAlquiler
 
         this.categoriaFormGroup = this._formBuilder.group({
@@ -119,7 +120,7 @@ export class EditarPublicacionComponent implements OnInit {
         });
 
         this.fotoProductoGroup = this._formBuilder.group({
-          multiplefile: [{ value: this.publicacion.multiplefile }, Validators.required]
+          multiplefile: [{ value: '' }, Validators.required]
         });
 
         this.tipoAlquilerGroup = this._formBuilder.group({
@@ -262,6 +263,18 @@ export class EditarPublicacionComponent implements OnInit {
       this.mantenerImg = true;
       dropzone.disabled = true;
       btnDropzone.disabled = true;
+
+      this.fotoProductoGroup.patchValue({
+        multiplefile: this.image
+      })
+
+      this.joinGroup = {
+        ...this.categoriaFormGroup.value,
+        ...this.datosProductosGroup.value,
+        ...this.fotoProductoGroup.value,
+        ...this.tipoAlquilerGroup.value
+      };
+
     } else {
       this.mantenerImg = false;
       dropzone.disabled = false;
@@ -276,16 +289,21 @@ export class EditarPublicacionComponent implements OnInit {
 
     this._auth.update_publicacion(this.publicacion._id, this.joinGroup).subscribe(
       response => {
-        console.log(response);
-        this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
-          .then((result: any) => {
-            window.location.assign("/publicacion-exito");
-          });
+        if (!this.mantenerImagen) {
+          this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
+            .then((result: any) => {
+              window.location.assign("/publicacion-exito");
+            });
+        }
+        else {
+          window.location.assign("/publicacion-exito");
+        }
       },
       err => {
       }
     )
   }
+
 
 
 
@@ -298,7 +316,7 @@ export class EditarPublicacionComponent implements OnInit {
   bellezaArray: string[] = ['Relojes - joyas - accesorios', 'Ropa y calzado', 'Salud y belleza']
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
-  herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
+  herramientasArray: string[] = ['Industria', 'Repuestos', 'Muebles para negocios - oficinas']
   otrosArray: string[] = ['Otra categoria']
 
 

@@ -39,7 +39,8 @@ import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/m
 import { ConfirmacionDestacacionComponent } from './components/confirmacion-destacacion/confirmacion-destacacion.component';
 import { DetallePublicacionComponent } from './components/publicaciones/detalle-publicacion/detalle-publicacion.component';
 import { EditarPublicacionComponent } from './components/publicaciones/editar-publicacion/editar-publicacion.component';
-import { BusquedaComponent } from './components/busqueda/busqueda.component';
+import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-publicaciones/busqueda-publicaciones.component';
+import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -70,8 +71,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MisAlquileresComponent,
     ConfirmacionDestacacionComponent,
     DetallePublicacionComponent,
-    EditarPublicacionComponent,
-    BusquedaComponent
+    EditarPublicacionComponent, 
+    BusquedaPublicacionesComponent, 
+    BusquedaCategoriasComponent
   ],
   imports: [
     BrowserModule,

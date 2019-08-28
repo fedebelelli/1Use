@@ -20,16 +20,16 @@ import { MisAlquileresComponent } from './components//mi-cuenta/mis-alquileres/m
 import {ConfirmacionDestacacionComponent} from './components/confirmacion-destacacion/confirmacion-destacacion.component';
 import { DetallePublicacionComponent } from './components/publicaciones/detalle-publicacion/detalle-publicacion.component';
 import { EditarPublicacionComponent } from './components/publicaciones/editar-publicacion/editar-publicacion.component';
-import { BusquedaComponent } from './components/busqueda/busqueda.component';
+import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
+import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-publicaciones/busqueda-publicaciones.component';
 
 const appRoutes: Routes = [
 
-    { path: '', component: HomeComponent },
+    { path: '',  redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'busqueda', component: BusquedaComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'auth', loadChildren: './components/auth.module#AuthModule' },
     { path: 'categorias', component: CategoriasComponent },
@@ -38,14 +38,16 @@ const appRoutes: Routes = [
     { path: 'register-publicacion', component: RegisterPublicacionComponent },
     { path: 'publicacion-exito', component: PublicacionExitoComponent },
     { path: 'destacacion-publicacion', component: DestacacionPublicacionComponent },
-    { path: 'mi-cuenta', component: MiCuentaComponent },
+    { path: 'mi-cuenta', component: MiCuentaComponent, },
     { path: 'mi-cuenta/perfil', component: PerfilUsuarioComponent },
     { path: 'mi-cuenta/mis-alquileres', component: MisAlquileresComponent },
     { path: 'mi-cuenta/mis-publicaciones', component: MisPublicacionesComponent },
     { path: 'confirmacion-destacacion', component: ConfirmacionDestacacionComponent },
     { path: 'publicaciones/:id', component: DetallePublicacionComponent },
     { path: 'editar-publicacion/:id', component: EditarPublicacionComponent },
-    { path: '*', component: ErrorComponent },
+    { path: 'busqueda/c/:c', component: BusquedaCategoriasComponent },
+    { path: 'busqueda/p/:p', component: BusquedaPublicacionesComponent },
+    { path: '**', component: ErrorComponent },
 
 ];
 

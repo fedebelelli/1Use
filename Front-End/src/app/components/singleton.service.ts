@@ -40,6 +40,10 @@ export class SingletonService {
     if (urlActual == "/") {
       this.estado = true;
     }
+    
+    if (urlActual.includes("/busqueda")) {
+      this.estado = true;
+    }
 
     if (urlActual == "/categorias") {
       this.estado = false;
@@ -61,7 +65,7 @@ export class SingletonService {
       this.estado = false;
     }
 
-    if (urlActual == "/mi-cuenta") {
+    if (urlActual.includes("/mi-cuenta")) {
       this.estado = false;
     }
 

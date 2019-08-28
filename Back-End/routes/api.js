@@ -370,4 +370,21 @@ router.get('/get-image-publicacion/:imagen', function (req, respuesta1) {
     })
 });
 
+
+
+
+
+/* ------------------------------ Busqueda de publicaciones ----------------------------------- */
+router.get('/search-categoria/:categoria', function(req, res){
+    var categoria = req.params.categoria;
+
+    Publicacion.find({categoria: categoria}, (err,publicaciones) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ publicaciones });
+    })
+})
+
 module.exports = router;

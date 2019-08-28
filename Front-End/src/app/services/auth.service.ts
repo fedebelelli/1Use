@@ -22,6 +22,7 @@ export class AuthService {
   private _getPublicacionId = "http://localhost:4201/api/get-one-publicacion/"
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
+  private _searchCategoria = "http://localhost:4201/api/search-categoria/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -29,6 +30,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  /* CRUD DE USUARIOS */
 
   registerUser(user) {
     return this.http.post<any>(this._registerUrl, user)
@@ -57,6 +59,9 @@ export class AuthService {
     return this.http.get<any>(this._getImgUser + id);
   }
 
+
+  /* CRUD DE PUBLICACIONES */
+
   registrarPublicacion(email, publicacion) {
     return this.http.post<any>(this._registerPublicacion + email, publicacion);
   }
@@ -79,4 +84,10 @@ export class AuthService {
     return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
   }
 
+
+
+  /* BÚSQUEDA DE CATEGORIAS Y PUBLICACIONES */
+  search_categoria(name){
+    return this.http.get<any>(this._searchCategoria + name);
+  }
 }

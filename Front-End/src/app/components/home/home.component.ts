@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-
   }
 
   checkPagina() {
@@ -111,6 +110,7 @@ export class HomeComponent implements OnInit {
     navigation: true,
     pagination: false,
     autoplay: { delay: 28000 },
+    preventClicks: false
   };
 
 
