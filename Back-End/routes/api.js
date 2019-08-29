@@ -375,10 +375,69 @@ router.get('/get-image-publicacion/:imagen', function (req, respuesta1) {
 
 
 /* ------------------------------ Busqueda de publicaciones ----------------------------------- */
-router.get('/search-categoria/:categoria', function(req, res){
+router.get('/search-categoria/:categoria', function (req, res) {
     var categoria = req.params.categoria;
+    var preciodia = req.query.p;
+    var estrellas = req.query.e;
+    var subcategoria = req.query.s;
 
-    Publicacion.find({categoria: categoria}, (err,publicaciones) => {
+    var query;
+
+    console.log(categoria, preciodia, estrellas, subcategoria)
+
+    /*  c p e s
+        1 0 0 0
+        1 0 0 1
+        1 0 1 0
+        1 0 1 1
+        1 1 0 0
+        1 1 0 1
+        1 1 1 1
+    */
+
+    /* URL EJEMPLO: http://localhost:4201/api/search-categoria/Hogar?p=300&s=Decoración */
+
+    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
+        query = Publicacion.find({ categoria: categoria})
+    }
+
+    //1001
+    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria != undefined) {
+        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria })
+    }
+
+    //1010
+    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria == undefined) {
+        query = Publicacion.find({ categoria: categoria, estrellas: estrellas })
+    }
+
+    //1011
+    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria != undefined) {
+        query = Publicacion.find({ categoria: categoria, estrellas: estrellas, subcategoria: subcategoria })
+    }
+
+    //1100
+    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria == undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia })
+    }
+
+    //1101
+    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria != undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, subcategoria: subcategoria })
+    }
+
+    //1110
+    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria == undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estrellas: estrellas })
+    }
+
+    //1111
+    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria != undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estrellas: estrellas, subcategoria: subcategoria })
+    }
+
+
+    query.exec((err, publicaciones) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
