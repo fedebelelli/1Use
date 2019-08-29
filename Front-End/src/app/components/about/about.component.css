@@ -39,3 +39,9 @@ mat-progress-bar{
 .progress-type{
     color: white
 }
+#tamaño{
+    font-size: 20px;
+}
+#texto{
+    text-align: center;
+}
