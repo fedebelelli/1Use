@@ -291,19 +291,35 @@
                 <h3>Seleccioná el tipo de alquiler de tu producto</h3>
                 <br>
                 <div fxLayout="column">
-                    <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
-                        <div fxLayout="column" fxLayoutAlign="center start">
-                            <mat-selection-list fxFlexOffset="20px">
-                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo1">
-                                    Alquiler con Intervencíon
-                                </mat-radio-button>
-                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo2">
-                                    Alquiler sin Intervencíon
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
-                    </mat-radio-group>
-                    <br>
+                    <div class="contenedor-imagenes">
+                        <p id="formatoLetra">
+                                La forma de alquiler que se denomina “sin intervención” permite establecer el contacto entre las partes que
+                                realizan la transacción sin intervenir en ella, los participantes de la misma se rigen en
+                                base a los términos y condiciones establecidos en la plataforma y esta no responde
+                                por posibles problemas que pueda surgir.
+                                <br>
+                                La segunda forma de alquiler se denomina “con intervención”, se basa en la obtención de un seguro
+                                 contra reembolso con el objetivo de proteger al objeto alquilado de algún daño que pueda surgir durante la
+                                ejecución del alquiler. Este seguro consiste en el depósito de un monto adicional que
+                                depende del tipo de objeto que el interesado en alquilar ha pagado por el mismo y
+                                será devuelto luego de que el propietario verifique el estado del objeto, no pudiendo
+                                pasar más de 24 hs de lo contrario se considera que el objeto fue entregado en
+                                buenas condiciones, finalizando la transacción.
+                        </p>
+                        <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button class="radioButton" color="primary" value="AlquilerSinIntervencion">
+                                        Alquiler sin Intervencíon
+                                    </mat-radio-button>
+                                    <mat-radio-button class="radioButton" color="primary" value="AlquilerConIntervencion">
+                                        Alquiler con Intervencíon
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                        <br>
+                    </div>
                 </div>
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
