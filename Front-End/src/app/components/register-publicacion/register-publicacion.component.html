@@ -6,7 +6,7 @@
 
 <!--VERSIÓN XL-->
 <section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
-    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
+    <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()">
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
@@ -295,10 +295,10 @@
                         <div fxLayout="column" fxLayoutAlign="center start">
                             <mat-selection-list fxFlexOffset="20px">
                                 <mat-radio-button class="radioButton" color="primary" value="Alquilertipo1">
-                                    Alquiler tipo 1 (explicar mejor)
+                                    Alquiler con Intervencíon
                                 </mat-radio-button>
                                 <mat-radio-button class="radioButton" color="primary" value="Alquilertipo2">
-                                    Alquiler tipo 2 (explicar mejor)
+                                    Alquiler sin Intervencíon
                                 </mat-radio-button>
                             </mat-selection-list>
                         </div>
