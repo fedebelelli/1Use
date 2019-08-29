@@ -44,7 +44,7 @@ export class BusquedaCategoriasComponent implements OnInit {
           this.titulo = "No existen publicaciones con la categoría seleccionada";
         } else {
           this.encontrado = true;
-          this.titulo = "Se encontraron " + this.publicaciones.length + " publicaciones con la categoria seleccionada"
+          this.titulo = "Se encontraron " + this.publicaciones.length + " publicaciones en la categoria "
           console.log(this.publicaciones);
         }
       },
