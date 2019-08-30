@@ -41,6 +41,8 @@ import { DetallePublicacionComponent } from './components/publicaciones/detalle-
 import { EditarPublicacionComponent } from './components/publicaciones/editar-publicacion/editar-publicacion.component';
 import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-publicaciones/busqueda-publicaciones.component';
 import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
+import { SoloNumerosDirective } from './components/mi-cuenta/perfil-usuario/inputSoloNumeros.directive';
+import { SoloLetrasDirective } from './components/mi-cuenta/perfil-usuario/inputSoloLetras.directive';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -73,7 +75,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DetallePublicacionComponent,
     EditarPublicacionComponent, 
     BusquedaPublicacionesComponent, 
-    BusquedaCategoriasComponent
+    BusquedaCategoriasComponent,
+    SoloNumerosDirective,
+    SoloLetrasDirective
   ],
   imports: [
     BrowserModule,

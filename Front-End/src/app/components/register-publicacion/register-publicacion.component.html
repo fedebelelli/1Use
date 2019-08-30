@@ -239,10 +239,11 @@
                 <h3>Completá los datos de tu producto</h3>
                 <br>
                 <mat-form-field>
-                    <input matInput placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
-                        (ngModelChange)="titulo = $event" required>
+                    <input matInput #titulo1 maxlength="35" placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
+                        (ngModelChange)="titulo = $event" (keyup)="obtenerMaxTelefono($event)" required>
+                    <mat-hint align="start">{{titulo1.value.length}} / 35</mat-hint>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field style="margin-top: 20px">
                     <textarea matInput placeholder="Descrpción del producto" cdkTextareaAutosize
                         formControlName="descripcion" name="descripcion" required
                         (ngModelChange)="descripcion = $event"></textarea>
@@ -314,26 +315,31 @@
                 <div fxLayout="column">
                     <div class="contenedor-imagenes">
                         <p id="formatoLetra">
-                                La primera forma de alquiler se denomina “sin intervención” y permite establecer el contacto entre las partes que
-                                realizan la transacción sin intervenir en ella. Los participantes de la misma se rigen en
-                                base a los términos y condiciones establecidos en la plataforma y esta no responde
-                                por posibles problemas que pueda surgir.
-                                <br><br>
-                                La segunda forma de alquiler se denomina “con intervención” y se basa en la obtención de un seguro
-                                 contra reembolso con el objetivo de proteger al objeto alquilado de algún daño que pueda surgir durante la
-                                ejecución del alquiler. Este seguro consiste en el depósito de un monto adicional que
-                                depende del tipo de objeto que el interesado en alquilar ha pagado por el mismo y
-                                será devuelto luego de que el propietario verifique el estado del objeto, no pudiendo
-                                pasar más de 24 hs de lo contrario se considera que el objeto fue entregado en
-                                buenas condiciones, finalizando la transacción.
+                            La primera forma de alquiler se denomina “sin intervención” y permite establecer el contacto
+                            entre las partes que
+                            realizan la transacción sin intervenir en ella. Los participantes de la misma se rigen en
+                            base a los términos y condiciones establecidos en la plataforma y esta no responde
+                            por posibles problemas que pueda surgir.
+                            <br><br>
+                            La segunda forma de alquiler se denomina “con intervención” y se basa en la obtención de un
+                            seguro
+                            contra reembolso con el objetivo de proteger al objeto alquilado de algún daño que pueda
+                            surgir durante la
+                            ejecución del alquiler. Este seguro consiste en el depósito de un monto adicional que
+                            depende del tipo de objeto que el interesado en alquilar ha pagado por el mismo y
+                            será devuelto luego de que el propietario verifique el estado del objeto, no pudiendo
+                            pasar más de 24 hs de lo contrario se considera que el objeto fue entregado en
+                            buenas condiciones, finalizando la transacción.
                         </p>
                         <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
                             <div fxLayout="column" fxLayoutAlign="center start">
                                 <mat-selection-list fxFlexOffset="20px">
-                                    <mat-radio-button class="radioButton" color="primary" value="AlquilerSinIntervencion">
+                                    <mat-radio-button class="radioButton" color="primary"
+                                        value="AlquilerSinIntervencion">
                                         Alquiler sin Intervencíon
                                     </mat-radio-button>
-                                    <mat-radio-button class="radioButton" color="primary" value="AlquilerConIntervencion">
+                                    <mat-radio-button class="radioButton" color="primary"
+                                        value="AlquilerConIntervencion">
                                         Alquiler con Intervencíon
                                     </mat-radio-button>
                                 </mat-selection-list>

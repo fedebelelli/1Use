@@ -103,5 +103,13 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  redirigirCategoria(categoria){
+    window.location.assign("/busqueda/c/"+categoria)
+  }
+
+  redirigirSubcategoria(categoria, subcategoria){
+    window.location.assign("/busqueda/c/"+categoria+"?s="+subcategoria)
+  }
+
 
 }

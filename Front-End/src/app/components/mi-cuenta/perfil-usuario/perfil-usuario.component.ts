@@ -334,6 +334,7 @@ export class PerfilUsuarioComponent implements OnInit {
   cambioTab(event: MatTabChangeEvent) {
     this.tabCambiada = true;
   }
+  
   obtenerMaxTelefono(evento) {
     this.numCodArea = evento.target.value;
     let cantidad = this.numCodArea.length;
@@ -352,8 +353,6 @@ export class PerfilUsuarioComponent implements OnInit {
     if(cantidad == 4){
       this.maxTelefono = 6;
     }
-
-
   }
 
   preview(files) {

@@ -392,8 +392,6 @@ router.get('/search-categoria/:categoria', function (req, res) {
 
     var query;
 
-    console.log(categoria, preciodia, estrellas, subcategoria)
-
     /*  c p e s
         1 0 0 0
         1 0 0 1
