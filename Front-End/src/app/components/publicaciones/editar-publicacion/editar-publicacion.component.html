@@ -81,6 +81,27 @@
                     </mat-expansion-panel>
 
                     <mat-expansion-panel>
+                            <mat-expansion-panel-header #b10 title="Libros">
+                                <mat-panel-title>
+                                    Libros
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Aventura, Ciencia Ficción, Otros.
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group formControlName="subcategoria" name="libros"
+                                (change)="obtenerSubCategoria($event);obtenerCategoria(b10)">
+                                <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let libros of librosArray">
+                                    <mat-selection-list fxFlexOffset="20px">
+                                        <mat-radio-button color="primary" value="{{libros}}">
+                                            {{libros}}
+                                        </mat-radio-button>
+                                    </mat-selection-list>
+                                </div>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b4 title="Mascotas">
                             <mat-panel-title>
                                 Mascotas
@@ -516,6 +537,24 @@
                             </div>
                         </mat-radio-group>
                     </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                            <mat-expansion-panel-header #b10 title="Libros">
+                                <mat-panel-title>
+                                    Libros
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group formControlName="subcategoria" name="libros"
+                                (change)="obtenerSubCategoria($event);obtenerCategoria(b10)">
+                                <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let libros of librosArray">
+                                    <mat-selection-list fxFlexOffset="20px">
+                                        <mat-radio-button color="primary" value="{{libros}}">
+                                            {{libros}}
+                                        </mat-radio-button>
+                                    </mat-selection-list>
+                                </div>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
 
                     <mat-expansion-panel>
                         <mat-expansion-panel-header #b5 title="Deporte">

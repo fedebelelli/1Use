@@ -2,7 +2,7 @@
   <swiper class="swiper-container" [config]="config">
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-        <mat-video [autoplay]="true" [preload]="true" [overlay]="false" [loop]= "true" [keyboard]="false" 
+        <mat-video [autoplay]="true" [preload]="true" [overlay]="false" [loop]="true" [keyboard]="false"
           src="../../../assets/images/homeVideo.mp4"></mat-video>
       </div>
     </div>
@@ -47,6 +47,43 @@
       </div>
     </div> -->
   </swiper>
+
+  <!--Publicaciones destacadas-->
+
+  <div class="container-destacados">
+    <div>
+      <h2 style="text-align: center; margin-bottom: 15px">Publicaciones destacadas</h2>
+    </div>
+    <div>
+      <mat-grid-list cols="4" rowHeight="367px" gutterSize="20px">
+        <mat-grid-tile *ngFor="let destacadas of arrayRandoms; let indice of index" [colspan]=1 [rowspan]=1>
+          <div *ngIf="destacadas == indice">
+            <mat-card class="container-card">
+              <mat-card-header>
+                <mat-card-title><a style="color:black;"
+                    routerLink="/publicaciones/{{publicacionesDestacadas[destacadas]._id}}">
+                    {{publicacionesDestacadas[destacadas].titulo}} </a>
+                </mat-card-title>
+                <mat-card-subtitle> {{publicacionesDestacadas[destacadas].categoria}},
+                  {{publicacionesDestacadas[destacadas].subcategoria}} </mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content style="height: 230px;">
+                <swiper class="swiper-container" [config]="config2">
+                  <div *ngFor="let img of publicacionesDestacadas[destacadas].multiplefile; let indice2 = index">
+                    <img class="container-img-card"
+                      src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacionesDestacadas[destacadas].multiplefile[indice2]}}">
+                  </div>
+                </swiper>
+                <p> <b>Precio por día:</b> ${{publicacionesDestacadas[destacadas].preciodia}} </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+
   <div>
     <app-categorias></app-categorias>
   </div>

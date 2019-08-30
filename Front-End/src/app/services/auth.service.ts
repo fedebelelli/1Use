@@ -20,6 +20,7 @@ export class AuthService {
   private _registerPublicacion = "http://localhost:4201/api/register-publicacion?email="
   private _getPublicacion = "http://localhost:4201/api/get-publicacion/"
   private _getPublicacionId = "http://localhost:4201/api/get-one-publicacion/"
+  private _getPublicacionesDestacadas = "http://localhost:4201/api/get-publicaciones-destacadas/"
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
   private _searchCategoria = "http://localhost:4201/api/search-categoria/"
@@ -84,10 +85,16 @@ export class AuthService {
     return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
   }
 
+  get_publicaciones_destacadas(){
+    return this.http.get<any>(this._getPublicacionesDestacadas)
+  }
+
 
 
   /* BÚSQUEDA DE CATEGORIAS Y PUBLICACIONES */
   search_categoria(name){
     return this.http.get<any>(this._searchCategoria + name);
   }
+
+
 }

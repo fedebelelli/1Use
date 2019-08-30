@@ -101,6 +101,27 @@
                     </mat-expansion-panel>
 
                     <mat-expansion-panel>
+                        <mat-expansion-panel-header #b10 title="Libros">
+                            <mat-panel-title>
+                                Libros
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Aventura, Ciencia Ficción, Otros.
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-radio-group formControlName="subcategoria" name="libros"
+                            (change)="obtenerSubCategoria($event);obtenerCategoria(b10)">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let libros of librosArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{libros}}">
+                                        {{libros}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
                         <mat-expansion-panel-header #b5 title="Deporte">
                             <mat-panel-title>
                                 Deporte
@@ -293,12 +314,12 @@
                 <div fxLayout="column">
                     <div class="contenedor-imagenes">
                         <p id="formatoLetra">
-                                La forma de alquiler que se denomina “sin intervención” permite establecer el contacto entre las partes que
-                                realizan la transacción sin intervenir en ella, los participantes de la misma se rigen en
+                                La primera forma de alquiler se denomina “sin intervención” y permite establecer el contacto entre las partes que
+                                realizan la transacción sin intervenir en ella. Los participantes de la misma se rigen en
                                 base a los términos y condiciones establecidos en la plataforma y esta no responde
                                 por posibles problemas que pueda surgir.
-                                <br>
-                                La segunda forma de alquiler se denomina “con intervención”, se basa en la obtención de un seguro
+                                <br><br>
+                                La segunda forma de alquiler se denomina “con intervención” y se basa en la obtención de un seguro
                                  contra reembolso con el objetivo de proteger al objeto alquilado de algún daño que pueda surgir durante la
                                 ejecución del alquiler. Este seguro consiste en el depósito de un monto adicional que
                                 depende del tipo de objeto que el interesado en alquilar ha pagado por el mismo y
@@ -528,6 +549,24 @@
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button color="primary" value="{{electronica}}">
                                         {{electronica}}
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header #b10 title="Libros">
+                            <mat-panel-title>
+                                Libros
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-radio-group formControlName="subcategoria" name="libros"
+                            (change)="obtenerSubCategoria($event);obtenerCategoria(b10)">
+                            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let libros of librosArray">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button color="primary" value="{{libros}}">
+                                        {{libros}}
                                     </mat-radio-button>
                                 </mat-selection-list>
                             </div>

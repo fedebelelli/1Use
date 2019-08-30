@@ -24,11 +24,54 @@ export class HomeComponent implements OnInit {
   urlRecortada: string;
   usuarioActivo;
   usuario;
+  publicacionesDestacadas;
+  arrayRandoms = [];
+  cantidad;
+  rnd;
+  imagen;
+  arrayJSON = [];
+  imagenJSON;
 
   constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
 
   ngOnInit() {
+    this._auth.get_publicaciones_destacadas().subscribe(
+      res => {
+        this.publicacionesDestacadas = res.publicaciones; //ARRAY DE PUBLICACIONES DESTACADAS
+
+        for (let i = 0; i < this.publicacionesDestacadas.length; i++) {
+          this.imagen = this.publicacionesDestacadas[i].multiplefile;
+          this.imagenJSON = JSON.parse(this.imagen); //CREA JSON CONVERTIDO DE STRING
+          for (let j in this.imagenJSON) {
+            this.arrayJSON.push(this.imagenJSON[j]);
+          }
+          this.publicacionesDestacadas[i].multiplefile = this.arrayJSON;
+          this.arrayJSON = [];
+        }
+
+
+        if (this.publicacionesDestacadas.length > 8) this.cantidad = 100;
+        if (this.publicacionesDestacadas.length > 100) this.cantidad = 1000;
+
+
+        for (let i = 0; i < this.publicacionesDestacadas.length; i++) {
+          for (let j = 0; j < this.cantidad; j++) {
+            if (this.arrayRandoms.length < 8) {
+              this.rnd = Math.round(Math.random() * this.cantidad)
+              if (this.arrayRandoms.includes(this.rnd)) {
+                continue;
+              } else {
+                if (this.rnd <= this.publicacionesDestacadas.length-1) {
+                  this.arrayRandoms.push(this.rnd);
+                }
+              }
+
+            }
+          }
+        }
+      }
+    )
   }
 
   checkPagina() {
@@ -112,6 +155,18 @@ export class HomeComponent implements OnInit {
     autoplay: { delay: 28000 },
     preventClicks: false
   };
+
+    //SWIPER
+    public config2: SwiperConfigInterface = {
+      a11y: true,
+      direction: 'horizontal',
+      slidesPerView: 1,
+      keyboard: true,
+      mousewheel: false,
+      scrollbar: false,
+      navigation: true,
+      autoplay: { delay: 5500 },
+    };
 
 
 }

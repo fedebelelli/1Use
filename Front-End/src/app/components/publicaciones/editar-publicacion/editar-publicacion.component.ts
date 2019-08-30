@@ -317,6 +317,7 @@ export class EditarPublicacionComponent implements OnInit {
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
   herramientasArray: string[] = ['Industria', 'Repuestos', 'Muebles para negocios - oficinas']
+  librosArray: string[] = ['Novela','Gótico','Ciencia Ficción','Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
   otrosArray: string[] = ['Otra categoria']
 
 
