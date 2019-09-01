@@ -21,7 +21,7 @@
 
 .container-muestra-imagenes {
     width: 99%;
-    height: 450px;
+    height: inherit;
     margin-top: 25px
 }
 
