@@ -240,7 +240,7 @@
                 <br>
                 <mat-form-field>
                     <input matInput #titulo1 maxlength="35" placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
-                        (ngModelChange)="titulo = $event" (keyup)="obtenerMaxTelefono($event)" required>
+                        (ngModelChange)="titulo = $event" required>
                     <mat-hint align="start">{{titulo1.value.length}} / 35</mat-hint>
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px">
@@ -277,7 +277,7 @@
 
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="fotoProductoGroup" (change)="checkCantidad()">
+            <form [formGroup]="fotoProductoGroup">
                 <!-- (change)="pasoImagen()" -->
                 <ng-template matStepLabel>Fotos del producto</ng-template>
                 <div fxLayout="column" fxLayoutAlign="center center">
@@ -736,7 +736,7 @@
 
         <!--AGREGAR FOTO DEL PRODUCTO-->
         <mat-step [stepControl]="fotoProductoGroup" errorMessage="La foto de tu producto es necesaria.">
-            <form [formGroup]="fotoProductoGroup" (change)="checkCantidad()">
+            <form [formGroup]="fotoProductoGroup">
                 <!-- (change)="pasoImagen()" -->
                 <ng-template matStepLabel>Fotos del producto</ng-template>
                 <div fxLayout="column" fxLayoutAlign="center center">

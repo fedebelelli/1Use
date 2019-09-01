@@ -125,16 +125,9 @@ export class RegisterPublicacionComponent implements OnInit {
         };
         reader.readAsDataURL(file);
       });
+      console.log(this.arrayImagenes);
       this.fotoProductoGroup.patchValue({
         multiplefile: [{ value: this.arrayImagenes }, Validators.required]
-      })
-    }
-  }
-
-  checkCantidad() {
-    if (this.arrayImagenes.length > 5) {
-      this.fotoProductoGroup.patchValue({
-        multiplefile: [{ value: "" }, Validators.required]
       })
     }
   }
@@ -236,6 +229,7 @@ export class RegisterPublicacionComponent implements OnInit {
     let email = localStorage.getItem("email");
     this.categoria = this.joinGroup.categoria;
     this.titulo = this.joinGroup.titulo;
+    console.log(this.image)
 
     this._auth.registrarPublicacion(email, this.joinGroup).subscribe(
       response => {

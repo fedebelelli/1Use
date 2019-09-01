@@ -267,15 +267,25 @@ router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddle
 
     if (req.files) {
         let nombre = "";
-        for (let i = 0; i < req.files.multiplefile.length; i++) {
-            var filePath = req.files.multiplefile[i].path;
+        let nombreFinal;
+        if (req.files.multiplefile.length == undefined) {
+            var filePath = req.files.multiplefile.path;
             var fileSplit = filePath.split('\\');
             var fileName = fileSplit[1];
-            if (i == 0) nombre += '{"imagen' + i + '":' + '"' + fileName + '",'
-            else nombre += '"imagen' + i + '":"' + fileName + '",';
+            nombre += '{"imagen0":' + '"' + fileName + '",'
+            nombreFinal = nombre.slice(0, -1);
+            nombreFinal += "}";
+        } else {
+            for (let i = 0; i < req.files.multiplefile.length; i++) {
+                var filePath = req.files.multiplefile[i].path;
+                var fileSplit = filePath.split('\\');
+                var fileName = fileSplit[1];
+                if (i == 0) nombre += '{"imagen' + i + '":' + '"' + fileName + '",'
+                else nombre += '"imagen' + i + '":"' + fileName + '",';
+            }
+            nombreFinal = nombre.slice(0, -1);
+            nombreFinal += "}";
         }
-        let nombreFinal = nombre.slice(0, -1);
-        nombreFinal += "}";
 
         Publicacion.findOneAndUpdate({ email: email, titulo: titulo, categoria: categoria }, { multiplefile: nombreFinal }, { new: true }, (err, projectUpdated) => {
             if (err) return res.status(500).send({ message: 'Imagen no subida' });
@@ -370,8 +380,8 @@ router.get('/get-image-publicacion/:imagen', function (req, respuesta1) {
     })
 });
 
-router.get('/get-publicaciones-destacadas',function(req,res){
-    Publicacion.find({destacar: 'SI', estado: 'ACTIVA'},(err,publicaciones) => {
+router.get('/get-publicaciones-destacadas', function (req, res) {
+    Publicacion.find({ destacar: 'SI', estado: 'ACTIVA' }, (err, publicaciones) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
         if (!publicaciones) return res.status(404).send({ message: 'El doc no existe' });
@@ -405,7 +415,7 @@ router.get('/search-categoria/:categoria', function (req, res) {
     /* URL EJEMPLO: http://localhost:4201/api/search-categoria/Hogar?p=300&s=Decoración */
 
     if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
-        query = Publicacion.find({ categoria: categoria, estado: 'ACTIVA'})
+        query = Publicacion.find({ categoria: categoria, estado: 'ACTIVA' })
     }
 
     //1001

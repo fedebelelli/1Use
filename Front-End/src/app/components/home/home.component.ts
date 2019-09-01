@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit {
           this.arrayJSON = [];
         }
 
+        console.log(this.publicacionesDestacadas);
+
 
         if (this.publicacionesDestacadas.length > 8) this.cantidad = 100;
         if (this.publicacionesDestacadas.length > 100) this.cantidad = 1000;
