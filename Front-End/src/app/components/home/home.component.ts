@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
             this.singleton.paginaActual("/register-publicacion");
             window.location.assign("/register-publicacion");
           } else {
-            window.location.assign("/perfil");
+            window.location.assign("/mi-cuenta/perfil");
           }
         },
         err => {
@@ -106,9 +106,6 @@ export class HomeComponent implements OnInit {
       return false;
     }
     if (user.ciudad == undefined) {
-      return false;
-    }
-    if (user.direccion == undefined) {
       return false;
     }
     if (user.nombre == undefined) {
@@ -136,6 +133,12 @@ export class HomeComponent implements OnInit {
       return false;
     }
     if (user.piso == undefined) {
+      return false;
+    }
+    if (user.codArea == undefined) {
+      return false;
+    }
+    if (user.barrio == undefined) {
       return false;
     }
     return true;
