@@ -23,9 +23,9 @@
         </form>
     </div>
     <!--class="buscador" class="buscador-full-width" -->
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-lg fxFlexOrder="3">
-        <button mat-button class="spanToolbar" [routerLink]="['/register-publicacion']"
-            (click)="checkPage('/register-publicacion'); setearInicioSesion()" [fxShow]=inicioSesion>Publicar</button>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-lg fxFlexOrder="3"> <!-- [routerLink]="['/register-publicacion']" -->
+        <button mat-button class="spanToolbar" 
+            (click)="checkPage('/register-publicacion'); setearInicioSesion(); verificarUsuario()" [fxShow]=inicioSesion>Publicar</button>
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
         <button mat-button class="spanToolbar" [routerLink]="['/about']"
             (click)="checkPage('/about'); setearInicioSesion()">Sobre

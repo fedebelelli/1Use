@@ -4,7 +4,7 @@ import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 })
 export class SoloLetrasDirective {
 
-    regexStr = '^[a-zA-Z]*$';
+    regexStr = '^[a-zA-Z ]*$';
     @Input() isAlphaNumeric: boolean;
 
     constructor(private el: ElementRef) { }

@@ -4,7 +4,7 @@ import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 })
 export class SoloNumerosDirective {
 
-    regexStr = '^[0-9_]*$';
+    regexStr = '^[0-9]*$';
     @Input() isAlphaNumeric: boolean;
 
     constructor(private el: ElementRef) { }

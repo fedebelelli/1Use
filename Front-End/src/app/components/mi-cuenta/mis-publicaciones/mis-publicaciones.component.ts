@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-mis-publicaciones',
@@ -10,7 +11,7 @@ import { SingletonService } from '../../singleton.service';
 })
 export class MisPublicacionesComponent implements OnInit {
 
-  constructor(private _auth: AuthService, private singleton: SingletonService) { }
+  constructor(private _auth: AuthService, private singleton: SingletonService, private _snackBar: MatSnackBar) { }
 
   publicaciones = [];
   titulo: string;
@@ -94,6 +95,74 @@ export class MisPublicacionesComponent implements OnInit {
 
   cambioTab(evento) {
     this.ngOnInit();
+  }
+
+  verificarUsuario() {
+    this._auth.user_data(localStorage.getItem("email")).subscribe(
+      res => {
+        if (this.checkUsuarioCompleto(res)) {
+          window.location.assign("/register-publicacion")
+        } else {
+          this.openSnackBar("Debes completar todos tus datos personales en la sección 'Mi perfil'", "Aceptar")
+        }
+      }
+    )
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 8000,
+      panelClass: ['color-snackbar']
+    });
+  }
+
+  checkUsuarioCompleto(user): boolean {
+    if (user.name == undefined || user.name == '' || user.name == null) {
+      return false;
+    }
+    if (user.email == undefined || user.email == '' || user.email == null) {
+      return false;
+    }
+    if (user.apellido == undefined || user.apellido == '' || user.apellido == null) {
+      return false;
+    }
+    if (user.ciudad == undefined || user.ciudad == '' || user.ciudad == null) {
+      return false;
+    }
+    if (user.nombre == undefined || user.nombre == '' || user.nombre == null) {
+      return false;
+    }
+    if (user.provincia == undefined || user.provincia == '' || user.provincia == null) {
+      return false;
+    }
+    if (user.telefono == undefined || user.telefono == '' || user.telefono == null) {
+      return false;
+    }
+    if (user.removablefile == undefined || user.removablefile == '' || user.removablefile == null) {
+      return false;
+    }
+    if (user.calle == undefined || user.calle == '' || user.calle == null) {
+      return false;
+    }
+    if (user.codigoPostal == undefined || user.codigoPostal == '' || user.codigoPostal == null) {
+      return false;
+    }
+    if (user.departamento == undefined || user.departamento == '' || user.departamento == null) {
+      return false;
+    }
+    if (user.numero == undefined || user.numero == '' || user.numero == null) {
+      return false;
+    }
+    if (user.piso == undefined || user.piso == '' || user.piso == null) {
+      return false;
+    }
+    if (user.codArea == undefined || user.codArea == '' || user.codArea == null) {
+      return false;
+    }
+    if (user.barrio == undefined || user.barrio == '' || user.barrio == null) {
+      return false;
+    }
+    return true;
   }
 
   //SWIPER

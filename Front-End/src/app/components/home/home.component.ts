@@ -50,9 +50,6 @@ export class HomeComponent implements OnInit {
           this.arrayJSON = [];
         }
 
-        console.log(this.publicacionesDestacadas);
-
-
         if (this.publicacionesDestacadas.length > 8) this.cantidad = 100;
         if (this.publicacionesDestacadas.length > 100) this.cantidad = 1000;
 
@@ -64,7 +61,7 @@ export class HomeComponent implements OnInit {
               if (this.arrayRandoms.includes(this.rnd)) {
                 continue;
               } else {
-                if (this.rnd <= this.publicacionesDestacadas.length-1) {
+                if (this.rnd <= this.publicacionesDestacadas.length - 1) {
                   this.arrayRandoms.push(this.rnd);
                 }
               }
@@ -98,49 +95,49 @@ export class HomeComponent implements OnInit {
   }
 
   checkUsuarioCompleto(user): boolean {
-    if (user.name == undefined) {
+    if (user.name == undefined || user.name == '' || user.name == null) {
       return false;
     }
-    if (user.email == undefined) {
+    if (user.email == undefined || user.email == '' || user.email == null) {
       return false;
     }
-    if (user.apellido == undefined) {
+    if (user.apellido == undefined || user.apellido == '' || user.apellido == null) {
       return false;
     }
-    if (user.ciudad == undefined) {
+    if (user.ciudad == undefined || user.ciudad == '' || user.ciudad == null) {
       return false;
     }
-    if (user.nombre == undefined) {
+    if (user.nombre == undefined || user.nombre == '' || user.nombre == null) {
       return false;
     }
-    if (user.provincia == undefined) {
+    if (user.provincia == undefined || user.provincia == '' || user.provincia == null) {
       return false;
     }
-    if (user.telefono == undefined) {
+    if (user.telefono == undefined || user.telefono == '' || user.telefono == null) {
       return false;
     }
-    if (user.removablefile == undefined) {
+    if (user.removablefile == undefined || user.removablefile == '' || user.removablefile == null) {
       return false;
     }
-    if (user.calle == undefined) {
+    if (user.calle == undefined || user.calle == '' || user.calle == null) {
       return false;
     }
-    if (user.codigoPostal == undefined) {
+    if (user.codigoPostal == undefined || user.codigoPostal == '' || user.codigoPostal == null) {
       return false;
     }
-    if (user.departamento == undefined) {
+    if (user.departamento == undefined || user.departamento == '' || user.departamento == null) {
       return false;
     }
-    if (user.numero == undefined) {
+    if (user.numero == undefined || user.numero == '' || user.numero == null) {
       return false;
     }
-    if (user.piso == undefined) {
+    if (user.piso == undefined || user.piso == '' || user.piso == null) {
       return false;
     }
-    if (user.codArea == undefined) {
+    if (user.codArea == undefined || user.codArea == '' || user.codArea == null) {
       return false;
     }
-    if (user.barrio == undefined) {
+    if (user.barrio == undefined || user.barrio == '' || user.barrio == null) {
       return false;
     }
     return true;
@@ -161,17 +158,17 @@ export class HomeComponent implements OnInit {
     preventClicks: false
   };
 
-    //SWIPER
-    public config2: SwiperConfigInterface = {
-      a11y: true,
-      direction: 'horizontal',
-      slidesPerView: 1,
-      keyboard: true,
-      mousewheel: false,
-      scrollbar: false,
-      navigation: true,
-      autoplay: { delay: 5500 },
-    };
+  //SWIPER
+  public config2: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+    autoplay: { delay: 5500 },
+  };
 
 
 }
