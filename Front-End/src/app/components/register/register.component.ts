@@ -17,10 +17,11 @@ export class RegisterComponent implements OnInit {
   minPw = 8;
   formGroup: FormGroup;
   appregister: FormGroup;
-  registerUserData = {}
+  registerUserData = {email: undefined, password: undefined, name: undefined}
 
   emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   passwordPattern: " ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$";
+
 
   constructor(private _auth: AuthService, private FormBuilder: FormBuilder, private _router: Router, private _snackBar: MatSnackBar) { }
 

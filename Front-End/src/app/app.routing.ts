@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
     { path: 'about', component: AboutComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'auth', loadChildren: './components/auth.module#AuthModule' },
+    /* { path: 'auth', loadChildren: './components/auth.module#AuthModule' }, */
     { path: 'categorias', component: CategoriasComponent },
     { path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent },
     { path: 'confirma', component: ConfirmaComponent },

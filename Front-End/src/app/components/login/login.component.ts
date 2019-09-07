@@ -11,7 +11,7 @@ import { SingletonService } from '../singleton.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData = { email: undefined }
+  loginUserData = { email: undefined, password: undefined }
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
   estado: boolean;
 

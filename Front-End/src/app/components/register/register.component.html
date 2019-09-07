@@ -11,7 +11,7 @@
             <input type="email" matInput placeholder="Nombre de usuario" [(ngModel)]="registerUserData.name" name="name"
                 class="input-login" style="color: black !important" id="Nombre" tabindex="1"
                 formControlName="name" ngModel required>
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value1=''">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear">
                 <mat-icon>close</mat-icon>
             </button>
             <mat-error *ngIf="name.hasError('required')">Usuario requerido</mat-error>
@@ -21,7 +21,7 @@
             <input #email_usuario type="email" matInput placeholder="E-mail" [(ngModel)]="registerUserData.email"
                 [pattern]="emailPattern" name="email" class="input-login" style="color: black !important" name="email"
                 id="username1" tabindex="1" formControlName="email" ngModel required>
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value2=''">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear">
                 <mat-icon>close</mat-icon>
             </button>
             <mat-error *ngIf="email.hasError('pattern')">Email no válido</mat-error>

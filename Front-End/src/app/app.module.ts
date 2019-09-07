@@ -43,6 +43,7 @@ import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-p
 import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
 import { SoloNumerosDirective } from './components/mi-cuenta/perfil-usuario/inputSoloNumeros.directive';
 import { SoloLetrasDirective } from './components/mi-cuenta/perfil-usuario/inputSoloLetras.directive';
+import { BusquedaComponent } from './components/busqueda/busqueda.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -77,7 +78,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BusquedaPublicacionesComponent, 
     BusquedaCategoriasComponent,
     SoloNumerosDirective,
-    SoloLetrasDirective
+    BusquedaComponent,
+    SoloLetrasDirective,
+    SoloNumerosDirective
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DropdownModule,
     MaterialFileInputModule,
     NgxDropzoneModule,
-    SwiperModule
+    SwiperModule,
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent]
