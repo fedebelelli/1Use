@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /* -----  ionicons Font  -----*/
 
 @import url("ionicons.min.css");
