@@ -22,12 +22,16 @@ import { DetallePublicacionComponent } from './components/publicaciones/detalle-
 import { EditarPublicacionComponent } from './components/publicaciones/editar-publicacion/editar-publicacion.component';
 import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
 import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-publicaciones/busqueda-publicaciones.component';
+import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
+import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 
 const appRoutes: Routes = [
 
     { path: '',  redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'lostpassword', component: LostPasswordComponent }, 
+    { path: 'confirmalostpassword', component: ConfirmaLostPasswordComponent }, 
     { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
     { path: 'about', component: AboutComponent },
     { path: 'register', component: RegisterComponent },

@@ -44,6 +44,8 @@ import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-cate
 import { SoloNumerosDirective } from './components/mi-cuenta/perfil-usuario/inputSoloNumeros.directive';
 import { SoloLetrasDirective } from './components/mi-cuenta/perfil-usuario/inputSoloLetras.directive';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
+import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
+import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -54,6 +56,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     AppComponent,
     LoginComponent,
+    LostPasswordComponent,
+    ConfirmaLostPasswordComponent,
     PerfilUsuarioComponent,
     HomeComponent,
     ErrorComponent,
