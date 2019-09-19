@@ -24,6 +24,9 @@ export class AuthService {
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
   private _searchCategoria = "http://localhost:4201/api/search-categoria/"
+  private _preguntaPublicacion = "http://localhost:4201/api/pregunta/"
+  private _respuestaPublicacion = "http://localhost:4201/api/respuesta"
+  private _pyrPublicacion = "http://localhost:4201/api/pyr"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -71,7 +74,7 @@ export class AuthService {
     return this.http.get<any>(this._getPublicacion + email);
   }
 
-  delete_publicacion(id){
+  delete_publicacion(id) {
     return this.http.delete<any>(this._deletePublicacion + id);
   }
 
@@ -79,22 +82,35 @@ export class AuthService {
     return this.http.get<any>(this._getPublicacionId + id);
   }
 
-  update_publicacion(id, publicacion){
+  update_publicacion(id, publicacion) {
     let params = JSON.stringify(publicacion);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
   }
 
-  get_publicaciones_destacadas(){
+  get_publicaciones_destacadas() {
     return this.http.get<any>(this._getPublicacionesDestacadas)
   }
 
 
 
   /* BÚSQUEDA DE CATEGORIAS Y PUBLICACIONES */
-  search_categoria(name){
+  search_categoria(name) {
     return this.http.get<any>(this._searchCategoria + name);
   }
 
+
+  /* CRUD DE PREGUNTAS Y RESPUESTAS DE PUBLICACIONES */
+  get_preguntas_respuestas(id) {
+    return this.http.get<any>(this._pyrPublicacion + id)
+  }
+
+  post_pregunta_publicacion(id, name) {
+    return this.http.post<any>(this._preguntaPublicacion + id + "/" + name, null, null);
+  }
+
+  post_respuesta_publicacion(id,name){
+    return this.http.post<any>(this._respuestaPublicacion + id + "/" + name, null, null);
+  }
 
 }

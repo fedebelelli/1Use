@@ -468,7 +468,7 @@ router.get('/search-categoria/:categoria', function (req, res) {
 //Get de las preguntas y respuestas de una publicación
 router.get("/pyr/:id", function (req, res) {
 
-    PyR.find({ id_publicacion: req.params.id }).exec((err,publicacion) => {
+    PyR.find({ id_publicacion: req.params.id }).exec((err, publicacion) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
@@ -478,14 +478,13 @@ router.get("/pyr/:id", function (req, res) {
 })
 
 
-//Post del usuario cuando hace una pregunta
+//Post del usuario cuando hace una pregunta (id = id del detalle de la publicación)
 router.post("/pregunta/:id/:name", function (req, res) {
 
     var pregunta = req.body.pregunta;
-    console.log(pregunta);
     var id_publicacion = req.params.id;
     var usuario_pregunta = req.params.name;
-    var objeto = { id_publicacion, usuario_pregunta, pregunta }
+    var objeto = { id_publicacion: id_publicacion, usuario_pregunta: usuario_pregunta, pregunta: pregunta }
     var modelo = new PyR(objeto);
 
 
@@ -498,17 +497,15 @@ router.post("/pregunta/:id/:name", function (req, res) {
     })
 })
 
-//Post de la respuesta del usuario que publicó
-router.post("/respuesta/:id/:name", function (req, res) {
+//Post de la respuesta del usuario que publicó (id = id de la pregunta que realizó el usuario interesado)
+router.post("/respuesta/:idPyR/:name", function (req, res) {
 
     var respuesta = req.body.respuesta;
-    var id_publicacion = req.params.id;
-    var usuario_respuesta = req.params.name;
-    var objeto = { id_publicacion, usuario_respuesta, respuesta }
-    var modelo = new PyR(objeto);
+    var usuarioRespuesta = req.params.name;
+    var id_publicacion = req.params.idPyR;
+    var objeto = { usuario_publicacion: usuarioRespuesta, respuesta: respuesta }
 
-
-    modelo.save((err, pyr) => {
+    PyR.findByIdAndUpdate(id_publicacion, objeto, (err, pyr) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });

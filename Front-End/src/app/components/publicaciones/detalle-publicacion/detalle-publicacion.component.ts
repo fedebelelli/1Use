@@ -23,6 +23,7 @@ export class DetallePublicacionComponent implements OnInit {
   JSONfinal;
   arrayJSON = [];
   preguntas = [1,2,3];
+  email;
 
   ngOnInit() {
     var urlActual = window.location.href;
@@ -47,6 +48,8 @@ export class DetallePublicacionComponent implements OnInit {
           this.arrayJSON.push(this.JSONfinal[j]);
         }
         this.publicacion.multiplefile = this.arrayJSON;
+
+        this.email = err.publicaciones.email;
 
       },
       res => {
