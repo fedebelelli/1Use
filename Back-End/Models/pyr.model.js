@@ -17,6 +17,9 @@ const pyrSchema = new Schema({
     respuesta: {
         type: String,
     },
+    tiene_respuesta: {
+        type: Boolean
+    }
 }, {
         timestamps: true
     });

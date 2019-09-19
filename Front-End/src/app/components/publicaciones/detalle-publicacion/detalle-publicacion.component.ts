@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SingletonService } from '../../singleton.service';
 
 @Component({
   selector: 'app-detalle-publicacion',
@@ -9,8 +10,9 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 })
 export class DetallePublicacionComponent implements OnInit {
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _singleton: SingletonService) { }
 
+  id;
   titulo;
   preciodia;
   preciosemana;
@@ -22,14 +24,18 @@ export class DetallePublicacionComponent implements OnInit {
   JSON;
   JSONfinal;
   arrayJSON = [];
-  preguntas = [1,2,3];
+  preguntas = [];
+  tienePreguntas = false;
+  tieneRespuesta = false;
+  es_publicador = false;
   email;
+  logueado;
 
   ngOnInit() {
     var urlActual = window.location.href;
-    var id = urlActual.substr(36);
+    this.id = urlActual.substr(36);
 
-    this._auth.get_publicacion_id(id).subscribe(
+    this._auth.get_publicacion_id(this.id).subscribe(
       err => {
 
         this.titulo = err.publicaciones.titulo;
@@ -49,23 +55,81 @@ export class DetallePublicacionComponent implements OnInit {
         }
         this.publicacion.multiplefile = this.arrayJSON;
 
-        this.email = err.publicaciones.email;
+        this.email = this.publicacion.email;
+        this._auth.user_data(localStorage.getItem("email")).subscribe(
+          res => {
+            this.logueado = res;
+            if (this.email == this.logueado.email) {
+              this.es_publicador = true;
+            } else {
+              this.es_publicador = false;
+            }
 
+          },
+        )
+
+
+        //VERIFICAR QUE SALGAN LAS PREGUNTAS SOLO DE ESTA PUBLICACION
+        this._auth.get_preguntas_respuestas(this.id).subscribe(
+          res => {
+            //Me devuelve un objeto que contiene un array de pyr
+            this.preguntas = res.publicacion;
+            this.preguntas.reverse();
+            if (this.preguntas[0].pregunta != null || this.preguntas[0].pregunta != undefined) {
+              this.tienePreguntas = true;
+            }
+
+          },
+        )
       },
       res => {
       })
   }
 
-  
-    //SWIPER
-    public config: SwiperConfigInterface = {
-      a11y: true,
-      direction: 'horizontal',
-      slidesPerView: 1,
-      keyboard: true,
-      mousewheel: false,
-      scrollbar: false,
-      navigation: true,
-    };
+  enviarPregunta(pregunta) {
+    this._auth.user_data(localStorage.getItem("email")).subscribe(
+      res => {
+        let usuario = res;
+        let objeto = { pregunta: pregunta }
+        this._auth.post_pregunta_publicacion(this.id, usuario.name, objeto).subscribe(
+          res => {
+            this.ngOnInit();
+          }
+        );
+
+      }
+    )
+  }
+
+  enviarRespuesta(respuesta, pregunta) {
+
+    let _id = pregunta._id;
+
+    this._auth.user_data(localStorage.getItem("email")).subscribe(
+      res => {
+        let usuario = res;
+        let objeto = { respuesta: respuesta }
+        this._auth.post_respuesta_publicacion(_id, usuario.name, objeto).subscribe(
+          res => {
+            this.ngOnInit();
+          }
+        );
+
+      }
+    )
+
+
+  }
+
+  //SWIPER
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+  };
 
 }

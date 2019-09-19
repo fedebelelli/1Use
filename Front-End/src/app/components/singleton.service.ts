@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 
 export class SingletonService {
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
   estado: boolean;
   inicioSesion: boolean;
@@ -40,7 +40,7 @@ export class SingletonService {
     if (urlActual == "/") {
       this.estado = true;
     }
-    
+
     if (urlActual.includes("/busqueda")) {
       this.estado = true;
     }

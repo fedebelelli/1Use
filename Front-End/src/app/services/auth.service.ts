@@ -25,8 +25,9 @@ export class AuthService {
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
   private _searchCategoria = "http://localhost:4201/api/search-categoria/"
   private _preguntaPublicacion = "http://localhost:4201/api/pregunta/"
-  private _respuestaPublicacion = "http://localhost:4201/api/respuesta"
-  private _pyrPublicacion = "http://localhost:4201/api/pyr"
+  private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
+  private _pyrPublicacion = "http://localhost:4201/api/pyr/"
+  private _pyrOnePublicacion = "http://localhost:4201/api/onePyR/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -105,12 +106,20 @@ export class AuthService {
     return this.http.get<any>(this._pyrPublicacion + id)
   }
 
-  post_pregunta_publicacion(id, name) {
-    return this.http.post<any>(this._preguntaPublicacion + id + "/" + name, null, null);
+  get_una_pregunta_respuesta(id) {
+    return this.http.get<any>(this._pyrOnePublicacion + id)
   }
 
-  post_respuesta_publicacion(id,name){
-    return this.http.post<any>(this._respuestaPublicacion + id + "/" + name, null, null);
+  post_pregunta_publicacion(id, name, pregunta) {
+    let params = JSON.stringify(pregunta);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._preguntaPublicacion + id + "/" + name, params, { headers: headers });
+  }
+
+  post_respuesta_publicacion(id, name, respuesta) {
+    let params = JSON.stringify(respuesta);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._respuestaPublicacion + id + "/" + name, params, { headers: headers });
   }
 
 }

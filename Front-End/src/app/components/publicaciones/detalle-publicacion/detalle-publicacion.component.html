@@ -28,7 +28,7 @@
                     <p style="text-align: justify; font-size: 17px;">{{descripcion}} </p>
                 </div>
                 <mat-divider></mat-divider>
-                <div class="preguntasRespuestas">
+                <div class="preguntasRespuestas" *ngIf="!es_publicador">
                     <h3>Preguntas y respuestas</h3>
                     <br><br>
                     <mat-form-field>
@@ -36,28 +36,66 @@
                             placeholder="Escribir una pregunta..."></textarea>
                         <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                     </mat-form-field>
-                    <button class="btnPreguntar" mat-raised-button color="primary">Preguntar</button>
+                    <button class="btnPreguntar" (click)="enviarPregunta(message.value)" mat-raised-button color="primary">Preguntar</button>
                 </div>
                 <div class="ultimasPreguntas">
                     <h3><b>Últimas preguntas</b></h3>
                     <br>
-                    <div *ngFor="let cantidad of preguntas">
-                        <!--Pregunta-->
+                    <div *ngIf="tienePreguntas">
+                        <div *ngFor="let pregunta of preguntas">
+                            <!--Pregunta-->
+                            <div fxLayout="row" style="margin-bottom: 10px; margin-left: 10px">
+                                <div fxLayoutAlign="center center">
+                                    <p style="font-size: 9px; margin-right: 7px"> {{pregunta.usuario_pregunta}} </p>
+                                </div>
+                                <div fxLayoutAlign="center center">
+                                    <mat-icon>chat</mat-icon>
+                                </div>
+                                <div style="margin-left: 10px">
+                                    <p>{{pregunta.pregunta}}</p>
+                                </div>
+                            </div>
+                            <!--Respuesta-->
+                            <div *ngIf="pregunta.tiene_respuesta">
+                                <div fxLayout="row" style="margin-bottom: 30px; margin-left: 10px">
+                                    <div fxLayoutAlign="center center">
+                                        <p style="font-size: 9px; margin-right: 7px"> {{pregunta.usuario_publicacion}} </p>
+                                    </div>
+                                    <div fxLayoutAlign="center center">
+                                        <mat-icon>comment</mat-icon>
+                                    </div>
+                                    <div style="margin-left: 10px">
+                                        <p> {{pregunta.respuesta}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!pregunta.tiene_respuesta">
+                                <div fxLayout="row" style="margin-bottom: 30px; margin-left: 10px; margin-right: 15px;">
+                                    <div fxLayoutAlign="center center" *ngIf="!es_publicador">
+                                        <mat-icon>comment</mat-icon>
+                                    </div>
+                                    <div style="margin-left: 10px" *ngIf="!es_publicador">
+                                        <p> Por el momento no hay respuesta a esta pregunta </p>
+                                    </div>
+                                    <div class="respuesta" *ngIf="es_publicador && !pregunta.tiene_respuesta" fxFlexFill>
+                                        <mat-form-field>
+                                            <textarea #message maxlength="256" style="min-height: 0px;" matInput
+                                                placeholder="Escribir una respuesta..."></textarea>
+                                            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                                        </mat-form-field>
+                                        <button class="btnPreguntar" (click)="enviarRespuesta(message.value, pregunta)" mat-raised-button color="primary">Responder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!tienePreguntas">
                         <div fxLayout="row" style="margin-bottom: 10px; margin-left: 10px">
                             <div fxLayoutAlign="center center">
                                 <mat-icon>chat</mat-icon>
                             </div>
                             <div style="margin-left: 10px">
-                                <p>Esta es una pregunta de prueba de un usuario!</p>
-                            </div>
-                        </div>
-                        <!--Respuesta-->
-                        <div fxLayout="row" style="margin-bottom: 30px; margin-left: 10px">
-                            <div fxLayoutAlign="center center">
-                                <mat-icon>comment</mat-icon>
-                            </div>
-                            <div style="margin-left: 10px">
-                                <p>Esta es una respuesta de prueba de un usuario!</p>
+                                <p>Hasta el momento, no se han realizado preguntas</p>
                             </div>
                         </div>
                     </div>
@@ -78,7 +116,8 @@
                     <br>
                     <br>
                     <div class="btnAlquilar">
-                        <button routerLink='/pos-alquiler/{{publicacion._id}}' style="width: 300px;" mat-raised-button color="primary">Alquilar</button>
+                        <button routerLink='/pos-alquiler/{{publicacion._id}}' style="width: 300px;" mat-raised-button
+                            color="primary">Alquilar</button>
                     </div>
                 </div>
                 <br>

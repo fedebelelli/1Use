@@ -503,9 +503,20 @@ router.post("/respuesta/:idPyR/:name", function (req, res) {
     var respuesta = req.body.respuesta;
     var usuarioRespuesta = req.params.name;
     var id_publicacion = req.params.idPyR;
-    var objeto = { usuario_publicacion: usuarioRespuesta, respuesta: respuesta }
+    var objeto = { usuario_publicacion: usuarioRespuesta, respuesta: respuesta, tiene_respuesta: true }
 
     PyR.findByIdAndUpdate(id_publicacion, objeto, (err, pyr) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ pyr });
+    })
+})
+
+router.get("/onePyR/:id", function (req, res) {
+    var _id = req.params.id;
+    PyR.findById(_id, (err, pyr) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
