@@ -46,6 +46,7 @@ import { SoloLetrasDirective } from './components/mi-cuenta/perfil-usuario/input
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
+import { PosAlquilerComponent } from './components/pos-alquiler/pos-alquiler.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -84,7 +85,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SoloNumerosDirective,
     BusquedaComponent,
     SoloLetrasDirective,
-    SoloNumerosDirective
+    SoloNumerosDirective,
+    PosAlquilerComponent
   ],
   imports: [
     BrowserModule,

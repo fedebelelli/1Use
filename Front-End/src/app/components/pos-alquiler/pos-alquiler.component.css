@@ -1,0 +1,16 @@
+.datosAlquiler{
+    width: 1400px;
+    height: 600px;
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 0 2px 30px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+h5,p{
+    margin-left: 10px;
+    margin-top: 20px;
+}
