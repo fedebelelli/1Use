@@ -27,7 +27,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 /* ----------------------------------- MODELOS ----------------------------------- */
 const User = require('../auth/auth.model');
 const Publicacion = require('../Models/publicaciones.model');
-
+const PyR = require('../Models/pyr.model');
 
 /* ---------------------------- Métodos de configuración ------------------------- */
 mongoose.connect(db, { useNewUrlParser: true }, err => {
@@ -54,8 +54,8 @@ const transporter = nodemailer.createTransport({
 //const bodyParserJSON = bodyParser.json();
 //const bodyParserURLEncoded = bodyParser.urlencoded({extended: true});
 
-//app.use(bodyParserJSON);
-//app.use(bodyParserURLEncoded);
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: true}));
 
 //app.use(cors());
 //app.use('/api', router);
@@ -462,5 +462,60 @@ router.get('/search-categoria/:categoria', function (req, res) {
         return res.status(200).send({ publicaciones });
     })
 })
+
+
+/* ------------------------------ Preguntas y respuestas ----------------------------------- */
+//Get de las preguntas y respuestas de una publicación
+router.get("/pyr/:id", function (req, res) {
+
+    PyR.find({ id_publicacion: req.params.id }).exec((err,publicacion) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ publicacion });
+    })
+})
+
+
+//Post del usuario cuando hace una pregunta
+router.post("/pregunta/:id/:name", function (req, res) {
+
+    var pregunta = req.body.pregunta;
+    console.log(pregunta);
+    var id_publicacion = req.params.id;
+    var usuario_pregunta = req.params.name;
+    var objeto = { id_publicacion, usuario_pregunta, pregunta }
+    var modelo = new PyR(objeto);
+
+
+    modelo.save((err, pyr) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ pyr });
+    })
+})
+
+//Post de la respuesta del usuario que publicó
+router.post("/respuesta/:id/:name", function (req, res) {
+
+    var respuesta = req.body.respuesta;
+    var id_publicacion = req.params.id;
+    var usuario_respuesta = req.params.name;
+    var objeto = { id_publicacion, usuario_respuesta, respuesta }
+    var modelo = new PyR(objeto);
+
+
+    modelo.save((err, pyr) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ pyr });
+    })
+})
+
 
 module.exports = router;
