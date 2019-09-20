@@ -30,6 +30,7 @@ export class DetallePublicacionComponent implements OnInit {
   es_publicador = false;
   email;
   logueado;
+  usuario = {};
 
   ngOnInit() {
     var urlActual = window.location.href;
@@ -64,8 +65,13 @@ export class DetallePublicacionComponent implements OnInit {
             } else {
               this.es_publicador = false;
             }
-
           },
+        )
+
+        this._auth.user_data(this.email).subscribe(
+          res => {
+            this.usuario = res;
+          }
         )
 
 
@@ -73,12 +79,13 @@ export class DetallePublicacionComponent implements OnInit {
         this._auth.get_preguntas_respuestas(this.id).subscribe(
           res => {
             //Me devuelve un objeto que contiene un array de pyr
-            this.preguntas = res.publicacion;
-            this.preguntas.reverse();
-            if (this.preguntas[0].pregunta != null || this.preguntas[0].pregunta != undefined) {
-              this.tienePreguntas = true;
+            if (res.publicacion.length > 1) {
+              this.preguntas = res.publicacion;
+              this.preguntas.reverse();
+              if (this.preguntas[0].pregunta != null || this.preguntas[0].pregunta != undefined) {
+                this.tienePreguntas = true;
+              }
             }
-
           },
         )
       },

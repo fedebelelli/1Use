@@ -5,14 +5,15 @@
 </div>
 
 <!--VERSIÓN XL-->
-<section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true">
+<section fxLayout="column" fxLayoutAlign="center center" fxShow.gt-md="true" fxHide.lt-md="true"
+    style="margin-bottom: 20px; margin-left: 100px; margin-right: 100px">
     <mat-horizontal-stepper #stepper (selectionChange)="actualizarDatos()" linear>
         <!-- linear -->
         <!--CATEGORIAS PRODUCTO-->
         <mat-step [stepControl]="categoriaFormGroup" errorMessage="Elige una categoría para tu producto">
             <form [formGroup]="categoriaFormGroup">
                 <ng-template matStepLabel>Categoría del producto</ng-template>
-                <h3>Seleccioná categoria de tu producto</h3>
+                <h3>Selecciona la categoria de tu producto</h3>
                 <br>
                 <mat-accordion>
                     <mat-expansion-panel>
@@ -239,8 +240,8 @@
                 <h3>Completá los datos de tu producto</h3>
                 <br>
                 <mat-form-field>
-                    <input matInput #titulo1 maxlength="35" placeholder="Título de la Publicación" formControlName="titulo" name="titulo"
-                        (ngModelChange)="titulo = $event" required>
+                    <input matInput #titulo1 maxlength="35" placeholder="Título de la Publicación"
+                        formControlName="titulo" name="titulo" (ngModelChange)="titulo = $event" required>
                     <mat-hint align="start">{{titulo1.value.length}} / 35</mat-hint>
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px">
@@ -336,11 +337,11 @@
                                 <mat-selection-list fxFlexOffset="20px">
                                     <mat-radio-button class="radioButton" color="primary"
                                         value="AlquilerSinIntervencion">
-                                        Alquiler sin Intervencíon
+                                        Alquiler sin Intervención
                                     </mat-radio-button>
                                     <mat-radio-button class="radioButton" color="primary"
                                         value="AlquilerConIntervencion">
-                                        Alquiler con Intervencíon
+                                        Alquiler con Intervención
                                     </mat-radio-button>
                                 </mat-selection-list>
                             </div>
@@ -772,19 +773,40 @@
                 <h4 style="text-align: center">Seleccioná el tipo de alquiler de tu producto</h4>
                 <br>
                 <div fxLayout="column">
-                    <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
-                        <div fxLayout="column" fxLayoutAlign="center start">
-                            <mat-selection-list fxFlexOffset="20px">
-                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo1">
-                                    Alquiler tipo 1 (explicar mejor)
-                                </mat-radio-button>
-                                <mat-radio-button class="radioButton" color="primary" value="Alquilertipo2">
-                                    Alquiler tipo 2 (explicar mejor)
-                                </mat-radio-button>
-                            </mat-selection-list>
-                        </div>
-                    </mat-radio-group>
-                    <br>
+                    <div class="contenedor-imagenes">
+                        <p id="formatoLetra">
+                            La primera forma de alquiler se denomina “sin intervención” y permite establecer el contacto
+                            entre las partes que
+                            realizan la transacción sin intervenir en ella. Los participantes de la misma se rigen en
+                            base a los términos y condiciones establecidos en la plataforma y esta no responde
+                            por posibles problemas que pueda surgir.
+                            <br><br>
+                            La segunda forma de alquiler se denomina “con intervención” y se basa en la obtención de un
+                            seguro
+                            contra reembolso con el objetivo de proteger al objeto alquilado de algún daño que pueda
+                            surgir durante la
+                            ejecución del alquiler. Este seguro consiste en el depósito de un monto adicional que
+                            depende del tipo de objeto que el interesado en alquilar ha pagado por el mismo y
+                            será devuelto luego de que el propietario verifique el estado del objeto, no pudiendo
+                            pasar más de 24 hs de lo contrario se considera que el objeto fue entregado en
+                            buenas condiciones, finalizando la transacción.
+                        </p>
+                        <mat-radio-group formControlName="tipoAlquiler" (change)="obtenerTipoAlquiler($event)">
+                            <div fxLayout="column" fxLayoutAlign="center start">
+                                <mat-selection-list fxFlexOffset="20px">
+                                    <mat-radio-button class="radioButton" color="primary"
+                                        value="AlquilerSinIntervencion">
+                                        Alquiler sin Intervención
+                                    </mat-radio-button>
+                                    <mat-radio-button class="radioButton" color="primary"
+                                        value="AlquilerConIntervencion">
+                                        Alquiler con Intervención
+                                    </mat-radio-button>
+                                </mat-selection-list>
+                            </div>
+                        </mat-radio-group>
+                        <br>
+                    </div>
                 </div>
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
@@ -843,7 +865,7 @@
             <ng-template matStepLabel>Publicar</ng-template>
             <h2 class="mt-30 center">Tu producto está listo para ser publicado</h2>
             <br>
-            <h4>Resúmen de tu publicación</h4>
+            <h4>Resumen de tu publicación</h4>
             <br>
             <div>
                 <form>

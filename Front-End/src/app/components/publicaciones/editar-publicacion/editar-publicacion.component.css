@@ -58,6 +58,11 @@
     width: 180px
 }
 
+.img-carrousel-sm {
+    height: 100px;
+    width: 100px
+}
+
 .swiper-slide {
     color: black;
     background-color: #fff;
@@ -73,6 +78,10 @@
     height: 400px !important;
 }
 
+.swiper-container-sm {
+    height: 130px !important;
+}
+
 form, .mt-30{
     margin-top: 30px !important;
 }
@@ -84,4 +93,13 @@ form, .mt-30{
 .chkImagen{
     margin-top: 30px;
     margin-bottom: 15px;
+}
+
+mat-form-field{
+    font-size: 20px;
+}
+
+#formatoLetra{
+    font-size: 12px;
+    text-align: justify;
 }

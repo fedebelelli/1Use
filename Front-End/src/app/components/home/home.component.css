@@ -276,6 +276,13 @@ mat-video {
   max-height: 380px
 }
 
+.container-card-sm {
+  width: 182px;
+  height: 369px;
+  max-width: 182px;
+  max-height: 369px
+}
+
 .container-img-card {
   height: 100%;
   width: 100%

@@ -21,6 +21,14 @@ export class SingletonService {
       this.estado = false;
     }
 
+    if(urlActual.includes("publicaciones")){
+      this.estado = true;
+    }
+
+    if(urlActual.includes("pos-alquiler")){
+      this.estado = false;
+    }
+
     if (urlActual == "/register") {
       this.estado = false;
     }

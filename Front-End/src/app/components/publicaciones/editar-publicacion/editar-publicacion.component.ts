@@ -32,6 +32,8 @@ export class EditarPublicacionComponent implements OnInit {
   preciosemana: number;
   preciomes: number;
   tipoAlquiler: String;
+  AlquilerSinIntervencion;
+  AlquilerConIntervencion;
 
 
   _id;
@@ -97,6 +99,7 @@ export class EditarPublicacionComponent implements OnInit {
         this.publicacion = err.publicaciones;
 
         this.categoria = err.publicaciones.categoria
+
         this.subcategoria = err.publicaciones.subcategoria
         this.titulo = err.publicaciones.titulo
         this.descripcion = err.publicaciones.descripcion
@@ -105,6 +108,12 @@ export class EditarPublicacionComponent implements OnInit {
         this.preciomes = err.publicaciones.preciomes
         this.imagenBD = err.publicaciones.multiplefile
         this.tipoAlquiler = err.publicaciones.tipoAlquiler
+
+        if (this.tipoAlquiler == "AlquilerSinIntervencion") {
+          this.AlquilerSinIntervencion = true;
+        } else {
+          this.AlquilerConIntervencion = true;
+        }
 
         this.categoriaFormGroup = this._formBuilder.group({
           categoria: [this.publicacion.categoria],
@@ -140,6 +149,7 @@ export class EditarPublicacionComponent implements OnInit {
         }
         this.publicacion.multiplefile = this.arrayJSON;
 
+        
       },
       res => {
 
@@ -317,7 +327,7 @@ export class EditarPublicacionComponent implements OnInit {
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
   herramientasArray: string[] = ['Industria', 'Repuestos', 'Muebles para negocios - oficinas']
-  librosArray: string[] = ['Novela','Gótico','Ciencia Ficción','Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
+  librosArray: string[] = ['Novela', 'Gótico', 'Ciencia Ficción', 'Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
   otrosArray: string[] = ['Otra categoria']
 
 
