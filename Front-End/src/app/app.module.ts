@@ -49,6 +49,7 @@ import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/c
 import { PosAlquilerComponent } from './components/pos-alquiler/pos-alquiler.component';
 import { DeshabilitarDialogComponent } from './components/mi-cuenta/mis-publicaciones/deshabilitar-dialog/dehsabilitar-dialog';
 import { EliminarDialogComponent } from './components/mi-cuenta/mis-publicaciones/eliminar-dialog/eliminar-dialog.component';
+import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -90,7 +91,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SoloNumerosDirective,
     PosAlquilerComponent,
     DeshabilitarDialogComponent,
-    EliminarDialogComponent
+    EliminarDialogComponent,
+    NotificacionesComponent
   ],
   imports: [
     BrowserModule,

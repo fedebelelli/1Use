@@ -25,6 +25,7 @@ import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-p
 import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 import{PosAlquilerComponent} from './components/pos-alquiler/pos-alquiler.component';
+import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 
 const appRoutes: Routes = [
 
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     { path: 'mi-cuenta/perfil', component: PerfilUsuarioComponent },
     { path: 'mi-cuenta/mis-alquileres', component: MisAlquileresComponent },
     { path: 'mi-cuenta/mis-publicaciones', component: MisPublicacionesComponent },
+    { path: 'mi-cuenta/notificaciones', component: NotificacionesComponent },
     { path: 'confirmacion-destacacion', component: ConfirmacionDestacacionComponent },
     { path: 'publicaciones/:id', component: DetallePublicacionComponent },
     { path: 'editar-publicacion/:id', component: EditarPublicacionComponent },
