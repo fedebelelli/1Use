@@ -90,10 +90,8 @@
                                         *ngIf="publicacion.destacar == 'NO'">Destacar</button>
                                     <button mat-raised-button color="primary"
                                         routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
-                                   <!-- <button mat-raised-button color="warn"
-                                        (click)="openDialog()">Deshabilitar</button>-->
                                         <button mat-raised-button color="warn"
-                                        (click)="openDialog(publicacion)">Deshabilitar</button>
+                                        (click)="openDialogDeshabilitar(publicacion)">Deshabilitar</button>
                                 </mat-card-actions>
                             </mat-card> 
                         </div>
@@ -145,7 +143,7 @@
                                     <button mat-raised-button color="primary"
                                         (click)="habilitarPublicacion(publicacion)">Habilitar</button>
                                     <button mat-raised-button color="warn"
-                                        (click)="eliminarPublicacion(publicacion)">Eliminar</button>
+                                        (click)="openDialogEliminar(publicacion)">Eliminar</button>
                                 </mat-card-actions>
                             </mat-card>
                         </div>

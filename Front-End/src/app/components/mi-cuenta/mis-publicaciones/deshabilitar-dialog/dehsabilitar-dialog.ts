@@ -4,12 +4,12 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mis-publicaciones-dialog',
-  templateUrl: './mis-publicaciones-dialog.component.html',
-  styleUrls: ['./mis-publicaciones-dialog.component.css']
+  templateUrl: './dehsabilitar-dialog.html',
+  styleUrls: ['./dehsabilitar-dialog.css']
 })
-export class MisPublicacionesDialogComponent implements OnInit {
+export class DeshabilitarDialogComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<MisPublicacionesDialogComponent>, private _auth: AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
+  constructor(private dialogRef: MatDialogRef<DeshabilitarDialogComponent>, private _auth: AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
   }
