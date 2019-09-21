@@ -25,6 +25,7 @@ import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-p
 import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 import{PosAlquilerComponent} from './components/pos-alquiler/pos-alquiler.component';
+import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
 
 const appRoutes: Routes = [
 
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     { path: 'busqueda/c/:c', component: BusquedaCategoriasComponent },
     { path: 'busqueda/p/:p', component: BusquedaPublicacionesComponent },
     { path: 'pos-alquiler/:id', component: PosAlquilerComponent },
+    { path: 'confirmacion-Alquiler', component: ConfirmacionAlquilerComponent },
     { path: '**', component: ErrorComponent },
 
 ];
