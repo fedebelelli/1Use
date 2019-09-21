@@ -26,6 +26,7 @@ import { LostPasswordComponent } from './components/login/lostpassword/lostpassw
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 import{PosAlquilerComponent} from './components/pos-alquiler/pos-alquiler.component';
 import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
+import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 
 const appRoutes: Routes = [
 
