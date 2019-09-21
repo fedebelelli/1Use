@@ -3,7 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MisPublicacionesDialogComponent } from './mis-publicaciones-dialog/mis-publicaciones-dialog.component'
 
 
 @Component({
@@ -118,13 +119,7 @@ export class MisPublicacionesComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(MisPublicacionesDialogo);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 
   checkUsuarioCompleto(user): boolean {
     if (user.name == undefined || user.name == '' || user.name == null) {
@@ -175,7 +170,7 @@ export class MisPublicacionesComponent implements OnInit {
     return true;
   }
 
-  
+
 
   //SWIPER
   public config: SwiperConfigInterface = {
@@ -188,15 +183,19 @@ export class MisPublicacionesComponent implements OnInit {
     navigation: true,
   };
 
-  
+
+
+  /* Métodos y atributos para el Dialog */
+
+  fileNameDialogRef: MatDialogRef<MisPublicacionesDialogComponent>;
+
+  openDialog(publicacion): void {
+    this.fileNameDialogRef = this.dialog.open(MisPublicacionesDialogComponent, 
+      {
+        data: {
+          publicacion: publicacion
+        }
+      });
+  }
 
 }
-
-
-@Component({
-  selector: 'mis-publicaciones-dialogo',
-  templateUrl: 'mis-publicaciones-dialogo.html',
-  styleUrls: ['./mis-publicaciones.component.css']
-})
-export class MisPublicacionesDialogo {}
-

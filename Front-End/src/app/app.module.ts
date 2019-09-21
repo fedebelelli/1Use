@@ -47,6 +47,7 @@ import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 import { PosAlquilerComponent } from './components/pos-alquiler/pos-alquiler.component';
+import { MisPublicacionesDialogComponent } from './components/mi-cuenta/mis-publicaciones/mis-publicaciones-dialog/mis-publicaciones-dialog.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -86,7 +87,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BusquedaComponent,
     SoloLetrasDirective,
     SoloNumerosDirective,
-    PosAlquilerComponent
+    PosAlquilerComponent,
+    MisPublicacionesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +107,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule,
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MisPublicacionesDialogComponent]
 })
 export class AppModule { }
