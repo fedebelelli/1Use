@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MisPublicacionesDialogComponent } from './mis-publicaciones-dialog.component';
+import { MisPublicacionesDialogComponent } from './dehsabilitar-dialog';
 
 describe('MisPublicacionesDialogComponent', () => {
   let component: MisPublicacionesDialogComponent;

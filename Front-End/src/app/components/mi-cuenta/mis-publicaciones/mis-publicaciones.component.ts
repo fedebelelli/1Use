@@ -4,7 +4,8 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MisPublicacionesDialogComponent } from './mis-publicaciones-dialog/mis-publicaciones-dialog.component'
+import { DeshabilitarDialogComponent } from './deshabilitar-dialog/dehsabilitar-dialog'
+import { EliminarDialogComponent } from './eliminar-dialog/eliminar-dialog.component'
 
 
 @Component({
@@ -170,8 +171,6 @@ export class MisPublicacionesComponent implements OnInit {
     return true;
   }
 
-
-
   //SWIPER
   public config: SwiperConfigInterface = {
     a11y: true,
@@ -187,15 +186,33 @@ export class MisPublicacionesComponent implements OnInit {
 
   /* Métodos y atributos para el Dialog */
 
-  fileNameDialogRef: MatDialogRef<MisPublicacionesDialogComponent>;
+  deshabilitarDialogRef: MatDialogRef<DeshabilitarDialogComponent>;
+  eliminarDialogRef: MatDialogRef<EliminarDialogComponent>;
 
-  openDialog(publicacion): void {
-    this.fileNameDialogRef = this.dialog.open(MisPublicacionesDialogComponent, 
+  openDialogDeshabilitar(publicacion): void {
+    this.deshabilitarDialogRef = this.dialog.open(DeshabilitarDialogComponent,
       {
         data: {
           publicacion: publicacion
         }
       });
+    this.deshabilitarDialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    })
   }
+
+  openDialogEliminar(publicacion): void {
+    this.eliminarDialogRef = this.dialog.open(EliminarDialogComponent,
+      {
+        data: {
+          publicacion: publicacion
+        }
+      });
+    this.eliminarDialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    })
+  }
+
+
 
 }
