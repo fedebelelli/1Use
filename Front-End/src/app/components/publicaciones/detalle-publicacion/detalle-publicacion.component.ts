@@ -96,13 +96,27 @@ export class DetallePublicacionComponent implements OnInit {
   enviarPregunta(pregunta) {
     this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
-        let usuario = res;
+        let usuario_pregunta = res;
         let objeto = { pregunta: pregunta }
-        this._auth.post_pregunta_publicacion(this.id, usuario.name, objeto).subscribe(
+        this._auth.post_pregunta_publicacion(this.id, usuario_pregunta.name, objeto).subscribe(
           res => {
             this.ngOnInit();
           }
         );
+
+        this.ngOnInit();
+
+        this._auth.user_data(this.publicacion.email).subscribe(
+          res1 => {
+            let usuario_publicacion = res1.name;
+            this._auth.notificacion_pregunta_publicacion(usuario_pregunta.name,usuario_publicacion,this.publicacion._id).subscribe(
+              res2 => {
+                this.ngOnInit();
+                console.log(res2);
+              }
+            )
+          }
+        )
 
       }
     )

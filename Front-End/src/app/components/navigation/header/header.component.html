@@ -22,13 +22,38 @@
             </mat-form-field>
         </form>
     </div>
-    <!--class="buscador" class="buscador-full-width" -->
+
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-lg fxFlexOrder="3">
-        <!-- [routerLink]="['/register-publicacion']" -->
+
+        <!-- Notificaciones -->
+        <div [fxShow]=inicioSesion>
+            <div (click)="desactivarBadge()">
+                <p mat-icon-button [matMenuTriggerFor]="menu" [matBadge]=cantidad matBadgeColor="warn"
+                    matBadgePosition="above after" matBadgeSize="small" matBadgeOverlap="true"
+                    [matBadgeHidden]=noHayNotificacionesNuevas style="margin-right: 8px; margin-top: 4px;">
+                    <mat-icon [fxShow]=!noHayNotificacionesNuevas>notifications</mat-icon>
+                    <mat-icon [fxShow]=noHayNotificacionesNuevas>notifications_none</mat-icon>
+                </p>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before">
+                <div mat-menu-item *ngFor="let not of notificaciones; let indice = index" style="max-width: 1000px !important">
+                    <p [fxShow]=!noHayNotificaciones routerLink="/publicaciones/{{not.id_publicacion}}"> {{not.mensaje_notificacion}}: {{arrayTitulos[indice]}}</p>
+                    <mat-divider style="margin: -1px"></mat-divider>
+                </div>
+                <p mat-menu-item [fxShow]=noHayNotificaciones> No hay notificaciones por mostrar </p>
+                <div mat-menu-item style="padding: 0 5px; margin-top: 5px">
+                    <button mat-raised-button routerLink="/mi-cuenta/notificaciones" color="primary"
+                        style="text-align: center" fxFlexFill>Mostrar todas</button>
+                </div>
+            </mat-menu>
+        </div>
+
         <button mat-button class="spanToolbar"
             (click)="checkPage('/register-publicacion'); setearInicioSesion(); verificarUsuario()"
             [fxShow]=inicioSesion>Publicar</button>
+
         <button mat-button [matMenuTriggerFor]="appMenu" class="spanToolbar">Categorías</button>
+
         <button mat-button class="spanToolbar" [routerLink]="['/about']"
             (click)="checkPage('/about'); setearInicioSesion()">Sobre
             Nosotros</button>
@@ -36,6 +61,8 @@
         <button mat-button class="spanToolbar" [routerLink]="['/login']"
             (click)="checkPage('/login'); setearInicioSesion()" [fxShow]=!inicioSesion>Iniciar
             Sesión</button>
+
+
         <div class="dropdown" #myDropdown=dropdown dropdown>
             <button mat-button class="spanToolbar" (click)="ngOnInit(); setearInicioSesion(); openNow()"
                 [fxShow]=inicioSesion class="dropdown-toggle" dropdownToggle *ngIf="tieneNombre">
@@ -82,10 +109,7 @@
                 </div>
             </ul>
         </div>
-        <button mat-button class="spanToolbar" [routerLink]="['/mi-cuenta/notificaciones']"
-            (click)="checkPage('/notificaciones'); setearInicioSesion()">
-            <mat-icon class="icono-notificaciones">notifications</mat-icon>
-        </button>
+
 
         <mat-menu #appMenu="matMenu">
             <button mat-menu-item [matMenuTriggerFor]="subHogar" (click)="redirigirCategoria('Hogar')">Hogar</button>
@@ -189,7 +213,8 @@
             <button mat-menu-item (click)="redirigirSubcategoria('Herramientas','Industria')">Industria</button>
             <button mat-menu-item (click)="redirigirSubcategoria('Herramientas','Repuestos')">Repuestos</button>
             <button mat-menu-item
-                (click)="redirigirSubcategoria('Herramientas','Muebles para negocios - oficinas')">Muebles para negocios
+                (click)="redirigirSubcategoria('Herramientas','Muebles para negocios - oficinas')">Muebles
+                para negocios
                 - oficinas</button>
         </mat-menu>
 

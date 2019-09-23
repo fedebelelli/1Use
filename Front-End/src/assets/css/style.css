@@ -19,6 +19,10 @@
     color: rgba(0,0,0,.87);
 }
 
+.mat-menu-panel{
+    max-width: 1000px !important;
+}
+
 /*
 01 ===== BASIC  =====
   1.1 General

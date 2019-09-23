@@ -32,7 +32,8 @@
               "src/assets/js/jQuery_v3.1.1.min.js",
               "src/assets/js/owl.carousel.min.js",
               "src/assets/js/jquery.magnific-popup.js",
-              "src/assets/js/custom.js"
+              "src/assets/js/custom.js",
+              "./node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           },
           "configurations": {

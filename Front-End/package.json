@@ -28,6 +28,7 @@
     "ngx-dropzone": "^1.2.0",
     "ngx-material-file-input": "^1.1.1",
     "ngx-swiper-wrapper": "^8.0.2",
+    "pusher-js": "^5.0.1",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.2",
     "sort-json-array": "^0.1.7",

@@ -7,6 +7,14 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+require("dotenv").config();
+const Pusher = require("pusher");
+const pusher = new Pusher({
+    appId: `${process.env.PUSHER_APP_ID}`,
+    key: `${process.env.PUSHER_API_KEY}`,
+    secret: `${process.env.PUSHER_API_SECRET}`,
+    cluster: `${process.env.PUSHER_APP_CLUSTER}`,
+});
 const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({ uploadDir: './uploads' });
@@ -28,6 +36,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const User = require('../auth/auth.model');
 const Publicacion = require('../Models/publicaciones.model');
 const PyR = require('../Models/pyr.model');
+const Notificacion = require('../Models/notificaciones.model');
 
 /* ---------------------------- Métodos de configuración ------------------------- */
 mongoose.connect(db, { useNewUrlParser: true }, err => {
@@ -57,7 +66,8 @@ const transporter = nodemailer.createTransport({
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({extended: true}));
 
-//app.use(cors());
+const cors = require("cors");
+app.use(cors());
 //app.use('/api', router);
 //authRoutes(router);
 
@@ -525,5 +535,66 @@ router.get("/onePyR/:id", function (req, res) {
     })
 })
 
+
+/* NOTIFICACIONES */
+router.post("/notificacion-pregunta/:origen/:destino/:id_publicacion", function (req, res) {
+    var id = req.params.id_publicacion;
+    var titulo = "Nueva pregunta en ";
+    var origen = req.params.origen;
+    var destino = req.params.destino;
+    var tipo = "pregunta";
+    var mensaje = origen + " ha realizado una pregunta en tu publicación";
+
+    var objeto = { id_publicacion: id, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
+
+    var notificacion = new Notificacion(objeto);
+
+    notificacion.save((err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        pusher.trigger("events-channel", "nueva-pregunta", objeto);
+
+        return res.status(200).send({ not });
+    })
+
+})
+
+router.get("/nuevas-notificaciones/:username", function (req, res) {
+    var name = req.params.username;
+
+    Notificacion.find({ name_destino: name, visto: false }, (err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ not });
+    })
+})
+
+router.get("/todas-notificaciones/:username", function (req, res) {
+    var name = req.params.username;
+
+    Notificacion.find({ name_destino: name }, (err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ not });
+    })
+})
+
+router.post("/notificacion-vista", function (req, res) {
+    var notificacion = req.body;
+
+    Notificacion.findByIdAndUpdate(notificacion._id, { visto: true }, (err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ not });
+    })
+})
 
 module.exports = router;

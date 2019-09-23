@@ -83,33 +83,33 @@
       </mat-grid-list>
     </div>
     <div fxHide.gt-md="true" fxShow.lt-md="true">
-        <mat-grid-list cols="2" rowHeight="367px" gutterSize="20px">
-          <mat-grid-tile *ngFor="let destacadas of arrayRandoms; let indice of index" [colspan]=1 [rowspan]=1>
-            <div *ngIf="destacadas == indice">
-              <mat-card class="container-card-sm">
-                <mat-card-header>
-                  <mat-card-title><a style="color:black;"
-                      routerLink="/publicaciones/{{publicacionesDestacadas[destacadas]._id}}">
-                      {{publicacionesDestacadas[destacadas].titulo}} </a>
-                  </mat-card-title>
-                  <mat-card-subtitle> {{publicacionesDestacadas[destacadas].categoria}},
-                    {{publicacionesDestacadas[destacadas].subcategoria}} </mat-card-subtitle>
-                </mat-card-header>
-  
-                <mat-card-content style="height: 230px;">
-                  <swiper class="swiper-container" [config]="config2">
-                    <div *ngFor="let img of publicacionesDestacadas[destacadas].multiplefile; let indice2 = index">
-                      <img class="container-img-card"
-                        src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacionesDestacadas[destacadas].multiplefile[indice2]}}">
-                    </div>
-                  </swiper>
-                  <p> <b>Precio por día:</b> ${{publicacionesDestacadas[destacadas].preciodia}} </p>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
+      <mat-grid-list cols="2" rowHeight="367px" gutterSize="20px">
+        <mat-grid-tile *ngFor="let destacadas of arrayRandoms; let indice of index" [colspan]=1 [rowspan]=1>
+          <div *ngIf="destacadas == indice">
+            <mat-card class="container-card-sm">
+              <mat-card-header>
+                <mat-card-title><a style="color:black;"
+                    routerLink="/publicaciones/{{publicacionesDestacadas[destacadas]._id}}">
+                    {{publicacionesDestacadas[destacadas].titulo}} </a>
+                </mat-card-title>
+                <mat-card-subtitle> {{publicacionesDestacadas[destacadas].categoria}},
+                  {{publicacionesDestacadas[destacadas].subcategoria}} </mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content style="height: 230px;">
+                <swiper class="swiper-container" [config]="config2">
+                  <div *ngFor="let img of publicacionesDestacadas[destacadas].multiplefile; let indice2 = index">
+                    <img class="container-img-card"
+                      src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacionesDestacadas[destacadas].multiplefile[indice2]}}">
+                  </div>
+                </swiper>
+                <p> <b>Precio por día:</b> ${{publicacionesDestacadas[destacadas].preciodia}} </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
 
   <div>

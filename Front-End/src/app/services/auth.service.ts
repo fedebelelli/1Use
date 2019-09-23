@@ -28,6 +28,10 @@ export class AuthService {
   private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
   private _pyrPublicacion = "http://localhost:4201/api/pyr/"
   private _pyrOnePublicacion = "http://localhost:4201/api/onePyR/"
+  private _nuevaNotificacion = "http://localhost:4201/api/notificacion-pregunta/"
+  private _notificacionesNuevas = "http://localhost:4201/api/nuevas-notificaciones/"
+  private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
+  private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -122,4 +126,24 @@ export class AuthService {
     return this.http.post<any>(this._respuestaPublicacion + id + "/" + name, params, { headers: headers });
   }
 
+
+  /* NOTIFICACIONES */
+  notificacion_pregunta_publicacion(origen, destino, id_publicacion) {
+    let params = JSON.stringify(id_publicacion);
+    return this.http.post<any>(this._nuevaNotificacion + origen + "/" + destino + "/" + id_publicacion,params);
+  }
+
+  notificacion_nueva(username){
+    return this.http.get<any>(this._notificacionesNuevas + username);
+  }
+
+  notificaciones_todas(username){
+    return this.http.get<any>(this._notificacionesTodas + username);
+  }
+
+  notificacion_vista(notificacion){
+    let params = JSON.stringify(notificacion);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._notificacionVista, params, { headers: headers });
+  }
 }

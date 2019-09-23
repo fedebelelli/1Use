@@ -3,6 +3,7 @@ import { SingletonService } from '../../singleton.service'
 import { DropdownDirective, TOGGLE_STATUS } from 'angular-custom-dropdown';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+import { PusherService } from '../../../services/pusher.service';
 
 @Component({
   selector: 'app-header',
@@ -21,14 +22,26 @@ export class HeaderComponent implements OnInit {
   urlRecortada: string;
   usuarioActivo;
   estadoDropdown: boolean = false;
+  estadoNotDropdown: boolean = false;
   paginaActual: string;
   subscriptionIniciada: boolean = false;
+  subscriptionNotIniciada: boolean = false;
   usuarioIniciado = {};
   _id;
   mostrarImagen = false;
   tieneNombre = false;
 
-  constructor(private singleton: SingletonService, private _auth: AuthService, private _snackBar: MatSnackBar) { }
+  /* NOTIFICACIONES */
+  cantidad;
+  noHayNotificacionesNuevas = false;
+  mensaje;
+  notificaciones = [];
+  notificaciones_nuevas = [];
+  titulo_publicacion;
+  arrayTitulos = [];
+  noHayNotificaciones = false;
+
+  constructor(private singleton: SingletonService, private _auth: AuthService, private _snackBar: MatSnackBar, private pusherService: PusherService) { }
 
   ngOnInit() {
     this.urlActual = window.location.href;
@@ -54,6 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   @ViewChild('myDropdown', { static: false }) myDropdown: DropdownDirective;
+  @ViewChild('notDropdown', { static: false }) notDropdown: DropdownDirective;
 
   openNow() {
     this.checkStatus();
@@ -77,6 +91,29 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openNotificacionesNow() {
+    this.checkNotStatus();
+    if (this.estadoNotDropdown == false) {
+      this.estadoNotDropdown = true;
+    } else {
+      this.estadoNotDropdown = false;
+    }
+  }
+
+  checkNotStatus() {
+    if (this.subscriptionNotIniciada == false) {
+      this.subscriptionNotIniciada = true;
+      this.notDropdown.statusChange()
+        .subscribe((status: TOGGLE_STATUS) => {
+          if (status === TOGGLE_STATUS.OPEN) {
+          } else if (status === TOGGLE_STATUS.CLOSE) {
+            this.estadoNotDropdown = false;
+          }
+        });
+    }
+  }
+
+
   cerrarSesion() {
     this.singleton.cerrarSesion();
   }
@@ -87,6 +124,8 @@ export class HeaderComponent implements OnInit {
       this._auth.user_data(email).subscribe(
         res => {
           this.usuarioIniciado = res;
+          this.get_notificaciones_nuevas(res.name);
+          this.get_notificaciones_todas(res.name);
           if (res.nombre != undefined) {
             this.tieneNombre = true;
           }
@@ -180,5 +219,56 @@ export class HeaderComponent implements OnInit {
     return true;
   }
 
+  /* NOTIFICACIONES test */
+
+  get_notificaciones_nuevas(username) {
+
+    this.pusherService.channel.bind('nueva-pregunta', data => {
+      this.cantidad = data.likes;
+    });
+
+    this._auth.notificacion_nueva(username).subscribe(
+      res => {
+        if (res.not.length > 0) {
+          this.noHayNotificacionesNuevas = false;
+          this.cantidad = res.not.length;
+          this.notificaciones_nuevas = res.not;
+        } else {
+          this.noHayNotificacionesNuevas = true;
+        }
+      }
+    )
+  }
+
+  get_notificaciones_todas(username) {
+    this._auth.notificaciones_todas(username).subscribe(
+      res => {
+        if (res.not.length > 0) {
+          this.notificaciones = res.not;
+          for (let i = 0; i < this.notificaciones.length; i++) {
+            this._auth.get_publicacion_id(res.not[i].id_publicacion).subscribe(
+              res1 => {
+                this.titulo_publicacion = res1.publicaciones.titulo;
+                this.arrayTitulos.push(this.titulo_publicacion);
+              })
+          }
+        } else {
+          this.noHayNotificaciones = true;
+          this.mensaje = "No hay notificaciones para mostrar";
+        }
+      }
+    )
+  }
+
+  desactivarBadge() {
+    this.noHayNotificacionesNuevas = true;
+    for (let i = 0; i < this.notificaciones_nuevas.length; i++) {
+      this._auth.notificacion_vista(this.notificaciones_nuevas[i]).subscribe(
+        res => {
+
+        }
+      );
+    }
+  }
 
 }
