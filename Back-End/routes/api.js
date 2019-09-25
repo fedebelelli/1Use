@@ -47,6 +47,9 @@ mongoose.connect(db, { useNewUrlParser: true }, err => {
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: true,
     auth: {
         user: "one.use.pf@gmail.com",
         pass: "1usemail",
@@ -93,9 +96,73 @@ router.post('/register', (req, res) => {
                 (err, token) => {
                     const url = 'http://localhost:4200/confirmacionemail/' + token;
                     transporter.sendMail({
+                        from: 'one.use.pf@gmail.com',
                         to: userData.email,
                         subject: 'Confirma tu Email para terminar tu registro en OneUse',
-                        html: 'Gracias por registrarte en OneUse. Para Confirmar tu email, por favor, haz click en este <a href="' + url + '">link' + '</a>',
+                        /* html: '<h1>Gracias por registrarte en OneUse</h1> <br> Para Confirmar tu email, por favor, haz click en este <a href="' + url + '">link' + '</a>', */
+                        html: `
+                        <!DOCTYPE html>
+                        <html lang="es">
+                        <head>
+                            <meta charset="utf-8">
+                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+                        </head>
+
+                        <body>
+                        <section style="background-color: #4a70af;">
+                        <div style="text-align: center;">
+                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
+                        </div>
+                      
+                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
+                      
+                          <h2 style="text-align:center !important"> ¡Estás a un paso de finalizar tu registro!</h2>
+                          <h3>¡Hola `+ userData.name + `!</h3>
+                          <p> Gracias por confiar en OneUse. Con el fin de ayudar a mantener la seguridad de tu cuenta, por favor, verifica tu dirección de email. </p>
+                      
+                          <div style="text-align:center !important;">
+                            <a style="
+                                                  line-height: 40px;
+                                                  padding: 0 40px;
+                                                  border-radius: 20px;
+                                                  background: transparent;
+                                                  border: 1px solid #ffd60f;
+                                                  display: inline-block;
+                                                  font-weight: 450;
+                                                  -webkit-transition: all 0.3s ease 0s;
+                                                  -moz-transition: all 0.3s ease 0s;
+                                                  -o-transition: all 0.3s ease 0s;
+                                                  transition: all 0.3s ease 0s;
+                                                  cursor: pointer;
+                                                  outline: none;
+                                                  margin-top: 20px;
+                                                  margin-bottom: 20px;
+                                                  margin-left: 14px;
+                                                  background: #4a70af;
+                                                  text-decoration: none;
+                                                  color: #fff;
+                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
+                                                  " href="`+ url + `">Verificar email</a>
+                          </div>
+                          <p>
+                            Verificar tu dirección de email te permitirá cambiar las credenciales de tu cuenta de OneUse, utilizar confirmaciones de intercambio y del Mercado y recuperar el acceso a tu cuenta de OneUse en caso de que lo pierdas u olvides tu contraseña.
+                          </p>
+                          <br>
+                          <p>
+                            Gracias por ayudarnos a mantener la seguridad de tu cuenta.
+                          </p>
+                      
+                          <p style="font-style: italic">
+                            El equipo de OneUse
+                          </p>
+                      
+                        </section>
+                        <br><br><br>
+                      </section>
+                      
+                        </body>
+                        </html>
+                        `,
                     });
                 },
             );
