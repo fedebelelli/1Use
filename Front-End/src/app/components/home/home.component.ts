@@ -170,5 +170,9 @@ export class HomeComponent implements OnInit {
     autoplay: { delay: 5500 },
   };
 
+  scroll(element: HTMLElement){
+    element.scrollIntoView();
+  }
+
 
 }

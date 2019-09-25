@@ -28,7 +28,8 @@ export class AuthService {
   private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
   private _pyrPublicacion = "http://localhost:4201/api/pyr/"
   private _pyrOnePublicacion = "http://localhost:4201/api/onePyR/"
-  private _nuevaNotificacion = "http://localhost:4201/api/notificacion-pregunta/"
+  private _nuevaNotificacionPregunta = "http://localhost:4201/api/notificacion-pregunta/"
+  private _nuevaNotificacionRespuesta = "http://localhost:4201/api/notificacion-respuesta/"
   private _notificacionesNuevas = "http://localhost:4201/api/nuevas-notificaciones/"
   private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
   private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
@@ -130,7 +131,12 @@ export class AuthService {
   /* NOTIFICACIONES */
   notificacion_pregunta_publicacion(origen, destino, id_publicacion) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._nuevaNotificacion + origen + "/" + destino + "/" + id_publicacion,params);
+    return this.http.post<any>(this._nuevaNotificacionPregunta + origen + "/" + destino + "/" + id_publicacion,params);
+  }
+
+  notificacion_respuesta_publicacion(origen, destino, id_publicacion) {
+    let params = JSON.stringify(id_publicacion);
+    return this.http.post<any>(this._nuevaNotificacionRespuesta + origen + "/" + destino + "/" + id_publicacion,params);
   }
 
   notificacion_nueva(username){

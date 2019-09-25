@@ -32,11 +32,11 @@
                     <h3>Preguntas y respuestas</h3>
                     <br><br>
                     <mat-form-field>
-                        <textarea #message maxlength="256" style="min-height: 0px;" matInput
+                        <textarea #message maxlength="256" style="min-height: 0px;" matInput [(ngModel)]=valorPregunta
                             placeholder="Escribir una pregunta..."></textarea>
                         <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                     </mat-form-field>
-                    <button class="btnPreguntar" (click)="enviarPregunta(message.value)" mat-raised-button color="primary">Preguntar</button>
+                    <button #btnPreguntar class="btnPreguntar" (click)="enviarPregunta(message.value)" mat-raised-button color="primary">Preguntar</button>
                 </div>
                 <div class="ultimasPreguntas">
                     <h3><b>Últimas preguntas</b></h3>

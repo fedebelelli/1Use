@@ -8,14 +8,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 require("dotenv").config();
-const Pusher = require("pusher");
-const pusher = new Pusher({
-    appId: `${process.env.PUSHER_APP_ID}`,
-    key: `${process.env.PUSHER_API_KEY}`,
-    secret: `${process.env.PUSHER_API_SECRET}`,
-    cluster: `${process.env.PUSHER_APP_CLUSTER}`,
-});
-const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
+//const db = "mongodb+srv://fede:1use@cluster0-pdt0d.mongodb.net/test?retryWrites=true&w=majority"
+const db = "mongodb+srv://federico:1usebasededatos$@cluster1-zogz0.azure.mongodb.net/test?retryWrites=true&w=majority"
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({ uploadDir: './uploads' });
 var multipartMiddlewarePublicaciones = multipart({ uploadDir: './publicaciones' });
@@ -554,7 +548,27 @@ router.post("/notificacion-pregunta/:origen/:destino/:id_publicacion", function 
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
-        pusher.trigger("events-channel", "nueva-pregunta", objeto);
+        return res.status(200).send({ not });
+    })
+
+})
+
+router.post("/notificacion-respuesta/:origen/:destino/:id_publicacion", function (req, res) {
+    var id = req.params.id_publicacion;
+    var titulo = "Nueva respuesta en ";
+    var origen = req.params.origen;
+    var destino = req.params.destino;
+    var tipo = "respuesta";
+    var mensaje = origen + " ha respondido a tu pregunta";
+
+    var objeto = { id_publicacion: id, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
+
+    var notificacion = new Notificacion(objeto);
+
+    notificacion.save((err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
         return res.status(200).send({ not });
     })

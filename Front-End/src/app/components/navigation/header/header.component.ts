@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   arrayTitulos = [];
   noHayNotificaciones = false;
 
-  constructor(private singleton: SingletonService, private _auth: AuthService, private _snackBar: MatSnackBar, private pusherService: PusherService) { }
+  constructor(private singleton: SingletonService, private _auth: AuthService, private _snackBar: MatSnackBar, /* private pusherService: PusherService */) { }
 
   ngOnInit() {
     this.urlActual = window.location.href;
@@ -222,11 +222,7 @@ export class HeaderComponent implements OnInit {
   /* NOTIFICACIONES test */
 
   get_notificaciones_nuevas(username) {
-
-    this.pusherService.channel.bind('nueva-pregunta', data => {
-      this.cantidad = data.likes;
-    });
-
+    /* this.pusherService.channel.bind('nueva-pregunta', data => { this.cantidad = data.likes }); */
     this._auth.notificacion_nueva(username).subscribe(
       res => {
         if (res.not.length > 0) {
