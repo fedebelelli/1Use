@@ -15,7 +15,7 @@
                         fxHide.lt-lg="true">Notificaciones</span>
                 </a>
             </mat-toolbar-row>
-            
+
             <mat-toolbar-row>
                 <a [routerLink]="['/mi-cuenta/perfil']">
                     <!-- [routerLink]="['/perfil']" -->
@@ -45,10 +45,117 @@
         </mat-toolbar>
 
     </div>
-    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
-        fxLayoutAlign.lt-lg="center center">
-        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
-            <!--CONTENIDO AQUÍ-->
+    <div fxLayout="column" fxFlexOrder="2" ngClass.gt-md="container-gt-md" ngClass.lt-md="container-lt-md">
+
+        <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
+            <p style="font-size: 25px;margin-bottom: 8px; "> Mis Alquileres</p>
+            <mat-divider fxFlexFill></mat-divider>
         </div>
+
+        <mat-tab-group style="width: 100%;" (selectedTabChange)="cambioTab($event)">
+            <mat-tab>
+                <div fxHide.lt-lg="true">
+                    <ng-template mat-tab-label>
+                        <mat-icon class="iconitos">star</mat-icon>
+                        De Mis Publicaciones
+                    </ng-template>
+                </div>
+                <!--  <div class="contenedor-imagenes">
+
+                    <div *ngIf="!hayPublicaciones">
+                        {{titulo}}
+                    </div>
+
+                    <div *ngFor="let publicacion of publicaciones; let indice1 = index">
+                        <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md"
+                            *ngIf="publicacion.estado == 'ACTIVA'">
+                            <mat-card class="example-card">
+                                <mat-card-header>
+                                    <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;"
+                                            routerLink="/publicaciones/{{publicacion._id}}"> {{publicacion.titulo}} </a>
+                                    </mat-card-title>
+                                    <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}},
+                                        {{publicacion.subcategoria}} </mat-card-subtitle>
+                                </mat-card-header> -->
+                <!-- juajua<img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">  -->
+                <!-- <swiper class="swiper-container" [config]="config">
+                                    <div *ngFor="let img of publicacion.multiplefile; let indice2 = index"
+                                        style="width: 100% !important">
+                                        <img class="container-muestra-imagenes"
+                                            src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                                    </div>
+                                </swiper>
+                                <mat-card-content style="text-align: left; font-size: 12px"> -->
+                <!--juajua <p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
+                <!-- <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>
+                                    <p> <b>Destacado:</b> {{publicacion.destacar}} </p> -->
+                <!-- juajua<p> <b>Vigente hasta:</b> implementar fecha </p> -->
+                <!-- </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" routerLink="/destacacion-publicacion"
+                                        *ngIf="publicacion.destacar == 'NO'">Destacar</button>
+                                    <button mat-raised-button color="primary"
+                                        routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
+                                    <button mat-raised-button color="warn"
+                                        (click)="openDialogDeshabilitar(publicacion)">Deshabilitar</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </div>
+                    </div> 
+                </div>-->
+            </mat-tab>
+
+            <mat-tab>
+                <div fxHide.lt-lg="true">
+                    <ng-template mat-tab-label>
+                        <mat-icon class="iconitos">star_border</mat-icon>
+                        Propios
+                    </ng-template>
+                </div>
+                <!-- <div class="contenedor-imagenes">
+
+                    <div *ngIf="!hayPublicaciones">
+                        {{titulo}}
+                    </div>
+
+                    <div *ngFor="let publicacion of publicaciones; let indice1 = index">
+                        <div ngClass.gt-md="contenedor-imagen-final" ngClass.lt-lg="tab-lt-md"
+                            *ngIf="publicacion.estado == 'INACTIVA'">
+                            <mat-card class="example-card">
+                                <mat-card-header>
+                                    <mat-card-title style="text-align: left; font-size: 17px"><a style="color:black;"
+                                            routerLink="/publicaciones/{{publicacion._id}}"> {{publicacion.titulo}} </a>
+                                    </mat-card-title>
+                                    <mat-card-subtitle style="text-align: left;"> {{publicacion.categoria}},
+                                        {{publicacion.subcategoria}} </mat-card-subtitle>
+                                </mat-card-header> -->
+                <!--jaujua <img class="container-muestra-imagenes" mat-card-image src="../../../../assets/images/OneUse.jpg">  -->
+                <!-- <swiper class="swiper-container" [config]="config">
+                                    <div *ngFor="let img of publicacion.multiplefile; let indice2 = index"
+                                        style="width: 100% !important">
+                                        <img class="container-muestra-imagenes"
+                                            src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                                    </div>
+                                </swiper>
+                                <mat-card-content style="text-align: left; font-size: 12px"> -->
+                <!-- jaujaua<p> <b>Descripción:</b> {{publicacion.descripcion}} </p> -->
+                <!--   <p> <b>Precio por día:</b> ${{publicacion.preciodia}} </p>
+                                    <p> <b>Precio por semana:</b> ${{publicacion.preciosemana}} </p>
+                                    <p> <b>Precio por mes:</b> ${{publicacion.preciomes}} </p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary"
+                                        routerLink="/editar-publicacion/{{publicacion._id}}">Editar</button>
+                                    <button mat-raised-button color="primary"
+                                        (click)="habilitarPublicacion(publicacion)">Habilitar</button>
+                                    <button mat-raised-button color="warn"
+                                        (click)="openDialogEliminar(publicacion)">Eliminar</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div> -->
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
