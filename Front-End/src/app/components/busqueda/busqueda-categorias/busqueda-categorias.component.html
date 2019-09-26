@@ -165,7 +165,7 @@
                             <div class="image-container">
 
                     <a  routerLink="/publicaciones/{{publicacion._id}}">
-                     <img class="tile-image ae-img"  src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[0]}}" >
+                     <img class="tile-image ae-img"  src="{{ urlApi + 'api/get-image-publicacion/'+ publicacion.multiplefile[0]}}" >
                         </a>
 
                             <a class="quickview btn btn-outline-primary" routerLink="/publicaciones/{{publicacion._id}}">

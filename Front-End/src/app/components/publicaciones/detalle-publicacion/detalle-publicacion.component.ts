@@ -31,7 +31,7 @@ export class DetallePublicacionComponent implements OnInit {
   es_publicador = false;
   email;
   logueado;
-  usuario = {};
+  usuario = {name: ""};
   estadoBtnPreguntar = false;
   valorPregunta;
 

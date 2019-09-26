@@ -5,7 +5,7 @@ export class UploadService {
     public url: string;
 
     constructor() {
-        this.url = "http://localhost:4201/api/";
+        this.url = "http://ec2-18-231-60-115.sa-east-1.compute.amazonaws.com:4201/api/";
     }
 
     makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string) {

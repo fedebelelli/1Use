@@ -5,34 +5,35 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtResponse } from '../models/jwt-response';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 
 @Injectable()
 export class AuthService {
-
-  private _registerUrl = "http://localhost:4201/api/register"
-  private _loginUrl = "http://localhost:4201/api/login"
-  private _confirmar = "http://localhost:4201/api/confirmation"
-  private _userData = "http://localhost:4201/api/user-data?email="
-  private _updateUser = "http://localhost:4201/api/update-user?id="
-  private _getImgUser = "http://localhost:4201/api/get-img-name/"
-  private _registerPublicacion = "http://localhost:4201/api/register-publicacion?email="
-  private _getPublicacion = "http://localhost:4201/api/get-publicacion/"
-  private _getPublicacionId = "http://localhost:4201/api/get-one-publicacion/"
-  private _getPublicacionesDestacadas = "http://localhost:4201/api/get-publicaciones-destacadas/"
-  private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
-  private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
-  private _searchCategoria = "http://localhost:4201/api/search-categoria/"
-  private _preguntaPublicacion = "http://localhost:4201/api/pregunta/"
-  private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
-  private _pyrPublicacion = "http://localhost:4201/api/pyr/"
-  private _pyrOnePublicacion = "http://localhost:4201/api/onePyR/"
-  private _nuevaNotificacionPregunta = "http://localhost:4201/api/notificacion-pregunta/"
-  private _nuevaNotificacionRespuesta = "http://localhost:4201/api/notificacion-respuesta/"
-  private _notificacionesNuevas = "http://localhost:4201/api/nuevas-notificaciones/"
-  private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
-  private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
+  private _urlApi = environment.urlApi;
+  private _registerUrl = this._urlApi + "api/register"
+  private _loginUrl = this._urlApi + "api/login"
+  private _confirmar = this._urlApi + "api/confirmation"
+  private _userData = this._urlApi + "api/user-data?email="
+  private _updateUser = this._urlApi + "api/update-user?id="
+  private _getImgUser = this._urlApi + "api/get-img-name/"
+  private _registerPublicacion = this._urlApi + "api/register-publicacion?email="
+  private _getPublicacion = this._urlApi + "api/get-publicacion/"
+  private _getPublicacionId = this._urlApi + "api/get-one-publicacion/"
+  private _getPublicacionesDestacadas = this._urlApi + "api/get-publicaciones-destacadas/"
+  private _deletePublicacion = this._urlApi + "api/delete-publicacion/"
+  private _updatePublicacion = this._urlApi + "api/update-publicacion/"
+  private _searchCategoria = this._urlApi + "api/search-categoria/"
+  private _preguntaPublicacion = this._urlApi + "api/pregunta/"
+  private _respuestaPublicacion = this._urlApi + "api/respuesta/"
+  private _pyrPublicacion = this._urlApi + "api/pyr/"
+  private _pyrOnePublicacion = this._urlApi + "api/onePyR/"
+  private _nuevaNotificacionPregunta = this._urlApi + "api/notificacion-pregunta/"
+  private _nuevaNotificacionRespuesta = this._urlApi + "api/notificacion-respuesta/"
+  private _notificacionesNuevas = this._urlApi + "api/nuevas-notificaciones/"
+  private _notificacionesTodas = this._urlApi + "api/todas-notificaciones/"
+  private _notificacionVista = this._urlApi + "api/notificacion-vista/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;

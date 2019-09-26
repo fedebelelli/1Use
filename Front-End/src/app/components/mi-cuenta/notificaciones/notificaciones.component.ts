@@ -12,4 +12,10 @@ export class NotificacionesComponent implements OnInit {
   ngOnInit() {
   }
 
+ cerrarSesion()
+{
+  
+}  
+
+
 }

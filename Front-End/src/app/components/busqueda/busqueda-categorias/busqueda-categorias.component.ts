@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-busqueda-categorias',
   templateUrl: './busqueda-categorias.component.html',
-  styleUrls: ['./busqueda-categorias.component.css']
+  styleUrls: ['./busqueda-categorias.component.css'],
 })
 export class BusquedaCategoriasComponent implements OnInit {
 
@@ -18,6 +19,7 @@ export class BusquedaCategoriasComponent implements OnInit {
   imagen;
   imagenJSON;
   arrayJSON = [];
+  urlApi= environment.urlApi;
 
   constructor(private _auth: AuthService) { }
 
