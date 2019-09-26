@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SingletonService } from '../../singleton.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-mis-alquileres',
@@ -8,12 +10,29 @@ import { SingletonService } from '../../singleton.service';
 })
 export class MisAlquileresComponent implements OnInit {
 
-  constructor(private singleton:SingletonService) { }
+  constructor(private _auth: AuthService, private singleton: SingletonService) { }
 
   ngOnInit() {
   }
+
+  cambioTab(evento) {
+    this.ngOnInit();
+  }
+
   cerrarSesion() {
     this.singleton.cerrarSesion();
   }
+
+
+    //SWIPER
+    public config: SwiperConfigInterface = {
+      a11y: true,
+      direction: 'horizontal',
+      slidesPerView: 1,
+      keyboard: true,
+      mousewheel: false,
+      scrollbar: false,
+      navigation: true,
+    };
 
 }
