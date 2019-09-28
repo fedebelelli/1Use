@@ -46,3 +46,25 @@ a, a:focus, a:active, a:link, img {
 mat-toolbar{
     background: rgb(215,215,215);
 }
+
+
+
+.container-notificaciones{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.container-una-notificacion{
+    min-width: 100%;
+    width: 100%;
+}
+
+.container-muestra-imagenes {
+    width: 100px;
+    height: 100px;
+}

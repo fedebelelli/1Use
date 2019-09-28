@@ -15,6 +15,7 @@ var multipartMiddleware = multipart({ uploadDir: './uploads' });
 var multipartMiddlewarePublicaciones = multipart({ uploadDir: './publicaciones' });
 var fs = require('fs'); //Librería FileSystem para borrar archivos locales
 var path = require('path'); //Modulo físico de NodeJS que nos permite cargar rutas físicas de nuestro sistema de archivos
+var randomstring = require("randomstring"); //Generador de números alfanumericos random
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -597,7 +598,7 @@ router.get("/onePyR/:id", function (req, res) {
 })
 
 
-/* NOTIFICACIONES */
+/* ------------------------------ Notificaciones ----------------------------------- */
 router.post("/notificacion-pregunta/:origen/:destino/:id_publicacion", function (req, res) {
     var id = req.params.id_publicacion;
     var titulo = "Nueva pregunta en ";
@@ -677,5 +678,14 @@ router.post("/notificacion-vista", function (req, res) {
         return res.status(200).send({ not });
     })
 })
+
+
+/* ------------------------------ Mis alquileres ----------------------------------- */
+
+//Test de generación de códigos
+router.post('/codigo-alquiler', function(req,res){
+    res.status(200).send(randomstring.generate(10));
+})
+
 
 module.exports = router;
