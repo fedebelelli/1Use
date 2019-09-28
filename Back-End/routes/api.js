@@ -322,12 +322,87 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.tipoAlquiler = datos.tipoAlquiler;
     publicaciones.destacar = datos.destacar;
     publicaciones.estado = 'ACTIVA'
+    publicaciones.id = datos.id;
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
         if (!res) return res.status(404).send("Error papi");
-        return res.status(200).send("Todo legal papi");
-    })
+
+                   
+                
+                    const url = 'http://localhost:4200/publicaciones/' + publicaciones.id;
+                    transporter.sendMail({
+                        from: 'one.use.pf@gmail.com',
+                        to: publicaciones.email,
+                        subject: 'Su publicacion ha sido publicada exitosamente',
+                        html: `
+                        <!DOCTYPE html>
+                        <html lang="es">
+                        <head>
+                            <meta charset="utf-8">
+                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+                        </head>
+
+                        <body>
+                        <section style="background-color: #4a70af;">
+                        <div style="text-align: center;">
+                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
+                        </div>
+                      
+                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
+                      
+                          <h2 style="text-align:center !important"> Tu producto ha sido publicado</h2>
+                         
+                          <p> Para ver tu publicacion, haz click en el siguiente link </p>
+                      
+                          <div style="text-align:center !important;">
+                            <a style="
+                                                  line-height: 40px;
+                                                  padding: 0 40px;
+                                                  border-radius: 20px;
+                                                  background: transparent;
+                                                  border: 1px solid #ffd60f;
+                                                  display: inline-block;
+                                                  font-weight: 450;
+                                                  -webkit-transition: all 0.3s ease 0s;
+                                                  -moz-transition: all 0.3s ease 0s;
+                                                  -o-transition: all 0.3s ease 0s;
+                                                  transition: all 0.3s ease 0s;
+                                                  cursor: pointer;
+                                                  outline: none;
+                                                  margin-top: 20px;
+                                                  margin-bottom: 20px;
+                                                  margin-left: 14px;
+                                                  background: #4a70af;
+                                                  text-decoration: none;
+                                                  color: #fff;
+                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
+                                                  " href="`+ url + `">Ir a la publicacion</a>
+                          </div>
+                          
+                          <br>
+                          <p>
+                            Gracias por elegirnos
+                          </p>
+                      
+                          <p style="font-style: italic">
+                            El equipo de OneUse
+                          </p>
+                      
+                        </section>
+                        <br><br><br>
+                      </section>
+                      
+                        </body>
+                        </html>
+                        `,
+                        
+                    });
+                
+            
+         return res.status(200).send("todo legal papi");
+        })
+
 })
 
 router.post('/upload-publicacion-img/:email/:titulo/:categoria', multipartMiddlewarePublicaciones, function (req, res) {
