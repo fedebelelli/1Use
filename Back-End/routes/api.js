@@ -229,6 +229,106 @@ router.post('/confirmation', (req, res) => {
 
 });
 
+
+router.post('/lostpassword', (req,res) => {
+
+    let userData = req.body
+   
+    User.findOne({ email: userData.email }, (error, user) => {
+
+        if (error) {
+            console.log(error)
+        }
+        else {
+
+            let payload = { subject: userData.email }
+            jwt.sign(payload, 'secretKey',
+                {
+                    expiresIn: '1d',
+                },
+                (err, token) => {
+                    const url = 'http://localhost:4200/home';
+                    transporter.sendMail({
+                        from: 'one.use.pf@gmail.com',
+                        to: userData.email,
+                        subject: 'Cambio de contraseña en www.1use.com',
+                        /* html: '<h1>Gracias por registrarte en OneUse</h1> <br> Para Confirmar tu email, por favor, haz click en este <a href="' + url + '">link' + '</a>', */
+                        html: `
+                        <!DOCTYPE html>
+                        <html lang="es">
+                        <head>
+                            <meta charset="utf-8">
+                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+                        </head>
+
+                        <body>
+                        <section style="background-color: #4a70af;">
+                        <div style="text-align: center;">
+                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
+                        </div>
+                      
+                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
+                      
+                          <h2 style="text-align:center !important"> Cambio de contraseña </h2>
+                         
+                          <p> Este mail ha sido generado debido a que ud solicito un cambio de contraseña por el olvido de la misma, para continuar con el cambio de contraseña, por favor siga el siguiente enlace </p>
+                      
+                          <div style="text-align:center !important;">
+                            <a style="
+                                                  line-height: 40px;
+                                                  padding: 0 40px;
+                                                  border-radius: 20px;
+                                                  background: transparent;
+                                                  border: 1px solid #ffd60f;
+                                                  display: inline-block;
+                                                  font-weight: 450;
+                                                  -webkit-transition: all 0.3s ease 0s;
+                                                  -moz-transition: all 0.3s ease 0s;
+                                                  -o-transition: all 0.3s ease 0s;
+                                                  transition: all 0.3s ease 0s;
+                                                  cursor: pointer;
+                                                  outline: none;
+                                                  margin-top: 20px;
+                                                  margin-bottom: 20px;
+                                                  margin-left: 14px;
+                                                  background: #4a70af;
+                                                  text-decoration: none;
+                                                  color: #fff;
+                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
+                                                  " href="`+ url + `">Cambio de contraseña</a>
+                          </div>
+                          
+                          <br>
+
+                          <p>
+                                Si usted no solicito ningun cambio de contraseña, ignore este mail. 
+                          </p>
+                          <p>
+                            Gracias por ayudarnos a mantener la seguridad de tu cuenta.
+                          </p>
+                      
+                          <p style="font-style: italic">
+                            El equipo de OneUse
+                          </p>
+                      
+                        </section>
+                        <br><br><br>
+                      </section>
+                      
+                        </body>
+                        </html>
+                        `,
+                    });
+                },
+            );
+            res.status(200).send(true);
+
+            
+        }
+    })
+
+})
+
 router.get('/user-data', function (req, res) {
     let params = req.query.email;
     User.findOne({ email: params }, (error, user) => {

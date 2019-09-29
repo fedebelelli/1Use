@@ -33,6 +33,7 @@ export class AuthService {
   private _notificacionesNuevas = "http://localhost:4201/api/nuevas-notificaciones/"
   private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
   private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
+  private _mailPassword = "http://localhost:4201/api/lostpassword/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -48,6 +49,10 @@ export class AuthService {
 
   loginUser(user) {
     return this.http.post<any>(this._loginUrl, user)
+  }
+
+  mailPassword(user){
+    return this.http.post<any>(this._mailPassword, user)
   }
 
   confirmar(token) {

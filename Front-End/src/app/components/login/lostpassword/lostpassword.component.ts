@@ -11,7 +11,7 @@ import { SingletonService } from '../../singleton.service';
 })
 export class LostPasswordComponent implements OnInit {
 
-  loginUserData = { email: undefined, password: undefined }
+  mailPasswordData = { email: undefined }
   constructor(private _auth: AuthService, private _router: Router, private _snackBar: MatSnackBar, private singleton: SingletonService) { }
   estado: boolean;
 
@@ -20,29 +20,19 @@ export class LostPasswordComponent implements OnInit {
   }
 
  
-  restablecerPassword() {
-    this._auth.loginUser(this.loginUserData).subscribe( 
+  mailPassword() {
+    this._auth.mailPassword(this.mailPasswordData).subscribe( 
       res => {
-        //localStorage.setItem('token', res.token)
-        //localStorage.setItem('email', this.loginUserData.email)
-        //this.estado = true;
-        this._router.navigate(['/confirmalostpassword']);
-        //this.iniciarSesion();
-      },
+         this._router.navigate(['/confirmalostpassword']);
+        },
       err => {
-        this.estado = false;
+        
         this.openSnackBar(err.error, "Aceptar");
       }
     )
   }
 
-  iniciarSesion() {
-    if (this.estado) {
-      this.singleton.setInicioSesion(true);
-      window.location.assign('/home');
-    } else this.singleton.setInicioSesion(false);
-  }
-
+  
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

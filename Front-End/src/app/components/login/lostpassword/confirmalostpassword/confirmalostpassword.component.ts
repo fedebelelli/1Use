@@ -12,9 +12,9 @@ export class ConfirmaLostPasswordComponent implements OnInit {
   constructor(private _router: Router, private singleton: SingletonService) { }
 
   ngOnInit() {
-    if (!this.singleton.verificarToken()) {
-      this._router.navigate(['/*']);
-    }
+    // if (!this.singleton.verificarToken()) {
+    //   this._router.navigate(['/*']);
+    // }
   }
 
 }
