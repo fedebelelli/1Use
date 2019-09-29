@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router()
 const nodemailer = require("nodemailer");
+var moment = require('moment');
 const app = express();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
@@ -32,6 +33,7 @@ const User = require('../auth/auth.model');
 const Publicacion = require('../Models/publicaciones.model');
 const PyR = require('../Models/pyr.model');
 const Notificacion = require('../Models/notificaciones.model');
+const MisAlquileres = require('../Models/mis-alquileres.model');
 
 /* ---------------------------- Métodos de configuración ------------------------- */
 mongoose.connect(db, { useNewUrlParser: true }, err => {
@@ -328,14 +330,14 @@ router.post('/register-publicacion', function (req, res) {
         if (err) return res.status(500).send("Error papi");
         if (!res) return res.status(404).send("Error papi");
 
-                   
-                
-                    const url = 'http://localhost:4200/publicaciones/' + publicaciones.id;
-                    transporter.sendMail({
-                        from: 'one.use.pf@gmail.com',
-                        to: publicaciones.email,
-                        subject: 'Su publicacion ha sido publicada exitosamente',
-                        html: `
+
+
+        const url = 'http://localhost:4200/publicaciones/' + publicaciones.id;
+        transporter.sendMail({
+            from: 'one.use.pf@gmail.com',
+            to: publicaciones.email,
+            subject: 'Su publicacion ha sido publicada exitosamente',
+            html: `
                         <!DOCTYPE html>
                         <html lang="es">
                         <head>
@@ -396,12 +398,12 @@ router.post('/register-publicacion', function (req, res) {
                         </body>
                         </html>
                         `,
-                        
-                    });
-                
-            
-         return res.status(200).send("todo legal papi");
-        })
+
+        });
+
+
+        return res.status(200).send("todo legal papi");
+    })
 
 })
 
@@ -758,8 +760,180 @@ router.post("/notificacion-vista", function (req, res) {
 /* ------------------------------ Mis alquileres ----------------------------------- */
 
 //Test de generación de códigos
-router.post('/codigo-alquiler', function(req,res){
+router.post('/codigo-alquiler', function (req, res) {
     res.status(200).send(randomstring.generate(10));
+})
+
+router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLocatario/:cantidadDias/:cantidadAlquilar', function (req, res) {
+    var estado = 'En proceso de pago';
+    var id_publicacion = req.params.id_publicacion;
+    var id_usuarioPropietario = req.params.usuarioPropietario;
+    var id_usuarioLocatario = req.params.usuarioLocatario;
+    var cantidadDias = req.params.cantidadDias;
+    var cantidadAlquilar = req.params.cantidadAlquilar;
+
+    var objeto = {
+        estado: estado, id_publicacion: id_publicacion, id_usuarioPropietario: id_usuarioPropietario,
+        id_usuarioLocatario: id_usuarioLocatario, cantidadDias: cantidadDias, cantidadAlquilar: cantidadAlquilar
+    }
+
+    var misAlquileres = new MisAlquileres(objeto);
+
+    misAlquileres.save((err, alquiler) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+
+})
+
+router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
+    var id_publicacion = req.params.id_publicacion;
+    var estado = 'En proceso de entrega';
+    var codigoEntregaPropietario = randomstring.generate(10);
+    var codigoEntregaLocatario = randomstring.generate(10);
+    var codigoPropietarioIngresado = false;
+    var codigoLocatarioIngresado = false;
+    var date = new Date();
+    date.setDate(date.getDate() + 3) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN ENTREGAR EL PRODUCTO
+    var fechaCaducidadEntrega = moment(date).format('DD/MM/YYYY');
+
+    var objeto = {
+        estado: estado, codigoEntregaPropietario: codigoEntregaPropietario, codigoEntregaLocatario: codigoEntregaLocatario,
+        fechaCaducidadEntrega: fechaCaducidadEntrega, codigoPropietarioIngresado: codigoPropietarioIngresado, codigoLocatarioIngresado: codigoLocatarioIngresado
+    }
+
+    MisAlquileres.findOneAndUpdate({ id_publicacion: id_publicacion }, objeto, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+
+})
+
+
+router.post("/registrar-entrega-locatario/:codigoEntregaPropietario", function (req, res) {
+    var codigoEntregaPropietario = req.params.codigoEntregaPropietario;
+    var codigoPropietarioIngresado = true;
+
+    MisAlquileres.findOneAndUpdate({ codigoEntregaPropietario: codigoEntregaPropietario }, { codigoPropietarioIngresado: codigoPropietarioIngresado }, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+})
+
+router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (req, res) {
+    var codigoEntregaLocatario = req.params.codigoEntregaLocatario;
+    var codigoLocatarioIngresado = true;
+    var fueDevuelto = false;
+    var estado = 'Entregado y en alquiler';
+    var date = new Date();
+    var fechaEntrega = moment(date).format('DD/MM/YYYY');
+
+    MisAlquileres.findOne({ codigoEntregaLocatario: codigoEntregaLocatario, fueDevuelto: fueDevuelto }, function (err1, alquiler1) {
+        var diasAlquiler = alquiler1.cantidadDias;
+        var date2 = new Date();
+        date2.setDate(date2.getDate() + diasAlquiler + 1) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN devolder EL PRODUCTO
+        var fechaCaducidadDevolucion = moment(date2).format('DD/MM/YYYY');
+
+        MisAlquileres.findOneAndUpdate({ codigoEntregaLocatario: codigoEntregaLocatario }, {
+            estado: estado, codigoLocatarioIngresado: codigoLocatarioIngresado,
+            fechaEntrega: fechaEntrega, fechaCaducidadDevolucion: fechaCaducidadDevolucion
+        }, function (err, alquiler) {
+            if (err) return res.status(500).send({ message: 'Error' });
+
+            if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+            return res.status(200).send({ alquiler });
+        })
+    })
+})
+router.post("/registrar-demora-devolucion/:id_usuarioPropietario", function (req, res) {
+    var fechaActual = moment(new Date()).format('DD/MM/YYYY');;
+    var id_usuarioPropietario = req.params.id_usuarioPropietario;
+
+    MisAlquileres.findOne({ id_usuarioPropietario: id_usuarioPropietario }, function (err1, alquiler1) {
+        var fechaCaducidadDevolucion = alquiler1.fechaCaducidadDevolucion;
+        if (fechaCaducidadDevolucion == fechaActual) {
+            var estado = 'En proceso de devolucion'
+
+            MisAlquileres.findByIdAndUpdate(alquiler1._id, { estado: estado }, function (err, alquiler) {
+                if (err) return res.status(500).send({ message: 'Error' });
+
+                if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+                return res.status(200).send({ alquiler });
+            })
+        } else {
+            res.status(500).send("xd")
+        }
+    })
+
+})
+
+/* Este evento lo genera el propietario cuando coloca el botón "Finalizar alquiler" en "Mis Alquileres" */
+router.post('/registrar-proceso-finalizacion/:id_usuarioPropietario', function (req, res) {
+    var id_usuarioPropietario = req.params.id_usuarioPropietario;
+    var fueDevuelto = true;
+    var codigoDevolucionPropietario = randomstring.generate(10);
+    var codigoDevolucionLocatario = randomstring.generate(10);
+    var codigoPropietarioDevolucionIngresado = false;
+    var codigoLocatarioDevolucionIngresado = false;
+
+    var objeto = {
+        fueDevuelto: fueDevuelto,
+        codigoDevolucionPropietario: codigoDevolucionPropietario, codigoDevolucionLocatario: codigoDevolucionLocatario,
+        codigoPropietarioDevolucionIngresado: codigoPropietarioDevolucionIngresado,
+        codigoLocatarioDevolucionIngresado: codigoLocatarioDevolucionIngresado
+    }
+
+    MisAlquileres.findOneAndUpdate({ id_usuarioPropietario: id_usuarioPropietario }, objeto, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+
+})
+
+
+router.post("/registrar-finalizacion-locatario/:codigoDevolucionPropietario", function (req, res) {
+    var codigoDevolucionPropietario = req.params.codigoDevolucionPropietario;
+    var codigoPropietarioDevolucionIngresado = true;
+
+    MisAlquileres.findOneAndUpdate({ codigoDevolucionPropietario: codigoDevolucionPropietario }, { codigoPropietarioDevolucionIngresado: codigoPropietarioDevolucionIngresado }, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+})
+
+router.post("/registrar-finalizacion-propietario/:codigoDevolucionLocatario", function (req, res) {
+    var codigoDevolucionLocatario = req.params.codigoDevolucionLocatario;
+    var codigoLocatarioDevolucionIngresado = true;
+    var estado = 'Finalizado';
+    var date = new Date();
+    var fechaDevolucion = moment(date).format('DD/MM/YYYY');
+
+    MisAlquileres.findOneAndUpdate({ codigoDevolucionLocatario: codigoDevolucionLocatario }, {
+        estado: estado, codigoLocatarioDevolucionIngresado: codigoLocatarioDevolucionIngresado, fechaDevolucion: fechaDevolucion
+    }, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
 })
 
 
