@@ -23,6 +23,8 @@ export class PosAlquilerComponent implements OnInit {
   nombre;
   email;
   telefono;
+  apellido;
+  codArea;
 
   ngOnInit() {
 
@@ -52,16 +54,18 @@ export class PosAlquilerComponent implements OnInit {
             this.nombre = res.nombre;
             this.email = res.email;
             this.telefono = res.telefono;
+            this.apellido = res.apellido;
+            this.codArea = res.codArea;
           },
           err => { }
-
-
         )
-
-
       },
       res => {
       })
+  }
+
+  registrarAlquiler(){
+
   }
 
 

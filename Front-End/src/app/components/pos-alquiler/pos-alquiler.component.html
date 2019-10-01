@@ -1,5 +1,5 @@
-<div fxLayoutAlign="center center" style="margin-top: 15px;">
-    <h2>Estas a punto de alquilar "{{titulo}}" !</h2>
+<div fxLayoutAlign="center center" style="margin-top: 30px;">
+    <h2>¡Estás a punto de alquilar "{{titulo}}" !</h2>
 </div>
 
 <div fxLayoutAlign="center center" fxLayout="row" class="datosAlquiler">
@@ -26,13 +26,12 @@
                 </swiper>
             </div>
         </div>
-
     </div>
     <div fxFlex="780,400" fxFlexFill>
         <h5><b>El dueño de tu producto</b></h5>
-        <h5>Nombre y Apellido: {{nombre}}</h5>
+        <h5>Nombre y Apellido: {{nombre}} {{apellido}}</h5>
         <h5>Email: {{email}}</h5>
-        <h5>Teléfono: {{telefono}}</h5>
+        <h5>Teléfono: ({{codArea}}) {{telefono}}</h5>
         <br>
         <mat-divider></mat-divider>
         <br>
@@ -43,6 +42,6 @@
         <h5>Precio por mes: {{preciomes}}</h5>
         <br>
         <br>
-        <button  [routerLink]="['/confirmacion-Alquiler']" style="width: 300px;" mat-raised-button color="primary">Continuar con el pago</button>
+        <button (click)="registrarAlquiler()" [routerLink]="['/confirmacion-Alquiler']" style="width: 300px;" mat-raised-button color="primary">Continuar con el pago</button>
     </div>
 </div>

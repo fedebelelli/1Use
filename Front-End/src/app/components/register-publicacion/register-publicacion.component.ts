@@ -35,6 +35,8 @@ export class RegisterPublicacionComponent implements OnInit {
   destacar: String = 'NO';
   seDestaca: Boolean = false;
   tipoAlquiler: String;
+  cantDias: number;
+  cantidadDisponible: number;
 
 
   _id;
@@ -62,7 +64,9 @@ export class RegisterPublicacionComponent implements OnInit {
       descripcion: [{ value: '' }, Validators.required],
       preciodia: [{ value: '' }, Validators.required],
       preciosemana: [{ value: '' }],
-      preciomes: [{ value: '' }]
+      preciomes: [{ value: '' }],
+      cantDias: [{ value: '' }, Validators.required],
+      cantidadDisponible: [{ value: '' }, Validators.required]
     });
 
     this.fotoProductoGroup = this._formBuilder.group({
@@ -125,7 +129,6 @@ export class RegisterPublicacionComponent implements OnInit {
         };
         reader.readAsDataURL(file);
       });
-      console.log(this.arrayImagenes);
       this.fotoProductoGroup.patchValue({
         multiplefile: [{ value: this.arrayImagenes }, Validators.required]
       })
@@ -166,7 +169,9 @@ export class RegisterPublicacionComponent implements OnInit {
       descripcion: this.descripcion,
       preciodia: this.preciodia,
       preciosemana: this.preciosemana,
-      preciomes: this.preciomes
+      preciomes: this.preciomes,
+      cantDias: this.cantDias,
+      cantidadDisponible: this.cantidadDisponible
     })
 
     this.fotoProductoGroup.patchValue({
@@ -213,7 +218,9 @@ export class RegisterPublicacionComponent implements OnInit {
     this.preciomes = null;
     this.image = '';
     this.tipoAlquiler = ''
-    this.destacar = 'NO'
+    this.destacar = 'NO';
+    this.cantidadDisponible = null;
+    this.cantDias = null;
 
     this.joinGroup = {
       ...this.categoriaFormGroup.value,
@@ -238,12 +245,12 @@ export class RegisterPublicacionComponent implements OnInit {
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
             console.log(result);
-            if(this.seDestaca){
+            if (this.seDestaca) {
               window.location.assign("/destacacion-publicacion");
-            }else{
+            } else {
               window.location.assign("/publicacion-exito");
             }
-            
+
           });
       }
     )
@@ -261,7 +268,7 @@ export class RegisterPublicacionComponent implements OnInit {
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
   herramientasArray: string[] = ['Industria', 'Repuestos', 'Muebles para negocios - oficinas']
-  librosArray: string[] = ['Novela','Gótico','Ciencia Ficción','Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
+  librosArray: string[] = ['Novela', 'Gótico', 'Ciencia Ficción', 'Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
   otrosArray: string[] = ['Otra categoria']
 
 

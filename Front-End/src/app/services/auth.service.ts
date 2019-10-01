@@ -34,6 +34,7 @@ export class AuthService {
   private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
   private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
   private _mailPassword = "http://localhost:4201/api/lostpassword/"
+  private _alquilerProcesoPago = "http://localhost:4201/api/registrar-alquiler/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -51,7 +52,7 @@ export class AuthService {
     return this.http.post<any>(this._loginUrl, user)
   }
 
-  mailPassword(user){
+  mailPassword(user) {
     return this.http.post<any>(this._mailPassword, user)
   }
 
@@ -136,25 +137,32 @@ export class AuthService {
   /* NOTIFICACIONES */
   notificacion_pregunta_publicacion(origen, destino, id_publicacion) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._nuevaNotificacionPregunta + origen + "/" + destino + "/" + id_publicacion,params);
+    return this.http.post<any>(this._nuevaNotificacionPregunta + origen + "/" + destino + "/" + id_publicacion, params);
   }
 
   notificacion_respuesta_publicacion(origen, destino, id_publicacion) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._nuevaNotificacionRespuesta + origen + "/" + destino + "/" + id_publicacion,params);
+    return this.http.post<any>(this._nuevaNotificacionRespuesta + origen + "/" + destino + "/" + id_publicacion, params);
   }
 
-  notificacion_nueva(username){
+  notificacion_nueva(username) {
     return this.http.get<any>(this._notificacionesNuevas + username);
   }
 
-  notificaciones_todas(username){
+  notificaciones_todas(username) {
     return this.http.get<any>(this._notificacionesTodas + username);
   }
 
-  notificacion_vista(notificacion){
+  notificacion_vista(notificacion) {
     let params = JSON.stringify(notificacion);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(this._notificacionVista, params, { headers: headers });
+  }
+
+
+  /* MIS ALQUILERES */
+  registrar_EnProcesoPago(id_publicacion, id_propietario, id_locatario, cantidadDias, cantidadAlquiler) {
+    let params = JSON.stringify(id_publicacion);
+    return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + id_propietario + "/" + id_locatario + "/" + cantidadDias + "/" + cantidadAlquiler, params);
   }
 }

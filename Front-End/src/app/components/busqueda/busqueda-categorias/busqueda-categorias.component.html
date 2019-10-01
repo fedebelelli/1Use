@@ -1,273 +1,301 @@
-
-    <div class="row">
-        <div class="col" style="margin-top: 20px;">
-                    <h5 class="search-title" style="text-align: center;">
-                
-                    <span >
-                        {{titulo}} 
-                    </span>
-                
-            </h5>
-        </div>
+<div class="row">
+    <div class="col" style="margin-top: 20px;">
+        <h5 class="search-title" style="text-align: center;">
+            <span> {{titulo}} </span>
+        </h5>
     </div>
-
-    <div class="row">
-        <div class="tab-content col-12">
-            <div class="tab-pane active" id="product-search-results" role="tabpanel" aria-expanded="true">
-                
-                <div class="row grid-header align-items-md-center justify-content-md-between">
-                        <div class=" text-md-center col-12 col-md-auto order-md-2">
-                            
-<!--                                 <span>
-                                    Ordenar publicaciones por:
-                                </span> -->
-                            </div>
-
-                    <div class="col-6 col-md-auto order-md-3 text-right">
-                        
-                        <!-- <select name="sort-order" class="custom-select" data-aesra-score="formFieldLabel:0.9;" aria-label="sort order" data-ae-blurbtype="select" data-ae-form-field="true">
-
-                            <option class="top-sellers" >
-                            Mejor puntuación 
-                            </option>
-
-                             <option class="price-low-to-high" data-id="price-low-to-high">
-                                Precio bajo a alto
-                             </option>
-    
-                            <option class="price-high-to-low"  data-id="price-high-to-low">
-                                Precio alto a bajo
-                               </option>
-    
-                                <option class="release-date-descending"  data-id="release-date-descending">
-                                Más recientes
-                                </option>
-    
-                                </select> -->
-
-
-                    </div>
-
-                    <div class="result-count text-md-center col-12 col-md-auto order-md-2"></div>
-                            <span>
-                            -
-                            </span>
-                        </div>
-                </div>
-            
-                <div class="row align-items-start">
-                    <div class="refinement-bar">
-                        <div class="refinements">
-
-                            <div class="card refinement refinement-category show-filters ">
-                    <div class="card-header">
-            
-                    Subcategorías
-
-                    <a class="reset link" href="/search/?q=run">
-
-                    <img class="icon reset-filter  ae-img" src="../../../assets/images/reset.png" alt="">
-                    Actualizar
-                </a>
-        </div>
-        <div class="card-body">
-                 
-            <ul *ngFor="let subcategoria of subcategorias" class="values content level-1">
-            <li>     
-            <a class="category-link "> 
-                <span title="Refine by Category: Hogar">
-                {{subcategoria}}
-                </span>
-            </a> 
-            </li>
-            </ul>  
-        </div>
-
-    </div>
-
-    <div class="card refinement refinement-price collapsible-xl ">
-        <div class="card-header">
-                Precio alquiler por día
-        </div>
-        <div class="card-body">
-            
-                <ul class="values content">
-
-                 <li class="col-sm-4 col-md-12" title="Refine by Price: $0 - $10">
-                    <a href="/search/?pmax=10.00&amp;pmin=0.00&amp;q=run" class="custom-control custom-radio form-group">
-            
-                        <input type="radio" class="custom-control-input" data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;" data-ae-blurbtype="checkable" data-ae-form-field="true">
-            
-                        <label class="custom-control-label ae-label">
-                             $0 - $10
-                        </label>
-                     </a>
-                    </li>
-
-                <li class="col-sm-4 col-md-12" title="Refine by Price: $10 - $25">
-                 <a href="/search/?pmax=25.00&amp;pmin=10.00&amp;q=run" class="custom-control custom-radio form-group">
-            
-                <input type="radio" class="custom-control-input" data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;" data-ae-blurbtype="checkable" data-ae-form-field="true">
-        
-                     <label class="custom-control-label ae-label">
-                        $10 - $25
-                     </label>
-                    </a>
-                    </li>
-
-                </ul>
-        </div>
-    </div>
-
-    <div class="card refinement refinement-release-date collapsible-xl ">
-        <div class="card-header">
-                Disponibilidad
-        </div>
-        <div class="card-body">
-
-            <ul class="values content">
-
-    
-        <li title="Refine by Release Date: Disponible Ahora" class="col-sm-4 col-md-12 ">
-            <a href="/search/?prefn1=isPreorder&amp;prefv1=Available%20Now&amp;q=run" class="custom-control custom-checkbox form-group ">
-    
-                <input type="checkbox" class="custom-control-input" data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;" data-ae-blurbtype="checkable" data-ae-form-field="true">
-    
-                <label class="custom-control-label  ae-label">Disponible ahora</label>
-            </a>
-            </li>
-   
-
-</ul>      
-        </div>
-    </div>
-
-
-<div class="mobile-refinement-options">
-    <button type="button" class="btn btn-primary filter-results-toggle ae-button" data-ae-blurbtype="button" data-ae-form-field="true">
-        Filtrar
-    </button>
 </div>
-                        </div>
 
-
-                    </div>
-
-                    <div class="product-grid-wrapper">
-                        
-                        <div class="row product-grid" >
-                                <div class="product-grid-tile-wrapper" *ngFor="let publicacion of publicaciones" >
-                            <!--  -->
-                           
-                        <div class="product grid-tile">
-                            <div class="product-tile" >
-                
-                            <div class="image-container">
-
-                    <a  routerLink="/publicaciones/{{publicacion._id}}">
-                     <img class="tile-image ae-img"  src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[0]}}" >
-                        </a>
-
-                            <a class="quickview btn btn-outline-primary" routerLink="/publicaciones/{{publicacion._id}}">
-                            Ver
-                            </a>
-                            </div>
-
-                        <div class="tile-body">
-    
-                             <div class="product-tile-header">
-        
-                            <div class="pdp-link">
-                                    <a class="link h5 pb-1 mb-0 d-block" style="color: black; font-size: 18px" routerLink="/publicaciones/{{publicacion._id}}">
-                                        {{publicacion.titulo}}
-                                    </a>
-                           </div>
-
-                    <div class="product-tile-availability">
-
-                    <span class="pr-1"> Subcategoria: {{publicacion.subcategoria}} </span>
-                    </div>
-    </div>
-
-  
-        <div class="condition-pricing pb-1">
-            <ul class="list-group list-group-flush list-group-condition font-weight-bold" role="presentation">
-        
-            <li class="list-group-item" role="presentation">
-                <span class="condition-display-name pull-left"> Precio alquiler por día</span>
-                <!-- Condition Price -->
-                
-                        <span class="price pull-right">  
-                <div class="price">
-                <span class="price">
-
-                <span class="sales">
-                <span class="value" >
-                        ${{publicacion.preciodia}}
-            </span>
-            </span>
-            </span>
+<div class="row">
+    <div class="tab-content col-12">
+        <div class="tab-pane active" id="product-search-results" role="tabpanel" aria-expanded="true">
+            <div class="row grid-header align-items-md-center justify-content-md-between">
+                <div class=" text-md-center col-12 col-md-auto order-md-2"></div>
+                <div class="col-6 col-md-auto order-md-3 text-right"></div>
+                <div class="result-count text-md-center col-12 col-md-auto order-md-2"></div>
+                <span>-</span>
             </div>
-            </span>                        
-            </li>
-    </ul>
-</div>
-<div class="row tile-promotions">
-    <div class="callout" title="Aclaraciones">
-            Subcategoria: {{publicacion.subcategoria}}
-                </div>
-</div>
-
-<div class="row tile-ratings">
-<div class="ratings col-12 col-sm-12 pb-2">
-    
-
-
-
-
-    <div data-bv-show="inline_rating" data-bv-productid="10168019" data-bv-redirect-url="/video-games/retro-gaming/playstation-2/games/products/the-simpsons-hit-and-run/10168019.html" data-bv-ready="true"><a id="7016457f-4702-4edb-b51b-0bf33335c744" href="/video-games/retro-gaming/playstation-2/games/products/the-simpsons-hit-and-run/10168019.html" class="bv_main_container bv_hover" aria-label="4.0 out of 5 stars. 1 review " itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><div class="bv_stars_component_container" aria-hidden="true"><div class="bv_stars_button_container"><span class="bv_stars_svg_no_wrap" style="
-        padding-left: 12px;
-    " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 25 25" style="width: 16px !important; height: 16px !important;"><polygon points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856" style="fill: url(&quot;#bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k&quot;) !important;"></polygon><path d="" style="fill: url(&quot;#bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k&quot;) !important;"></path><defs><linearGradient id="bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k" x1="99.99%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: rgb(218, 41, 28); stop-opacity: 1;"></stop><stop offset="1%" style="stop-color: rgb(227, 227, 227); stop-opacity: 1;"></stop></linearGradient></defs></svg><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 25 25" style="width: 16px !important; height: 16px !important;"><polygon points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856" style="fill: url(&quot;#bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e&quot;) !important;"></polygon><path d="" style="fill: url(&quot;#bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e&quot;) !important;"></path><defs><linearGradient id="bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e" x1="99.99%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: rgb(218, 41, 28); stop-opacity: 1;"></stop><stop offset="1%" style="stop-color: rgb(227, 227, 227); stop-opacity: 1;"></stop></linearGradient></defs></svg><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 25 25" style="width: 16px !important; height: 16px !important;"><polygon points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856" style="fill: url(&quot;#bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs&quot;) !important;"></polygon><path d="" style="fill: url(&quot;#bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs&quot;) !important;"></path><defs><linearGradient id="bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs" x1="99.99%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: rgb(218, 41, 28); stop-opacity: 1;"></stop><stop offset="1%" style="stop-color: rgb(227, 227, 227); stop-opacity: 1;"></stop></linearGradient></defs></svg><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 25 25" style="width: 16px !important; height: 16px !important;"><polygon points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856" style="fill: url(&quot;#bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2&quot;) !important;"></polygon><path d="" style="fill: url(&quot;#bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2&quot;) !important;"></path><defs><linearGradient id="bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2" x1="99.99%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: rgb(218, 41, 28); stop-opacity: 1;"></stop><stop offset="1%" style="stop-color: rgb(227, 227, 227); stop-opacity: 1;"></stop></linearGradient></defs></svg><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 25 25" style="width: 16px !important; height: 16px !important;"><polygon points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856" style="fill: url(&quot;#bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai&quot;) !important;"></polygon><path d="" style="fill: url(&quot;#bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai&quot;) !important;"></path><defs><linearGradient id="bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai" x1="0.00%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: rgb(218, 41, 28); stop-opacity: 1;"></stop><stop offset="1%" style="stop-color: rgb(227, 227, 227); stop-opacity: 1;"></stop></linearGradient></defs></svg></span></div></div></a></div>
-
-
-
-
-</div>
-</div>
-
-<div class="row tile-body-footer">
-
-        <a class="primary-btn banner-btn" routerLink=""  style="margin-left: 65px;">Alquilar</a>
- 
-
-
-
-<div class="compare col-sm-6 d-none d-sm-block">   
-
-</div>
-</div>
-</div>
-
-</div>
-
-</div>        
-</div>
-
-
-
-
+        </div>
+        <div class="row align-items-start">
+            <div class="refinement-bar">
+                <div class="refinements">
+                    <div class="card refinement refinement-category show-filters ">
+                        <div class="card-header">Subcategorías
+                            <a class="reset link" href="/search/?q=run">
+                                <img class="icon reset-filter  ae-img" src="../../../assets/images/reset.png" alt="">
+                                Actualizar
+                            </a>
                         </div>
+                        <div class="card-body">
+                            <ul *ngFor="let subcategoria of subcategorias" class="values content level-1">
+                                <li>
+                                    <a class="category-link ">
+                                        <span title="Refine by Category: Hogar"> {{subcategoria}} </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                        <!-- Search Ad placeholder -->
-                        <div id="SearchAd_2" class="mb-4" data-google-query-id="CIyUq-qon-QCFQ9TwQodafMDAw" style="display: none;"><div id="google_ads_iframe_/21675127096/GSweb/search_1__container__" style="border: 0pt none; margin: auto; text-align: center; width: 100%; height: 0%;"></div></div>
+                    <div class="card refinement refinement-price collapsible-xl ">
+                        <div class="card-header"> Precio alquiler por día </div>
+                        <div class="card-body">
+                            <ul class="values content">
+                                <li class="col-sm-4 col-md-12" title="Refine by Price: $0 - $10">
+                                    <a href="/search/?pmax=10.00&amp;pmin=0.00&amp;q=run"
+                                        class="custom-control custom-radio form-group">
+                                        <input type="radio" class="custom-control-input"
+                                            data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;"
+                                            data-ae-blurbtype="checkable" data-ae-form-field="true">
+                                        <label class="custom-control-label ae-label"> $0 - $10 </label>
+                                    </a>
+                                </li>
+
+                                <li class="col-sm-4 col-md-12" title="Refine by Price: $10 - $25">
+                                    <a href="/search/?pmax=25.00&amp;pmin=10.00&amp;q=run"
+                                        class="custom-control custom-radio form-group">
+                                        <input type="radio" class="custom-control-input"
+                                            data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;"
+                                            data-ae-blurbtype="checkable" data-ae-form-field="true">
+                                        <label class="custom-control-label ae-label">$10 - $25</label>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card refinement refinement-release-date collapsible-xl ">
+                        <div class="card-header">Disponibilidad</div>
+                        <div class="card-body">
+                            <ul class="values content">
+                                <li title="Refine by Release Date: Disponible Ahora" class="col-sm-4 col-md-12">
+                                    <a href="/search/?prefn1=isPreorder&amp;prefv1=Available%20Now&amp;q=run"
+                                        class="custom-control custom-checkbox form-group ">
+                                        <input type="checkbox" class="custom-control-input"
+                                            data-aesra-score="formFieldLabel:0.9;formFieldLabel:0.9;"
+                                            data-ae-blurbtype="checkable" data-ae-form-field="true">
+                                        <label class="custom-control-label  ae-label">Disponible ahora</label>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mobile-refinement-options">
+                        <button type="button" class="btn btn-primary filter-results-toggle ae-button"
+                            data-ae-blurbtype="button" data-ae-form-field="true"> Filtrar </button>
                     </div>
                 </div>
-            
+            </div>
+
+            <div class="product-grid-wrapper">
+                <div class="row product-grid">
+                    <div class="product-grid-tile-wrapper" *ngFor="let publicacion of publicaciones">
+                        <div class="product grid-tile">
+                            <div class="product-tile">
+                                <div class="image-container">
+                                    <a routerLink="/publicaciones/{{publicacion._id}}">
+                                        <img class="tile-image ae-img"
+                                            src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[0]}}">
+                                    </a>
+                                    <a class="quickview btn btn-outline-primary"
+                                        routerLink="/publicaciones/{{publicacion._id}}"> Ver </a>
+                                </div>
+
+                                <div class="tile-body">
+                                    <div class="product-tile-header">
+                                        <div class="pdp-link">
+                                            <a class="link h5 pb-1 mb-0 d-block" style="color: black; font-size: 18px"
+                                                routerLink="/publicaciones/{{publicacion._id}}">
+                                                {{publicacion.titulo}}
+                                            </a>
+                                        </div>
+
+                                        <div class="product-tile-availability">
+                                            <span class="pr-1"> Subcategoria: {{publicacion.subcategoria}} </span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="condition-pricing pb-1">
+                                        <ul class="list-group list-group-flush list-group-condition font-weight-bold"
+                                            role="presentation">
+                                            <li class="list-group-item" role="presentation">
+                                                <span class="condition-display-name pull-left"> Precio alquiler por
+                                                    día</span>
+                                                <span class="price pull-right">
+                                                    <div class="price">
+                                                        <span class="price">
+                                                            <span class="sales">
+                                                                <span class="value"> ${{publicacion.preciodia}} </span>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="row tile-promotions">
+                                        <div class="callout" title="Aclaraciones"> Subcategoria:
+                                            {{publicacion.subcategoria}} </div>
+                                    </div>
+
+                                    <div class="row tile-ratings">
+                                        <div class="ratings col-12 col-sm-12 pb-2">
+                                            <div data-bv-show="inline_rating" data-bv-productid="10168019"
+                                                data-bv-ready="true">
+                                                <a id="7016457f-4702-4edb-b51b-0bf33335c744"
+                                                    class="bv_main_container bv_hover"
+                                                    aria-label="4.0 out of 5 stars. 1 review "
+                                                    itemprop="aggregateRating" itemscope="">
+                                                    <div class="bv_stars_component_container" aria-hidden="true">
+                                                        <div class="bv_stars_button_container">
+                                                            <span class="bv_stars_svg_no_wrap"
+                                                                style="padding-left: 12px;" aria-hidden="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                                    height="16px" viewBox="0 0 25 25"
+                                                                    style="width: 16px !important; height: 16px !important;">
+                                                                    <polygon
+                                                                        points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856"
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k&quot;) !important;">
+                                                                    </polygon>
+                                                                    <path d=""
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k&quot;) !important;">
+                                                                    </path>
+                                                                    <defs>
+                                                                        <linearGradient
+                                                                            id="bv_inline_ratings_star_filled_0_99.99_ZRRdu1lA5k"
+                                                                            x1="99.99%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="0%"
+                                                                                style="stop-color: rgb(218, 41, 28); stop-opacity: 1;">
+                                                                            </stop>
+                                                                            <stop offset="1%"
+                                                                                style="stop-color: rgb(227, 227, 227); stop-opacity: 1;">
+                                                                            </stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                                    height="16px" viewBox="0 0 25 25"
+                                                                    style="width: 16px !important; height: 16px !important;">
+                                                                    <polygon
+                                                                        points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856"
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e&quot;) !important;">
+                                                                    </polygon>
+                                                                    <path d=""
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e&quot;) !important;">
+                                                                    </path>
+                                                                    <defs>
+                                                                        <linearGradient
+                                                                            id="bv_inline_ratings_star_filled_1_99.99_RPqzb6ur3e"
+                                                                            x1="99.99%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="0%"
+                                                                                style="stop-color: rgb(218, 41, 28); stop-opacity: 1;">
+                                                                            </stop>
+                                                                            <stop offset="1%"
+                                                                                style="stop-color: rgb(227, 227, 227); stop-opacity: 1;">
+                                                                            </stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                                    height="16px" viewBox="0 0 25 25"
+                                                                    style="width: 16px !important; height: 16px !important;">
+                                                                    <polygon
+                                                                        points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856"
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs&quot;) !important;">
+                                                                    </polygon>
+                                                                    <path d=""
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs&quot;) !important;">
+                                                                    </path>
+                                                                    <defs>
+                                                                        <linearGradient
+                                                                            id="bv_inline_ratings_star_filled_2_99.99_ci2oHAJXCs"
+                                                                            x1="99.99%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="0%"
+                                                                                style="stop-color: rgb(218, 41, 28); stop-opacity: 1;">
+                                                                            </stop>
+                                                                            <stop offset="1%"
+                                                                                style="stop-color: rgb(227, 227, 227); stop-opacity: 1;">
+                                                                            </stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                                    height="16px" viewBox="0 0 25 25"
+                                                                    style="width: 16px !important; height: 16px !important;">
+                                                                    <polygon
+                                                                        points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856"
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2&quot;) !important;">
+                                                                    </polygon>
+                                                                    <path d=""
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2&quot;) !important;">
+                                                                    </path>
+                                                                    <defs>
+                                                                        <linearGradient
+                                                                            id="bv_inline_ratings_star_filled_3_99.99_yQ70B0PlT2"
+                                                                            x1="99.99%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="0%"
+                                                                                style="stop-color: rgb(218, 41, 28); stop-opacity: 1;">
+                                                                            </stop>
+                                                                            <stop offset="1%"
+                                                                                style="stop-color: rgb(227, 227, 227); stop-opacity: 1;">
+                                                                            </stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                                    height="16px" viewBox="0 0 25 25"
+                                                                    style="width: 16px !important; height: 16px !important;">
+                                                                    <polygon
+                                                                        points="25 9.12 15.5669599 9.12 12.512219 0 9.40860215 9.12 0 9.12 7.55131965 14.856 4.47214076 24 12.512219 18.216 20.5522972 24 17.4731183 14.856"
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai&quot;) !important;">
+                                                                    </polygon>
+                                                                    <path d=""
+                                                                        style="fill: url(&quot;#bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai&quot;) !important;">
+                                                                    </path>
+                                                                    <defs>
+                                                                        <linearGradient
+                                                                            id="bv_inline_ratings_star_filled_4_0.00_57T0xaN4ai"
+                                                                            x1="0.00%" y1="0%" x2="100%" y2="0%">
+                                                                            <stop offset="0%"
+                                                                                style="stop-color: rgb(218, 41, 28); stop-opacity: 1;">
+                                                                            </stop>
+                                                                            <stop offset="1%"
+                                                                                style="stop-color: rgb(227, 227, 227); stop-opacity: 1;">
+                                                                            </stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row tile-body-footer">
+                                        <a class="primary-btn banner-btn" routerLink=""
+                                            style="margin-left: 65px;">Alquilar</a>
+                                        <div class="compare col-sm-6 d-none d-sm-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="SearchAd_2" class="mb-4" data-google-query-id="CIyUq-qon-QCFQ9TwQodafMDAw"
+                    style="display: none;">
+                    <div id="google_ads_iframe_/21675127096/GSweb/search_1__container__"
+                        style="border: 0pt none; margin: auto; text-align: center; width: 100%; height: 0%;"></div>
+                </div>
             </div>
 
             <div class="tab-pane" id="content-search-results-pane" role="tabpanel" aria-expanded="false">
                 <div id="content-search-results" class="row content-grid-header"></div>
             </div>
-
+        </div>
     </div>
-
+</div>

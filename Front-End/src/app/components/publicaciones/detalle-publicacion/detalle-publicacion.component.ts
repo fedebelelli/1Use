@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-publicacion',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class DetallePublicacionComponent implements OnInit {
 
-  constructor(private _auth: AuthService, private _singleton: SingletonService, private _snackBar: MatSnackBar) { }
+  constructor(private _auth: AuthService, private _singleton: SingletonService, private _snackBar: MatSnackBar, private _formBuilder: FormBuilder) { }
 
   id;
   titulo;
@@ -31,13 +32,28 @@ export class DetallePublicacionComponent implements OnInit {
   es_publicador = false;
   email;
   logueado;
-  usuario = {};
+  usuario = { _id: '' };
+  usuario_logueado = { _id: '' };
   estadoBtnPreguntar = false;
   valorPregunta;
+  estaLogueado = false;
+  cantidadDisponible;
+  arrayCantidadDisponible = [];
+  cantidadDisponibleSeleccionada;
+  cantidadDias;
+  arraycantidadDias = [];
+  cantidadDiasSeleccionado;
+  btnAlquilar = true;
+  cantidades: FormGroup;
 
   ngOnInit() {
     var urlActual = window.location.href;
     this.id = urlActual.substr(36);
+
+    this.cantidades = this._formBuilder.group({
+      cantidadDisponibleSeleccionada: ['', Validators.required],
+      cantidadDiasSeleccionado: ['', Validators.required]
+    });
 
     this._auth.get_publicacion_id(this.id).subscribe(
       err => {
@@ -49,6 +65,16 @@ export class DetallePublicacionComponent implements OnInit {
         this.descripcion = err.publicaciones.descripcion;
         this.categoria = err.publicaciones.categoria;
         this.subcategoria = err.publicaciones.subcategoria;
+        this.cantidadDisponible = err.publicaciones.cantidadDisponible;
+        this.cantidadDias = err.publicaciones.cantDias;
+
+        for (let i = 0; i <= this.cantidadDisponible; i++) {
+          this.arrayCantidadDisponible.push(i);
+        }
+
+        for (let i = 0; i <= this.cantidadDias; i++) {
+          this.arraycantidadDias.push(i);
+        }
 
         //Para mostrar las imagenes
         this.publicacion = err.publicaciones;
@@ -60,16 +86,23 @@ export class DetallePublicacionComponent implements OnInit {
         this.publicacion.multiplefile = this.arrayJSON;
 
         this.email = this.publicacion.email;
-        this._auth.user_data(localStorage.getItem("email")).subscribe(
-          res => {
-            this.logueado = res;
-            if (this.email == this.logueado.email) {
-              this.es_publicador = true;
-            } else {
-              this.es_publicador = false;
+        if (localStorage.getItem("email") == undefined || localStorage.getItem("email") == null) {
+          this.estaLogueado = false;
+        } else {
+          this._auth.user_data(localStorage.getItem("email")).subscribe(
+            res => {
+              this.usuario_logueado = res;
+              this.logueado = res;
+              this.estaLogueado = true;
+              if (this.email == this.logueado.email) {
+                this.es_publicador = true;
+              } else {
+                this.es_publicador = false;
+              }
             }
-          },
-        )
+          )
+        }
+
 
         this._auth.user_data(this.email).subscribe(
           res => {
@@ -160,8 +193,25 @@ export class DetallePublicacionComponent implements OnInit {
 
       }
     )
+  }
 
+  habilitarAlquilar() {
+    if (this.cantidadDiasSeleccionado != null && this.cantidadDisponibleSeleccionada != null) {
+      if (this.cantidadDiasSeleccionado == 0 || this.cantidadDisponibleSeleccionada == 0) {
+        this.btnAlquilar = true;
+      } else {
+        this.btnAlquilar = false;
+      }
 
+    }
+  }
+
+  registrarAlquiler() {
+    this._auth.registrar_EnProcesoPago(this.id, this.usuario._id, this.usuario_logueado._id, this.cantidadDiasSeleccionado, this.cantidadDisponible).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
   }
 
   //SWIPER

@@ -252,19 +252,33 @@
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por día de alquiler" formControlName="preciodia"
-                        name="preciodia" required (ngModelChange)="preciodia = $event">
+                        name="preciodia" required (ngModelChange)="preciodia = $event" soloNumerosDirective>
                 </mat-form-field>
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por semana de alquiler"
-                        formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event">
+                        formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event" soloNumerosDirective>
                 </mat-form-field>
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por mes de alquiler" formControlName="preciomes"
-                        optional name="preciomes" (ngModelChange)="preciomes = $event">
+                        optional name="preciomes" (ngModelChange)="preciomes = $event" soloNumerosDirective>
                 </mat-form-field>
-
+                <div fxLayout="row" fxFlexFill>
+                    <mat-form-field style="padding-right: 100px; width: 100%; margin-bottom: 40px;">
+                        <input matInput #cantDias1 maxlength="3" placeholder="Cantidad de días disponibles de alquiler"
+                            formControlName="cantDias" name="cantDias" (ngModelChange)="cantDias = $event" required soloNumerosDirective>
+                        <mat-hint align="end">{{cantDias1.value.length}} / 3</mat-hint>
+                        <mat-hint align="start">Cantidad total de días en que se puede alquilar el objeto</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%; margin-bottom: 40px;">
+                        <input matInput #cantDisponible1 maxlength="3"
+                            placeholder="Cantidad de objetos identicos disponibles" formControlName="cantidadDisponible"
+                            name="cantidadDisponible" (ngModelChange)="cantidadDisponible = $event" required soloNumerosDirective>
+                        <mat-hint align="end">{{cantDisponible1.value.length}} / 3</mat-hint>
+                        <mat-hint align="start">Cantidad total de objetos identicos a alquilar</mat-hint>
+                    </mat-form-field>
+                </div>
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
                         <button mat-raised-button matStepperPrevious color="primary">Volver</button>
@@ -432,6 +446,17 @@
                         <input matInput placeholder="Publicación Destacada" [value]=joinGroup.destacar disabled>
                     </mat-form-field>
 
+                    <div fxLayout="row" fxFlexFill>
+                        <mat-form-field style="padding-right: 100px; width: 100%; margin-bottom: 40px;">
+                            <input type="number" matInput placeholder="Cantidad de días disponibles de alquiler"
+                                [value]=joinGroup.cantDias disabled>
+                        </mat-form-field>
+                        <mat-form-field style="width: 100%; margin-bottom: 40px;">
+                            <input type="number" matInput placeholder="Cantidad de días disponibles de alquiler"
+                                [value]=joinGroup.cantidadDisponible disabled>
+                        </mat-form-field>
+                    </div>
+
                     <div fxLayout="row" fxLayoutGap="40px">
                         <mat-form-field>
                             <span matPrefix>$ &nbsp;</span>
@@ -449,6 +474,7 @@
                                 disabled>
                         </mat-form-field>
                     </div>
+
                     <br>
                     <h5>Imágenes</h5>
                     <mat-divider></mat-divider>
@@ -711,18 +737,37 @@
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por día de alquiler" formControlName="preciodia"
-                        name="preciodia" required (ngModelChange)="preciodia = $event">
+                        name="preciodia" required (ngModelChange)="preciodia = $event" soloNumerosDirective>
                 </mat-form-field>
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por semana de alquiler"
-                        formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event">
+                        formControlName="preciosemana" name="preciosemana" (ngModelChange)="preciosemana = $event" soloNumerosDirective>
                 </mat-form-field>
                 <mat-form-field>
                     <span matPrefix>$ &nbsp;</span>
                     <input matInput type="number" placeholder="Precio por mes de alquiler" formControlName="preciomes"
-                        optional name="preciomes" (ngModelChange)="preciomes = $event">
+                        optional name="preciomes" (ngModelChange)="preciomes = $event" soloNumerosDirective>
                 </mat-form-field>
+                <div style="margin-bottom: 40px">
+                    <div fxLayout="column" fxLayoutGap="20px" fxFlexFill>
+                        <mat-form-field style="width: 100%">
+                            <input matInput #cantDias1 maxlength="3"
+                                placeholder="Cantidad de días disponibles de alquiler" formControlName="cantDias"
+                                name="cantDias" (ngModelChange)="cantDias = $event" required soloNumerosDirective>
+                            <mat-hint align="end">{{cantDias1.value.length}} / 3</mat-hint>
+                            <mat-hint align="start">Días disponibles de alquiler del objeto</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field style="width: 100%; margin-bottom: 40px">
+                            <input matInput #cantDisponible1 maxlength="3"
+                                placeholder="Cantidad de objetos identicos disponibles"
+                                formControlName="cantidadDisponible" name="cantidadDisponible"
+                                (ngModelChange)="cantidadDisponible = $event" required soloNumerosDirective>
+                            <mat-hint align="end">{{cantDisponible1.value.length}} / 3</mat-hint>
+                            <mat-hint align="start">Total de objetos a alquilar</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
 
                 <div fxLayout="row" fxFlexFill>
                     <div fxFlex>
@@ -890,6 +935,19 @@
                     <mat-form-field>
                         <input matInput placeholder="Publicación Destacada" [value]=joinGroup.destacar disabled>
                     </mat-form-field>
+
+                    <div style="margin-bottom: 30px">
+                        <div fxLayout="column" fxFlexFill>
+                            <mat-form-field style="width: 100%">
+                                <input type="number" matInput placeholder="Cantidad de días disponibles de alquiler"
+                                    [value]=joinGroup.cantDias disabled>
+                            </mat-form-field>
+                            <mat-form-field style="width: 100%">
+                                <input type="number" matInput placeholder="Cantidad de días disponibles de alquiler"
+                                    [value]=joinGroup.cantidadDisponible disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
                     <div fxLayout="row" fxLayoutGap="40px">
                         <mat-form-field>

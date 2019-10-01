@@ -49,6 +49,12 @@ const publicacionesSchema = new Schema({
     },
     estado: {
         type: String,
+    },
+    cantidadDisponible: {
+        type: String
+    },
+    cantDias: {
+        type: String,
     }
 }, {
         timestamps: true

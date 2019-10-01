@@ -36,7 +36,8 @@
                             placeholder="Escribir una pregunta..."></textarea>
                         <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                     </mat-form-field>
-                    <button #btnPreguntar class="btnPreguntar" (click)="enviarPregunta(message.value)" mat-raised-button color="primary">Preguntar</button>
+                    <button #btnPreguntar class="btnPreguntar" (click)="enviarPregunta(message.value)" mat-raised-button
+                        color="primary">Preguntar</button>
                 </div>
                 <div class="ultimasPreguntas">
                     <h3><b>Últimas preguntas</b></h3>
@@ -59,7 +60,8 @@
                             <div *ngIf="pregunta.tiene_respuesta">
                                 <div fxLayout="row" style="margin-bottom: 30px; margin-left: 10px">
                                     <div fxLayoutAlign="center center">
-                                        <p style="font-size: 9px; margin-right: 7px"> {{pregunta.usuario_publicacion}} </p>
+                                        <p style="font-size: 9px; margin-right: 7px"> {{pregunta.usuario_publicacion}}
+                                        </p>
                                     </div>
                                     <div fxLayoutAlign="center center">
                                         <mat-icon>comment</mat-icon>
@@ -77,13 +79,15 @@
                                     <div style="margin-left: 10px" *ngIf="!es_publicador">
                                         <p> Por el momento no hay respuesta a esta pregunta </p>
                                     </div>
-                                    <div class="respuesta" *ngIf="es_publicador && !pregunta.tiene_respuesta" fxFlexFill>
+                                    <div class="respuesta" *ngIf="es_publicador && !pregunta.tiene_respuesta"
+                                        fxFlexFill>
                                         <mat-form-field>
                                             <textarea #message maxlength="256" style="min-height: 0px;" matInput
                                                 placeholder="Escribir una respuesta..."></textarea>
                                             <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                                         </mat-form-field>
-                                        <button class="btnPreguntar" (click)="enviarRespuesta(message.value, pregunta)" mat-raised-button color="primary">Responder</button>
+                                        <button class="btnPreguntar" (click)="enviarRespuesta(message.value, pregunta)"
+                                            mat-raised-button color="primary">Responder</button>
                                     </div>
                                 </div>
                             </div>
@@ -115,10 +119,40 @@
                     <p fxFlexAlign="start"><b>Precio por mes: </b> ${{preciomes}} </p>
                     <p fxFlexAlign="start"><b>Publicado por: </b> {{usuario.name}} </p>
                     <br>
+                    <form [formGroup]="cantidades">
+                        <div fxLayout="row" fxFlexFill fxLayoutGap="20px" *ngIf="estaLogueado && !es_publicador">
+                            <mat-form-field style="width: 150px">
+                                <mat-label>Cantidad a alquilar</mat-label>
+                                <mat-select formControlName="cantidadDisponibleSeleccionada"
+                                    name="cantidadDisponibleSeleccionada"
+                                    (ngModelChange)="cantidadDisponibleSeleccionada = $event; habilitarAlquilar()">
+                                    <mat-option *ngFor="let c of arrayCantidadDisponible; let indice = index"
+                                        [value]="arrayCantidadDisponible[indice]">
+                                        {{arrayCantidadDisponible[indice]}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field style="width: 240px">
+                                <mat-label>Cantidad de días de alquiler</mat-label>
+                                <mat-select formControlName="cantidadDiasSeleccionado" name="cantidadDiasSeleccionado"
+                                    (ngModelChange)="cantidadDiasSeleccionado = $event; habilitarAlquilar()">
+                                    <mat-option *ngFor="let c of arraycantidadDias; let indice = index"
+                                        [value]="arraycantidadDias[indice]">
+                                        {{arraycantidadDias[indice]}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
                     <br>
                     <div class="btnAlquilar">
-                        <button routerLink='/pos-alquiler/{{publicacion._id}}' style="width: 300px;" mat-raised-button
-                            color="primary">Alquilar</button>
+                        <button routerLink='/login' style="width: 300px;" mat-raised-button color="primary"
+                            *ngIf="!estaLogueado">Iniciar sesión para poder alquilar</button>
+                        <button routerLink='/editar-publicacion/{{id}}' style="width: 300px;" mat-raised-button
+                            color="primary" *ngIf="estaLogueado && es_publicador">Editar</button>
+                        <button routerLink='/pos-alquiler/{{publicacion._id}}' (click)="registrarAlquiler()"
+                            style="width: 300px;" mat-raised-button color="primary"
+                            *ngIf="estaLogueado && !es_publicador" [disabled]="btnAlquilar">Alquilar</button>
                     </div>
                 </div>
                 <br>
