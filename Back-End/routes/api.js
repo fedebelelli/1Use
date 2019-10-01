@@ -84,7 +84,7 @@ router.post('/register', (req, res) => {
     let user = new User(userData);
     user.password = bcrypt.hashSync(user.password);
     user.confirmed = false;
-    user.save((error, registeredUser) => {
+    user.save((error, registeredUser) => { 
 
         if (error) {
             //console.log(error)
@@ -230,9 +230,36 @@ router.post('/confirmation', (req, res) => {
 });
 
 
+router.post('/newpwd', (req, res) => {
+     
+    if(req.body.user.password != req.body.user.password2)
+        res.status(401).send();
+
+    try {
+        let email = jwt.verify(req.body.token, 'secretKey').subject;
+        User.findOne({ email: email }, (error, user) => {
+            if (error) {
+                console.log(error)
+            }
+            else {
+                user.password = bcrypt.hashSync(req.body.user.password);
+                user.save();
+                res.status(200).send(true);
+            }
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(401).send();
+    }
+
+}); 
+
+
 router.post('/lostpassword', (req,res) => {
 
     let userData = req.body
+    
+    
    
     User.findOne({ email: userData.email }, (error, user) => {
 
@@ -247,7 +274,7 @@ router.post('/lostpassword', (req,res) => {
                     expiresIn: '1d',
                 },
                 (err, token) => {
-                    const url = 'http://localhost:4200/home';
+                    const url = 'http://localhost:4200/newpwd/' + token;
                     transporter.sendMail({
                         from: 'one.use.pf@gmail.com',
                         to: userData.email,
