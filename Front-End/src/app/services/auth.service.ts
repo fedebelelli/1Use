@@ -34,6 +34,7 @@ export class AuthService {
   private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
   private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
   private _mailPassword = "http://localhost:4201/api/lostpassword/"
+  private _newpwd = "http://localhost:4201/api/newpwd/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -57,6 +58,12 @@ export class AuthService {
 
   confirmar(token) {
     return this.http.post<any>(this._confirmar, { token: token });
+  }
+
+  newPwd(user,token){
+
+    return this.http.post<any>(this._newpwd, { token: token, user: user });
+
   }
 
   user_data(email) {

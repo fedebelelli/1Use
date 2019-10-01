@@ -1,6 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -27,6 +26,7 @@ import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/c
 import{PosAlquilerComponent} from './components/pos-alquiler/pos-alquiler.component';
 import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
+import { NewpwdComponent } from './components/newpwd/newpwd.component';
 
 const appRoutes: Routes = [
 
@@ -38,6 +38,7 @@ const appRoutes: Routes = [
     { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
     { path: 'about', component: AboutComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'newpwd/:token', component: NewpwdComponent },
     /* { path: 'auth', loadChildren: './components/auth.module#AuthModule' }, */
     { path: 'categorias', component: CategoriasComponent },
     { path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent },

@@ -1,0 +1,58 @@
+<section fxFlexFill>
+    <form id="login-form" action="#" method="post" fxLayout="column" fxLayoutAlign="center center"
+        fxLayout.lt-lg="column" fxLayoutAlign.lt-lg="center center" fxFlexFill>
+        <div class="panel-heading">
+            <h3>Cambio de contraseña</h3>
+        </div>
+        <hr>
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+            <input type="password" matInput placeholder="Contraseña" [(ngModel)]="newPwdData.password"
+                [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password"
+                id="password" tabindex="2" ngModel>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field hideRequiredMarker ngClass.xs="input-sm">
+            <input type="password" matInput placeholder="Repetir Contraseña" [(ngModel)]="newPwdData.password2"
+                [type]="hide ? 'password' : 'text'" class="input-login" style="color: black !important" name="password2"
+                id="password2" tabindex="2" ngModel>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        
+        <div class="text-center mt_30" ngClass.xs="input-sm">
+            <button mat-raised-button color="primary" type="submit" (click)="newPwd()">Cambiar Contraseña</button>
+        </div>
+        <br>
+        </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="scrollup">Scroll</a>

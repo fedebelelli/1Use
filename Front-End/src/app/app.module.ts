@@ -51,6 +51,7 @@ import { DeshabilitarDialogComponent } from './components/mi-cuenta/mis-publicac
 import { EliminarDialogComponent } from './components/mi-cuenta/mis-publicaciones/eliminar-dialog/eliminar-dialog.component';
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
+import { NewpwdComponent } from './components/newpwd/newpwd.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -94,7 +95,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DeshabilitarDialogComponent,
     EliminarDialogComponent,
     NotificacionesComponent,
-    ConfirmacionAlquilerComponent
+    ConfirmacionAlquilerComponent,
+    NewpwdComponent
   ],
   imports: [
     BrowserModule,
