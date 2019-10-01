@@ -84,7 +84,7 @@ router.post('/register', (req, res) => {
     let user = new User(userData);
     user.password = bcrypt.hashSync(user.password);
     user.confirmed = false;
-    user.save((error, registeredUser) => { 
+    user.save((error, registeredUser) => {
 
         if (error) {
             //console.log(error)
@@ -231,8 +231,8 @@ router.post('/confirmation', (req, res) => {
 
 
 router.post('/newpwd', (req, res) => {
-     
-    if(req.body.user.password != req.body.user.password2)
+
+    if (req.body.user.password != req.body.user.password2)
         res.status(401).send();
 
     try {
@@ -252,15 +252,15 @@ router.post('/newpwd', (req, res) => {
         res.status(401).send();
     }
 
-}); 
+});
 
 
-router.post('/lostpassword', (req,res) => {
+router.post('/lostpassword', (req, res) => {
 
     let userData = req.body
-    
-    
-   
+
+
+
     User.findOne({ email: userData.email }, (error, user) => {
 
         if (error) {
@@ -350,7 +350,7 @@ router.post('/lostpassword', (req,res) => {
             );
             res.status(200).send(true);
 
-            
+
         }
     })
 
@@ -452,6 +452,8 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.destacar = datos.destacar;
     publicaciones.estado = 'ACTIVA'
     publicaciones.id = datos.id;
+    publicaciones.cantDias = datos.cantDias;
+    publicaciones.cantidadDisponible = datos.cantidadDisponible;
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
@@ -478,11 +480,11 @@ router.post('/register-publicacion', function (req, res) {
                           <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
                         </div>
                       
-                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
+                        <section style="width: 65%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
                       
-                          <h2 style="text-align:center !important"> Tu producto ha sido publicado</h2>
+                          <h1 style="text-align:center !important">¡Enhorabuena, tu producto ha sido publicado!</h1>
                          
-                          <p> Para ver tu publicacion, haz click en el siguiente link </p>
+                          <p> Gracias por confiar en nosotros. Para ver tu nueva publicacion, haz click en el siguiente link: </p>
                       
                           <div style="text-align:center !important;">
                             <a style="
@@ -511,7 +513,7 @@ router.post('/register-publicacion', function (req, res) {
                           
                           <br>
                           <p>
-                            Gracias por elegirnos
+                            Gracias por elegirnos todos los días.
                           </p>
                       
                           <p style="font-style: italic">
