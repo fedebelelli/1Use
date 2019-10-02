@@ -805,15 +805,17 @@ router.get("/onePyR/:id", function (req, res) {
 
 
 /* ------------------------------ Notificaciones ----------------------------------- */
-router.post("/notificacion-pregunta/:origen/:destino/:id_publicacion", function (req, res) {
-    var id = req.params.id_publicacion;
+router.post("/notificacion-pregunta/:origen/:destino/:tituloPublicacion/:imagen/:id_publicacion", function (req, res) {
+    var id_publicacion = req.params.id_publicacion;
+    var tituloPublicacion = req.params.tituloPublicacion;
+    var imagen = req.params.imagen;
     var titulo = "Nueva pregunta en ";
     var origen = req.params.origen;
+    var mensaje = origen + " ha realizado una pregunta en tu publicación";
     var destino = req.params.destino;
     var tipo = "pregunta";
-    var mensaje = origen + " ha realizado una pregunta en tu publicación";
 
-    var objeto = { id_publicacion: id, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
+    var objeto = { id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
 
     var notificacion = new Notificacion(objeto);
 
@@ -827,15 +829,17 @@ router.post("/notificacion-pregunta/:origen/:destino/:id_publicacion", function 
 
 })
 
-router.post("/notificacion-respuesta/:origen/:destino/:id_publicacion", function (req, res) {
-    var id = req.params.id_publicacion;
+router.post("/notificacion-respuesta/:origen/:destino/:tituloPublicacion/:imagen/:id_publicacion", function (req, res) {
+    var id_publicacion = req.params.id_publicacion;
+    var tituloPublicacion = req.params.tituloPublicacion;
+    var imagen = req.params.imagen;
     var titulo = "Nueva respuesta en ";
     var origen = req.params.origen;
     var destino = req.params.destino;
     var tipo = "respuesta";
     var mensaje = origen + " ha respondido a tu pregunta";
 
-    var objeto = { id_publicacion: id, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
+    var objeto = { id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen, titulo: titulo, name_origen: origen, name_destino: destino, tipo: tipo, mensaje_notificacion: mensaje, visto: false }
 
     var notificacion = new Notificacion(objeto);
 

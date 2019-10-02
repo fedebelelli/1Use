@@ -156,8 +156,9 @@ export class DetallePublicacionComponent implements OnInit {
           this._auth.user_data(this.publicacion.email).subscribe(
             res1 => {
               let usuario_publicacion = res1.name;
-              this._auth.notificacion_pregunta_publicacion(usuario_pregunta.name, usuario_publicacion, this.publicacion._id).subscribe(
+              this._auth.notificacion_pregunta_publicacion(usuario_pregunta.name, usuario_publicacion, this.publicacion.titulo, this.publicacion.multiplefile[0], this.publicacion._id).subscribe(
                 res2 => {
+                  console.log(res2);
                 }
               )
             }
@@ -184,7 +185,7 @@ export class DetallePublicacionComponent implements OnInit {
         this._auth.get_una_pregunta_respuesta(_id).subscribe(
           res1 => {
             let usuario_pregunta = res1.pyr.usuario_pregunta;
-            this._auth.notificacion_respuesta_publicacion(usuario_respuesta.name, usuario_pregunta, this.publicacion._id).subscribe(
+            this._auth.notificacion_respuesta_publicacion(usuario_respuesta.name, usuario_pregunta, this.publicacion.titulo, this.publicacion.multiplefile[0], this.publicacion._id).subscribe(
               res2 => {
               }
             )

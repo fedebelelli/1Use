@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableDataSource } from './data-table-datasource';
 import { AuthService } from 'src/app/services/auth.service';
+import { map } from 'rxjs/internal/operators/map';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notificaciones',
@@ -42,18 +44,10 @@ export class NotificacionesComponent implements OnInit {
               this.month = this.date.getMonth() + 1;
               this.dt = this.date.getDate();
               this.arrayFechas.push(this.dt + '-' + this.month + '-' + this.year);
-
-              this._auth.get_publicacion_id(res2.not[i].id_publicacion).subscribe(
-                res3 => {
-                  //Para mostrar las imagenes
-                  this.JSON = res3.publicaciones.multiplefile;
-                  this.JSONfinal = JSON.parse(this.JSON); //CREA JSON CONVERTIDO DE STRING
-                  this.arrayJSON.push(this.JSONfinal.imagen0);
-                  this.arrayTitulos.push(res3.publicaciones.titulo);
-                  this.dataSource = new DataTableDataSource(this.paginator, this.sort, res2.not, this.arrayJSON, this.arrayTitulos, this.arrayFechas);
-                }
-              )
+              this.arrayJSON.push(res2.not[i].imagen);
+              this.arrayTitulos.push(res2.not[i].titulo);
             }
+            this.dataSource = new DataTableDataSource(this.paginator, this.sort, res2.not, this.arrayJSON, this.arrayTitulos, this.arrayFechas);
           }
         )
       }

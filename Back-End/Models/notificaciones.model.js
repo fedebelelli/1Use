@@ -5,6 +5,12 @@ const notificaciones = new Schema({
     id_publicacion: {
         type: String
     },
+    tituloPublicacion: {
+        type: String
+    },
+    imagen: {
+        type: String
+    },
     titulo: {
         type: String,
     },

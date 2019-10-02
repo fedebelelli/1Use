@@ -71,10 +71,10 @@
                         <div fxLayout="row" fxLayoutGap="20px" style="margin-top: 10px;">
                             <div>
                                 <img class="container-muestra-imagenes"
-                                    src="{{'http://localhost:4201/api/get-image-publicacion/'+ row.multiplefile}}">
+                                    src="{{'http://localhost:4201/api/get-image-publicacion/'+ row.imagen}}">
                             </div>
                             <div>
-                                <h4> {{row.titulo}}: {{row.titulo_publicacion}} </h4>
+                                <h4> {{row.titulo}}: {{row.tituloPublicacion}} </h4>
                                 <p> {{row.mensaje_notificacion}} </p>
                                 <p> Fecha de notificación: {{row.createdAt}} </p>
                             </div>

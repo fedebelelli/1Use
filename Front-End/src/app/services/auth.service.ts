@@ -141,14 +141,14 @@ export class AuthService {
 
 
   /* NOTIFICACIONES */
-  notificacion_pregunta_publicacion(origen, destino, id_publicacion) {
+  notificacion_pregunta_publicacion(origen, destino, titulo, imagen, id_publicacion) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._nuevaNotificacionPregunta + origen + "/" + destino + "/" + id_publicacion, params);
+    return this.http.post<any>(this._nuevaNotificacionPregunta + origen + "/" + destino + "/" + titulo + "/" + imagen + "/" + id_publicacion, params);
   }
 
-  notificacion_respuesta_publicacion(origen, destino, id_publicacion) {
+  notificacion_respuesta_publicacion(origen, destino, titulo, imagen, id_publicacion) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._nuevaNotificacionRespuesta + origen + "/" + destino + "/" + id_publicacion, params);
+    return this.http.post<any>(this._nuevaNotificacionRespuesta + origen + "/" + destino + "/" + titulo + "/" + imagen + "/" + id_publicacion, params);
   }
 
   notificacion_nueva(username) {

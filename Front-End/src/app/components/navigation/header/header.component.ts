@@ -3,7 +3,6 @@ import { SingletonService } from '../../singleton.service'
 import { DropdownDirective, TOGGLE_STATUS } from 'angular-custom-dropdown';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
-import { PusherService } from '../../../services/pusher.service';
 
 @Component({
   selector: 'app-header',
@@ -37,7 +36,7 @@ export class HeaderComponent implements OnInit {
   mensaje;
   notificaciones = [];
   notificaciones_nuevas = [];
-  titulo_publicacion;
+  tituloPublicacion;
   arrayTitulos = [];
   noHayNotificaciones = false;
 
@@ -242,11 +241,7 @@ export class HeaderComponent implements OnInit {
         if (res.not.length > 0) {
           this.notificaciones = res.not;
           for (let i = 0; i < this.notificaciones.length; i++) {
-            this._auth.get_publicacion_id(res.not[i].id_publicacion).subscribe(
-              res1 => {
-                this.titulo_publicacion = res1.publicaciones.titulo;
-                this.arrayTitulos.push(this.titulo_publicacion);
-              })
+            this.arrayTitulos.push(res.not[i].tituloPublicacion);
           }
         } else {
           this.noHayNotificaciones = true;
