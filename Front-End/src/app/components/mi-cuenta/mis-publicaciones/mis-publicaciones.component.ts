@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeshabilitarDialogComponent } from './deshabilitar-dialog/dehsabilitar-dialog'
 import { EliminarDialogComponent } from './eliminar-dialog/eliminar-dialog.component'
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mis-publicaciones',
@@ -24,6 +24,7 @@ export class MisPublicacionesComponent implements OnInit {
   imagenJSON;
   arrayJSON = [];
   arrayImagen = [];
+  urlApi= environment.urlApi;
 
   ngOnInit() {
 

@@ -84,7 +84,7 @@
                                     <div *ngFor="let img of publicacion.multiplefile; let indice2 = index"
                                         style="width: 100% !important">
                                         <img class="container-muestra-imagenes"
-                                            src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                                            src="{{ urlApi + 'api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
                                     </div>
                                 </swiper>
                                 <mat-card-content style="text-align: left; font-size: 12px">
@@ -136,7 +136,7 @@
                                     <div *ngFor="let img of publicacion.multiplefile; let indice2 = index"
                                         style="width: 100% !important">
                                         <img class="container-muestra-imagenes"
-                                            src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                                            src="{{ urlApi + 'api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
                                     </div>
                                 </swiper>
                                 <mat-card-content style="text-align: left; font-size: 12px">

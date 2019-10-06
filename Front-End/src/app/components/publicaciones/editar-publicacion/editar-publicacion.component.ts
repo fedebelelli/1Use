@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { MatSnackBar } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-editar-publicacion',
@@ -21,7 +22,7 @@ export class EditarPublicacionComponent implements OnInit {
   fotoProductoGroup: FormGroup;
   tipoAlquilerGroup: FormGroup;
 
-
+  urlApi= environment.urlApi;
   image;
   joinGroup;
   categoria: string;
@@ -300,7 +301,7 @@ export class EditarPublicacionComponent implements OnInit {
     this._auth.update_publicacion(this.publicacion._id, this.joinGroup).subscribe(
       response => {
         if (!this.mantenerImagen) {
-          this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
+          this._uploadService.makeFileRequest(this.urlApi + "api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
             .then((result: any) => {
               window.location.assign("/publicacion-exito");
             });

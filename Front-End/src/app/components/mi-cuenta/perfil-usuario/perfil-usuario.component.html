@@ -199,7 +199,7 @@
                                     <p>Imágen actual</p>
                                     <mat-icon *ngIf="!tieneImagen" class="previsualizacion-icon ">face</mat-icon>
                                     <img *ngIf="tieneImagen" class="previsualizacion"
-                                        src="{{'http://localhost:4201/api/get-image/'+_id}}">
+                                        src="{{ urlApi + 'api/get-image/'+_id}}">
                                 </div>
                                 <div fxLayout="column" fxLayoutAlign="center center" [fxShow]="hayImagen">
                                     <mat-icon>compare_arrows</mat-icon>

@@ -3,6 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-detalle-publicacion',
@@ -12,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
 export class DetallePublicacionComponent implements OnInit {
 
   constructor(private _auth: AuthService, private _singleton: SingletonService, private _snackBar: MatSnackBar) { }
-
+  urlApi= environment.urlApi;
   id;
   titulo;
   preciodia;

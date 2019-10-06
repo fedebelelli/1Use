@@ -4,6 +4,7 @@ import { DropdownDirective, TOGGLE_STATUS } from 'angular-custom-dropdown';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { PusherService } from '../../../services/pusher.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   onToggleSidenav() { this.sidenavToggle.emit(); }
 
-
+  urlApi= environment.urlApi;
   estadoBuscador: boolean;
   inicioSesion: boolean;
   urlActual: string;

@@ -17,7 +17,7 @@
                     <swiper class="swiper-container" [config]="config" fxFlexAlign="center">
                         <div *ngFor="let img of publicacion.multiplefile; let indice2 = index">
                             <img class="container-muestra-imagenes"
-                                src="{{'http://localhost:4201/api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
+                                src="{{urlApi + 'api/get-image-publicacion/'+ publicacion.multiplefile[indice2]}}">
                         </div>
                     </swiper>
                 </div>

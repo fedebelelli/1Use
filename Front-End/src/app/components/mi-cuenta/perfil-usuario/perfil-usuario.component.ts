@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { SingletonService } from '../../singleton.service';
 import { UploadService } from '../../../services/upload.service';
-
+import { environment } from 'src/environments/environment';
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
 
@@ -25,7 +25,7 @@ export interface Provincias {
 })
 
 export class PerfilUsuarioComponent implements OnInit {
-
+  urlApi= environment.urlApi;
   public name: string;
   public nombre: string;
   public apellido: string;
@@ -270,7 +270,7 @@ export class PerfilUsuarioComponent implements OnInit {
       },
       err => {
         console.log(err);
-        this._uploadService.makeFileRequest("http://localhost:4201/api/upload-image/" + this._id, [], this.filesToUpload, 'removablefile')
+        this._uploadService.makeFileRequest(this.urlApi + "api/upload-image/" + this._id, [], this.filesToUpload, 'removablefile')
           .then((result: any) => {
             console.log(result);
           });

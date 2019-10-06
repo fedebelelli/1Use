@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pos-alquiler',
@@ -23,6 +23,7 @@ export class PosAlquilerComponent implements OnInit {
   nombre;
   email;
   telefono;
+  urlApi= environment.urlApi;
 
   ngOnInit() {
 

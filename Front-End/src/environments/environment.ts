@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false, 
-  urlApi: "http://localhost:4201/"
-  //urlApi: "http://ec2-18-231-60-115.sa-east-1.compute.amazonaws.com:4201/"
+  //: "http://localhost:4201/"
+  urlApi: "http://ec2-18-231-60-115.sa-east-1.compute.amazonaws.com:4201/"
 };
 
 /*

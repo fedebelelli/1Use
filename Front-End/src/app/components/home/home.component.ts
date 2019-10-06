@@ -5,6 +5,7 @@ import { SingletonService } from '../singleton.service';
 import { CategoriasComponent } from '../../components/categorias/categorias.component';
 import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [CategoriasComponent]
@@ -17,6 +18,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  urlApi= environment.urlApi;
   @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
 
   inicioSesion: boolean;

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MatSnackBar } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-publicacion ',
@@ -17,7 +18,7 @@ import { MatSnackBar } from '@angular/material';
 export class RegisterPublicacionComponent implements OnInit {
 
   @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
-
+  urlApi= environment.urlApi;
   categoriaFormGroup: FormGroup;
   datosProductosGroup: FormGroup;
   fotoProductoGroup: FormGroup;
@@ -235,7 +236,7 @@ export class RegisterPublicacionComponent implements OnInit {
       response => {
       },
       err => {
-        this._uploadService.makeFileRequest("http://localhost:4201/api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
+        this._uploadService.makeFileRequest(this.urlApi + "api/upload-publicacion-img/" + email + "/" + this.titulo + "/" + this.categoria, [], this.image, 'multiplefile')
           .then((result: any) => {
             console.log(result);
             if(this.seDestaca){
