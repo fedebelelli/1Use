@@ -32,8 +32,8 @@ export class DetallePublicacionComponent implements OnInit {
   es_publicador = false;
   email;
   logueado;
-  usuario = { _id: '' };
-  usuario_logueado = { _id: '' };
+  usuario = { name: '' };
+  usuario_logueado = { name: '' };
   estadoBtnPreguntar = false;
   valorPregunta;
   estaLogueado = false;
@@ -208,7 +208,7 @@ export class DetallePublicacionComponent implements OnInit {
   }
 
   registrarAlquiler() {
-    this._auth.registrar_EnProcesoPago(this.id, this.usuario._id, this.usuario_logueado._id, this.cantidadDiasSeleccionado, this.cantidadDisponible).subscribe(
+    this._auth.registrar_EnProcesoPago(this.id, this.usuario.name, this.usuario_logueado.name, this.cantidadDiasSeleccionado, this.cantidadDisponible, this.publicacion.multiplefile[0]).subscribe(
       res => {
         console.log(res);
       }

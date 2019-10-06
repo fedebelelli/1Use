@@ -32,10 +32,10 @@ const misAlquileres = new Schema({
     fechaCaducidadDevolucion: {
         type: String,
     },
-    id_usuarioPropietario: {
+    name_usuarioPropietario: {
         type: String,
     },
-    id_usuarioLocatario: {
+    name_usuarioLocatario: {
         type: String,
     },
     cantidadDias: {
@@ -58,6 +58,9 @@ const misAlquileres = new Schema({
     },
     fueDevuelto:{
         type: Boolean
+    },
+    imagen: {
+        type: String,
     }
 }, {
         timestamps: true

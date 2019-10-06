@@ -127,3 +127,30 @@ mat-toolbar{
     }
     .cdk-global-overlay-wrapper, .cdk-overlay-container {
         pointer-events: none;}
+.imagen{
+    height: 100px;
+    width: 100px;
+}
+.contenedorAlquiler{
+    margin-bottom: 25px;
+}
+.info{
+    margin-left: 15px;
+}
+.info2{
+    margin-left: 150px;
+}
+.boton{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+p{
+    font-size: 18px;
+}
+.contenedor-gral{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+    

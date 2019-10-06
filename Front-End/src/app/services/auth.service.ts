@@ -36,6 +36,10 @@ export class AuthService {
   private _mailPassword = "http://localhost:4201/api/lostpassword/"
   private _newpwd = "http://localhost:4201/api/newpwd/"
   private _alquilerProcesoPago = "http://localhost:4201/api/registrar-alquiler/"
+  private _getAlquiler = "http://localhost:4201/api/get-alquiler/"
+  private _registrarEntrega = "http://localhost:4201/api/registrar-proceso-entrega/"
+  
+
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -167,8 +171,17 @@ export class AuthService {
 
 
   /* MIS ALQUILERES */
-  registrar_EnProcesoPago(id_publicacion, id_propietario, id_locatario, cantidadDias, cantidadAlquiler) {
+  registrar_EnProcesoPago(id_publicacion, name_propietario, name_locatario, cantidadDias, cantidadAlquiler, imagen) {
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + id_propietario + "/" + id_locatario + "/" + cantidadDias + "/" + cantidadAlquiler, params);
+    return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + name_propietario + "/" + name_locatario + "/" + cantidadDias + "/" + cantidadAlquiler + "/" + imagen, params);
+  }
+
+  getAlquiler(name_usuarioPropietario){
+    return this.http.get<any>(this._getAlquiler + name_usuarioPropietario);
+  }
+
+  registrar_Entrega(id_publicacion){
+    let params = JSON.stringify(id_publicacion);
+    return this.http.post<any>(this._registrarEntrega + id_publicacion, params);
   }
 }

@@ -897,17 +897,19 @@ router.post('/codigo-alquiler', function (req, res) {
     res.status(200).send(randomstring.generate(10));
 })
 
-router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLocatario/:cantidadDias/:cantidadAlquilar', function (req, res) {
+router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLocatario/:cantidadDias/:cantidadAlquilar/:imagen', function (req, res) {
     var estado = 'En proceso de pago';
     var id_publicacion = req.params.id_publicacion;
-    var id_usuarioPropietario = req.params.usuarioPropietario;
-    var id_usuarioLocatario = req.params.usuarioLocatario;
+    var name_usuarioPropietario = req.params.usuarioPropietario;
+    var name_usuarioLocatario = req.params.usuarioLocatario;
     var cantidadDias = req.params.cantidadDias;
     var cantidadAlquilar = req.params.cantidadAlquilar;
+    var imagen = req.params.imagen;
 
     var objeto = {
-        estado: estado, id_publicacion: id_publicacion, id_usuarioPropietario: id_usuarioPropietario,
-        id_usuarioLocatario: id_usuarioLocatario, cantidadDias: cantidadDias, cantidadAlquilar: cantidadAlquilar
+        imagen:imagen,
+        estado: estado, id_publicacion: id_publicacion, name_usuarioPropietario: name_usuarioPropietario,
+        name_usuarioLocatario: name_usuarioLocatario, cantidadDias: cantidadDias, cantidadAlquilar: cantidadAlquilar
     }
 
     var misAlquileres = new MisAlquileres(objeto);
@@ -1069,5 +1071,15 @@ router.post("/registrar-finalizacion-propietario/:codigoDevolucionLocatario", fu
     })
 })
 
+router.get("/get-alquiler/:name_usuarioPropietario", function (req, res) {
+    var name_usuarioPropietario = req.params.name_usuarioPropietario;
 
+    MisAlquileres.find({ name_usuarioPropietario: name_usuarioPropietario }, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!alquiler) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+})
 module.exports = router;
