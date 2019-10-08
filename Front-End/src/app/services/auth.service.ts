@@ -36,9 +36,12 @@ export class AuthService {
   private _mailPassword = "http://localhost:4201/api/lostpassword/"
   private _newpwd = "http://localhost:4201/api/newpwd/"
   private _alquilerProcesoPago = "http://localhost:4201/api/registrar-alquiler/"
-  private _getAlquiler = "http://localhost:4201/api/get-alquiler/"
-  private _registrarEntrega = "http://localhost:4201/api/registrar-proceso-entrega/"
-  
+  private _getAlquilerPropietario = "http://localhost:4201/api/get-alquiler-publicaciones/"
+  private _getAlquilerPropios = "http://localhost:4201/api/get-alquiler-propios/"
+  private _registrarEnProcesoEntrega = "http://localhost:4201/api/registrar-proceso-entrega/"
+  private _getPropietarioAlquiler = "http://localhost:4201/api/get-propietario-alquiler/"
+  private _registrarCodigoPropietarioEntrega = "http://localhost:4201/api/registrar-entrega-locatario/"
+  private _registrarCodigoLocatarioEntrega = "http://localhost:4201/api/registrar-entrega-propietario/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -176,12 +179,30 @@ export class AuthService {
     return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + name_propietario + "/" + name_locatario + "/" + cantidadDias + "/" + cantidadAlquiler + "/" + imagen, params);
   }
 
-  getAlquiler(name_usuarioPropietario){
-    return this.http.get<any>(this._getAlquiler + name_usuarioPropietario);
+  getAlquilerPublicaciones(name_usuarioPropietario){
+    return this.http.get<any>(this._getAlquilerPropietario + name_usuarioPropietario);
   }
 
-  registrar_Entrega(id_publicacion){
+  getAlquilerPropios(name_usuarioLocatario){
+    return this.http.get<any>(this._getAlquilerPropios + name_usuarioLocatario);
+  }
+
+  registrar_EnProcesoEntrega(id_publicacion){
     let params = JSON.stringify(id_publicacion);
-    return this.http.post<any>(this._registrarEntrega + id_publicacion, params);
+    return this.http.post<any>(this._registrarEnProcesoEntrega + id_publicacion, params);
+  }
+
+  registrar_codigoPropietarioEntrega(codigo){
+    let params = JSON.stringify(codigo);
+    return this.http.post<any>(this._registrarCodigoPropietarioEntrega + codigo, params);
+  }
+
+  registrar_codigoLocatarioEntrega(codigo){
+    let params = JSON.stringify(codigo);
+    return this.http.post<any>(this._registrarCodigoLocatarioEntrega + codigo, params);
+  }
+
+  getPropietarioAlquiler(username){
+    return this.http.get<any>(this._getPropietarioAlquiler + username);
   }
 }

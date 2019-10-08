@@ -459,8 +459,6 @@ router.post('/register-publicacion', function (req, res) {
         if (err) return res.status(500).send("Error papi");
         if (!res) return res.status(404).send("Error papi");
 
-
-
         const url = 'http://localhost:4200/publicaciones/' + publicaciones.id;
         transporter.sendMail({
             from: 'one.use.pf@gmail.com',
@@ -905,9 +903,10 @@ router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLoc
     var cantidadDias = req.params.cantidadDias;
     var cantidadAlquilar = req.params.cantidadAlquilar;
     var imagen = req.params.imagen;
+    var fuePagado = false;
 
     var objeto = {
-        imagen:imagen,
+        imagen: imagen, fuePagado: fuePagado,
         estado: estado, id_publicacion: id_publicacion, name_usuarioPropietario: name_usuarioPropietario,
         name_usuarioLocatario: name_usuarioLocatario, cantidadDias: cantidadDias, cantidadAlquilar: cantidadAlquilar
     }
@@ -932,10 +931,12 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
     var codigoPropietarioIngresado = false;
     var codigoLocatarioIngresado = false;
     var date = new Date();
+    var fuePagado = true;
     date.setDate(date.getDate() + 3) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN ENTREGAR EL PRODUCTO
     var fechaCaducidadEntrega = moment(date).format('DD/MM/YYYY');
 
     var objeto = {
+        fuePagado: fuePagado,
         estado: estado, codigoEntregaPropietario: codigoEntregaPropietario, codigoEntregaLocatario: codigoEntregaLocatario,
         fechaCaducidadEntrega: fechaCaducidadEntrega, codigoPropietarioIngresado: codigoPropietarioIngresado, codigoLocatarioIngresado: codigoLocatarioIngresado
     }
@@ -945,12 +946,15 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
+        enviarEmail(alquiler.name_usuarioPropietario,"Código de entrega propietario","¡Hola! Tu código de propietario es el siguiente:"+codigoEntregaPropietario+". Recuerda darselo al locatario cuando este te lo indique.","http://localhost:4200/mis-alquileres","Ir a mis alquileres");
+        enviarEmail(alquiler.name_usuarioLocatario,"Código de entrega locatario","¡Hola! Tu código de locatario es el siguiente:"+codigoEntregaLocatario+". Recuerda darselo al propietario cuando este te lo indique.","http://localhost:4200/mis-alquileres","Ir a mis alquileres");
+
         return res.status(200).send({ alquiler });
     })
 
 })
 
-
+/*CUANDO EL LOCATARIO INGRESA EL CÓDIGO DEL PROPIETARIO */
 router.post("/registrar-entrega-locatario/:codigoEntregaPropietario", function (req, res) {
     var codigoEntregaPropietario = req.params.codigoEntregaPropietario;
     var codigoPropietarioIngresado = true;
@@ -964,15 +968,15 @@ router.post("/registrar-entrega-locatario/:codigoEntregaPropietario", function (
     })
 })
 
+/*CUANDO EL PROPIETARIO INGRESA EL CÓDIGO DEL LOCATARIO */
 router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (req, res) {
     var codigoEntregaLocatario = req.params.codigoEntregaLocatario;
     var codigoLocatarioIngresado = true;
-    var fueDevuelto = false;
     var estado = 'Entregado y en alquiler';
     var date = new Date();
     var fechaEntrega = moment(date).format('DD/MM/YYYY');
 
-    MisAlquileres.findOne({ codigoEntregaLocatario: codigoEntregaLocatario, fueDevuelto: fueDevuelto }, function (err1, alquiler1) {
+    MisAlquileres.findOne({ codigoEntregaLocatario: codigoEntregaLocatario }, function (err1, alquiler1) {
         var diasAlquiler = alquiler1.cantidadDias;
         var date2 = new Date();
         date2.setDate(date2.getDate() + diasAlquiler + 1) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN devolder EL PRODUCTO
@@ -1071,7 +1075,7 @@ router.post("/registrar-finalizacion-propietario/:codigoDevolucionLocatario", fu
     })
 })
 
-router.get("/get-alquiler/:name_usuarioPropietario", function (req, res) {
+router.get("/get-alquiler-publicaciones/:name_usuarioPropietario", function (req, res) {
     var name_usuarioPropietario = req.params.name_usuarioPropietario;
 
     MisAlquileres.find({ name_usuarioPropietario: name_usuarioPropietario }, function (err, alquiler) {
@@ -1082,4 +1086,106 @@ router.get("/get-alquiler/:name_usuarioPropietario", function (req, res) {
         return res.status(200).send({ alquiler });
     })
 })
+
+router.get("/get-alquiler-propios/:name_usuarioLocatario", function (req, res) {
+    var name_usuarioLocatario = req.params.name_usuarioLocatario;
+
+    MisAlquileres.find({ name_usuarioLocatario: name_usuarioLocatario }, function (err, alquiler) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!alquiler) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ alquiler });
+    })
+})
+
+router.get("/get-propietario-alquiler/:username", function (req, res) {
+    var username = req.params.username;
+    User.findOne({ name: username }, function (err, usuario) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!usuario) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ usuario });
+    })
+})
+
+
+/* PARA ENVIO DE MAILS */
+function enviarEmail(username, asunto, mensaje, url, mensajeBoton) {
+    variable = {};
+    User.findOne({ name: username }, function (err, usuario) {
+        enviar(usuario.email, asunto, mensaje, url, mensajeBoton);
+    });
+}
+
+function enviar(email_destinatario, asunto, mensaje, url, mensajeBoton) {
+    transporter.sendMail({
+        from: 'one.use.pf@gmail.com',
+        to: email_destinatario,
+        subject: asunto,
+        html: `
+                    <!DOCTYPE html>
+                    <html lang="es">
+                    <head>
+                        <meta charset="utf-8">
+                        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+                    </head>
+
+                    <body>
+                    <section style="background-color: #4a70af;">
+                    <div style="text-align: center;">
+                      <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
+                    </div>
+                  
+                    <section style="width: 65%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
+                  
+                      <h1 style="text-align:center !important">¡Enhorabuena, tu producto ha sido publicado!</h1>
+                     
+                      <p>`+ mensaje + `</p>
+                  
+                      <div style="text-align:center !important;">
+                        <a style="
+                                              line-height: 40px;
+                                              padding: 0 40px;
+                                              border-radius: 20px;
+                                              background: transparent;
+                                              border: 1px solid #ffd60f;
+                                              display: inline-block;
+                                              font-weight: 450;
+                                              -webkit-transition: all 0.3s ease 0s;
+                                              -moz-transition: all 0.3s ease 0s;
+                                              -o-transition: all 0.3s ease 0s;
+                                              transition: all 0.3s ease 0s;
+                                              cursor: pointer;
+                                              outline: none;
+                                              margin-top: 20px;
+                                              margin-bottom: 20px;
+                                              margin-left: 14px;
+                                              background: #4a70af;
+                                              text-decoration: none;
+                                              color: #fff;
+                                              box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
+                                              " href="`+ url + `">` + mensajeBoton + `</a>
+                      </div>
+                      
+                      <br>
+                      <p>
+                        Gracias por elegirnos todos los días.
+                      </p>
+                  
+                      <p style="font-style: italic">
+                        El equipo de OneUse
+                      </p>
+                  
+                    </section>
+                    <br><br><br>
+                  </section>
+                  
+                    </body>
+                    </html>
+                    `,
+
+    });
+}
 module.exports = router;

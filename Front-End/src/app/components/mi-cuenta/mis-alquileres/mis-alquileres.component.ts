@@ -3,6 +3,11 @@ import { SingletonService } from '../../singleton.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ConfirmacionAlquilerComponent } from '../../confirmacion-alquiler/confirmacion-alquiler.component';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { DatosPropietarioDialogComponent } from './datos-propietario-dialog/datos-propietario-dialog.component';
+import { DatosLocatarioDialogComponent } from './datos-locatario-dialog/datos-locatario-dialog.component';
+import { CodigoPropietarioDialogComponent } from './codigo-propietario-dialog/codigo-propietario-dialog.component';
+import { CodigoLocatarioDialogComponent } from './codigo-locatario-dialog/codigo-locatario-dialog.component';
 
 @Component({
   selector: 'app-mis-alquileres',
@@ -12,39 +17,51 @@ import { ConfirmacionAlquilerComponent } from '../../confirmacion-alquiler/confi
 export class MisAlquileresComponent implements OnInit {
 
   usuarioLogueado = {};
-  arrayAlquiler = [];
-  arrayDatos = [];
-  fuePagado;
+  arrayAlquilerPropietario = [];
+  arrayDatosPropietario = [];
+  arrayAlquilerPropios = [];
+  arrayDatosPropios = [];
+  hayAlquileresPropietario = false;
+  hayAlquileresPropios = false;
 
-  constructor(private _auth: AuthService, private singleton: SingletonService) { }
+  constructor(private _auth: AuthService, private singleton: SingletonService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.arrayAlquilerPropietario = []
+    this.arrayDatosPropietario = []
+    this.arrayAlquilerPropios = [];
+    this.arrayDatosPropios = [];
     this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
         this.usuarioLogueado = res;
         var username = res.name
 
-        this._auth.getAlquiler(username).subscribe(
+        this._auth.getAlquilerPublicaciones(username).subscribe(
           res1 => {
-            this.arrayAlquiler = res1.alquiler;
-            var id_publicacion = res1.id_publicacion;
-            
+            this.arrayAlquilerPropietario = res1.alquiler;
 
-            for (let i = 0; i < this.arrayAlquiler.length; i++) {
+            for (let i = 0; i < this.arrayAlquilerPropietario.length; i++) {
               var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
-              this.arrayAlquiler[i].createdAt = date;
-              if(this.arrayAlquiler[i].estado == "En proceso de pago"){
-                this.fuePagado=false;
-              }
-              if(this.arrayAlquiler[i].estado == "En proceso de entrega"){
-                this.fuePagado=true;
-              }
-              this.arrayDatos.push(this.arrayAlquiler[i])
+              this.arrayAlquilerPropietario[i].createdAt = date;
+              this.arrayDatosPropietario.push(this.arrayAlquilerPropietario[i])
             }
+
+            this.hayAlquileresPropietario = true;
+          })
+
+        this._auth.getAlquilerPropios(username).subscribe(
+          res1 => {
+            this.arrayAlquilerPropios = res1.alquiler;
+
+            for (let i = 0; i < this.arrayAlquilerPropios.length; i++) {
+              var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
+              this.arrayAlquilerPropios[i].createdAt = date;
+              this.arrayDatosPropios.push(this.arrayAlquilerPropios[i])
+            }
+            this.hayAlquileresPropios = true;
           })
       })
   }
-
 
   cambioTab(evento) {
     this.ngOnInit();
@@ -54,16 +71,57 @@ export class MisAlquileresComponent implements OnInit {
     this.singleton.cerrarSesion();
   }
 
+  pagar(alquiler) {
+    this._auth.registrar_EnProcesoEntrega(alquiler.id_publicacion).subscribe(
+      res => {
+        this.ngOnInit();
+      }
+    )
+  }
 
-  //SWIPER
-  public config: SwiperConfigInterface = {
-    a11y: true,
-    direction: 'horizontal',
-    slidesPerView: 1,
-    keyboard: true,
-    mousewheel: false,
-    scrollbar: false,
-    navigation: true,
-  };
+  datosPropietarioDialogRef: MatDialogRef<DatosPropietarioDialogComponent>;
+  datosLocatarioDialogRef: MatDialogRef<DatosLocatarioDialogComponent>;
+  codigoPropietarioDialogRef: MatDialogRef<CodigoPropietarioDialogComponent>
+  codigoLocatarioDialogRef: MatDialogRef<CodigoLocatarioDialogComponent>
+
+  openDialogDatosPropietario(alquiler): void {
+    this.datosPropietarioDialogRef = this.dialog.open(DatosPropietarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+  }
+
+  openDialogDatosLocatario(alquiler): void {
+    this.datosLocatarioDialogRef = this.dialog.open(DatosLocatarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+/*     this.datosPropietarioDialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    }) */
+  }
+
+  openDialogCodigoPropietario(alquiler): void {
+    this.codigoPropietarioDialogRef = this.dialog.open(CodigoPropietarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+  }
+
+  openDialogCodigoLocatario(alquiler): void {
+    this.codigoLocatarioDialogRef = this.dialog.open(CodigoLocatarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+  }
+
 
 }

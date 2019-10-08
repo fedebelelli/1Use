@@ -41,29 +41,32 @@ const misAlquileres = new Schema({
     cantidadDias: {
         type: Number,
     },
-    cantidadAlquilar:{
+    cantidadAlquilar: {
         type: Number,
     },
-    codigoPropietarioIngresado:{
+    codigoPropietarioIngresado: {
         type: Boolean
     },
-    codigoLocatarioIngresado:{
+    codigoLocatarioIngresado: {
         type: Boolean
     },
-    codigoPropietarioDevolucionIngresado:{
+    codigoPropietarioDevolucionIngresado: {
         type: Boolean
     },
-    codigoLocatarioDevolucionIngresado:{
+    codigoLocatarioDevolucionIngresado: {
         type: Boolean
     },
-    fueDevuelto:{
+    fueDevuelto: {
+        type: Boolean
+    },
+    fuePagado: {
         type: Boolean
     },
     imagen: {
         type: String,
     }
 }, {
-        timestamps: true
-    });
+    timestamps: true
+});
 
 module.exports = mongoose.model('misAlquileres', misAlquileres, 'misAlquileres');

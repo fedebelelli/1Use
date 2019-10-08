@@ -52,6 +52,11 @@ import { EliminarDialogComponent } from './components/mi-cuenta/mis-publicacione
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
 import { NewpwdComponent } from './components/newpwd/newpwd.component';
+import { DatosPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/datos-propietario-dialog/datos-propietario-dialog.component';
+import { EliminarAlquilerDialogComponent } from './components/mi-cuenta/mis-alquileres/eliminar-alquiler-dialog/eliminar-alquiler-dialog.component';
+import { DatosLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/datos-locatario-dialog/datos-locatario-dialog.component';
+import { CodigoLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-locatario-dialog/codigo-locatario-dialog.component';
+import { CodigoPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-propietario-dialog/codigo-propietario-dialog.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -84,8 +89,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MisAlquileresComponent,
     ConfirmacionDestacacionComponent,
     DetallePublicacionComponent,
-    EditarPublicacionComponent, 
-    BusquedaPublicacionesComponent, 
+    EditarPublicacionComponent,
+    BusquedaPublicacionesComponent,
     BusquedaCategoriasComponent,
     SoloNumerosDirective,
     BusquedaComponent,
@@ -96,7 +101,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     EliminarDialogComponent,
     NotificacionesComponent,
     ConfirmacionAlquilerComponent,
-    NewpwdComponent
+    NewpwdComponent,
+    DatosPropietarioDialogComponent,
+    EliminarAlquilerDialogComponent,
+    DatosLocatarioDialogComponent,
+    CodigoLocatarioDialogComponent,
+    CodigoPropietarioDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -116,6 +126,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent],
-  entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent]
+  entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent, 
+    DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent]
 })
 export class AppModule { }
