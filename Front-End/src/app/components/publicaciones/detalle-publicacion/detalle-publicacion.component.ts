@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
+import {TooltipPosition} from '@angular/material/tooltip';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -13,7 +14,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class DetallePublicacionComponent implements OnInit {
 
   constructor(private _auth: AuthService, private _singleton: SingletonService, private _snackBar: MatSnackBar, private _formBuilder: FormBuilder) { }
+  
+  position: TooltipPosition = 'below';
 
+  
   id;
   titulo;
   preciodia;
@@ -36,6 +40,7 @@ export class DetallePublicacionComponent implements OnInit {
   usuario_logueado = { name: '' };
   estadoBtnPreguntar = false;
   valorPregunta;
+  esConIntervencion = false;
   estaLogueado = false;
   cantidadDisponible;
   arrayCantidadDisponible = [];
@@ -45,6 +50,7 @@ export class DetallePublicacionComponent implements OnInit {
   cantidadDiasSeleccionado;
   btnAlquilar = true;
   cantidades: FormGroup;
+  tipoAlquiler;
 
   ngOnInit() {
     var urlActual = window.location.href;
@@ -67,6 +73,13 @@ export class DetallePublicacionComponent implements OnInit {
         this.subcategoria = err.publicaciones.subcategoria;
         this.cantidadDisponible = err.publicaciones.cantidadDisponible;
         this.cantidadDias = err.publicaciones.cantDias;
+        this.tipoAlquiler = err.publicaciones.tipoAlquiler;
+
+        if (this.tipoAlquiler == 'AlquilerConIntervencion') {
+          this.esConIntervencion = true;
+        }else{
+          this.esConIntervencion=false;
+        }
 
         for (let i = 0; i <= this.cantidadDisponible; i++) {
           this.arrayCantidadDisponible.push(i);
