@@ -691,7 +691,7 @@ router.post("/notificacion-vista", function (req, res) {
     })
 })
 
-router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCaducidad", function (req, res) {
+router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCaducidad/:imagen/:id_publicacion", function (req, res) {
 
 
     var fechaActual = moment(new Date(req.params.fechaActual)).format("MM/DD/YYYY");
@@ -701,19 +701,42 @@ router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCadu
     const date2 = new Date(fechaActual);
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    console.log(diffDays);
+
+    var id_publicacion = req.params.id_publicacion;
+    var tituloPublicacion = req.params.tituloPublicacion;
+    var imagen = req.params.imagen;
+    var titulo = "ALERTA, tienes una entrega de producto pendiente";
+    var destino = req.params.destino;
+    var mensaje = "Tienes " + diffDays + " dias para entregar el producto ha " + destino;
+    
+
+
+    var objeto = { id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen, 
+        titulo: titulo, name_destino: destino, mensaje_notificacion: mensaje, visto: false }
+
+    var notificacion = new Notificacion(objeto);
+
+    notificacion.save((err, not) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ not });
+    })
+
 })
+
 
 router.post("/notificacion-caducidad-entrega-locatario/:fechaActual/:fechaCaducidad", function (req, res) {
 
     var fechaActual = req.params.fechaActual;
     var fechaCaducidad = req.params.fechaCaducidad;
 
-    const date1 = new Date('7/13/2010');
-    const date2 = new Date('12/15/2010');
+    const date1 = new Date(fechaCaducidad);
+    const date2 = new Date(fechaActual);
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    console.log(diffDays);
+
 })
 
 
