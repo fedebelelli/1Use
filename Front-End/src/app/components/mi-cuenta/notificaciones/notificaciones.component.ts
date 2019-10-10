@@ -1,19 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableDataSource } from './data-table-datasource';
 import { AuthService } from 'src/app/services/auth.service';
 import { map } from 'rxjs/internal/operators/map';
 import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.css']
 })
-export class NotificacionesComponent implements OnInit {
+export class NotificacionesComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  private subscription: Subscription;
 
   dataSource: DataTableDataSource;
   displayedColumns = ['id']; /* ,'name', 'amount' */
@@ -33,7 +36,7 @@ export class NotificacionesComponent implements OnInit {
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
-    this._auth.user_data(localStorage.getItem("email")).subscribe(
+    this.subscription = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res1 => {
         this._auth.notificaciones_todas(res1.name).subscribe(
           res2 => {
@@ -52,5 +55,9 @@ export class NotificacionesComponent implements OnInit {
         )
       }
     )
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

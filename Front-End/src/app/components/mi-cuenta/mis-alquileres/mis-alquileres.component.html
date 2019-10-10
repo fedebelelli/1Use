@@ -83,6 +83,11 @@
                                             <p mat-line *ngIf="datos.fuePagado && !datos.codigoPropietarioIngresado"><b>
                                                     Código entrega propietario: </b>{{datos.codigoEntregaPropietario}}
                                             </p>
+                                            <p mat-line
+                                                *ngIf="datos.fuePagado && datos.codigoLocatarioIngresado">
+                                                <b> Fecha de devolución:
+                                                </b>{{datos.fechaCaducidadDevolucion}}
+                                            </p>
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px" *ngIf="!datos.fuePagado">
@@ -143,8 +148,13 @@
                                             <p mat-line><b>Estado del Alquiler: </b>{{alquilerPropio.estado}} </p>
                                             <p mat-line
                                                 *ngIf="alquilerPropio.fuePagado && !alquilerPropio.codigoLocatarioIngresado">
-                                                <b> Código entrega locatario:
-                                                </b>{{alquilerPropio.codigoEntregaLocatario}}
+                                                <b> Código entrega
+                                                    locatario:</b>{{alquilerPropio.codigoEntregaLocatario}}
+                                            </p>
+                                            <p mat-line
+                                                *ngIf="alquilerPropio.fuePagado && alquilerPropio.codigoLocatarioIngresado">
+                                                <b> Fecha de devolución:
+                                                </b>{{alquilerPropio.fechaCaducidadDevolucion}}
                                             </p>
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"

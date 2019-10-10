@@ -1,15 +1,18 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import { SingletonService } from '../../singleton.service'
 import { DropdownDirective, TOGGLE_STATUS } from 'angular-custom-dropdown';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  private suscripcion: Subscription
 
   @Output() sidenavToggle = new EventEmitter<void>();
   onToggleSidenav() { this.sidenavToggle.emit(); }
@@ -49,6 +52,8 @@ export class HeaderComponent implements OnInit {
     this.checkPage(this.paginaActual);
     this.setearInicioSesion();
     this.obtenerNombreLogueado();
+    this.checkCaducidadesAlquilerPropietario();
+    this.checkCaducidadesAlquilerPropios();
   }
 
   setearInicioSesion() {
@@ -120,7 +125,7 @@ export class HeaderComponent implements OnInit {
   obtenerNombreLogueado() {
     let email = localStorage.getItem("email");
     if (email != undefined || email != null) {
-      this._auth.user_data(email).subscribe(
+      this.suscripcion = this._auth.user_data(email).subscribe(
         res => {
           this.usuarioIniciado = res;
           this.get_notificaciones_nuevas(res.name);
@@ -151,7 +156,7 @@ export class HeaderComponent implements OnInit {
   }
 
   verificarUsuario() {
-    this._auth.user_data(localStorage.getItem("email")).subscribe(
+    this.suscripcion = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
         if (this.checkUsuarioCompleto(res)) {
           window.location.assign("/register-publicacion")
@@ -222,7 +227,7 @@ export class HeaderComponent implements OnInit {
 
   get_notificaciones_nuevas(username) {
     /* this.pusherService.channel.bind('nueva-pregunta', data => { this.cantidad = data.likes }); */
-    this._auth.notificacion_nueva(username).subscribe(
+    this.suscripcion = this._auth.notificacion_nueva(username).subscribe(
       res => {
         if (res.not.length > 0) {
           this.noHayNotificacionesNuevas = false;
@@ -236,7 +241,7 @@ export class HeaderComponent implements OnInit {
   }
 
   get_notificaciones_todas(username) {
-    this._auth.notificaciones_todas(username).subscribe(
+    this.suscripcion = this._auth.notificaciones_todas(username).subscribe(
       res => {
         if (res.not.length > 0) {
           this.notificaciones = res.not;
@@ -260,6 +265,42 @@ export class HeaderComponent implements OnInit {
         }
       );
     }
+  }
+
+  ngOnDestroy() {
+    this.suscripcion.unsubscribe();
+  }
+
+  /* Esto es para verificar cuando vamos a tener una fecha proxima a caducar */
+  checkCaducidadesAlquilerPropietario() {
+    this.suscripcion = this._auth.user_data(localStorage.getItem("email")).subscribe(
+      res => {
+        var usuario = res;
+        this._auth.getAlquilerPublicaciones(usuario.name).subscribe(
+          res2 => {
+            var alquiler = res2.alquiler;
+            for (let i = 0; i < alquiler.length; i++) {
+              if (alquiler[i].fechaCaducidadDevolucion != undefined) {
+                var fechaActual = new Date();
+                var fechaAlquiler = new Date(alquiler[i].fechaCaducidadEntrega)
+                this._auth.notificacion_caducidadEntregaPropietario(fechaActual,fechaAlquiler).subscribe(
+                  res3 => {
+                    console.log(res3);
+                  }
+                )
+              }
+            }
+          }
+        )
+      }
+    )
+  }
+
+  checkCaducidadesAlquilerPropios() {
+    this.suscripcion = this._auth.user_data(localStorage.getItem("email")).subscribe(
+      res => {
+      }
+    )
   }
 
 }

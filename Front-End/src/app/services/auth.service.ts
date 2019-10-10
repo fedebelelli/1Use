@@ -33,6 +33,8 @@ export class AuthService {
   private _notificacionesNuevas = "http://localhost:4201/api/nuevas-notificaciones/"
   private _notificacionesTodas = "http://localhost:4201/api/todas-notificaciones/"
   private _notificacionVista = "http://localhost:4201/api/notificacion-vista/"
+  private _notificacionCaducidadEntregaPropietario = "http://localhost:4201/api/notificacion-caducidad-entrega-propietario/"
+  private _notificacionCaducidadEntregaLocatario = "http://localhost:4201/api/notificacion-caducidad-entrega-locatario/"
   private _mailPassword = "http://localhost:4201/api/lostpassword/"
   private _newpwd = "http://localhost:4201/api/newpwd/"
   private _alquilerProcesoPago = "http://localhost:4201/api/registrar-alquiler/"
@@ -170,6 +172,16 @@ export class AuthService {
     let params = JSON.stringify(notificacion);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(this._notificacionVista, params, { headers: headers });
+  }
+
+  notificacion_caducidadEntregaPropietario(fechaActual, fechaCaducidad){
+    let params = JSON.stringify(fechaActual);
+    return this.http.post<any>(this._notificacionCaducidadEntregaPropietario + fechaActual + "/" + fechaCaducidad, params);
+  }
+
+  notificacion_caducidadEntregaLocatario(fechaActual, fechaCaducidad){
+    let params = JSON.stringify(fechaActual);
+    return this.http.post<any>(this._notificacionCaducidadEntregaLocatario + fechaActual + "/" + fechaCaducidad, params);
   }
 
 

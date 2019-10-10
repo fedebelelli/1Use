@@ -98,75 +98,11 @@ router.post('/register', (req, res) => {
                 },
                 (err, token) => {
                     const url = 'http://localhost:4200/confirmacionemail/' + token;
-                    transporter.sendMail({
-                        from: 'one.use.pf@gmail.com',
-                        to: userData.email,
-                        subject: 'Confirma tu Email para terminar tu registro en OneUse',
-                        /* html: '<h1>Gracias por registrarte en OneUse</h1> <br> Para Confirmar tu email, por favor, haz click en este <a href="' + url + '">link' + '</a>', */
-                        html: `
-                        <!DOCTYPE html>
-                        <html lang="es">
-                        <head>
-                            <meta charset="utf-8">
-                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-                        </head>
 
-                        <body>
-                        <section style="background-color: #4a70af;">
-                        <div style="text-align: center;">
-                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
-                        </div>
-                      
-                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
-                      
-                          <h2 style="text-align:center !important"> ¡Estás a un paso de finalizar tu registro!</h2>
-                          <h3>¡Hola `+ userData.name + `!</h3>
-                          <p> Gracias por confiar en OneUse. Con el fin de ayudar a mantener la seguridad de tu cuenta, por favor, verifica tu dirección de email. </p>
-                      
-                          <div style="text-align:center !important;">
-                            <a style="
-                                                  line-height: 40px;
-                                                  padding: 0 40px;
-                                                  border-radius: 20px;
-                                                  background: transparent;
-                                                  border: 1px solid #ffd60f;
-                                                  display: inline-block;
-                                                  font-weight: 450;
-                                                  -webkit-transition: all 0.3s ease 0s;
-                                                  -moz-transition: all 0.3s ease 0s;
-                                                  -o-transition: all 0.3s ease 0s;
-                                                  transition: all 0.3s ease 0s;
-                                                  cursor: pointer;
-                                                  outline: none;
-                                                  margin-top: 20px;
-                                                  margin-bottom: 20px;
-                                                  margin-left: 14px;
-                                                  background: #4a70af;
-                                                  text-decoration: none;
-                                                  color: #fff;
-                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
-                                                  " href="`+ url + `">Verificar email</a>
-                          </div>
-                          <p>
-                            Verificar tu dirección de email te permitirá cambiar las credenciales de tu cuenta de OneUse, utilizar confirmaciones de intercambio y del Mercado y recuperar el acceso a tu cuenta de OneUse en caso de que lo pierdas u olvides tu contraseña.
-                          </p>
-                          <br>
-                          <p>
-                            Gracias por ayudarnos a mantener la seguridad de tu cuenta.
-                          </p>
-                      
-                          <p style="font-style: italic">
-                            El equipo de OneUse
-                          </p>
-                      
-                        </section>
-                        <br><br><br>
-                      </section>
-                      
-                        </body>
-                        </html>
-                        `,
-                    });
+                    enviar(userData.email, 'Confirma tu Email para terminar tu registro en OneUse', "¡Estás a un paso de finalizar tu registro!",
+                        "Gracias por confiar en OneUse. Con el fin de ayudar a mantener la seguridad de tu cuenta, por favor, verifica tu dirección de email.",
+                        url, "Verificar email"
+                    )
                 },
             );
             res.status(200).send(true);
@@ -275,77 +211,11 @@ router.post('/lostpassword', (req, res) => {
                 },
                 (err, token) => {
                     const url = 'http://localhost:4200/newpwd/' + token;
-                    transporter.sendMail({
-                        from: 'one.use.pf@gmail.com',
-                        to: userData.email,
-                        subject: 'Cambio de contraseña en www.1use.com',
-                        /* html: '<h1>Gracias por registrarte en OneUse</h1> <br> Para Confirmar tu email, por favor, haz click en este <a href="' + url + '">link' + '</a>', */
-                        html: `
-                        <!DOCTYPE html>
-                        <html lang="es">
-                        <head>
-                            <meta charset="utf-8">
-                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-                        </head>
 
-                        <body>
-                        <section style="background-color: #4a70af;">
-                        <div style="text-align: center;">
-                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
-                        </div>
-                      
-                        <section style="width: 95%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
-                      
-                          <h2 style="text-align:center !important"> Cambio de contraseña </h2>
-                         
-                          <p> Este mail ha sido generado debido a que ud solicito un cambio de contraseña por el olvido de la misma, para continuar con el cambio de contraseña, por favor siga el siguiente enlace </p>
-                      
-                          <div style="text-align:center !important;">
-                            <a style="
-                                                  line-height: 40px;
-                                                  padding: 0 40px;
-                                                  border-radius: 20px;
-                                                  background: transparent;
-                                                  border: 1px solid #ffd60f;
-                                                  display: inline-block;
-                                                  font-weight: 450;
-                                                  -webkit-transition: all 0.3s ease 0s;
-                                                  -moz-transition: all 0.3s ease 0s;
-                                                  -o-transition: all 0.3s ease 0s;
-                                                  transition: all 0.3s ease 0s;
-                                                  cursor: pointer;
-                                                  outline: none;
-                                                  margin-top: 20px;
-                                                  margin-bottom: 20px;
-                                                  margin-left: 14px;
-                                                  background: #4a70af;
-                                                  text-decoration: none;
-                                                  color: #fff;
-                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
-                                                  " href="`+ url + `">Cambio de contraseña</a>
-                          </div>
-                          
-                          <br>
-
-                          <p>
-                                Si usted no solicito ningun cambio de contraseña, ignore este mail. 
-                          </p>
-                          <p>
-                            Gracias por ayudarnos a mantener la seguridad de tu cuenta.
-                          </p>
-                      
-                          <p style="font-style: italic">
-                            El equipo de OneUse
-                          </p>
-                      
-                        </section>
-                        <br><br><br>
-                      </section>
-                      
-                        </body>
-                        </html>
-                        `,
-                    });
+                    enviar(userData.email, 'Cambio de contraseña en www.1use.com', "Cambio de contraseña",
+                        "Este mail ha sido generado debido a que ud solicito un cambio de contraseña por el olvido de la misma, para continuar con el cambio de contraseña, por favor siga el siguiente enlace:",
+                        url, "Cambio de contraseña"
+                    )
                 },
             );
             res.status(200).send(true);
@@ -460,74 +330,8 @@ router.post('/register-publicacion', function (req, res) {
         if (!res) return res.status(404).send("Error papi");
 
         const url = 'http://localhost:4200/publicaciones/' + publicaciones.id;
-        transporter.sendMail({
-            from: 'one.use.pf@gmail.com',
-            to: publicaciones.email,
-            subject: 'Su publicacion ha sido publicada exitosamente',
-            html: `
-                        <!DOCTYPE html>
-                        <html lang="es">
-                        <head>
-                            <meta charset="utf-8">
-                            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-                        </head>
 
-                        <body>
-                        <section style="background-color: #4a70af;">
-                        <div style="text-align: center;">
-                          <img style="padding-top:20px;width: 150px; height: 100px;margin-bottom: 20px;" src="http://oneuseprimerdeploy.s3-website-sa-east-1.amazonaws.com/assets/images/E3.png">
-                        </div>
-                      
-                        <section style="width: 65%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
-                      
-                          <h1 style="text-align:center !important">¡Enhorabuena, tu producto ha sido publicado!</h1>
-                         
-                          <p> Gracias por confiar en nosotros. Para ver tu nueva publicacion, haz click en el siguiente link: </p>
-                      
-                          <div style="text-align:center !important;">
-                            <a style="
-                                                  line-height: 40px;
-                                                  padding: 0 40px;
-                                                  border-radius: 20px;
-                                                  background: transparent;
-                                                  border: 1px solid #ffd60f;
-                                                  display: inline-block;
-                                                  font-weight: 450;
-                                                  -webkit-transition: all 0.3s ease 0s;
-                                                  -moz-transition: all 0.3s ease 0s;
-                                                  -o-transition: all 0.3s ease 0s;
-                                                  transition: all 0.3s ease 0s;
-                                                  cursor: pointer;
-                                                  outline: none;
-                                                  margin-top: 20px;
-                                                  margin-bottom: 20px;
-                                                  margin-left: 14px;
-                                                  background: #4a70af;
-                                                  text-decoration: none;
-                                                  color: #fff;
-                                                  box-shadow: 0px 10px 20px 0px rgba(60, 64, 143, 0.2);
-                                                  " href="`+ url + `">Ir a la publicacion</a>
-                          </div>
-                          
-                          <br>
-                          <p>
-                            Gracias por elegirnos todos los días.
-                          </p>
-                      
-                          <p style="font-style: italic">
-                            El equipo de OneUse
-                          </p>
-                      
-                        </section>
-                        <br><br><br>
-                      </section>
-                      
-                        </body>
-                        </html>
-                        `,
-
-        });
-
+        enviar(publicaciones.email, 'Su publicacion ha sido publicada exitosamente', "¡Enhorabuena, tu producto ha sido publicado!", "Gracias por confiar en nosotros. Para ver tu nueva publicacion, haz click en el siguiente link:", url, "Ir a la publicacion");
 
         return res.status(200).send("todo legal papi");
     })
@@ -887,6 +691,31 @@ router.post("/notificacion-vista", function (req, res) {
     })
 })
 
+router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCaducidad", function (req, res) {
+
+
+    var fechaActual = moment(new Date(req.params.fechaActual)).format("MM/DD/YYYY");
+    var fechaCaducidad = moment(new Date(req.params.fechaCaducidad)).format("MM/DD/YYYY");
+
+    const date1 = new Date(fechaCaducidad);
+    const date2 = new Date(fechaActual);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log(diffDays);
+})
+
+router.post("/notificacion-caducidad-entrega-locatario/:fechaActual/:fechaCaducidad", function (req, res) {
+
+    var fechaActual = req.params.fechaActual;
+    var fechaCaducidad = req.params.fechaCaducidad;
+
+    const date1 = new Date('7/13/2010');
+    const date2 = new Date('12/15/2010');
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log(diffDays);
+})
+
 
 /* ------------------------------ Mis alquileres ----------------------------------- */
 
@@ -933,7 +762,7 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
     var date = new Date();
     var fuePagado = true;
     date.setDate(date.getDate() + 3) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN ENTREGAR EL PRODUCTO
-    var fechaCaducidadEntrega = moment(date).format('DD/MM/YYYY');
+    var fechaCaducidadEntrega = moment(date).format('MM/DD/YYYY');
 
     var objeto = {
         fuePagado: fuePagado,
@@ -946,8 +775,8 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
-        enviarEmail(alquiler.name_usuarioPropietario,"Código de entrega propietario","¡Hola! Tu código de propietario es el siguiente:"+codigoEntregaPropietario+". Recuerda darselo al locatario cuando este te lo indique.","http://localhost:4200/mis-alquileres","Ir a mis alquileres");
-        enviarEmail(alquiler.name_usuarioLocatario,"Código de entrega locatario","¡Hola! Tu código de locatario es el siguiente:"+codigoEntregaLocatario+". Recuerda darselo al propietario cuando este te lo indique.","http://localhost:4200/mis-alquileres","Ir a mis alquileres");
+        enviarEmailAUsuario(alquiler.name_usuarioPropietario, "Código de entrega propietario", "¡Enhobrabuena! Tu publicación ha sido pagada", "¡Hola! Tu código de propietario es el siguiente:" + codigoEntregaPropietario + ". Recuerda darselo al locatario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
+        enviarEmailAUsuario(alquiler.name_usuarioLocatario, "Código de entrega locatario", "¡Enhobrabuena! Tu producto ha sido pagado", "¡Hola! Tu código de locatario es el siguiente:" + codigoEntregaLocatario + ". Recuerda darselo al propietario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
 
         return res.status(200).send({ alquiler });
     })
@@ -974,13 +803,13 @@ router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (
     var codigoLocatarioIngresado = true;
     var estado = 'Entregado y en alquiler';
     var date = new Date();
-    var fechaEntrega = moment(date).format('DD/MM/YYYY');
+    var fechaEntrega = moment(date).format('MM/DD/YYYY');
 
     MisAlquileres.findOne({ codigoEntregaLocatario: codigoEntregaLocatario }, function (err1, alquiler1) {
         var diasAlquiler = alquiler1.cantidadDias;
         var date2 = new Date();
         date2.setDate(date2.getDate() + diasAlquiler + 1) //DEFINIR LA CANTIDAD DE DÍAS EN EL QUE SE PUEDE TARDAR EN devolder EL PRODUCTO
-        var fechaCaducidadDevolucion = moment(date2).format('DD/MM/YYYY');
+        var fechaCaducidadDevolucion = moment(date2).format('MM/DD/YYYY');
 
         MisAlquileres.findOneAndUpdate({ codigoEntregaLocatario: codigoEntregaLocatario }, {
             estado: estado, codigoLocatarioIngresado: codigoLocatarioIngresado,
@@ -995,7 +824,7 @@ router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (
     })
 })
 router.post("/registrar-demora-devolucion/:id_usuarioPropietario", function (req, res) {
-    var fechaActual = moment(new Date()).format('DD/MM/YYYY');;
+    var fechaActual = moment(new Date()).format('MM/DD/YYYY');;
     var id_usuarioPropietario = req.params.id_usuarioPropietario;
 
     MisAlquileres.findOne({ id_usuarioPropietario: id_usuarioPropietario }, function (err1, alquiler1) {
@@ -1062,7 +891,7 @@ router.post("/registrar-finalizacion-propietario/:codigoDevolucionLocatario", fu
     var codigoLocatarioDevolucionIngresado = true;
     var estado = 'Finalizado';
     var date = new Date();
-    var fechaDevolucion = moment(date).format('DD/MM/YYYY');
+    var fechaDevolucion = moment(date).format('MM/DD/YYYY');
 
     MisAlquileres.findOneAndUpdate({ codigoDevolucionLocatario: codigoDevolucionLocatario }, {
         estado: estado, codigoLocatarioDevolucionIngresado: codigoLocatarioDevolucionIngresado, fechaDevolucion: fechaDevolucion
@@ -1112,14 +941,14 @@ router.get("/get-propietario-alquiler/:username", function (req, res) {
 
 
 /* PARA ENVIO DE MAILS */
-function enviarEmail(username, asunto, mensaje, url, mensajeBoton) {
+function enviarEmailAUsuario(username, asunto, titulo, mensaje, url, mensajeBoton) {
     variable = {};
     User.findOne({ name: username }, function (err, usuario) {
-        enviar(usuario.email, asunto, mensaje, url, mensajeBoton);
+        enviar(usuario.email, asunto, titulo, mensaje, url, mensajeBoton);
     });
 }
 
-function enviar(email_destinatario, asunto, mensaje, url, mensajeBoton) {
+function enviar(email_destinatario, asunto, titulo, mensaje, url, mensajeBoton) {
     transporter.sendMail({
         from: 'one.use.pf@gmail.com',
         to: email_destinatario,
@@ -1140,7 +969,7 @@ function enviar(email_destinatario, asunto, mensaje, url, mensajeBoton) {
                   
                     <section style="width: 65%;height: 100%;background-color: white;box-sizing: border-box;padding: 5px; text-align:justify; padding-bottom:10px; margin:0 auto">
                   
-                      <h1 style="text-align:center !important">¡Enhorabuena, tu producto ha sido publicado!</h1>
+                      <h1 style="text-align:center !important">`+ titulo + `</h1>
                      
                       <p>`+ mensaje + `</p>
                   

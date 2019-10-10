@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SingletonService } from '../../singleton.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-import { ConfirmacionAlquilerComponent } from '../../confirmacion-alquiler/confirmacion-alquiler.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DatosPropietarioDialogComponent } from './datos-propietario-dialog/datos-propietario-dialog.component';
 import { DatosLocatarioDialogComponent } from './datos-locatario-dialog/datos-locatario-dialog.component';
 import { CodigoPropietarioDialogComponent } from './codigo-propietario-dialog/codigo-propietario-dialog.component';
 import { CodigoLocatarioDialogComponent } from './codigo-locatario-dialog/codigo-locatario-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mis-alquileres',
   templateUrl: './mis-alquileres.component.html',
   styleUrls: ['./mis-alquileres.component.css']
 })
-export class MisAlquileresComponent implements OnInit {
+export class MisAlquileresComponent implements OnInit, OnDestroy {
+
+  private subscription: Subscription;
 
   usuarioLogueado = {};
   arrayAlquilerPropietario = [];
@@ -31,7 +32,7 @@ export class MisAlquileresComponent implements OnInit {
     this.arrayDatosPropietario = []
     this.arrayAlquilerPropios = [];
     this.arrayDatosPropios = [];
-    this._auth.user_data(localStorage.getItem("email")).subscribe(
+    this.subscription = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
         this.usuarioLogueado = res;
         var username = res.name
@@ -61,6 +62,10 @@ export class MisAlquileresComponent implements OnInit {
             this.hayAlquileresPropios = true;
           })
       })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   cambioTab(evento) {
@@ -100,9 +105,9 @@ export class MisAlquileresComponent implements OnInit {
           alquiler: alquiler
         }
       });
-/*     this.datosPropietarioDialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-    }) */
+    /*     this.datosPropietarioDialogRef.afterClosed().subscribe(result => {
+          this.ngOnInit();
+        }) */
   }
 
   openDialogCodigoPropietario(alquiler): void {
