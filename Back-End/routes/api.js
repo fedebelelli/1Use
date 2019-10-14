@@ -705,7 +705,7 @@ router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCadu
     var id_publicacion = req.params.id_publicacion;
     var tituloPublicacion = req.params.tituloPublicacion;
     var imagen = req.params.imagen;
-    var titulo = "ALERTA, tienes una entrega de producto pendiente";
+    var titulo = "ALERTA: tienes una entrega de producto pendiente.";
     var destino = req.params.user;
     var mensaje = "Tienes " + diffDays + " dias para entregar el producto a " + destino;
     console.log(destino);

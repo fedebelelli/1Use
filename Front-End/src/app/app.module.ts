@@ -43,7 +43,6 @@ import { BusquedaPublicacionesComponent } from './components/busqueda/busqueda-p
 import { BusquedaCategoriasComponent } from './components/busqueda/busqueda-categorias/busqueda-categorias.component';
 import { SoloNumerosDirective } from './components/mi-cuenta/perfil-usuario/inputSoloNumeros.directive';
 import { SoloLetrasDirective } from './components/mi-cuenta/perfil-usuario/inputSoloLetras.directive';
-import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { LostPasswordComponent } from './components/login/lostpassword/lostpassword.component';
 import { ConfirmaLostPasswordComponent } from './components/login/lostpassword/confirmalostpassword/confirmalostpassword.component';
 import { PosAlquilerComponent } from './components/pos-alquiler/pos-alquiler.component';
@@ -93,7 +92,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BusquedaPublicacionesComponent,
     BusquedaCategoriasComponent,
     SoloNumerosDirective,
-    BusquedaComponent,
     SoloLetrasDirective,
     SoloNumerosDirective,
     PosAlquilerComponent,
