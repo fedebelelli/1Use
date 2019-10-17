@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableDataSource } from './data-table-datasource';
 import { AuthService } from 'src/app/services/auth.service';
-import { map } from 'rxjs/internal/operators/map';
-import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,7 +19,7 @@ export class NotificacionesComponent implements OnInit, OnDestroy {
   dataSource: DataTableDataSource;
   displayedColumns = ['id']; /* ,'name', 'amount' */
   usuarioLogueado;
-  notificaciones;
+  notificaciones = [];
   publicacion;
   JSON;
   JSONfinal;
@@ -50,7 +48,12 @@ export class NotificacionesComponent implements OnInit, OnDestroy {
               this.arrayJSON.push(res2.not[i].imagen);
               this.arrayTitulos.push(res2.not[i].titulo);
             }
-            this.dataSource = new DataTableDataSource(this.paginator, this.sort, res2.not, this.arrayJSON, this.arrayTitulos, this.arrayFechas);
+            this.notificaciones = res2.not;
+            this.notificaciones.reverse();
+            this.arrayJSON.reverse();
+            this.arrayTitulos.reverse();
+            this.arrayFechas.reverse();
+            this.dataSource = new DataTableDataSource(this.paginator, this.sort, this.notificaciones, this.arrayJSON, this.arrayTitulos, this.arrayFechas);
           }
         )
       }

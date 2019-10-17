@@ -49,7 +49,7 @@
                 <div mat-menu-item *ngFor="let not of notificaciones; let indice = index"
                     style="max-width: 1000px !important">
                     <p [fxShow]=!noHayNotificaciones routerLink="/publicaciones/{{not.id_publicacion}}">
-                        {{not.mensaje_notificacion}}: {{arrayTitulos[indice]}}</p>
+                        {{not.mensaje_notificacion}} {{arrayTitulos[indice]}}</p>
                     <mat-divider style="margin: -1px"></mat-divider>
                 </div>
                 <p mat-menu-item [fxShow]=noHayNotificaciones> No hay notificaciones por mostrar </p>

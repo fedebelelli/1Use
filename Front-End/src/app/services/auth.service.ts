@@ -24,6 +24,7 @@ export class AuthService {
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
   private _searchCategoria = "http://localhost:4201/api/search-categoria/"
+  private _searchPalabra = "http://localhost:4201/api/search-palabra/"
   private _preguntaPublicacion = "http://localhost:4201/api/pregunta/"
   private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
   private _pyrPublicacion = "http://localhost:4201/api/pyr/"
@@ -69,7 +70,7 @@ export class AuthService {
     return this.http.post<any>(this._confirmar, { token: token });
   }
 
-  newPwd(user,token){
+  newPwd(user, token) {
 
     return this.http.post<any>(this._newpwd, { token: token, user: user });
 
@@ -126,6 +127,10 @@ export class AuthService {
     return this.http.get<any>(this._searchCategoria + name);
   }
 
+  search_palabra(palabra) {
+    return this.http.get<any>(this._searchPalabra + palabra);
+  }
+
 
   /* CRUD DE PREGUNTAS Y RESPUESTAS DE PUBLICACIONES */
   get_preguntas_respuestas(id) {
@@ -174,14 +179,16 @@ export class AuthService {
     return this.http.post<any>(this._notificacionVista, params, { headers: headers });
   }
 
-  notificacion_caducidadEntregaPropietario(fechaActual, fechaCaducidad){
-    let params = JSON.stringify(fechaActual);
-    return this.http.post<any>(this._notificacionCaducidadEntregaPropietario + fechaActual + "/" + fechaCaducidad, params);
+  notificacion_caducidadEntregaPropietario(fechaActual, fechaCaducidad, imagen, id_publicacion, name_usuario_propietario, name_usuario_locatario, id_alquiler) {
+    var objeto = { fechaActual: fechaActual, fechaCaducidad: fechaCaducidad };
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._notificacionCaducidadEntregaPropietario + imagen + "/" + id_publicacion + "/" + name_usuario_propietario + "/" + name_usuario_locatario + "/" + id_alquiler, objeto, { headers: headers });
   }
 
-  notificacion_caducidadEntregaLocatario(fechaActual, fechaCaducidad){
-    let params = JSON.stringify(fechaActual);
-    return this.http.post<any>(this._notificacionCaducidadEntregaLocatario + fechaActual + "/" + fechaCaducidad, params);
+  notificacion_caducidadEntregaLocatario(fechaActual, fechaCaducidad, imagen, id_publicacion, name_usuario_propietario, name_usuario_locatario, id_alquiler) {
+    var objeto = { fechaActual: fechaActual, fechaCaducidad: fechaCaducidad };
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._notificacionCaducidadEntregaLocatario + imagen + "/" + id_publicacion + "/" + name_usuario_propietario + "/" + name_usuario_locatario + "/" + id_alquiler, objeto, { headers: headers });
   }
 
 
@@ -191,30 +198,30 @@ export class AuthService {
     return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + name_propietario + "/" + name_locatario + "/" + cantidadDias + "/" + cantidadAlquiler + "/" + imagen, params);
   }
 
-  getAlquilerPublicaciones(name_usuarioPropietario){
+  getAlquilerPublicaciones(name_usuarioPropietario) {
     return this.http.get<any>(this._getAlquilerPropietario + name_usuarioPropietario);
   }
 
-  getAlquilerPropios(name_usuarioLocatario){
+  getAlquilerPropios(name_usuarioLocatario) {
     return this.http.get<any>(this._getAlquilerPropios + name_usuarioLocatario);
   }
 
-  registrar_EnProcesoEntrega(id_publicacion){
+  registrar_EnProcesoEntrega(id_publicacion) {
     let params = JSON.stringify(id_publicacion);
     return this.http.post<any>(this._registrarEnProcesoEntrega + id_publicacion, params);
   }
 
-  registrar_codigoPropietarioEntrega(codigo){
+  registrar_codigoPropietarioEntrega(codigo) {
     let params = JSON.stringify(codigo);
     return this.http.post<any>(this._registrarCodigoPropietarioEntrega + codigo, params);
   }
 
-  registrar_codigoLocatarioEntrega(codigo){
+  registrar_codigoLocatarioEntrega(codigo) {
     let params = JSON.stringify(codigo);
     return this.http.post<any>(this._registrarCodigoLocatarioEntrega + codigo, params);
   }
 
-  getPropietarioAlquiler(username){
+  getPropietarioAlquiler(username) {
     return this.http.get<any>(this._getPropietarioAlquiler + username);
   }
 }

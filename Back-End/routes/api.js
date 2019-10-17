@@ -543,6 +543,80 @@ router.get('/search-categoria/:categoria', function (req, res) {
     })
 })
 
+router.get("/search-palabra/:palabra", function (req, res) {
+    var palabra = req.params.palabra;
+
+    var preciodia = req.query.p;
+    var estrellas = req.query.e;
+    var categoria = req.query.c;
+    var subcategoria = req.query.s;
+
+    var query;
+
+    /*  p c p e s
+        1 0 0 0
+        1 0 0 1
+        1 0 1 0
+        1 0 1 1
+        1 1 0 0
+        1 1 0 1
+        1 1 1 1
+    */
+
+    if (categoria == undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, estado: 'ACTIVA' })
+    }
+
+    //1000 
+    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estado: 'ACTIVA' })
+    }
+
+    //1001
+    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+    //1010
+    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //1011
+    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+    //1100
+    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estado: 'ACTIVA' })
+    }
+
+    //1101
+    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+    //1110
+    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //1111
+    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+
+    query.exec((err, publicaciones) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ publicaciones });
+    })
+})
+
 
 /* ------------------------------ Preguntas y respuestas ----------------------------------- */
 //Get de las preguntas y respuestas de una publicación
@@ -691,46 +765,94 @@ router.post("/notificacion-vista", function (req, res) {
     })
 })
 /*Notificación para avisar a el propietario el tiempo que le queda para entregar el producto al locatario*/
-router.post("/notificacion-caducidad-entrega-propietario/:fechaActual/:fechaCaducidad/:imagen/:id_publicacion/:user", function (req, res) {
-
-
-    var fechaActual = moment(new Date(req.params.fechaActual)).format("MM/DD/YYYY");
-    var fechaCaducidad = moment(new Date(req.params.fechaCaducidad)).format("MM/DD/YYYY");
+router.post("/notificacion-caducidad-entrega-propietario/:imagen/:id_publicacion/:user_propietario/:user_locatario/:id_alquiler", function (req, res) {
+    var fechaActual = moment(new Date(req.body.fechaActual)).format("MM/DD/YYYY");
+    var fechaCaducidad = moment(new Date(req.body.fechaCaducidad)).format("MM/DD/YYYY");
 
     const date1 = new Date(fechaCaducidad);
     const date2 = new Date(fechaActual);
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
     var id_publicacion = req.params.id_publicacion;
     var tituloPublicacion = req.params.tituloPublicacion;
     var imagen = req.params.imagen;
     var titulo = "ALERTA: tienes una entrega de producto pendiente.";
-    var destino = req.params.user;
-    var mensaje = "Tienes " + diffDays + " dias para entregar el producto a " + destino;
-    console.log(destino);
+    var origen = req.params.user_locatario; //EL USUARIO QUE ME ALQUILÓ UNA PUBLICACIÓN
+    var destino = req.params.user_propietario; //YO USUARIO, DUEÑO DE LA PUBLICACIÓN
+    var id_alquiler = req.params.id_alquiler;
+    if (date1 >= date2) {
+        if (diffDays <= 3 && diffDays > 0) {
+            if (diffDays == 1) {
+                var mensaje = "Tienes " + diffDays + " día para entregar el producto a " + origen;
+            } else {
+                var mensaje = "Tienes " + diffDays + " dias para entregar el producto a " + origen;
+            }
+        } else {
+            if (diffDays == 0) {
+                var mensaje = "Hoy es el último día para entregar el producto a " + origen;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (diffDays == 1) {
+            var mensaje = "Te has demorado " + diffDays + " día en entregar el producto a " + origen;
+        } else {
+            var mensaje = "Te has demorado " + diffDays + " dias en entregar el producto a " + origen;
+        }
 
+    }
 
-    var objeto = { id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen, 
-        titulo: titulo, name_destino: destino, mensaje_notificacion: mensaje, visto: false }
+    var objeto = {
+        id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen,
+        titulo: titulo, name_destino: destino, mensaje_notificacion: mensaje, visto: false
+    }
 
     var notificacion = new Notificacion(objeto);
 
-    notificacion.save((err, not) => {
+    MisAlquileres.findById(id_alquiler, (err, alquiler) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
-        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+        if (!alquiler) return res.status(404).send({ message: 'Error' });
 
-        return res.status(200).send({ not });
+        if (alquiler.fechaEntrega == undefined && alquiler.estado == "En proceso de entrega") {
+
+            Notificacion.find({ mensaje_notificacion: mensaje }, (err, not1) => {
+                if (err) return res.status(500).send({ message: 'Error' });
+
+                /* Si encuentra la notificación, no la envía. En cambio, si no la encuentra, la sube como nueva */
+                if (not1.length < 1) {
+                    notificacion.save((err, not) => {
+
+                        if (diffDays == 2 && date1 >= date2) {
+                            enviarEmailAUsuario(destino, "Tiempo de caducación de entrega de tu alquiler", "Tu producto debe ser entregado en 2 días", "¡Hola " + destino + "! Este e-mail es para recordate que debes entregar el producto dentro de 2(dos) días. En caso de que no se realice la entrega, un botón para generar un reclamo va a ser generado en la sección de 'Mis Alquileres' dentro de tu cuenta en el cual podrás realizar un descargo del por qué no fue entregado en la fecha pactada.", "http://localhost:4200/mi-cuenta/mis-alquileres", "Ir a Mis Alquileres");
+                        }
+
+                        if (diffDays == 1 && date1 < date2) {
+                            enviarEmailAUsuario(destino, "Tiempo de caducación de entrega de tu alquiler", "Tu producto no fue entregado en el tiempo pactado", "¡Hola " + destino + "! Este e-mail es para recordate que no has entregado en tiempo y forma el producto que te han alquilado. Puedes realizar tu descargo dentro de la sección 'Mis Alquileres'.", "http://localhost:4200/mi-cuenta/mis-alquileres", "Ir a Mis Alquileres");
+                        }
+
+                        if (err) return res.status(500).send({ message: 'Error' });
+
+                        if (!not) return res.status(404).send({ message: 'El doc no existe' });
+
+                        return res.status(200).send({ not });
+                    })
+                } else {
+                    return res.status(200).send({ not1 });
+                }
+            })
+        } else {
+            res.status(200).send("");
+        }
     })
-
 })
-/*Notificación para avisar a el locatario el tiempo que queda para que el propietario le entregue el producto*/
-router.post("/notificacion-caducidad-entrega-locatario/:fechaActual/:fechaCaducidad/:imagen/:id_publicacion/:user", function (req, res) {
 
+/*Notificación para avisar al locatario el tiempo que queda para que el propietario le entregue el producto*/
+router.post("/notificacion-caducidad-entrega-locatario/:imagen/:id_publicacion/:user_propietario/:user_locatario/:id_alquiler", function (req, res) {
 
-    var fechaActual = moment(new Date(req.params.fechaActual)).format("MM/DD/YYYY");
-    var fechaCaducidad = moment(new Date(req.params.fechaCaducidad)).format("MM/DD/YYYY");
+    var fechaActual = moment(new Date(req.body.fechaActual)).format("MM/DD/YYYY");
+    var fechaCaducidad = moment(new Date(req.body.fechaCaducidad)).format("MM/DD/YYYY");
 
     const date1 = new Date(fechaCaducidad);
     const date2 = new Date(fechaActual);
@@ -741,24 +863,75 @@ router.post("/notificacion-caducidad-entrega-locatario/:fechaActual/:fechaCaduci
     var tituloPublicacion = req.params.tituloPublicacion;
     var imagen = req.params.imagen;
     var titulo = "ALERTA, tienes una entrega de producto pendiente";
-    var origen = req.params.user;
-    var mensaje = "Tienes " + diffDays + " dias para recibir el producto que has alquilado a " + origen;
-    
+    var origen = req.params.user_propietario; //EL USUARIO DUEÑO DE LA PUBLICACIÓN QUE ALQUILÉ
+    var destino = req.params.user_locatario; //YO USUARIO, QUIEN ALQUILÓ LA PUBLICACIÓN
+    var id_alquiler = req.params.id_alquiler;
 
+    if (date1 >= date2) {
+        if (diffDays <= 3 && diffDays > 0) {
+            if (diffDays == 1) {
+                var mensaje = "Tienes " + diffDays + " día para recibir el producto que has alquilado a " + origen;
+            } else {
+                var mensaje = "Tienes " + diffDays + " dias para recibir el producto que has alquilado a " + origen;
+            }
+        } else {
+            if (diffDays == 0) {
+                var mensaje = "Hoy es el último día para recibir el producto que has alquilado a " + origen;
+            } else {
+                return;
+            }
+        }
+    } else {
+        if (diffDays == 1) {
+            var mensaje = origen + " se ha demorado " + diffDays + " día en entregarte el objeto que has alquilado";
+        } else {
+            var mensaje = origen + " se ha demorado " + diffDays + " dias en entregarte el objeto que has alquilado";
+        }
 
-    var objeto = { id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen, 
-        titulo: titulo, name_origen: origen, mensaje_notificacion: mensaje, visto: false }
+    }
+
+    var objeto = {
+        id_publicacion: id_publicacion, tituloPublicacion: tituloPublicacion, imagen: imagen,
+        titulo: titulo, name_destino: destino, mensaje_notificacion: mensaje, visto: false
+    }
 
     var notificacion = new Notificacion(objeto);
 
-    notificacion.save((err, not) => {
+    MisAlquileres.findById(id_alquiler, (err, alquiler) => {
         if (err) return res.status(500).send({ message: 'Error' });
 
-        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+        if (!alquiler) return res.status(404).send({ message: 'Error' });
 
-        return res.status(200).send({ not });
+        if (alquiler.fechaEntrega == undefined && alquiler.estado == "En proceso de entrega") {
+            Notificacion.find({ mensaje_notificacion: mensaje }, (err, not1) => {
+                if (err) return res.status(500).send({ message: 'Error' });
+
+                /* Si encuentra la notificación, no la envía. En cambio, si no la encuentra, la sube como nueva */
+                if (not1.length < 1) {
+                    notificacion.save((err, not) => {
+
+                        if (diffDays == 2 && date1 >= date2) {
+                            enviarEmailAUsuario(destino, "Tiempo de caducación de entrega de tu alquiler", "Tu producto debe ser entregado en 2 días", "¡Hola " + destino + "! Este e-mail es para recordate que el dueño de la publicación debe entregarte el producto dentro de 2(dos) días. En caso de que no se realice la entrega, un botón para generar un reclamo va a ser generado en la sección de 'Mis Alquileres' dentro de tu cuenta.", "http://localhost:4200/mi-cuenta/mis-alquileres", "Ir a Mis Alquileres");
+                        }
+
+                        if (diffDays == 1 && date1 < date2) {
+                            enviarEmailAUsuario(destino, "Tiempo de caducación de entrega de tu alquiler", "Tu producto no fue entregado en el tiempo pactado", "¡Hola " + destino + "! Este e-mail es para recordate que el dueño de la publicación no ha entregado en tiempo y forma el producto que has alquilado. Puedes realizar el reclamo del mismo dentro de la sección 'Mis Alquileres'.", "http://localhost:4200/mi-cuenta/mis-alquileres", "Ir a Mis Alquileres");
+                        }
+
+                        if (err) return res.status(500).send({ message: 'Error' });
+
+                        if (!not) return res.status(404).send({ message: 'El doc no existe' });
+
+                        return res.status(200).send({ not });
+                    })
+                } else {
+                    return res.status(200).send({ not1 });
+                }
+            })
+        } else {
+            res.status(200).send("");
+        }
     })
-
 })
 
 /* ------------------------------ Mis alquileres ----------------------------------- */

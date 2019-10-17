@@ -65,7 +65,11 @@ export class PosAlquilerComponent implements OnInit {
   }
 
   registrarAlquiler(){
-
+    this._auth.registrar_EnProcesoEntrega(this.publicacion._id).subscribe(
+      res => {
+        //console.log(res);
+      }
+    )
   }
 
 

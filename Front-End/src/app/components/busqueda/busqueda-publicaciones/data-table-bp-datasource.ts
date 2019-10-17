@@ -6,9 +6,11 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 // TODO: Replace this with your own data model type
 export interface BusquedaPalabra {
     titulo: string,
-    categoria: string,
     preciodia: string,
-    multiplefile: string,        
+    _id: string
+    categoria: string,
+    multiplefile: string,
+    subcategoria: string, 
 }
 
 /**
@@ -17,11 +19,27 @@ export interface BusquedaPalabra {
  * (including sorting, pagination, and filtering).
  */
 export class DataTableBusquedaPalabra extends DataSource<BusquedaPalabra> {
+
     data: BusquedaPalabra[];
 
+    imagen;
+    publicacion = [];
+    imagenJSON;
+    arrayJSON = [];
+    arrayImagen = [];
 
     constructor(private paginator: MatPaginator, private sort: MatSort, private busqueda: BusquedaPalabra[]) {
         super();
+        for (let i = 0; i < this.busqueda.length; i++) {
+            this.imagen = this.busqueda[i].multiplefile;
+            this.imagenJSON = JSON.parse(this.imagen); //CREA JSON CONVERTIDO DE STRING
+            for (let j in this.imagenJSON) {
+                this.arrayJSON.push(this.imagenJSON[j]);
+            }
+            this.busqueda[i].multiplefile = this.arrayJSON[0];
+            this.arrayJSON = [];
+        }
+        
         this.data = this.busqueda;
     }
 

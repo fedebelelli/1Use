@@ -1,17 +1,29 @@
 <section fxLayout="row" class="container-general" fxFlexFill>
     <!-- Sección de filtros -->
     <section fxFlex="28%">
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" class="mat-elevation-z8 contenedor-filtros">
-            <div>
-                <p>Subcategorias</p>
+        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="15px"
+            class="mat-elevation-z8 contenedor-filtros">
+            <div *ngIf="!filtroCategoria" fxLayout="column">
+                <h3>Categorías</h3>
+                <a style="color: black;" *ngFor="let cat of arrayCategorias" (click)="categoriaSeleccionada(cat)">
+                    {{cat}}
+                </a>
             </div>
 
-            <div>
-                <p>Subcategorias</p>
+            <!-- MOSTRAR SOLO CUANDO SE SELECCIONÓ UNA CATEGORÍA -->
+            <div *ngIf="!filtroSubcategoria && filtroCategoria">
+                <h3>Subcategorias</h3>
+                <a *ngFor="let sub of arraySubcategorias">
+                    {{sub}}
+                </a>
             </div>
 
-            <div>
-                <p>Subcategorias</p>
+            <div *ngIf="!filtroPrecioDia">
+                <h3>Precio por día</h3>
+            </div>
+
+            <div *ngIf="!filtroEstrellas">
+                <h3>Puntuación del propietario</h3>
             </div>
         </div>
     </section>
@@ -19,19 +31,34 @@
     <!-- Sección de publicaciones -->
     <section fxFlex="72%" class="mat-elevation-z8 contenedor-publicaciones">
         <div>
-            <!--<mat-grid-list cols="4" rowHeight="367px" gutterSize="20px">
-                <mat-grid-tile [colspan]=1 [rowspan]=1>
+            <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row" style="height: 100%; line-height: 38px">
+                        <div fxLayout="row" fxLayoutGap="20px" style="margin-top: 10px;">
+                            <div *ngIf="!hayPublicaciones">
+                                {{mensaje}}
+                            </div>
+                            <div>
+                                <img class="container-muestra-imagenes"
+                                    src="{{'http://localhost:4201/api/get-image-publicacion/'+ row.multiplefile}}">
+                            </div>
+                            <div>
+                                <h3 routerLink="/publicaciones/{{row._id}}">{{row.titulo}} </h3>
+                                <p> <b> Precio por día </b>: ${{row.preciodia}} </p>
+                                <p> <b> Categoría </b>: {{row.categoria}}</p>
+                            </div>
+                        </div>
+                    </mat-cell>
+                </ng-container>
 
-                </mat-grid-tile>
-            </mat-grid-list> -->
-        </div>
+                <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
 
-        <div>
-            <p>Subcategorias</p>
-        </div>
-
-        <div>
-            <p>Subcategorias</p>
+            <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="5"
+                [pageSizeOptions]="[1,5,10,15,20,25,50]">
+            </mat-paginator>
         </div>
     </section>
 </section>

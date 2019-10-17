@@ -223,10 +223,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  /* NOTIFICACIONES test */
+  /* NOTIFICACIONES */
 
   get_notificaciones_nuevas(username) {
-    /* this.pusherService.channel.bind('nueva-pregunta', data => { this.cantidad = data.likes }); */
     this.suscripcion = this._auth.notificacion_nueva(username).subscribe(
       res => {
         if (res.not.length > 0) {
@@ -248,6 +247,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
           for (let i = 0; i < this.notificaciones.length; i++) {
             this.arrayTitulos.push(res.not[i].tituloPublicacion);
           }
+          this.notificaciones.reverse();
+          this.arrayTitulos.reverse();
         } else {
           this.noHayNotificaciones = true;
           this.mensaje = "No hay notificaciones para mostrar";
@@ -271,7 +272,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.suscripcion.unsubscribe();
   }
 
-  /* Esto es para verificar cuando vamos a tener una fecha proxima a caducar */
+  /* Esto es para verificar en cuanto tiempo va a devolver o está tardando en devolver un objeto un usuario al usuario logueado */
   checkCaducidadesAlquilerPropietario() {
     this.suscripcion = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
@@ -282,10 +283,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
             for (let i = 0; i < alquiler.length; i++) {
               if (alquiler[i].fechaCaducidadDevolucion != undefined) {
                 var fechaActual = new Date();
-                var fechaAlquiler = new Date(alquiler[i].fechaCaducidadEntrega)
-                this._auth.notificacion_caducidadEntregaPropietario(fechaActual,fechaAlquiler).subscribe(
+                var fechaAlquiler = new Date(alquiler[i].fechaCaducidadEntrega);
+                //MANDAR TODO POR JSON EN EL BODY SINO TIRA ERROR
+                this._auth.notificacion_caducidadEntregaPropietario(fechaActual, fechaAlquiler, alquiler[i].imagen, alquiler[i].id_publicacion, usuario.name, alquiler[i].name_usuarioLocatario, alquiler[i]._id).subscribe(
                   res3 => {
-                    console.log(res3);
+                    //console.log(res3);
                   }
                 )
               }
@@ -299,6 +301,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   checkCaducidadesAlquilerPropios() {
     this.suscripcion = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
+        var usuario = res;
+        this._auth.getAlquilerPublicaciones(usuario.name).subscribe(
+          res2 => {
+            var alquiler = res2.alquiler;
+            for (let i = 0; i < alquiler.length; i++) {
+              if (alquiler[i].fechaCaducidadDevolucion != undefined) {
+                var fechaActual = new Date();
+                var fechaAlquiler = new Date(alquiler[i].fechaCaducidadEntrega);
+                //MANDAR TODO POR JSON EN EL BODY SINO TIRA ERROR
+                this._auth.notificacion_caducidadEntregaLocatario(fechaActual, fechaAlquiler, alquiler[i].imagen, alquiler[i].id_publicacion, usuario.name, alquiler[i].name_usuarioLocatario, alquiler[i]._id).subscribe(
+                  res3 => {
+                    //console.log(res3);
+                  }
+                )
+              }
+            }
+          }
+        )
       }
     )
   }
