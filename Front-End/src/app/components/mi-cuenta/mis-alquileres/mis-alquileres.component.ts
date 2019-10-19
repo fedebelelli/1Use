@@ -24,6 +24,8 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   arrayDatosPropios = [];
   hayAlquileresPropietario = false;
   hayAlquileresPropios = false;
+  reclamado = false;
+  arrayEstados = [];
 
   constructor(private _auth: AuthService, private singleton: SingletonService, public dialog: MatDialog) { }
 
@@ -36,7 +38,6 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
       res => {
         this.usuarioLogueado = res;
         var username = res.name
-
         this._auth.getAlquilerPublicaciones(username).subscribe(
           res1 => {
             this.arrayAlquilerPropietario = res1.alquiler;
@@ -52,9 +53,26 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
 
         this._auth.getAlquilerPropios(username).subscribe(
           res1 => {
+            var fechaActual = new Date();
             this.arrayAlquilerPropios = res1.alquiler;
 
             for (let i = 0; i < this.arrayAlquilerPropios.length; i++) {
+
+              this._auth.get_publicacion_id(res1.alquiler[i].id_publicacion).subscribe(
+                res2 => {
+                  console.log(res2.publicaciones.tipoAlquiler)
+                  if (res1.alquiler[i].estado == "En proceso de entrega" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion") {
+                    let fechaCaducidad = new Date(res1.alquiler[i].fechaCaducidadEntrega);
+                    if (fechaActual > fechaCaducidad) {
+                      this.arrayEstados.push(true);
+                    } else {
+                      this.arrayEstados.push(false);
+                    }
+                  } else {
+                    this.arrayEstados.push(false);
+                  }
+                })
+
               var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
               this.arrayAlquilerPropios[i].createdAt = date;
               this.arrayDatosPropios.push(this.arrayAlquilerPropios[i])
@@ -64,7 +82,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
@@ -83,6 +101,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
       }
     )
   }
+
 
   datosPropietarioDialogRef: MatDialogRef<DatosPropietarioDialogComponent>;
   datosLocatarioDialogRef: MatDialogRef<DatosLocatarioDialogComponent>;
