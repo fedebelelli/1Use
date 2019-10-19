@@ -3,27 +3,52 @@
     <section fxFlex="28%">
         <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="15px"
             class="mat-elevation-z8 contenedor-filtros">
-            <div *ngIf="!filtroCategoria" fxLayout="column">
-                <h3>Categorías</h3>
-                <a style="color: black;" *ngFor="let cat of arrayCategorias" (click)="categoriaSeleccionada(cat)">
+            <div *ngIf="!filtroCategoria" fxLayout="column" class="filtros">
+                <p style="font-size: 16px;"><b>Categoría</b></p>
+                <a style="color: black;" *ngFor="let cat of arrayCategorias" (click)="filtroSeleccionado('c',cat)">
                     {{cat}}
                 </a>
             </div>
 
             <!-- MOSTRAR SOLO CUANDO SE SELECCIONÓ UNA CATEGORÍA -->
-            <div *ngIf="!filtroSubcategoria && filtroCategoria">
-                <h3>Subcategorias</h3>
-                <a *ngFor="let sub of arraySubcategorias">
+            <div *ngIf="!filtroSubcategoria && filtroCategoria" class="filtros" fxLayout="column"
+                fxLayoutAlign="center start" fxLayoutGap="15px">
+                <p style="font-size: 16px;"><b>Subcategoria</b></p>
+                <a style="color: black;" *ngFor="let sub of arraySubcategorias" (click)="filtroSeleccionado('sc',sub)">
                     {{sub}}
                 </a>
             </div>
 
-            <div *ngIf="!filtroPrecioDia">
-                <h3>Precio por día</h3>
+            <div *ngIf="!filtroPrecioDia" class="filtros">
+                <p style="font-size: 16px;"> <b>Precio por día</b></p>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-slider #slider class="slider" [displayWith]="formatoSlider" color="primary"
+                        [max]="sliderMax.value" [min]="sliderMin.value" thumbLabel="true">
+                    </mat-slider>
+                    <mat-hint> ${{slider.value}} </mat-hint>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                    <mat-form-field>
+                        <span matPrefix>$ &nbsp;</span>
+                        <input soloNumerosDirective maxlength="8" style="width: 70px;" matInput #sliderMin
+                            placeholder="Desde" value="0">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <span matPrefix>$ &nbsp;</span>
+                        <input soloNumerosDirective maxlength="8" style="width: 70px;" matInput #sliderMax
+                            placeholder="Hasta" value="100">
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="filtroSeleccionado('precio',slider.value)">
+                        <mat-icon>check_box</mat-icon>
+                    </button>
+                </div>
+
             </div>
 
-            <div *ngIf="!filtroEstrellas">
-                <h3>Puntuación del propietario</h3>
+            <div *ngIf="!filtroEstrellas" class="filtros">
+                <p style="font-size: 16px;"><b>Puntuación del propietario</b></p>
+                <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColorP"
+                    (ratingUpdated)="onRatingChanged($event)"></mat-star-rating>
             </div>
         </div>
     </section>

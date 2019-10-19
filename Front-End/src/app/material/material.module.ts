@@ -31,6 +31,7 @@ import {
   MatPaginatorModule,
   MatProgressBarModule,
   MatChipsModule,
+  MatSliderModule,
   
 } from '@angular/material';
 
@@ -69,7 +70,8 @@ const MaterialComponents = [
   MatDividerModule,
   MatProgressBarModule,
   MatVideoModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSliderModule
 ]
 
 @NgModule({ imports: [MaterialComponents], exports: [MaterialComponents] })

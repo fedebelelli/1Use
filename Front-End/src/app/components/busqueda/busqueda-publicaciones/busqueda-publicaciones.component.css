@@ -1,16 +1,16 @@
-.container-general{
+.container-general {
     margin-top: 40px;
     margin-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.contenedor-filtros{
+.contenedor-filtros {
     width: 269px;
     margin-left: 87px;
 }
 
-.contenedor-publicaciones{
+.contenedor-publicaciones {
     margin-bottom: 50px;
     margin-right: 142px;
 }
@@ -18,4 +18,15 @@
 .container-muestra-imagenes {
     width: 230px;
     height: 230px;
+}
+
+.filtros {
+    margin-left: 20px;
+    line-height: 32px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.slider {
+    width: 180px;
 }

@@ -266,13 +266,13 @@ export class PerfilUsuarioComponent implements OnInit {
     console.log(this.formulario.value);
     this._auth.update_user(this.formulario.value, this._id).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this._uploadService.makeFileRequest("http://localhost:4201/api/upload-image/" + this._id, [], this.filesToUpload, 'removablefile')
           .then((result: any) => {
-            console.log(result);
+            //console.log(result);
           });
       }
     )
@@ -320,12 +320,12 @@ export class PerfilUsuarioComponent implements OnInit {
     let valor;
     this._auth.user_data(email).subscribe(
       res => {
-        console.log(res._id);
+        //console.log(res._id);
         valor = res._id;
-        console.log(valor);
+        //console.log(valor);
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     )
     return valor;
