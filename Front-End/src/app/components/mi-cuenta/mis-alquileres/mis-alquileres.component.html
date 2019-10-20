@@ -83,8 +83,7 @@
                                             <p mat-line *ngIf="datos.fuePagado && !datos.codigoPropietarioIngresado"><b>
                                                     Código entrega propietario: </b>{{datos.codigoEntregaPropietario}}
                                             </p>
-                                            <p mat-line
-                                                *ngIf="datos.fuePagado && datos.codigoLocatarioIngresado">
+                                            <p mat-line *ngIf="datos.fuePagado && datos.codigoLocatarioIngresado">
                                                 <b> Fecha de devolución:
                                                 </b>{{datos.fechaCaducidadDevolucion}}
                                             </p>
@@ -161,18 +160,27 @@
                                             fxLayoutGap="10px">
                                             <button mat-raised-button (click)="pagar(alquilerPropio)" color="primary"
                                                 *ngIf="!alquilerPropio.fuePagado">Continuar con el pago</button>
-                                            <button mat-raised-button color="warn" *ngIf= arrayEstados[indice]>Reclamar</button>
-                                            <button mat-raised-button color="primary"
-                                                (click)="openDialogCodigoPropietario(alquilerPropio)"
-                                                *ngIf="alquilerPropio.fuePagado && !alquilerPropio.codigoPropietarioIngresado">Ingresar
-                                                código
-                                                propietario</button>
+                                            <button mat-raised-button color="warn"
+                                                *ngIf=arrayEstados[indice]>Reclamar</button>
                                             <button mat-raised-button
                                                 (click)="openDialogDatosPropietario(alquilerPropio)"
                                                 color="primary">Datos del propietario</button>
-                                            <button mat-raised-button color="warn">
-                                                <mat-icon>delete</mat-icon>
+                                            <button mat-icon-button [matMenuTriggerFor]="menu"
+                                                aria-label="Example icon-button with a menu">
+                                                <mat-icon>more_vert</mat-icon>
                                             </button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item>
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>Borrar</span>
+                                                </button>
+                                                <button mat-menu-item
+                                                    (click)="openDialogCodigoPropietario(alquilerPropio)"
+                                                    *ngIf="alquilerPropio.fuePagado && !alquilerPropio.codigoPropietarioIngresado">
+                                                    <mat-icon>format_align_justify</mat-icon>
+                                                    <span>Ingresar código propietario</span>
+                                                </button>
+                                            </mat-menu>
                                         </div>
                                     </div>
                                 </mat-list-item>

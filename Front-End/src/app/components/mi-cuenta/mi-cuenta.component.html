@@ -45,14 +45,37 @@
         </mat-toolbar>
 
     </div>
+    
     <div fxLayout="row" fxFlexOrder="2" fxLayoutAlign="center center" fxLayout.lt-lg="column"
-        fxLayoutAlign.lt-lg="center center">
+        fxLayoutAlign.lt-lg="center center" >
         <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
-            <!-- Contenido aquí -->
-            <img src="https://www.ingeniovirtual.com/wp-content/uploads/grafico-de-anillos.jpg" style="width: 400px;">
-            <img src="https://www.zohowebstatic.com/sites/default/files/column-chart.jpg" style="width: 400px;">
+           
+            <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
+                <p style="font-size: 25px;margin-bottom: 8px; "> Mis Estadísticas </p>
+                <mat-divider fxFlexFill></mat-divider>
+            </div>
+            <mat-tab-group style="width: 100%;" (selectedTabChange)="cambioTab($event)">
+                <mat-tab>
+                    <div fxHide.lt-lg="true">
+                        <ng-template mat-tab-label>
+                            <mat-icon class="iconitos">check_circle</mat-icon>
+                            Cantidad de visistas a tus publicaciones
+                        </ng-template>
+                    </div>
+                </mat-tab>
+    
+                <mat-tab>
+                    <div fxHide.lt-lg="true">
+                        <ng-template mat-tab-label>
+                            <mat-icon class="iconitos">cancel</mat-icon>
+                            Otra Estadistica
+                        </ng-template>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
 
         </div>
     </div>
+    
 
 </div>

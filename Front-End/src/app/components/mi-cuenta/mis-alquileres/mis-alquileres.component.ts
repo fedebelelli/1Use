@@ -60,10 +60,11 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
 
               this._auth.get_publicacion_id(res1.alquiler[i].id_publicacion).subscribe(
                 res2 => {
-                  console.log(res2.publicaciones.tipoAlquiler)
-                  if (res1.alquiler[i].estado == "En proceso de entrega" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion") {
+                  if ((res1.alquiler[i].estado == "En proceso de entrega" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion") ||
+                   (res1.alquiler[i].estado == "" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion")) {
                     let fechaCaducidad = new Date(res1.alquiler[i].fechaCaducidadEntrega);
-                    if (fechaActual > fechaCaducidad) {
+                    let fechaCaducidadDev = new Date(res1.alquiler[i].fechaCaducidadDevolucion);
+                    if (fechaActual > fechaCaducidad || fechaActual > fechaCaducidadDev) {
                       this.arrayEstados.push(true);
                     } else {
                       this.arrayEstados.push(false);
