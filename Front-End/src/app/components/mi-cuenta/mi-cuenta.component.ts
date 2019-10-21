@@ -19,4 +19,7 @@ export class MiCuentaComponent implements OnInit {
 cerrarSesion(){
   this.singleton.cerrarSesion();
 }
+cambioTab(evento) {
+  this.ngOnInit();
+}
 }
