@@ -1,6 +1,16 @@
 <section fxLayout="row" class="container-general" fxFlexFill>
     <!-- Sección de filtros -->
     <section fxFlex="28%">
+        <div class="chips">
+            <!-- Sección de Chips -->
+            <mat-chip-list #chipList>
+                <mat-chip color="primary" *ngFor="let filtro of arrayFiltrosSeleccionados" [selectable]="selectable"
+                    [removable]="removable">    
+                    {{filtro.nombre}} : {{filtro.valor}}
+                    <mat-icon matChipRemove (click)="eliminarFiltro(filtro)">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
         <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="15px"
             class="mat-elevation-z8 contenedor-filtros">
             <div *ngIf="!filtroCategoria" fxLayout="column" class="filtros">

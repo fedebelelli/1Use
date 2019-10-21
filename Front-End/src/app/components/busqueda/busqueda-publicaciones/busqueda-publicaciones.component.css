@@ -30,3 +30,9 @@
 .slider {
     width: 180px;
 }
+
+.chips{
+    max-width: 270px;
+    margin-left: 87px;
+    margin-bottom: 10px;
+}

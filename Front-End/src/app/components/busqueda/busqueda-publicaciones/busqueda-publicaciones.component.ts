@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableBusquedaPalabra } from './data-table-bp-datasource';
 import { StarRatingColor } from './star-rating.component';
-import { zip } from 'rxjs';
+import { zip, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-busqueda-publicaciones',
   templateUrl: './busqueda-publicaciones.component.html',
   styleUrls: ['./busqueda-publicaciones.component.css']
 })
-export class BusquedaPublicacionesComponent implements OnInit {
+export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
 
   constructor(private _auth: AuthService) { }
 
@@ -19,6 +19,7 @@ export class BusquedaPublicacionesComponent implements OnInit {
 
   dataSource: DataTableBusquedaPalabra;
   displayedColumns = ['id']; /* ,'name', 'amount' */
+  suscription: Subscription;
 
   palabra: string;
   publicaciones = []
@@ -27,8 +28,13 @@ export class BusquedaPublicacionesComponent implements OnInit {
   filtroCategoria = false;
   filtroSubcategoria = false;
   filtroEstrellas = false;
+  arraySubcategoriasTotal = [];
   arraySubcategorias = [];
   arrayCategorias = [];
+  arrayFiltrosSeleccionados = [];
+  objectSubcategoriaSeleccionada = {};
+  removable = true;
+  selectable = true;
 
   url = new URL(window.location.href);
   params = new URLSearchParams(this.url.search.slice(1));
@@ -38,23 +44,7 @@ export class BusquedaPublicacionesComponent implements OnInit {
     let urlActual = document.location.href;
     this.palabra = urlActual.slice(33);
 
-    if (this.palabra.includes("?p=")) {
-      this.filtroPrecioDia = true;
-    }
-
-    if (this.palabra.includes("?e=")) {
-      this.filtroEstrellas = true;
-    }
-
-    if (this.palabra.includes("?s=")) {
-      this.filtroSubcategoria = true;
-    }
-
-    if (this.palabra.includes("?c=")) {
-      this.filtroCategoria = true;
-    }
-
-    this._auth.search_palabra(this.palabra).subscribe(
+    this.suscription = this._auth.search_palabra(this.palabra).subscribe(
       res => {
         if (res != undefined) {
           this.hayPublicaciones = true;
@@ -74,11 +64,11 @@ export class BusquedaPublicacionesComponent implements OnInit {
 
           //Subcategorías obtenidas de las categorías de las publicaciones  
           for (let i = 0; i < this.arrayCategorias.length; i++) {
-            let objeto = {'categoria': this.arrayCategorias[i], 'valor': this.obtenerSubcategoria(this.arrayCategorias[i])}
-            this.arraySubcategorias.push(objeto);
+            let objeto = { 'categoria': this.arrayCategorias[i], 'valor': this.obtenerSubcategoria(this.arrayCategorias[i]) }
+            this.arraySubcategoriasTotal.push(objeto);
           }
-          this.arraySubcategorias.sort(); 
-        
+          this.arraySubcategoriasTotal.sort();
+
           this.dataSource = new DataTableBusquedaPalabra(this.paginator, this.sort, this.publicaciones);
 
         } else {
@@ -115,40 +105,51 @@ export class BusquedaPublicacionesComponent implements OnInit {
     if (nombreParametro == 'c') {
       this.filtroCategoria = true;
       this.arraySubcategorias = this.obtenerArraySubcategoria(valorParametro);
+      this.agregarFiltroChip("Categoría", valorParametro);
     }
     if (nombreParametro == 'sc') {
       this.filtroSubcategoria = true;
+      this.agregarFiltroChip("Subcategoría", valorParametro)
     }
     if (nombreParametro == 'precio') {
       this.filtroPrecioDia = true;
+      this.agregarFiltroChip("Precio", valorParametro)
     }
     if (nombreParametro == 'star') {
       this.filtroEstrellas = true;
+      this.agregarFiltroChip("Estrellas", valorParametro);
     }
   }
 
-  obtenerArraySubcategoria(valor){
-    for(let i = 0; i < this.arraySubcategorias.length; i++){
-      if(this.arraySubcategorias[i].categoria == valor){
-        return this.arraySubcategorias[i].valor
+  obtenerArraySubcategoria(valor) {
+    for (let i = 0; i < this.arraySubcategoriasTotal.length; i++) {
+      if (this.arraySubcategoriasTotal[i].categoria == valor) {
+        return this.arraySubcategoriasTotal[i].valor
       }
     }
   }
 
-  eliminarFiltro(nombreParametro) {
-    this.params.delete(nombreParametro);
-    window.history.replaceState({}, '', location.pathname + '?' + this.params);
-    if (nombreParametro == 'c') {
-      this.filtroCategoria = false;
+  eliminarFiltro(filtro) {
+    if (filtro.nombre == 'Categoría') {
+      this.eliminarFiltroChip(filtro)
+      this.params.delete('c');
+      this.params.delete('sc');
+      window.history.replaceState({}, '', location.pathname + '?' + this.params);
     }
-    if (nombreParametro == 'sc') {
-      this.filtroSubcategoria = false;
+    if (filtro.nombre == 'Subcategoría') {
+      this.eliminarFiltroChip(filtro)
+      this.params.delete('sc');
+      window.history.replaceState({}, '', location.pathname + '?' + this.params);
     }
-    if (nombreParametro == 'precio') {
-      this.filtroPrecioDia = false;
+    if (filtro.nombre == 'Precio') {
+      this.eliminarFiltroChip(filtro)
+      this.params.delete('precio');
+      window.history.replaceState({}, '', location.pathname + '?' + this.params);
     }
-    if (nombreParametro == 'star') {
-      this.filtroEstrellas = false;
+    if (filtro.nombre == 'Estrellas') {
+      this.eliminarFiltroChip(filtro)
+      this.params.delete('star');
+      window.history.replaceState({}, '', location.pathname + '?' + this.params);
     }
   }
 
@@ -162,6 +163,49 @@ export class BusquedaPublicacionesComponent implements OnInit {
     this.filtroSubcategoria = false;
     this.filtroPrecioDia = false;
     this.filtroEstrellas = false;
+  }
+
+  agregarFiltroChip(filtro, valor) {
+    if (filtro == 'Precio') {
+      this.arrayFiltrosSeleccionados.push({ 'nombre': filtro, 'valor': '$' + valor });
+    } else {
+      this.arrayFiltrosSeleccionados.push({ 'nombre': filtro, 'valor': valor });
+      if (filtro == "Subcategoría") {
+        this.objectSubcategoriaSeleccionada = { 'nombre': filtro, 'valor': valor };
+      }
+    }
+  }
+
+  eliminarFiltroChip(filtro) {
+    var index = this.arrayFiltrosSeleccionados.indexOf(filtro);
+
+    if (index => 0) {
+      this.arrayFiltrosSeleccionados.splice(index, 1);
+      if (filtro.nombre == "Categoría") {
+        this.filtroCategoria = false;
+        this.filtroSubcategoria = false;
+        let index2;
+        for(let i = 0; i < this.arrayFiltrosSeleccionados.length ; i++){
+          if(this.arrayFiltrosSeleccionados[i].nombre == "Subcategoría"){
+            index2 = i;
+          }
+        }
+        if (index2 > -1) {
+          this.arrayFiltrosSeleccionados.splice(index2, 1);
+        }
+
+      }
+      if (filtro.nombre == "Subcategoría") {
+        this.filtroSubcategoria = false;
+      }
+      if (filtro.nombre == "Precio") {
+        this.filtroPrecioDia = false;
+      }
+      if (filtro.nombre == "Estrellas") {
+        this.filtroEstrellas = false;
+      }
+    }
+
   }
 
   obtenerSubcategoria(nombre) {
@@ -204,4 +248,7 @@ export class BusquedaPublicacionesComponent implements OnInit {
   herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
   otrosArray: string[] = ['Otra categoria']
 
+  ngOnDestroy() {
+    this.suscription.unsubscribe();
+  }
 }
