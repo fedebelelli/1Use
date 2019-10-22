@@ -324,6 +324,7 @@ router.post('/register-publicacion', function (req, res) {
     publicaciones.id = datos.id;
     publicaciones.cantDias = datos.cantDias;
     publicaciones.cantidadDisponible = datos.cantidadDisponible;
+    publicaciones.contadorDeVisita = 0;
 
     publicaciones.save((err, res1) => {
         if (err) return res.status(500).send("Error papi");
@@ -388,6 +389,26 @@ router.get('/get-publicacion/:email', function (req, res) {
         return res.status(200).send({ publicaciones });
 
     })
+})
+
+router.post("/actualizar-visitas/:id", function (req, res) {
+    var id = req.params.id;
+
+    Publicacion.findById(id, (err, actualizado) => {
+        
+        var objeto = { 'contadorDeVisita': actualizado.contadorDeVisita + 1 };
+ 
+        Publicacion.findByIdAndUpdate(id, objeto, (err2, actualizado2) => {
+
+            if (err2) return res.status(500).send({ message: 'Error al actualizar el contador' });
+
+            if (!actualizado2) return res.status(404).send({ message: 'Error' });
+
+            return res.status(200).send({ actualizado2 })
+        })
+    })
+
+
 })
 
 router.post('/update-publicacion/:id', multipartMiddlewarePublicaciones, function (req, res) {
@@ -1155,6 +1176,7 @@ router.get("/get-propietario-alquiler/:username", function (req, res) {
         return res.status(200).send({ usuario });
     })
 })
+
 
 
 

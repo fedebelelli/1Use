@@ -55,6 +55,9 @@ const publicacionesSchema = new Schema({
     },
     cantDias: {
         type: String,
+    },
+    contadorDeVisita:{
+        type:Number
     }
 }, {
         timestamps: true

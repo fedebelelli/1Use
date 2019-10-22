@@ -1,23 +1,24 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SingletonService } from '../../singleton.service';
 import { MatSnackBar } from '@angular/material';
-import {TooltipPosition} from '@angular/material/tooltip';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detalle-publicacion',
   templateUrl: './detalle-publicacion.component.html',
   styleUrls: ['./detalle-publicacion.component.css']
 })
-export class DetallePublicacionComponent implements OnInit {
+export class DetallePublicacionComponent implements OnInit, OnDestroy {
 
   constructor(private _auth: AuthService, private _singleton: SingletonService, private _snackBar: MatSnackBar, private _formBuilder: FormBuilder) { }
-  
+
   position: TooltipPosition = 'below';
 
-  
+
   id;
   titulo;
   preciodia;
@@ -51,6 +52,11 @@ export class DetallePublicacionComponent implements OnInit {
   btnAlquilar = true;
   cantidades: FormGroup;
   tipoAlquiler;
+  suscription: Subscription;
+
+  ngOnDestroy() {
+    this.suscription.unsubscribe();
+  }
 
   ngOnInit() {
     var urlActual = window.location.href;
@@ -60,6 +66,12 @@ export class DetallePublicacionComponent implements OnInit {
       cantidadDisponibleSeleccionada: ['', Validators.required],
       cantidadDiasSeleccionado: ['', Validators.required]
     });
+
+    this.suscription = this._auth.contador_visitas(this.id).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
 
     this._auth.get_publicacion_id(this.id).subscribe(
       err => {
@@ -77,8 +89,8 @@ export class DetallePublicacionComponent implements OnInit {
 
         if (this.tipoAlquiler == 'AlquilerConIntervencion') {
           this.esConIntervencion = true;
-        }else{
-          this.esConIntervencion=false;
+        } else {
+          this.esConIntervencion = false;
         }
 
         for (let i = 0; i <= this.cantidadDisponible; i++) {
