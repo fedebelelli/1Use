@@ -45,6 +45,7 @@ export class AuthService {
   private _getPropietarioAlquiler = "http://localhost:4201/api/get-propietario-alquiler/"
   private _registrarCodigoPropietarioEntrega = "http://localhost:4201/api/registrar-entrega-locatario/"
   private _registrarCodigoLocatarioEntrega = "http://localhost:4201/api/registrar-entrega-propietario/"
+  private _actualizarContador = "http://localhost:4201/api/actualizar-visitas/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -118,6 +119,12 @@ export class AuthService {
 
   get_publicaciones_destacadas() {
     return this.http.get<any>(this._getPublicacionesDestacadas)
+  }
+
+  contador_visitas(id) {
+    
+    let params = {id:id};
+    return this.http.post<any>(this._actualizarContador + id, params);
   }
 
 

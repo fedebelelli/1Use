@@ -65,6 +65,7 @@ const misAlquileres = new Schema({
     imagen: {
         type: String,
     }
+ 
 }, {
     timestamps: true
 });
