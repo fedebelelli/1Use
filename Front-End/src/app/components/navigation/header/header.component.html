@@ -15,8 +15,8 @@
         [fxHide.lt-lg]=!estadoBuscador>
         <form>
             <mat-form-field>
-                <input matInput>
-                <button mat-button>
+                <input #inputPalabra matInput>
+                <button mat-button (click)="buscarPalabra(inputPalabra.value)">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-form-field>

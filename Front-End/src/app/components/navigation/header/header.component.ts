@@ -323,4 +323,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     )
   }
 
+  /* PARA EL BUSCADOR DE PALABRAS */
+  buscarPalabra(inputPalabra) {
+    let encode = encodeURI(inputPalabra);
+    window.location.assign('/busqueda/p/' + encode)
+  }
+
 }

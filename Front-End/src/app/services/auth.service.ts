@@ -24,7 +24,7 @@ export class AuthService {
   private _deletePublicacion = "http://localhost:4201/api/delete-publicacion/"
   private _updatePublicacion = "http://localhost:4201/api/update-publicacion/"
   private _searchCategoria = "http://localhost:4201/api/search-categoria/"
-  private _searchPalabra = "http://localhost:4201/api/search-palabra/"
+  private _searchPalabra = "http://localhost:4201/api/search-palabra"
   private _preguntaPublicacion = "http://localhost:4201/api/pregunta/"
   private _respuestaPublicacion = "http://localhost:4201/api/respuesta/"
   private _pyrPublicacion = "http://localhost:4201/api/pyr/"
@@ -122,8 +122,8 @@ export class AuthService {
   }
 
   contador_visitas(id) {
-    
-    let params = {id:id};
+
+    let params = { id: id };
     return this.http.post<any>(this._actualizarContador + id, params);
   }
 
@@ -135,7 +135,8 @@ export class AuthService {
   }
 
   search_palabra(palabra, parametros) {
-    return this.http.get<any>(this._searchPalabra + palabra + parametros);
+    let objeto = { 'palabra': palabra }
+    return this.http.post<any>(this._searchPalabra + "?" + parametros, objeto);
   }
 
 

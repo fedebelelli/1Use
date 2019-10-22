@@ -44,7 +44,9 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.clearURL();
     this.urlActual = document.location.href;
-    this.palabra = this.urlActual.slice(33);
+    let parametro = this.urlActual.slice(33);
+
+    this.palabra = decodeURI(parametro);
 
     this.suscription = this._auth.search_palabra(this.palabra, '').subscribe(
       res => {
@@ -122,8 +124,6 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
       this.agregarFiltroChip("Estrellas", valorParametro);
     }
 
-    console.log(this.params);
-
     this.suscription = this._auth.search_palabra(this.palabra, this.params).subscribe(
       res => {
         console.log(res);
@@ -131,11 +131,15 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
         this.dataSource = new DataTableBusquedaPalabra(this.paginator, this.sort, this.publicaciones);
       }
     );
+
+
   }
 
   obtenerArraySubcategoria(valor) {
     for (let i = 0; i < this.arraySubcategoriasTotal.length; i++) {
       if (this.arraySubcategoriasTotal[i].categoria == valor) {
+        
+        
         return this.arraySubcategoriasTotal[i].valor
       }
     }
@@ -163,6 +167,14 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
       this.params.delete('star');
       window.history.replaceState({}, '', location.pathname + '?' + this.params);
     }
+
+    this.suscription = this._auth.search_palabra(this.palabra, this.params).subscribe(
+      res => {
+        console.log(res);
+        this.publicaciones = res.publicaciones;
+        this.dataSource = new DataTableBusquedaPalabra(this.paginator, this.sort, this.publicaciones);
+      }
+    );
   }
 
   clearURL() {

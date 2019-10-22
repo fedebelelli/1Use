@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router()
 const nodemailer = require("nodemailer");
+var encodeUrl = require('encodeurl')
 var moment = require('moment');
 const app = express();
 const bodyParser = require('body-parser');
@@ -395,9 +396,9 @@ router.post("/actualizar-visitas/:id", function (req, res) {
     var id = req.params.id;
 
     Publicacion.findById(id, (err, actualizado) => {
-        
+
         var objeto = { 'contadorDeVisita': actualizado.contadorDeVisita + 1 };
- 
+
         Publicacion.findByIdAndUpdate(id, objeto, (err2, actualizado2) => {
 
             if (err2) return res.status(500).send({ message: 'Error al actualizar el contador' });
@@ -564,70 +565,124 @@ router.get('/search-categoria/:categoria', function (req, res) {
     })
 })
 
-router.get("/search-palabra/:palabra", function (req, res) {
-    var palabra = req.params.palabra;
+router.post("/search-palabra", function (req, res) {
 
-    var preciodia = req.query.p;
-    var estrellas = req.query.e;
+    var palabra = req.body.palabra;
+    console.log(palabra)
+
+    var preciodia = req.query.precio;
+    var estrellas = req.query.star;
     var categoria = req.query.c;
-    var subcategoria = req.query.s;
+    var subcategoria = req.query.sc;
+
+    console.log(req.query)
+
+    console.log(categoria, subcategoria, preciodia, estrellas)
 
     var query;
 
-    /*  p c p e s
-        1 0 0 0
-        1 0 0 1
-        1 0 1 0
-        1 0 1 1
-        1 1 0 0
-        1 1 0 1
-        1 1 1 1
+    /*  c sc p e 
+        0  0 0 0
+        0  0 0 1
+        0  0 1 0
+        0  0 1 1
+
+        0  1 0 0
+        0  1 0 1
+        0  1 1 0
+        0  1 1 1
+
+        1  0 0 0
+        1  0 0 1
+        1  0 1 0
+        1  0 1 1
+        
+        1  1 0 0
+        1  1 0 1
+        1  1 1 0
+        1  1 1 1  
     */
 
-    if (categoria == undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, estado: 'ACTIVA' })
+    //0000
+    if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, estado: 'ACTIVA' })   
+        // new RegExp('^' + palabra + '$', "i")
     }
 
-    //1000 
-    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
+    //0001 
+    if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //0010
+    if (categoria == undefined && subcategoria == undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0011
+    if (categoria == undefined && subcategoria == undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0100
+    if (categoria == undefined && subcategoria != undefined && preciodia == undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+    //0101
+    if (categoria == undefined && subcategoria != undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, subcategoria: subcategoria, estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //0110
+    if (categoria == undefined && subcategoria != undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, subcategoria: subcategoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0111
+    if (categoria == undefined && subcategoria != undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, subcategoria: subcategoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //1000
+    if (categoria != undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
         query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estado: 'ACTIVA' })
     }
 
     //1001
-    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria != undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, estado: 'ACTIVA' })
-    }
-
-    //1010
-    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria == undefined) {
+    if (categoria != undefined && subcategoria == undefined && preciodia == undefined && estrellas != undefined) {
         query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estrellas: estrellas, estado: 'ACTIVA' })
     }
 
+    //1010
+    if (categoria != undefined && subcategoria == undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
     //1011
-    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria != undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria == undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
 
     //1100
-    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria == undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia == undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, estado: 'ACTIVA' })
     }
 
     //1101
-    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria != undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, estrellas: estrellas, estado: 'ACTIVA' })
     }
 
     //1110
-    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria == undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
 
     //1111
-    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria != undefined) {
-        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, preciodia: preciodia, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ titulo: { $regex: '.*' + palabra + '.*' }, categoria: categoria, subcategoria: subcategoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
-
 
     query.exec((err, publicaciones) => {
         if (err) return res.status(500).send({ message: 'Error' });

@@ -20,7 +20,7 @@ const publicacionesSchema = new Schema({
     },
 
     preciodia: {
-        type: String,
+        type: Number,
     },
 
     preciosemana: {
