@@ -98,7 +98,7 @@
                                                 (click)="openDialogCodigoLocatario(datos)"
                                                 *ngIf="datos.codigoPropietarioIngresado && !datos.codigoLocatarioIngresado">Ingresar
                                                 código locatario</button>
-                                            <button mat-raised-button   (click)="openDialogDatosLocatario(datos)"
+                                            <button mat-raised-button (click)="openDialogDatosLocatario(datos)"
                                                 color="primary">Datos del locatario</button>
                                             <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
                                                 <mat-icon>delete</mat-icon>
@@ -166,15 +166,12 @@
                                             <button mat-raised-button
                                                 (click)="openDialogDatosPropietario(alquilerPropio)"
                                                 color="primary">Datos del propietario</button>
-<<<<<<< HEAD
-                                            <button mat-icon-button [matMenuTriggerFor]="menu"
-                                                aria-label="Example icon-button with a menu">
-                                                <mat-icon>more_vert</mat-icon>
-=======
                                             <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
                                                 <mat-icon>delete</mat-icon>
                                                 Cancelar Alquiler
->>>>>>> Cancelar alquiler
+                                            </button>
+                                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                                <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu="matMenu">
                                                 <button mat-menu-item>
@@ -188,6 +185,7 @@
                                                     <span>Ingresar código propietario</span>
                                                 </button>
                                             </mat-menu>
+
                                         </div>
                                     </div>
                                 </mat-list-item>
