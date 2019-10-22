@@ -94,16 +94,35 @@
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px" *ngIf="datos.fuePagado">
-                                            <button mat-raised-button color="primary"
-                                                (click)="openDialogCodigoLocatario(datos)"
-                                                *ngIf="datos.codigoPropietarioIngresado && !datos.codigoLocatarioIngresado">Ingresar
-                                                código locatario</button>
-                                            <button mat-raised-button (click)="openDialogDatosLocatario(datos)"
-                                                color="primary">Datos del locatario</button>
+
                                             <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
-                                                <mat-icon>delete</mat-icon>
-                                                Cancelar Alquiler
+                                                <mat-icon>cancel</mat-icon>
+                                                <span> Cancelar alquiler</span>
                                             </button>
+
+                                            <button mat-icon-button [matMenuTriggerFor]="menu1">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu1="matMenu">
+                                                
+                                                <button mat-menu-item
+                                                    (click)="openDialogDatosLocatario(datos)">
+                                                    <mat-icon>person</mat-icon>
+                                                    <span>Datos del locatario</span>
+                                                </button>
+
+                                                <button mat-menu-item>
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>Anular alquiler</span>
+                                                </button>
+
+                                                <button mat-menu-item (click)="openDialogCodigoLocatario(datos)"
+                                                    *ngIf="datos.codigoPropietarioIngresado && !datos.codigoLocatarioIngresado">
+                                                    <mat-icon>format_align_justify</mat-icon>
+                                                    <span>Ingresar código locatario</span>
+                                                </button>
+                                            </mat-menu>
+
                                         </div>
                                     </div>
                                 </mat-list-item>
@@ -163,20 +182,23 @@
                                                 *ngIf="!alquilerPropio.fuePagado">Continuar con el pago</button>
                                             <button mat-raised-button color="warn"
                                                 *ngIf=arrayEstados[indice]>Reclamar</button>
-                                            <button mat-raised-button
-                                                (click)="openDialogDatosPropietario(alquilerPropio)"
-                                                color="primary">Datos del propietario</button>
+
                                             <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
-                                                <mat-icon>delete</mat-icon>
-                                                Cancelar Alquiler
+                                                <mat-icon>cancel</mat-icon>
+                                                <span> Cancelar alquiler</span>
                                             </button>
                                             <button mat-icon-button [matMenuTriggerFor]="menu">
                                                 <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu="matMenu">
+                                                <button mat-menu-item
+                                                    (click)="openDialogDatosPropietario(alquilerPropio)">
+                                                    <mat-icon>person</mat-icon>
+                                                    <span>Datos del propietario</span>
+                                                </button>
                                                 <button mat-menu-item>
                                                     <mat-icon>delete</mat-icon>
-                                                    <span>Borrar</span>
+                                                    <span>Anular alquiler</span>
                                                 </button>
                                                 <button mat-menu-item
                                                     (click)="openDialogCodigoPropietario(alquilerPropio)"
