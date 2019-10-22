@@ -127,8 +127,8 @@ export class AuthService {
     return this.http.get<any>(this._searchCategoria + name);
   }
 
-  search_palabra(palabra) {
-    return this.http.get<any>(this._searchPalabra + palabra);
+  search_palabra(palabra, parametros) {
+    return this.http.get<any>(this._searchPalabra + palabra + parametros);
   }
 
 

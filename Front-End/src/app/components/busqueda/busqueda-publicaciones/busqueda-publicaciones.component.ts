@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableBusquedaPalabra } from './data-table-bp-datasource';
 import { StarRatingColor } from './star-rating.component';
-import { zip, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-busqueda-publicaciones',
@@ -35,16 +35,18 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
   objectSubcategoriaSeleccionada = {};
   removable = true;
   selectable = true;
+  urlActual : String;
+
 
   url = new URL(window.location.href);
   params = new URLSearchParams(this.url.search.slice(1));
 
   ngOnInit() {
     this.clearURL();
-    let urlActual = document.location.href;
-    this.palabra = urlActual.slice(33);
+    this.urlActual = document.location.href;
+    this.palabra = this.urlActual.slice(33);
 
-    this.suscription = this._auth.search_palabra(this.palabra).subscribe(
+    this.suscription = this._auth.search_palabra(this.palabra, '').subscribe(
       res => {
         if (res != undefined) {
           this.hayPublicaciones = true;
@@ -119,6 +121,16 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
       this.filtroEstrellas = true;
       this.agregarFiltroChip("Estrellas", valorParametro);
     }
+
+    console.log(this.params);
+
+    this.suscription = this._auth.search_palabra(this.palabra, this.params).subscribe(
+      res => {
+        console.log(res);
+        this.publicaciones = res.publicaciones;
+        this.dataSource = new DataTableBusquedaPalabra(this.paginator, this.sort, this.publicaciones);
+      }
+    );
   }
 
   obtenerArraySubcategoria(valor) {
@@ -185,8 +197,8 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
         this.filtroCategoria = false;
         this.filtroSubcategoria = false;
         let index2;
-        for(let i = 0; i < this.arrayFiltrosSeleccionados.length ; i++){
-          if(this.arrayFiltrosSeleccionados[i].nombre == "Subcategoría"){
+        for (let i = 0; i < this.arrayFiltrosSeleccionados.length; i++) {
+          if (this.arrayFiltrosSeleccionados[i].nombre == "Subcategoría") {
             index2 = i;
           }
         }
