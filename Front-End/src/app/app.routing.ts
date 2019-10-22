@@ -27,6 +27,7 @@ import{PosAlquilerComponent} from './components/pos-alquiler/pos-alquiler.compon
 import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquiler/confirmacion-alquiler.component';
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 import { NewpwdComponent } from './components/newpwd/newpwd.component';
+import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
 
 const appRoutes: Routes = [
 
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     /* { path: 'auth', loadChildren: './components/auth.module#AuthModule' }, */
     { path: 'categorias', component: CategoriasComponent },
     { path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent },
+    { path: 'cancelar-alquiler', component: CancelarAlquilerComponent },
     { path: 'confirma', component: ConfirmaComponent },
     { path: 'register-publicacion', component: RegisterPublicacionComponent },
     { path: 'publicacion-exito', component: PublicacionExitoComponent },
