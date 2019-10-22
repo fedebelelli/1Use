@@ -1,0 +1,52 @@
+    <div fxLayout="column" style="width:100%" fxFlexOrder="2" fxLayoutAlign="center start" fxLayout.lt-lg="column"
+        fxLayoutAlign.lt-lg="center center">
+        <div class="contenedorDeDatos" ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
+            <h3>Cancelar alquiler</h3>
+            <hr>
+            <br>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <!-- #udpdateForm="ngForm" -->
+                <mat-tab-group (selectedTabChange)="cambioTab($event)">
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon class="iconitos">close</mat-icon>
+                            Datos de Cancelación
+                        </ng-template>
+                        <br>
+
+                        <mat-form-field>
+                            <mat-select placeholder="Motivos Cancelación" [value]="motivoCancelacionActual"
+                                (selectionChange)="onSelectionChanged($event)" formControlName="motivoCancelacion"
+                                name="motivoCancelacion">
+                                <mat-option *ngFor="let motivoCancelacion of datosCancelacion" [value]="motivoCancelacion.value">
+                                    {{provincia.viewValue}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput placeholder="Fecha" [matDatepicker]="picker" [max]="maxDate"
+                                (ngModelChange)="fechaCancelacion= $event" ngModel formControlName="fecha_cancelacion"
+                                name="date" [formControl]="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                        
+                              <mat-form-field >
+                                <textarea matInput style="font-size: 20px" placeholder="Exprese sus motivos de cancelación." cdkTextareaAutosize
+                                    formControlName="descripcion" name="descripcion" required
+                                    (ngModelChange)="descripcion = $event"></textarea>
+                            </mat-form-field>
+                        
+                           
+                    </mat-tab>
+                   
+                </mat-tab-group>
+            </form>
+        </div>
+        <div fxLayout="row" fxFlexOrder="3" style="width:100%" fxLayoutAlign="center start" fxShow.lt-lg="true"
+            fxHide.gt-md="true">
+            <div style="padding-bottom: 15px; padding-top: 10px;">
+                <button (click)="onSubmit()" mat-raised-button color="primary">Cancelar alquiler</button>
+            </div>
+        </div>
+    </div>

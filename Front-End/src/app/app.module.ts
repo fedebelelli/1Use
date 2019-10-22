@@ -56,7 +56,12 @@ import { EliminarAlquilerDialogComponent } from './components/mi-cuenta/mis-alqu
 import { DatosLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/datos-locatario-dialog/datos-locatario-dialog.component';
 import { CodigoLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-locatario-dialog/codigo-locatario-dialog.component';
 import { CodigoPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-propietario-dialog/codigo-propietario-dialog.component';
+<<<<<<< HEAD
 import { StarRatingComponent } from './components/busqueda/busqueda-publicaciones/star-rating.component'
+=======
+import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
+import { SearchPipe } from './search.pipe';
+>>>>>>> Cancelar alquiler
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -106,7 +111,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DatosLocatarioDialogComponent,
     CodigoLocatarioDialogComponent,
     CodigoPropietarioDialogComponent,
+<<<<<<< HEAD
     StarRatingComponent
+=======
+    CancelarAlquilerComponent,
+    SearchPipe
+>>>>>>> Cancelar alquiler
   ],
   imports: [
     BrowserModule,
