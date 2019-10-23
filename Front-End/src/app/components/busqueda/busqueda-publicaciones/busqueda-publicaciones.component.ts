@@ -126,20 +126,15 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
 
     this.suscription = this._auth.search_palabra(this.palabra, this.params).subscribe(
       res => {
-        console.log(res);
         this.publicaciones = res.publicaciones;
         this.dataSource = new DataTableBusquedaPalabra(this.paginator, this.sort, this.publicaciones);
       }
     );
-
-
   }
 
   obtenerArraySubcategoria(valor) {
     for (let i = 0; i < this.arraySubcategoriasTotal.length; i++) {
       if (this.arraySubcategoriasTotal[i].categoria == valor) {
-        
-        
         return this.arraySubcategoriasTotal[i].valor
       }
     }
