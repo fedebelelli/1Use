@@ -46,6 +46,7 @@ export class AuthService {
   private _registrarCodigoPropietarioEntrega = "http://localhost:4201/api/registrar-entrega-locatario/"
   private _registrarCodigoLocatarioEntrega = "http://localhost:4201/api/registrar-entrega-propietario/"
   private _actualizarContador = "http://localhost:4201/api/actualizar-visitas/"
+  private _registrarReclamo = "http://localhost:4201/api/cancelar-alquiler/"
 
   //authSubject = new BehaviorSubject(false);
   //private token: string;
@@ -232,4 +233,13 @@ export class AuthService {
   getPropietarioAlquiler(username) {
     return this.http.get<any>(this._getPropietarioAlquiler + username);
   }
+
+
+  //Reclamo
+  registrar_reclamo(reclamo) {
+
+    return this.http.post<any>(this._registrarReclamo, reclamo);
+
+  }
+
 }

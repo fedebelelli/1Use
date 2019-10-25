@@ -30,13 +30,14 @@ export class CancelarAlquilerComponent implements OnInit {
   constructor(private _auth: AuthService, private singletoon: SingletonService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
-    this.hoy.setFullYear(this.hoy.getFullYear())
-    console.log(this.hoy)
-
+   
     if (this.verificarInicioSesion() == false) {
       return;
     }
   }
+
+  reclamoData = { tipo: undefined, motivo: undefined}
+
 
   cerrarSesion() {
     this.singletoon.cerrarSesion();
@@ -49,6 +50,25 @@ export class CancelarAlquilerComponent implements OnInit {
     }
     return true;
   }
+
+  reclamar() {
+    
+    this._auth.registrar_reclamo(this.reclamoData).subscribe(
+      
+      res => {
+        
+        
+      },
+      err => {
+        console.log(err)
+        
+      }
+    )
+    this._router.navigate(['/reclamo-exito']);
+  }
+
+
+
 }
 
 

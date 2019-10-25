@@ -28,6 +28,8 @@ import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquile
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 import { NewpwdComponent } from './components/newpwd/newpwd.component';
 import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
+import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
+import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.component';
 
 const appRoutes: Routes = [
 
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
     { path: 'busqueda/c/:c', component: BusquedaCategoriasComponent },
     { path: 'busqueda/p/:p', component: BusquedaPublicacionesComponent },
     { path: 'pos-alquiler/:id', component: PosAlquilerComponent },
+    { path: 'prereclamo', component: PrereclamoComponent },
     { path: 'confirmacion-Alquiler', component: ConfirmacionAlquilerComponent },
+    { path: 'reclamo-exito', component: ReclamoExitoComponent },
     { path: '**', component: ErrorComponent },
 
 ];

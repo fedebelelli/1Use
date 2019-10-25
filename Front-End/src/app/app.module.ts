@@ -58,6 +58,9 @@ import { CodigoLocatarioDialogComponent } from './components/mi-cuenta/mis-alqui
 import { CodigoPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-propietario-dialog/codigo-propietario-dialog.component';
 import { StarRatingComponent } from './components/busqueda/busqueda-publicaciones/star-rating.component'
 import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
+import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
+import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.component';
+
 //import { SearchPipe } from './search.pipe';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -110,6 +113,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CodigoPropietarioDialogComponent,
     StarRatingComponent,
     CancelarAlquilerComponent,
+    PrereclamoComponent,
+    ReclamoExitoComponent,
+    
     //SearchPipe
   ],
   imports: [
