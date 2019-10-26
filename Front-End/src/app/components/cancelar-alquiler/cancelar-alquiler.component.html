@@ -29,13 +29,12 @@
                     
 
                     <mat-form-field>
-                        <textarea matInput style="font-size: 20px" placeholder="Escriba la mayor informacion posible y precisa sobre el reclamo" [(ngModel)]="reclamoData.motivo"
+                        <textarea matInput style="font-size: 20px" placeholder="Escriba la mayor información posible y precisa sobre el reclamo" [(ngModel)]="reclamoData.motivo"
                             name="motivo" cdkTextareaAutosize required></textarea>
                     </mat-form-field>
 
-                    <div>
-                            <button mat-raised-button (click)="reclamar()">Registrar reclamo/cancelacion</button>
-                            
+                    <div styles="padding-bottom: 10px; height: 38px;">
+                            <button mat-raised-button (click)="reclamar()">Registrar reclamo/cancelación</button>
                     </div>
 
 
