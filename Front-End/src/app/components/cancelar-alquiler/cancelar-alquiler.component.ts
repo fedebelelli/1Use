@@ -7,9 +7,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { SingletonService } from '../singleton.service';
 import { UploadService } from '../../services/upload.service';
+import motivos from './motivos.json';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
+
+
+export interface Motivos {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-confirmacion',
@@ -24,9 +31,9 @@ export class CancelarAlquilerComponent implements OnInit {
   public user = {};
   emailLogueado = localStorage.getItem("email");
 
-  //Para armar los JSON de provincias y ciudades
+  //Para armar JSON
   hoy = new Date();
-
+  motivosCancelacion: Motivos[];
   constructor(private _auth: AuthService, private singletoon: SingletonService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
@@ -34,6 +41,8 @@ export class CancelarAlquilerComponent implements OnInit {
     if (this.verificarInicioSesion() == false) {
       return;
     }
+
+    this.crearJSONmotivos();
   }
 
   reclamoData = { tipo: undefined, motivo: undefined}
@@ -67,6 +76,16 @@ export class CancelarAlquilerComponent implements OnInit {
     this._router.navigate(['/reclamo-exito']);
   }
 
+  crearJSONmotivos() {
+    let index, JSONmotivos = motivos;
+    let arreglo = [];
+    for (index in JSONmotivos) {
+      arreglo.push({ 'value': JSONmotivos[index].id, 'viewValue': JSONmotivos[index].descripción })
+    }
+    this.motivosCancelacion = sortJsonArray(arreglo, 'value', 'asc');
+
+    
+  }
 
 
 }

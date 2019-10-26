@@ -1,7 +1,7 @@
 <div fxLayout="column" fxFlexOrder="2" fxLayoutAlign="center center" fxLayout.lt-lg="column" fxFlexFill
     fxLayoutAlign.lt-lg="center center">
     <div class="contenedorDeDatos" ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
-        <h2 style="text-align: center;">¡Realiza tu reclamo!</h2>
+        <h2 style="text-align: center;">¡Realizá tu reclamo!</h2>
         <hr>
         <br>
         <form>
@@ -21,12 +21,19 @@
                             <mat-option *ngFor="let motivoCancelacion of datosCancelacion"></mat-option>
                         </mat-select>
                     </mat-form-field> -->
+                    <mat-form-field>
+                            <mat-select placeholder="Motivos de cancelación" [value]="motivoActual"
+                                (selectionChange)="onSelectionChanged($event)" formControlName="motivo"
+                                name="motivo">
+                                <mat-option *ngFor="let motivo of motivosCancelacion" [value]="motivo.value">
+                                    {{motivo.viewValue}} </mat-option>
+                            </mat-select>
+                     </mat-form-field>
 
                     <mat-form-field>
                             <textarea matInput style="font-size: 10px" placeholder="Tipo de reclamo" [(ngModel)]="reclamoData.tipo"
                                 name="tipo" cdkTextareaAutosize required></textarea>
                         </mat-form-field>
-                    
 
                     <mat-form-field>
                         <textarea matInput style="font-size: 20px" placeholder="Escriba la mayor información posible y precisa sobre el reclamo" [(ngModel)]="reclamoData.motivo"
@@ -34,7 +41,7 @@
                     </mat-form-field>
 
                     <div styles="padding-bottom: 10px; height: 38px;">
-                            <button mat-raised-button (click)="reclamar()">Registrar reclamo/cancelación</button>
+                            <button mat-raised-button  class="primary-btn banner-btn" (click)="reclamar()">Registrar reclamo/cancelación</button>
                     </div>
 
 
