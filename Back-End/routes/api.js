@@ -1157,6 +1157,7 @@ router.get("/get-propietario-alquiler/:username", function (req, res) {
 })
 
 
+
 /* PARA ENVIO DE MAILS */
 function enviarEmailAUsuario(username, asunto, titulo, mensaje, url, mensajeBoton) {
     variable = {};

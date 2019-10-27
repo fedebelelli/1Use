@@ -161,6 +161,7 @@
                                             fxLayoutGap="10px">
                                             <button mat-raised-button (click)="pagar(alquilerPropio)" color="primary"
                                                 *ngIf="!alquilerPropio.fuePagado">Continuar con el pago</button>
+                                            <button mat-raised-button color="warn" *ngIf= arrayEstados[indice]>Reclamar</button>
                                             <button mat-raised-button color="primary"
                                                 (click)="openDialogCodigoPropietario(alquilerPropio)"
                                                 *ngIf="alquilerPropio.fuePagado && !alquilerPropio.codigoPropietarioIngresado">Ingresar
