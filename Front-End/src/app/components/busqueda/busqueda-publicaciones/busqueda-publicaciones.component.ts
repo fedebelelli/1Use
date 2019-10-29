@@ -252,6 +252,9 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
     if (nombre == "Herramientas") {
       return this.herramientasArray;
     }
+    if (nombre == "Libros") {
+      return this.librosArray;
+    }
     if (nombre == "Otros") {
       return this.otrosArray;
     }
@@ -264,6 +267,7 @@ export class BusquedaPublicacionesComponent implements OnInit, OnDestroy {
   bellezaArray: string[] = ['Relojes - joyas - accesorios', 'Ropa y calzado', 'Salud y belleza']
   bebesArray: string[] = ['Cunas - Accesorios', 'Juegos - juguetes', 'Ropa bebés y niños']
   animalesArray: string[] = ['Accesorios para perros', 'Accesorios para gatos', 'Otros (mascotas)']
+  librosArray: string[] = ['Novela', 'Gótico', 'Ciencia Ficción', 'Cuento de hadas', 'Acción', 'Drama', 'Suspenso', 'Terror', 'Fantástica']
   herramientasArray: string[] = ['Industria', 'Herramientas', 'Muebles para negocios - oficinas']
   otrosArray: string[] = ['Otra categoria']
 

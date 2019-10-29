@@ -131,8 +131,8 @@ export class AuthService {
 
 
   /* BÚSQUEDA DE CATEGORIAS Y PUBLICACIONES */
-  search_categoria(name) {
-    return this.http.get<any>(this._searchCategoria + name);
+  search_categoria(parametros) {
+    return this.http.get<any>(this._searchCategoria + "?" + parametros);
   }
 
   search_palabra(palabra, parametros) {

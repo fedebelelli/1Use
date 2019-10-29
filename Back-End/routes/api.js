@@ -497,63 +497,119 @@ router.get('/get-publicaciones-destacadas', function (req, res) {
 
 
 /* ------------------------------ Busqueda de publicaciones ----------------------------------- */
-router.get('/search-categoria/:categoria', function (req, res) {
-    var categoria = req.params.categoria;
-    var preciodia = req.query.p;
-    var estrellas = req.query.e;
+router.get('/search-categoria', function (req, res) {
+    var categoria = req.query.c;
+    var preciodia = req.query.precio;
+    var estrellas = req.query.star;
     var subcategoria = req.query.s;
 
     var query;
 
-    /*  c p e s
-        1 0 0 0
-        1 0 0 1
-        1 0 1 0
-        1 0 1 1
-        1 1 0 0
-        1 1 0 1
-        1 1 1 1
+    /*  c sc p e 
+        0  0 0 0
+        0  0 0 1
+        0  0 1 0
+        0  0 1 1
+
+        0  1 0 0
+        0  1 0 1
+        0  1 1 0
+        0  1 1 1
+
+        1  0 0 0
+        1  0 0 1
+        1  0 1 0
+        1  0 1 1
+        
+        1  1 0 0
+        1  1 0 1
+        1  1 1 0
+        1  1 1 1  
     */
 
     /* URL EJEMPLO: http://localhost:4201/api/search-categoria/Hogar?p=300&s=Decoración */
 
-    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria == undefined) {
+    //0000
+    if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
+
+        query = Publicacion.find({});
+        //{ $regex: '.*' + palabra + '.*' }   
+        // new RegExp('^' + palabra + '$', "i")
+    }
+
+    //0001 
+    if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //0010
+    if (categoria == undefined && subcategoria == undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0011
+    if (categoria == undefined && subcategoria == undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0100
+    if (categoria == undefined && subcategoria != undefined && preciodia == undefined && estrellas == undefined) {
+        query = Publicacion.find({ subcategoria: subcategoria, estado: 'ACTIVA' })
+    }
+
+    //0101
+    if (categoria == undefined && subcategoria != undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ subcategoria: subcategoria, estrellas: estrellas, estado: 'ACTIVA' })
+    }
+
+    //0110
+    if (categoria == undefined && subcategoria != undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ subcategoria: subcategoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //0111
+    if (categoria == undefined && subcategoria != undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ subcategoria: subcategoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
+    //1000
+    if (categoria != undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
         query = Publicacion.find({ categoria: categoria, estado: 'ACTIVA' })
     }
 
     //1001
-    if (categoria != undefined && preciodia == undefined && estrellas == undefined && subcategoria != undefined) {
-        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria, estado: 'ACTIVA' })
-    }
-
-    //1010
-    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria == undefined) {
+    if (categoria != undefined && subcategoria == undefined && preciodia == undefined && estrellas != undefined) {
         query = Publicacion.find({ categoria: categoria, estrellas: estrellas, estado: 'ACTIVA' })
     }
 
+    //1010
+    if (categoria != undefined && subcategoria == undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
+    }
+
     //1011
-    if (categoria != undefined && preciodia == undefined && estrellas != undefined && subcategoria != undefined) {
-        query = Publicacion.find({ categoria: categoria, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria == undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
 
     //1100
-    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria == undefined) {
-        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia == undefined && estrellas == undefined) {
+        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria, estado: 'ACTIVA' })
     }
 
     //1101
-    if (categoria != undefined && preciodia != undefined && estrellas == undefined && subcategoria != undefined) {
-        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia == undefined && estrellas != undefined) {
+        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria, estrellas: estrellas, estado: 'ACTIVA' })
     }
 
     //1110
-    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria == undefined) {
-        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia != undefined && estrellas == undefined) {
+        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria, preciodia: preciodia, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
 
     //1111
-    if (categoria != undefined && preciodia != undefined && estrellas != undefined && subcategoria != undefined) {
-        query = Publicacion.find({ categoria: categoria, preciodia: preciodia, estrellas: estrellas, subcategoria: subcategoria, estado: 'ACTIVA' })
+    if (categoria != undefined && subcategoria != undefined && preciodia != undefined && estrellas != undefined) {
+        query = Publicacion.find({ categoria: categoria, subcategoria: subcategoria, preciodia: preciodia, estrellas: estrellas, estado: 'ACTIVA' }).where('preciodia').lt(preciodia)
     }
 
 
@@ -569,16 +625,11 @@ router.get('/search-categoria/:categoria', function (req, res) {
 router.post("/search-palabra", function (req, res) {
 
     var palabra = req.body.palabra;
-    console.log(palabra)
 
     var preciodia = req.query.precio;
     var estrellas = req.query.star;
     var categoria = req.query.c;
     var subcategoria = req.query.sc;
-
-    console.log(req.query)
-
-    console.log(categoria, subcategoria, preciodia, estrellas)
 
     var query;
 
@@ -606,7 +657,7 @@ router.post("/search-palabra", function (req, res) {
 
     //0000
     if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
-        
+
         query = Publicacion.find({ titulo: new RegExp(palabra, 'i'), estado: 'ACTIVA' })
         //{ $regex: '.*' + palabra + '.*' }   
         // new RegExp('^' + palabra + '$', "i")
@@ -1281,14 +1332,14 @@ router.post('/cancelar-alquiler', (req, res) => {
         if (error) {
             res.status(401).send("error");
         } else {
-            
+
             res.status(200).send(true);
         }
 
     })
 
-   
-    
+
+
 
 });
 
