@@ -1,10 +1,10 @@
 [
      {
-        "descripción": "El producto que alquile no estaba en las condiciones que mostraba las fotos",
+        "descripción": "El producto que alquilé no estaba en las mismas condiciones que se mostraban en las fotos",
         "id": "1"
     },
     {
-        "descripción": "El producto que alquile no funciona como lo especifica el propietario",
+        "descripción": "El producto que alquilé no funciona como lo especifica el propietario",
         "id": "2"
     },
     {
@@ -16,7 +16,7 @@
         "id": "4"
     },
     {
-        "descripción": "Otro (Especificar en informacion)",
+        "descripción": "Otro (Especificar en información)",
         "id": "5"
     }
 ]
