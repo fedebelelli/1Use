@@ -15,19 +15,14 @@
                     <br>
 
                     <mat-form-field>
-                            <mat-select placeholder="Motivos de cancelación" [value]="motivoActual"
-                                name="motivo" required>
+                            <mat-select placeholder="Motivos de cancelación" [(ngModel)]="reclamoData.tipo" [value]="motivoActual"
+                                name="motivo"  required>
                                 <mat-option *ngFor="let motivo of motivosCancelacion" [value]="motivo.value">
                                     {{motivo.viewValue}} </mat-option>
                             </mat-select>
                      </mat-form-field>
 
-                    <mat-form-field>
-                            <textarea matInput style="font-size: 10px" placeholder="Tipo de reclamo" [(ngModel)]="reclamoData.tipo"
-                                name="tipo" cdkTextareaAutosize required></textarea>
-                        </mat-form-field>
-
-                    <mat-form-field>
+                                        <mat-form-field>
                         <textarea matInput style="font-size: 20px" placeholder="Escriba la mayor información posible y precisa sobre el reclamo" [(ngModel)]="reclamoData.motivo"
                             name="motivo" cdkTextareaAutosize required></textarea>
                     </mat-form-field>

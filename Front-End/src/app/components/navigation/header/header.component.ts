@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy } from '@
 import { SingletonService } from '../../singleton.service'
 import { DropdownDirective, TOGGLE_STATUS } from 'angular-custom-dropdown';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatInput } from '@angular/material';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() sidenavToggle = new EventEmitter<void>();
   onToggleSidenav() { this.sidenavToggle.emit(); }
+  @ViewChild(MatInput, { static: true }) inputPalabra: MatInput;
 
 
   estadoBuscador: boolean;
@@ -54,6 +55,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.obtenerNombreLogueado();
     this.checkCaducidadesAlquilerPropietario();
     this.checkCaducidadesAlquilerPropios();
+    if (this.urlActual.includes('/p/')) {
+      let url = this.urlActual.slice(33);
+      this.inputPalabra.value = url;
+    }
   }
 
   setearInicioSesion() {

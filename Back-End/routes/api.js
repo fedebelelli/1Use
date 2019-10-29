@@ -1421,19 +1421,14 @@ router.post('/visitas-publicaciones/:id_publicacion', function (req, res) {
     })
 })
 
-router.get('/get-visitas-publicacion/:email', function (req, res) {
-    var email = req.params.email;
-    var total = []
-    var cantidad = 0;
-    Publicacion.find({ email: email }, function (err1, res1) {
-        for (let i = 0; i < res1.length; i++) {
-            VisitaPublicaciones.find({ id_publicacion: res1[i]._id }, function(err,res2){
-                var objeto = { id: res1[i]._id, fecha: res2.fecha_visita, cantidadVisitas: res2.cantidadVisitas }
-                total.push(objeto);
-                cantidad++;
-            })
-        }
-        return res.status(200).send({ total });
+router.get('/get-visitas-publicacion/:id_publicacion', function (req, res) {
+    var id = req.params.id_publicacion;
+    VisitaPublicaciones.find({ id_publicacion: id }, function (err, doc) {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!doc) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send({ doc });
     })
 })
 

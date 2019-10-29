@@ -61,6 +61,11 @@ import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancel
 import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
 import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.component';
 
+import { FusionChartsModule } from 'angular-fusioncharts';
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
+FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 //import { SearchPipe } from './search.pipe';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -133,6 +138,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MaterialFileInputModule,
     NgxDropzoneModule,
     SwiperModule,
+    FusionChartsModule 
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent],

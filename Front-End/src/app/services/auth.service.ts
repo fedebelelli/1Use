@@ -48,7 +48,7 @@ export class AuthService {
   private _registrarReclamo = "http://localhost:4201/api/cancelar-alquiler/"
   private _registrarVisitaPublicacion = "http://localhost:4201/api/visitas-publicaciones/"
   private _getVisitasPublicacion = "http://localhost:4201/api/get-visitas-publicacion/"
-
+  private _getVisitas = "http://localhost:4201/api/get-visitas-publicacion/"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -240,8 +240,8 @@ export class AuthService {
     return this.http.post<any>(this._registrarVisitaPublicacion + id_publicacion,{id_publicacion: id_publicacion});
   }
 
-  get_visitas_publicacion(email){
-    return this.http.get<any>(this._getVisitasPublicacion + email);
+  get_visitas_id(id){
+    return this.http.get<any>(this._getVisitas + id)
   }
 
 }

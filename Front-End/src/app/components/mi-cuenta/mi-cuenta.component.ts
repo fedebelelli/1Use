@@ -15,15 +15,13 @@ export class MiCuentaComponent implements OnInit {
 
   constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
-  ngOnInit() {
-
-    this._auth.get_visitas_publicacion(localStorage.getItem('email')).subscribe(
+  ngOnInit(){
+    this._auth.get_visitas_id('5d68670f3c1ee86964c5e05c').subscribe(
       res => {
-        
+        let array = res.doc;
+        console.log(array)
       }
-    )
-
-  }
+    )}
 
   cerrarSesion() {
     this.singleton.cerrarSesion();
