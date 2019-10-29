@@ -1126,8 +1126,9 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
 
         enviarEmailAUsuario(alquiler.name_usuarioPropietario, "Código de entrega propietario", "¡Enhobrabuena! Tu publicación ha sido pagada", "¡Hola! Tu código de propietario es el siguiente: <b>" + codigoEntregaPropietario + "</b>. Recuerda darselo al locatario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
         enviarEmailAUsuario(alquiler.name_usuarioLocatario, "Código de entrega locatario", "¡Enhobrabuena! Tu producto ha sido pagado", "¡Hola! Tu código de locatario es el siguiente: <b>" + codigoEntregaLocatario + "</b>. Recuerda darselo al propietario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
-
+        
         return res.status(200).send({ alquiler });
+
     })
 
 })
@@ -1150,9 +1151,14 @@ router.post("/registrar-entrega-locatario/:codigoEntregaPropietario", function (
 router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (req, res) {
     var codigoEntregaLocatario = req.params.codigoEntregaLocatario;
     var codigoLocatarioIngresado = true;
-    var estado = 'Entregado y en alquiler';
+    var estado = 'En proceso de devolución';
     var date = new Date();
     var fechaEntrega = moment(date).format('MM/DD/YYYY');
+
+    var codigoDevolucionPropietario = randomstring.generate(10);
+    var codigoDevolucionLocatario = randomstring.generate(10);
+    var codigoPropietarioDevolucionIngresado = false;
+    var codigoLocatarioDevolucionIngresado = false;
 
     MisAlquileres.findOne({ codigoEntregaLocatario: codigoEntregaLocatario }, function (err1, alquiler1) {
         var diasAlquiler = alquiler1.cantidadDias;
@@ -1162,37 +1168,23 @@ router.post("/registrar-entrega-propietario/:codigoEntregaLocatario", function (
 
         MisAlquileres.findOneAndUpdate({ codigoEntregaLocatario: codigoEntregaLocatario }, {
             estado: estado, codigoLocatarioIngresado: codigoLocatarioIngresado,
-            fechaEntrega: fechaEntrega, fechaCaducidadDevolucion: fechaCaducidadDevolucion
+            fechaEntrega: fechaEntrega, fechaCaducidadDevolucion: fechaCaducidadDevolucion,
+            codigoDevolucionPropietario: codigoDevolucionPropietario,
+            codigoDevolucionLocatario: codigoDevolucionLocatario,
+            codigoPropietarioDevolucionIngresado: codigoPropietarioDevolucionIngresado,
+            codigoLocatarioDevolucionIngresado: codigoLocatarioDevolucionIngresado
         }, function (err, alquiler) {
             if (err) return res.status(500).send({ message: 'Error' });
 
             if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
+            enviarEmailAUsuario(alquiler1.name_usuarioPropietario, "Código de propietario", "¡Hola " + alquiler1.name_usuarioPropietario + "!", "Te enviamos este mail con el motivo de acercarte el siguiente código, el cual usarás cuando te tengan que devolver el producto. El mismo es el siguiente: <br>" + codigoDevolucionPropietario + "</br>", 'http://localhost:4201/mi-cuenta/mis-alquileres', "Ir a mis alquileres");
+
+            enviarEmailAUsuario(alquiler1.name_usuarioLocatario, "Código de locatario", "¡Hola " + alquiler1.name_usuarioLocatario + "!", "Te enviamos este mail con el motivo de acercarte el siguiente código, el cual usarás cuando tengas que devolver el producto. El mismo es el siguiente: <br>" + codigoDevolucionLocatario + "</br>", 'http://localhost:4201/mi-cuenta/mis-alquileres', "Ir a mis alquileres");
+
             return res.status(200).send({ alquiler });
         })
     })
-})
-router.post("/registrar-demora-devolucion/:id_usuarioPropietario", function (req, res) {
-    var fechaActual = moment(new Date()).format('MM/DD/YYYY');;
-    var id_usuarioPropietario = req.params.id_usuarioPropietario;
-
-    MisAlquileres.findOne({ id_usuarioPropietario: id_usuarioPropietario }, function (err1, alquiler1) {
-        var fechaCaducidadDevolucion = alquiler1.fechaCaducidadDevolucion;
-        if (fechaCaducidadDevolucion == fechaActual) {
-            var estado = 'En proceso de devolucion'
-
-            MisAlquileres.findByIdAndUpdate(alquiler1._id, { estado: estado }, function (err, alquiler) {
-                if (err) return res.status(500).send({ message: 'Error' });
-
-                if (!res) return res.status(404).send({ message: 'El doc no existe' });
-
-                return res.status(200).send({ alquiler });
-            })
-        } else {
-            res.status(500).send("xd")
-        }
-    })
-
 })
 
 /* Este evento lo genera el propietario cuando coloca el botón "Finalizar alquiler" en "Mis Alquileres" */

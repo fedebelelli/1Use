@@ -52,7 +52,7 @@
             <mat-divider fxFlexFill></mat-divider>
         </div>
 
-        <mat-tab-group style="width: 100%;" (selectedTabChange)="cambioTab($event)">
+        <mat-tab-group style="width: 100%;">
             <mat-tab>
                 <div fxHide.lt-lg="true">
                     <ng-template mat-tab-label>
@@ -104,22 +104,24 @@
                                                 <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu1="matMenu">
-                                                
-                                                <button mat-menu-item
-                                                    (click)="openDialogDatosLocatario(datos)">
+
+                                                <button mat-menu-item (click)="openDialogDatosLocatario(datos)">
                                                     <mat-icon>person</mat-icon>
                                                     <span>Datos del locatario</span>
-                                                </button>
-
-                                                <button mat-menu-item>
-                                                    <mat-icon>delete</mat-icon>
-                                                    <span>Anular alquiler</span>
                                                 </button>
 
                                                 <button mat-menu-item (click)="openDialogCodigoLocatario(datos)"
                                                     *ngIf="datos.codigoPropietarioIngresado && !datos.codigoLocatarioIngresado">
                                                     <mat-icon>format_align_justify</mat-icon>
                                                     <span>Ingresar código locatario</span>
+                                                </button>
+
+
+                                                <button mat-menu-item
+                                                    (click)="openDialogCodigoLocatarioDevolucion(datos)"
+                                                    *ngIf="!datos.codigoLocatarioDevolucionIngresado">
+                                                    <mat-icon>format_align_justify</mat-icon>
+                                                    <span>Ingresar código locatario devolución</span>
                                                 </button>
                                             </mat-menu>
 
@@ -178,9 +180,6 @@
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px">
-                                            <button mat-raised-button (click)="pagar(alquilerPropio)" color="primary"
-                                                *ngIf="!alquilerPropio.fuePagado">Continuar con el pago</button>
-                                    
                                             <button mat-raised-button routerLink="/prereclamo" color="warn">
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Cancelar alquiler</span>
@@ -194,15 +193,17 @@
                                                     <mat-icon>person</mat-icon>
                                                     <span>Datos del propietario</span>
                                                 </button>
-                                                <button mat-menu-item>
-                                                    <mat-icon>delete</mat-icon>
-                                                    <span>Anular alquiler</span>
-                                                </button>
                                                 <button mat-menu-item
                                                     (click)="openDialogCodigoPropietario(alquilerPropio)"
                                                     *ngIf="alquilerPropio.fuePagado && !alquilerPropio.codigoPropietarioIngresado">
                                                     <mat-icon>format_align_justify</mat-icon>
                                                     <span>Ingresar código propietario</span>
+                                                </button>
+                                                <button mat-menu-item
+                                                    (click)="openDialogCodigoPropietarioDevolucion(alquilerPropio)"
+                                                    *ngIf="!alquilerPropio.codigoPropietarioDevolucionIngresado && alquilerPropio.codigoLocatarioDevolucionIngresado">
+                                                    <mat-icon>format_align_justify</mat-icon>
+                                                    <span>Ingresar código propietario devolución</span>
                                                 </button>
                                             </mat-menu>
 

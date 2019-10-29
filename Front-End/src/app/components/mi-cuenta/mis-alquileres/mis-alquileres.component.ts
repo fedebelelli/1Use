@@ -26,14 +26,14 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   hayAlquileresPropios = false;
   reclamado = false;
   arrayEstados = [];
+  arrayDevolucionLocatario = [];
+  arrayDevolucionPropietario = [];
 
   constructor(private _auth: AuthService, private singleton: SingletonService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.arrayAlquilerPropietario = []
-    this.arrayDatosPropietario = []
-    this.arrayAlquilerPropios = [];
-    this.arrayDatosPropios = [];
+    this.arrayAlquilerPropios = []
     this.subscription = this._auth.user_data(localStorage.getItem("email")).subscribe(
       res => {
         this.usuarioLogueado = res;
@@ -47,7 +47,6 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
               this.arrayAlquilerPropietario[i].createdAt = date;
               this.arrayDatosPropietario.push(this.arrayAlquilerPropietario[i])
             }
-
             this.hayAlquileresPropietario = true;
           })
 
@@ -57,13 +56,14 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
             this.arrayAlquilerPropios = res1.alquiler;
 
             for (let i = 0; i < this.arrayAlquilerPropios.length; i++) {
-
               this._auth.get_publicacion_id(res1.alquiler[i].id_publicacion).subscribe(
                 res2 => {
+                  let fechaCaducidad = new Date(res1.alquiler[i].fechaCaducidadEntrega);
+                  let fechaCaducidadDev = new Date(res1.alquiler[i].fechaCaducidadDevolucion);
+
+                  /* Ayuda a que se muestren los botones de "Reclamar" */
                   if ((res1.alquiler[i].estado == "En proceso de entrega" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion") ||
-                   (res1.alquiler[i].estado == "En proceso de devolucion" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion")) {
-                    let fechaCaducidad = new Date(res1.alquiler[i].fechaCaducidadEntrega);
-                    let fechaCaducidadDev = new Date(res1.alquiler[i].fechaCaducidadDevolucion);
+                    (res1.alquiler[i].estado == "En proceso de devolución" && res2.publicaciones.tipoAlquiler == "AlquilerConIntervencion")) {
                     if (fechaActual > fechaCaducidad || fechaActual > fechaCaducidadDev) {
                       this.arrayEstados.push(true);
                     } else {
@@ -72,6 +72,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
                   } else {
                     this.arrayEstados.push(false);
                   }
+
                 })
 
               var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
@@ -87,9 +88,6 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  cambioTab(evento) {
-    this.ngOnInit();
-  }
 
   cerrarSesion() {
     this.singleton.cerrarSesion();
@@ -125,9 +123,6 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
           alquiler: alquiler
         }
       });
-    /*     this.datosPropietarioDialogRef.afterClosed().subscribe(result => {
-          this.ngOnInit();
-        }) */
   }
 
   openDialogCodigoPropietario(alquiler): void {
@@ -140,6 +135,24 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   }
 
   openDialogCodigoLocatario(alquiler): void {
+    this.codigoLocatarioDialogRef = this.dialog.open(CodigoLocatarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+  }
+
+  openDialogCodigoPropietarioDevolucion(alquiler): void {
+    this.codigoPropietarioDialogRef = this.dialog.open(CodigoPropietarioDialogComponent,
+      {
+        data: {
+          alquiler: alquiler
+        }
+      });
+  }
+
+  openDialogCodigoLocatarioDevolucion(alquiler): void {
     this.codigoLocatarioDialogRef = this.dialog.open(CodigoLocatarioDialogComponent,
       {
         data: {

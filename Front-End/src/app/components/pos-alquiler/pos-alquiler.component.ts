@@ -30,7 +30,8 @@ export class PosAlquilerComponent implements OnInit {
 
     var urlActual = window.location.href;
     var id = urlActual.substr(35);
-
+    console.log(id);
+    
     this._auth.get_publicacion_id(id).subscribe(
       err => {
 
@@ -67,7 +68,8 @@ export class PosAlquilerComponent implements OnInit {
   registrarAlquiler(){
     this._auth.registrar_EnProcesoEntrega(this.publicacion._id).subscribe(
       res => {
-        //console.log(res);
+        console.log(res);
+        window.location.assign('/confirmacion-Alquiler');
       }
     )
   }
