@@ -180,9 +180,7 @@
                                             fxLayoutGap="10px">
                                             <button mat-raised-button (click)="pagar(alquilerPropio)" color="primary"
                                                 *ngIf="!alquilerPropio.fuePagado">Continuar con el pago</button>
-                                            <button mat-raised-button color="warn" routerLink="/precelamo"
-                                                *ngIf=arrayEstados[indice]>Reclamar</button>
-
+                                    
                                             <button mat-raised-button routerLink="/prereclamo" color="warn">
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Cancelar alquiler</span>
