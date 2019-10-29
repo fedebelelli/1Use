@@ -276,8 +276,7 @@ export class PerfilUsuarioComponent implements OnInit {
           });
       }
     )
-    //this.openSnackBar("Datos guardados. Actualiza la página para observalos", "Aceptar")
-    location.reload(true);
+    this.openSnackBar("Datos guardados. Actualiza la página para observalos", "Aceptar")
   }
 
   fileChangeEvent(fileInput: any) {
