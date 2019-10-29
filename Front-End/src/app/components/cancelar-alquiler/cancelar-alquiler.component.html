@@ -14,17 +14,9 @@
                     </ng-template>
                     <br>
 
-                    <!-- No se bien como se manejan los select con angular material y no la quiero cagar asi que 
-                        si lo imprementa algun kpo de front-end buenisimo yo lo voy a hacer con un text area nomas
-                        <mat-form-field>
-                        <mat-select placeholder="Tipo de reclamo" [value]="motivoCancelacionActual">
-                            <mat-option *ngFor="let motivoCancelacion of datosCancelacion"></mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
                     <mat-form-field>
                             <mat-select placeholder="Motivos de cancelación" [value]="motivoActual"
-                                (selectionChange)="onSelectionChanged($event)" formControlName="motivo"
-                                name="motivo">
+                                name="motivo" required>
                                 <mat-option *ngFor="let motivo of motivosCancelacion" [value]="motivo.value">
                                     {{motivo.viewValue}} </mat-option>
                             </mat-select>
