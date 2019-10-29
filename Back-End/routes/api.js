@@ -1289,40 +1289,6 @@ router.get("/get-propietario-alquiler/:username", function (req, res) {
 
 //Reclamo
 
-router.post('/register', (req, res) => {
-
-    let userData = req.body;
-    let user = new User(userData);
-    user.password = bcrypt.hashSync(user.password);
-    user.confirmed = false;
-    user.save((error, registeredUser) => {
-
-        if (error) {
-            //console.log(error)
-            res.status(401).send("Error en base de datos. Probar nuevamente");
-        } else {
-            //jwt de usuario, enviar mail con ese token, y mail con redireccion
-            let payload = { subject: registeredUser.email }
-            jwt.sign(payload, 'secretKey',
-                {
-                    expiresIn: '1d',
-                },
-                (err, token) => {
-                    const url = 'http://localhost:4200/confirmacionemail/' + token;
-
-                    enviar(userData.email, 'Confirma tu Email para terminar tu registro en OneUse', "¡Estás a un paso de finalizar tu registro!",
-                        "Gracias por confiar en OneUse. Con el fin de ayudar a mantener la seguridad de tu cuenta, por favor, verifica tu dirección de email.",
-                        url, "Verificar email"
-                    )
-                },
-            );
-            res.status(200).send(true);
-        }
-
-    })
-
-})
-
 router.post('/cancelar-alquiler', (req, res) => {
 
     reclamoData = req.body;
