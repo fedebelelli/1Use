@@ -284,6 +284,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               if (alquiler[i].fechaCaducidadDevolucion != undefined) {
                 var fechaActual = new Date();
                 var fechaAlquiler = new Date(alquiler[i].fechaCaducidadEntrega);
+                console.log(fechaAlquiler, fechaActual)
                 //MANDAR TODO POR JSON EN EL BODY SINO TIRA ERROR
                 this._auth.notificacion_caducidadEntregaPropietario(fechaActual, fechaAlquiler, alquiler[i].imagen, alquiler[i].id_publicacion, usuario.name, alquiler[i].name_usuarioLocatario, alquiler[i]._id).subscribe(
                   res3 => {

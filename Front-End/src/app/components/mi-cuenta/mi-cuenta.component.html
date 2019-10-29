@@ -43,32 +43,30 @@
                 </a>
             </mat-toolbar-row>
         </mat-toolbar>
-
     </div>
-    
-    <div fxLayout="row" fxFlexOrder="2" fxLayoutAlign="center center" fxLayout.lt-lg="column"
-        fxLayoutAlign.lt-lg="center center" >
-        <div ngClass.gt-md="tab-gt-md" ngClass.lt-lg="tab-lt-md">
-           
-            <div fxLayout="column" style="width: 100%; text-align: center; margin-top: 40px" fxLayoutAlign="center center">
-                <p style="font-size: 25px;margin-bottom: 8px; "> Mis Estadísticas </p>
+
+    <div fxLayout="column" fxFlexOrder="2" fxLayoutAlign="start center" fxLayout.lt-lg="column"
+        fxLayoutAlign.lt-lg="center center" style="width: 100%; margin-top: 20px;">
+        <div>
+            <div style="text-align: center;">
+                <p style="font-size: 25px;margin-bottom: 8px; "> Mis estadísticas </p>
                 <mat-divider fxFlexFill></mat-divider>
             </div>
-            <mat-tab-group style="width: 100%;" (selectedTabChange)="cambioTab($event)">
+            <mat-tab-group (selectedTabChange)="cambioTab($event)">
                 <mat-tab>
                     <div fxHide.lt-lg="true">
                         <ng-template mat-tab-label>
                             <mat-icon class="iconitos">check_circle</mat-icon>
-                            Cantidad de visistas a tus publicaciones
+                            Cantidad de visistas en una publicación
                         </ng-template>
                     </div>
                 </mat-tab>
-    
+
                 <mat-tab>
                     <div fxHide.lt-lg="true">
                         <ng-template mat-tab-label>
                             <mat-icon class="iconitos">cancel</mat-icon>
-                            Otra Estadistica
+                            Otras estadísticas
                         </ng-template>
                     </div>
                 </mat-tab>
@@ -76,6 +74,4 @@
 
         </div>
     </div>
-    
-
 </div>

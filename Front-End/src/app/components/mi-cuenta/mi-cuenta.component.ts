@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SingletonService } from '../singleton.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -12,14 +13,23 @@ export class MiCuentaComponent implements OnInit {
   alquileres: boolean = false;
   perfil: boolean = false;
 
-  constructor(private singleton:SingletonService) { }
+  constructor(private singleton: SingletonService, private _auth: AuthService) { }
 
   ngOnInit() {
+
+    this._auth.get_visitas_publicacion(localStorage.getItem('email')).subscribe(
+      res => {
+        
+      }
+    )
+
   }
-cerrarSesion(){
-  this.singleton.cerrarSesion();
-}
-cambioTab(evento) {
-  this.ngOnInit();
-}
+
+  cerrarSesion() {
+    this.singleton.cerrarSesion();
+  }
+
+  cambioTab(evento) {
+    this.ngOnInit();
+  }
 }

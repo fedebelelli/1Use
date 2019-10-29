@@ -36,6 +36,7 @@ const PyR = require('../Models/pyr.model');
 const Notificacion = require('../Models/notificaciones.model');
 const MisAlquileres = require('../Models/mis-alquileres.model');
 const Reclamo = require('../Models/reclamos.model');
+const VisitaPublicaciones = require("../Models/visitasPublicaciones.model")
 
 /* ---------------------------- Métodos de configuración ------------------------- */
 mongoose.connect(db, { useNewUrlParser: true }, err => {
@@ -532,7 +533,7 @@ router.get('/search-categoria', function (req, res) {
     //0000
     if (categoria == undefined && subcategoria == undefined && preciodia == undefined && estrellas == undefined) {
 
-        query = Publicacion.find({});
+        query = Publicacion.find({ estado: 'ACTIVA' });
         //{ $regex: '.*' + palabra + '.*' }   
         // new RegExp('^' + palabra + '$', "i")
     }
@@ -947,11 +948,12 @@ router.post("/notificacion-caducidad-entrega-propietario/:imagen/:id_publicacion
 
         if (alquiler.fechaEntrega == undefined && alquiler.estado == "En proceso de entrega") {
 
-            Notificacion.find({ mensaje_notificacion: mensaje }, (err, not1) => {
+            Notificacion.find({ mensaje_notificacion: mensaje, id_publicacion: id_publicacion }, (err, not1) => {
                 if (err) return res.status(500).send({ message: 'Error' });
 
                 /* Si encuentra la notificación, no la envía. En cambio, si no la encuentra, la sube como nueva */
                 if (not1.length < 1) {
+
                     notificacion.save((err, not) => {
 
                         if (diffDays == 2 && date1 >= date2) {
@@ -1122,8 +1124,8 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
 
         if (!res) return res.status(404).send({ message: 'El doc no existe' });
 
-        enviarEmailAUsuario(alquiler.name_usuarioPropietario, "Código de entrega propietario", "¡Enhobrabuena! Tu publicación ha sido pagada", "¡Hola! Tu código de propietario es el siguiente:" + codigoEntregaPropietario + ". Recuerda darselo al locatario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
-        enviarEmailAUsuario(alquiler.name_usuarioLocatario, "Código de entrega locatario", "¡Enhobrabuena! Tu producto ha sido pagado", "¡Hola! Tu código de locatario es el siguiente:" + codigoEntregaLocatario + ". Recuerda darselo al propietario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
+        enviarEmailAUsuario(alquiler.name_usuarioPropietario, "Código de entrega propietario", "¡Enhobrabuena! Tu publicación ha sido pagada", "¡Hola! Tu código de propietario es el siguiente: <b>" + codigoEntregaPropietario + "</b>. Recuerda darselo al locatario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
+        enviarEmailAUsuario(alquiler.name_usuarioLocatario, "Código de entrega locatario", "¡Enhobrabuena! Tu producto ha sido pagado", "¡Hola! Tu código de locatario es el siguiente: <b>" + codigoEntregaLocatario + "</b>. Recuerda darselo al propietario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
 
         return res.status(200).send({ alquiler });
     })
@@ -1390,3 +1392,57 @@ function enviar(email_destinatario, asunto, titulo, mensaje, url, mensajeBoton) 
     });
 }
 module.exports = router;
+
+
+
+/* -------------------- ESTADISTICAS --------------------------- */
+router.post('/visitas-publicaciones/:id_publicacion', function (req, res) {
+    var id_publicacion = req.params.id_publicacion;
+    var fecha_actual = moment(new Date()).format("MM/DD/YYYY");
+    var objeto;
+
+    VisitaPublicaciones.find({ id_publicacion: id_publicacion, fecha_visita: fecha_actual }, function (err, res2) {
+        if (res2.length < 1) {
+            objeto = { id_publicacion: id_publicacion, fecha_visita: fecha_actual, cantidadVisitas: 1 };
+            var visita = new VisitaPublicaciones(objeto);
+            visita.save((error) => {
+                if (error) {
+                    res.status(500).send('Error');
+                } else {
+                    res.status(200).send({ objeto })
+                }
+            })
+        } else {
+            objeto = { id_publicacion: id_publicacion, fecha_visita: fecha_actual, cantidadVisitas: res2[0].cantidadVisitas + 1 }
+            VisitaPublicaciones.findByIdAndUpdate(res2[0]._id, objeto, function (err, doc) {
+                return res.status(200).send({ doc });
+            })
+        }
+    })
+})
+
+router.get('/get-visitas-publicacion/:email', function (req, res) {
+    var email = req.params.email;
+    var total = []
+    var cantidad = 0;
+    Publicacion.find({ email: email }, function (err1, res1) {
+        for (let i = 0; i < res1.length; i++) {
+            VisitaPublicaciones.find({ id_publicacion: res1[i]._id }, function(err,res2){
+                var objeto = { id: res1[i]._id, fecha: res2.fecha_visita, cantidadVisitas: res2.cantidadVisitas }
+                total.push(objeto);
+                cantidad++;
+            })
+        }
+        return res.status(200).send({ total });
+    })
+})
+
+
+
+
+
+
+
+
+
+

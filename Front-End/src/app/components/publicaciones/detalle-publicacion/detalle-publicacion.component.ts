@@ -67,9 +67,9 @@ export class DetallePublicacionComponent implements OnInit, OnDestroy {
       cantidadDiasSeleccionado: ['', Validators.required]
     });
 
-    this.suscription = this._auth.contador_visitas(this.id).subscribe(
+    this.suscription = this._auth.registrar_visita_publicacion(this.id).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
       }
     )
 
