@@ -76,12 +76,17 @@
                                         </div>
 
                                         <div class="info" fxLayout="column" fxFlex="300" fxLayoutAlign="center">
-                                            <p mat-line><b>Persona que alquilo: </b>{{datos.name_usuarioLocatario}}</p>
+                                            <p mat-line><b>Persona que alquiló: </b>{{datos.name_usuarioLocatario}}</p>
                                             <p mat-line><b>Fecha de generación: </b>{{datos.createdAt}}</p>
-                                            <p mat-line><b> Cantidad de dias alquiler: </b>{{datos.cantidadDias}} </p>
+                                            <p mat-line><b> Cantidad de días alquiler: </b>{{datos.cantidadDias}} </p>
                                             <p mat-line><b> Estado del Alquiler: </b>{{datos.estado}} </p>
                                             <p mat-line *ngIf="datos.fuePagado && !datos.codigoPropietarioIngresado"><b>
                                                     Código entrega propietario: </b>{{datos.codigoEntregaPropietario}}
+                                            </p>
+                                            <p mat-line *ngIf="datos.estado == 'En proceso de devolución'">
+                                                <b>
+                                                    Código devolución propietario:
+                                                </b>{{datos.codigoDevolucionPropietario}}
                                             </p>
                                             <p mat-line *ngIf="datos.fuePagado && datos.codigoLocatarioIngresado">
                                                 <b> Fecha de devolución:
@@ -116,12 +121,16 @@
                                                     <span>Ingresar código locatario</span>
                                                 </button>
 
-
                                                 <button mat-menu-item
                                                     (click)="openDialogCodigoLocatarioDevolucion(datos)"
-                                                    *ngIf="!datos.codigoLocatarioDevolucionIngresado">
+                                                    *ngIf="datos.codigoPropietrioDevolucionIngresado && !datos.codigoLocatarioDevolucionIngresado">
                                                     <mat-icon>format_align_justify</mat-icon>
                                                     <span>Ingresar código locatario devolución</span>
+                                                </button>
+
+                                                <button mat-menu-item *ngIf="datos.estado == 'Finalizado'">
+                                                    <mat-icon>star</mat-icon>
+                                                    <span>Puntuar al locatario</span>
                                                 </button>
                                             </mat-menu>
 
@@ -172,6 +181,10 @@
                                                 <b> Código entrega
                                                     locatario:</b>{{alquilerPropio.codigoEntregaLocatario}}
                                             </p>
+                                            <p mat-line *ngIf="alquilerPropio.estado == 'En proceso de devolución'">
+                                                <b> Código devolución
+                                                    locatario:</b>{{alquilerPropio.codigoDevolucionLocatario}}
+                                            </p>
                                             <p mat-line
                                                 *ngIf="alquilerPropio.fuePagado && alquilerPropio.codigoLocatarioIngresado">
                                                 <b> Fecha de devolución:
@@ -201,9 +214,13 @@
                                                 </button>
                                                 <button mat-menu-item
                                                     (click)="openDialogCodigoPropietarioDevolucion(alquilerPropio)"
-                                                    *ngIf="!alquilerPropio.codigoPropietarioDevolucionIngresado && alquilerPropio.codigoLocatarioDevolucionIngresado">
+                                                    *ngIf="!alquilerPropio.codigoPropietarioDevolucionIngresado && alquilerPropio.estado == 'En proceso de devolución'">
                                                     <mat-icon>format_align_justify</mat-icon>
                                                     <span>Ingresar código propietario devolución</span>
+                                                </button>
+                                                <button mat-menu-item *ngIf="alquilerPropio.estado == 'Finalizado'">
+                                                    <mat-icon>star</mat-icon>
+                                                    <span>Puntuar al propietario</span>
                                                 </button>
                                             </mat-menu>
 

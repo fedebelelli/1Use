@@ -49,6 +49,8 @@ export class AuthService {
   private _registrarVisitaPublicacion = "http://localhost:4201/api/visitas-publicaciones/"
   private _registrarEnProcesoDevolucion = "http://localhost:4201/api/registrar-demora-devolucion/"
   private _getVisitas = "http://localhost:4201/api/get-visitas-publicacion/"
+  private _registrarCodigoDevolucionPropietario = "http://localhost:4201/api/registrar-finalizacion-propietario/"
+  private _registrarCodigoDevolucionLocatario = "http://localhost:4201/api/registrar-finalizacion-locatario/"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -236,12 +238,12 @@ export class AuthService {
 
   registrar_codigoPropietarioDevolucion(codigo) {
     let params = JSON.stringify(codigo);
-    return this.http.post<any>(this._registrarCodigoPropietarioEntrega + codigo, params);
+    return this.http.post<any>(this._registrarCodigoDevolucionPropietario + codigo, params);
   }
 
   registrar_codigoLocatarioDevolucion(codigo) {
     let params = JSON.stringify(codigo);
-    return this.http.post<any>(this._registrarCodigoLocatarioEntrega + codigo, params);
+    return this.http.post<any>(this._registrarCodigoDevolucionLocatario + codigo, params);
   }
 
 

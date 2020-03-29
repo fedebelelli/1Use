@@ -64,7 +64,9 @@ import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.
 import { FusionChartsModule } from 'angular-fusioncharts';
 import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
-import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
+import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import { CodigoDevolucionLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-devolucion-locatario-dialog/codigo-devolucion-locatario-dialog.component';
+import { CodigoDevolucionPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-devolucion-propietario-dialog/codigo-devolucion-propietario-dialog.component'
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 //import { SearchPipe } from './search.pipe';
 
@@ -120,7 +122,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CancelarAlquilerComponent,
     PrereclamoComponent,
     ReclamoExitoComponent,
-    
+    CodigoDevolucionLocatarioDialogComponent,
+    CodigoDevolucionPropietarioDialogComponent,
+
     //SearchPipe
   ],
   imports: [
@@ -138,11 +142,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MaterialFileInputModule,
     NgxDropzoneModule,
     SwiperModule,
-    FusionChartsModule 
+    FusionChartsModule
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent],
-  entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent, 
-    DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent]
+  entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent,
+    DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent, CodigoDevolucionLocatarioDialogComponent,
+    CodigoDevolucionPropietarioDialogComponent,]
 })
 export class AppModule { }

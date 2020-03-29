@@ -6,6 +6,8 @@ import { DatosPropietarioDialogComponent } from './datos-propietario-dialog/dato
 import { DatosLocatarioDialogComponent } from './datos-locatario-dialog/datos-locatario-dialog.component';
 import { CodigoPropietarioDialogComponent } from './codigo-propietario-dialog/codigo-propietario-dialog.component';
 import { CodigoLocatarioDialogComponent } from './codigo-locatario-dialog/codigo-locatario-dialog.component';
+import { CodigoDevolucionLocatarioDialogComponent } from './codigo-devolucion-locatario-dialog/codigo-devolucion-locatario-dialog.component';
+import { CodigoDevolucionPropietarioDialogComponent } from './codigo-devolucion-propietario-dialog/codigo-devolucion-propietario-dialog.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -106,6 +108,8 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   datosLocatarioDialogRef: MatDialogRef<DatosLocatarioDialogComponent>;
   codigoPropietarioDialogRef: MatDialogRef<CodigoPropietarioDialogComponent>
   codigoLocatarioDialogRef: MatDialogRef<CodigoLocatarioDialogComponent>
+  codigoDevolucionPropietarioDialogRef: MatDialogRef<CodigoDevolucionPropietarioDialogComponent>
+  codigoDevolucionLocatarioDialogRef: MatDialogRef<CodigoDevolucionLocatarioDialogComponent>
 
   openDialogDatosPropietario(alquiler): void {
     this.datosPropietarioDialogRef = this.dialog.open(DatosPropietarioDialogComponent,
@@ -144,7 +148,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   }
 
   openDialogCodigoPropietarioDevolucion(alquiler): void {
-    this.codigoPropietarioDialogRef = this.dialog.open(CodigoPropietarioDialogComponent,
+    this.codigoDevolucionPropietarioDialogRef = this.dialog.open(CodigoDevolucionPropietarioDialogComponent,
       {
         data: {
           alquiler: alquiler
@@ -153,7 +157,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   }
 
   openDialogCodigoLocatarioDevolucion(alquiler): void {
-    this.codigoLocatarioDialogRef = this.dialog.open(CodigoLocatarioDialogComponent,
+    this.codigoDevolucionLocatarioDialogRef = this.dialog.open(CodigoDevolucionLocatarioDialogComponent,
       {
         data: {
           alquiler: alquiler
