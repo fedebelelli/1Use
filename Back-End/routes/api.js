@@ -292,6 +292,39 @@ router.post('/update-user', multipartMiddleware, function (req, res) {
     });
 })
 
+router.post('/update-superadmin-user', function (req, res) {
+
+    var user = req.body;
+    var usuario = new User();
+
+    usuario._id = user._id;
+    usuario.name = user.name;
+    usuario.password = user.password;
+    usuario.confirmed = user.confirmed;
+    usuario.createdAt = user.createdAt;
+    usuario.updatedAt = user.updatedAt;
+    usuario.__v = user.__v;
+    usuario.nombre = user.nombre;
+    usuario.apellido = user.apellido;
+    usuario.codArea = user.codArea;
+    usuario.telefono = user.telefono;
+    usuario.fecha_nacimiento = user.fecha_nacimiento;
+    usuario.provincia = user.provincia;
+    usuario.ciudad = user.ciudad;
+    usuario.barrio = user.barrio;
+    usuario.calle = user.calle;
+    usuario.numero = user.numero;
+    usuario.piso = user.piso;
+    usuario.departamento = user.departamento;
+    usuario.codigoPostal = user.codigoPostal;
+
+    User.findOneAndUpdate({_id: usuario._id}, usuario,(err, pUpdated) => {
+        if (err) return res.status(500).send("Error en BD");
+        if (!pUpdated) return res.status(500).send("Error en BD");
+        return res.status(200).send("Datos guardados correctamente");
+    });
+})
+
 router.post('/upload-image/:id', multipartMiddleware, function (req, res) {
 
     var projectId = req.params.id;

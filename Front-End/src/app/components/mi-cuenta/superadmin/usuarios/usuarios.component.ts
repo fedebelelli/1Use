@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { DatosUsuariosDialogComponent } from './datos-usuarios-dialog/datos-usuarios-dialog.component'
 import { EliminarUsuarioDialogComponent } from './eliminar-usuario-dialog/eliminar-usuario-dialog.component'
+import { ModificarUsuarioDialogComponent } from './modificar-usuario-dialog/modificar-usuario-dialog.component'
 
 export interface Usuarios {
   _id: string,
@@ -47,12 +48,14 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   datosUsuariosDialogRef: MatDialogRef<DatosUsuariosDialogComponent>
   eliminarUsuarioDialogRef: MatDialogRef<EliminarUsuarioDialogComponent>
+  modificarUsuarioDialogRef: MatDialogRef<ModificarUsuarioDialogComponent>
 
   nombreUsuario;
   mail;
   fechaCreacion;
   dataSource;
   displayedColumns = ['nombre', 'email', 'fecha', 'boton'];
+  data;
 
   ngOnInit() {
     this.subscription = this._auth.get_all_users().subscribe(
@@ -84,6 +87,21 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   openDialogEliminarUsuario(data): void {
     this.eliminarUsuarioDialogRef = this.dialog.open(EliminarUsuarioDialogComponent,
+      {
+        data: {
+          data: data
+        }
+      });
+
+      this.dialog.afterAllClosed.subscribe(
+        res => {
+          this.ngOnInit();
+        }
+      );
+  }
+
+  openDialogModificarUsuario(data): void {
+    this.modificarUsuarioDialogRef = this.dialog.open(ModificarUsuarioDialogComponent,
       {
         data: {
           data: data

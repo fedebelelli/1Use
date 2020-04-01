@@ -53,6 +53,7 @@ export class AuthService {
   private _registrarCodigoDevolucionLocatario = "http://localhost:4201/api/registrar-finalizacion-locatario/"
   private _getAllUsers = "http://localhost:4201/api/get-all-users/"
   private _deleteUser = "http://localhost:4201/api/delete-user/"
+  private _updateSuperadminUser = "http://localhost:4201/api/update-superadmin-user"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -92,15 +93,22 @@ export class AuthService {
     return this.http.post<any>(this._updateUser + _id, params, { headers: headers });
   }
 
+  update_superadmin_user(user) {
+    // let params = JSON.stringify(user);
+    // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this._updateSuperadminUser, user); //params, { headers: headers }
+  }
+
   get_image(id) {
     return this.http.get<any>(this._getImgUser + id);
   }
 
-  get_all_users(){
+  get_all_users() {
     return this.http.get<any>(this._getAllUsers);
   }
 
-  delete_user(mail){
+  delete_user(mail) {
     return this.http.delete<any>(this._deleteUser + mail)
   }
 
@@ -239,7 +247,7 @@ export class AuthService {
     return this.http.get<any>(this._getPropietarioAlquiler + username);
   }
 
-  registrar_enProcesoDevolucion(name_propietario){
+  registrar_enProcesoDevolucion(name_propietario) {
     let objeto = {}
     return this.http.post<any>(this._registrarEnProcesoDevolucion + name_propietario, objeto);
   }
@@ -262,11 +270,11 @@ export class AuthService {
   }
 
   /* ESTADISTICAS*/
-  registrar_visita_publicacion(id_publicacion){
-    return this.http.post<any>(this._registrarVisitaPublicacion + id_publicacion,{id_publicacion: id_publicacion});
+  registrar_visita_publicacion(id_publicacion) {
+    return this.http.post<any>(this._registrarVisitaPublicacion + id_publicacion, { id_publicacion: id_publicacion });
   }
 
-  get_visitas_id(id){
+  get_visitas_id(id) {
     return this.http.get<any>(this._getVisitas + id)
   }
 

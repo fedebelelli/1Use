@@ -75,6 +75,7 @@ import { ReclamosComponent } from './components/mi-cuenta/superadmin/reclamos/re
 import { EstadisticasComponent } from './components/mi-cuenta/superadmin/estadisticas/estadisticas.component';
 import { DatosUsuariosDialogComponent } from './components/mi-cuenta/superadmin/usuarios/datos-usuarios-dialog/datos-usuarios-dialog.component';
 import { EliminarUsuarioDialogComponent } from './components/mi-cuenta/superadmin/usuarios/eliminar-usuario-dialog/eliminar-usuario-dialog.component';
+import { ModificarUsuarioDialogComponent } from './components/mi-cuenta/superadmin/usuarios/modificar-usuario-dialog/modificar-usuario-dialog.component';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 //import { SearchPipe } from './search.pipe';
 
@@ -140,6 +141,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     EstadisticasComponent,
     DatosUsuariosDialogComponent,
     EliminarUsuarioDialogComponent,
+    ModificarUsuarioDialogComponent,
 
     //SearchPipe
   ],
@@ -164,6 +166,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   bootstrap: [AppComponent],
   entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent,
     DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent, CodigoDevolucionLocatarioDialogComponent,
-    CodigoDevolucionPropietarioDialogComponent,EliminarUsuarioDialogComponent,DatosUsuariosDialogComponent]
+    CodigoDevolucionPropietarioDialogComponent,EliminarUsuarioDialogComponent,DatosUsuariosDialogComponent,ModificarUsuarioDialogComponent]
 })
 export class AppModule { }
