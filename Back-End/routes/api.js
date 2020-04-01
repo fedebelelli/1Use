@@ -242,8 +242,8 @@ router.get('/user-data', function (req, res) {
 });
 
 router.get('/get-all-users', function (req, res) {
-    User.find((error,user) => {
-        if(error){
+    User.find((error, user) => {
+        if (error) {
             console.log("no trajo nada");
         } else {
             res.status(200).send(user);
@@ -318,7 +318,7 @@ router.post('/update-superadmin-user', function (req, res) {
     usuario.departamento = user.departamento;
     usuario.codigoPostal = user.codigoPostal;
 
-    User.findOneAndUpdate({_id: usuario._id}, usuario,(err, pUpdated) => {
+    User.findOneAndUpdate({ _id: usuario._id }, usuario, (err, pUpdated) => {
         if (err) return res.status(500).send("Error en BD");
         if (!pUpdated) return res.status(500).send("Error en BD");
         return res.status(200).send("Datos guardados correctamente");
@@ -549,7 +549,14 @@ router.get('/get-publicaciones-destacadas', function (req, res) {
     })
 })
 
+router.get('/get-all-publicaciones', function (req, res) {
+    Publicacion.find(function (err, publicaciones) {
+        if (err) return res.status(500).send({ message: 'Error' });
 
+        if (!publicaciones) return res.status(404).send({ message: 'El doc no existe' });
+        return res.status(200).send({ publicaciones });
+    })
+})
 
 
 /* ------------------------------ Busqueda de publicaciones ----------------------------------- */

@@ -54,6 +54,7 @@ export class AuthService {
   private _getAllUsers = "http://localhost:4201/api/get-all-users/"
   private _deleteUser = "http://localhost:4201/api/delete-user/"
   private _updateSuperadminUser = "http://localhost:4201/api/update-superadmin-user"
+  private _getAllPublicaciones = "http://localhost:4201/api/get-all-publicaciones"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -139,6 +140,10 @@ export class AuthService {
 
   get_publicaciones_destacadas() {
     return this.http.get<any>(this._getPublicacionesDestacadas)
+  }
+
+  get_all_publicaciones(){
+    return this.http.get<any>(this._getAllPublicaciones);
   }
 
 
