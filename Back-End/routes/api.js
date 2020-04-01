@@ -241,6 +241,28 @@ router.get('/user-data', function (req, res) {
     })
 });
 
+router.get('/get-all-users', function (req, res) {
+    User.find((error,user) => {
+        if(error){
+            console.log("no trajo nada");
+        } else {
+            res.status(200).send(user);
+        }
+    })
+})
+
+router.delete('/delete-user/:email', function (req, res) {
+    let params = req.params.email;
+    User.findOneAndDelete({ email: params }, (error, user) => {
+        if (error) {
+            console.log("No pasa nada che")
+        }
+        else {
+            res.status(200).send(user);
+        }
+    })
+});
+
 router.post('/update-user', multipartMiddleware, function (req, res) {
 
     var params = req.query.id;
@@ -1126,7 +1148,7 @@ router.post('/registrar-proceso-entrega/:id_publicacion', function (req, res) {
 
         enviarEmailAUsuario(alquiler.name_usuarioPropietario, "Código de entrega propietario", "¡Enhobrabuena! Tu publicación ha sido pagada", "¡Hola! Tu código de propietario es el siguiente: <b>" + codigoEntregaPropietario + "</b>. Recuerda darselo al locatario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
         enviarEmailAUsuario(alquiler.name_usuarioLocatario, "Código de entrega locatario", "¡Enhobrabuena! Tu producto ha sido pagado", "¡Hola! Tu código de locatario es el siguiente: <b>" + codigoEntregaLocatario + "</b>. Recuerda darselo al propietario cuando este te lo indique.", "http://localhost:4200/mis-alquileres", "Ir a mis alquileres");
-        
+
         return res.status(200).send({ alquiler });
 
     })

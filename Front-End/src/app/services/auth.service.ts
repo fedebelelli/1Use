@@ -51,6 +51,8 @@ export class AuthService {
   private _getVisitas = "http://localhost:4201/api/get-visitas-publicacion/"
   private _registrarCodigoDevolucionPropietario = "http://localhost:4201/api/registrar-finalizacion-propietario/"
   private _registrarCodigoDevolucionLocatario = "http://localhost:4201/api/registrar-finalizacion-locatario/"
+  private _getAllUsers = "http://localhost:4201/api/get-all-users/"
+  private _deleteUser = "http://localhost:4201/api/delete-user/"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -76,9 +78,7 @@ export class AuthService {
   }
 
   newPwd(user, token) {
-
-    return this.http.post<any>(this._newpwd, { token: token, user: user });
-
+    return this.http.post<any>(this._newpwd, { token: token, user: user })
   }
 
   user_data(email) {
@@ -94,6 +94,14 @@ export class AuthService {
 
   get_image(id) {
     return this.http.get<any>(this._getImgUser + id);
+  }
+
+  get_all_users(){
+    return this.http.get<any>(this._getAllUsers);
+  }
+
+  delete_user(mail){
+    return this.http.delete<any>(this._deleteUser + mail)
   }
 
 

@@ -66,7 +66,15 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import { CodigoDevolucionLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-devolucion-locatario-dialog/codigo-devolucion-locatario-dialog.component';
-import { CodigoDevolucionPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-devolucion-propietario-dialog/codigo-devolucion-propietario-dialog.component'
+import { CodigoDevolucionPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-devolucion-propietario-dialog/codigo-devolucion-propietario-dialog.component';
+import { SuperadminComponent } from './components/mi-cuenta/superadmin/superadmin.component';
+import { UsuariosComponent } from './components/mi-cuenta/superadmin/usuarios/usuarios.component';
+import { PublicacionesComponent } from './components/mi-cuenta/superadmin/publicaciones/publicaciones.component';
+import { AlquileresComponent } from './components/mi-cuenta/superadmin/alquileres/alquileres.component';
+import { ReclamosComponent } from './components/mi-cuenta/superadmin/reclamos/reclamos.component';
+import { EstadisticasComponent } from './components/mi-cuenta/superadmin/estadisticas/estadisticas.component';
+import { DatosUsuariosDialogComponent } from './components/mi-cuenta/superadmin/usuarios/datos-usuarios-dialog/datos-usuarios-dialog.component';
+import { EliminarUsuarioDialogComponent } from './components/mi-cuenta/superadmin/usuarios/eliminar-usuario-dialog/eliminar-usuario-dialog.component';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 //import { SearchPipe } from './search.pipe';
 
@@ -124,6 +132,14 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ReclamoExitoComponent,
     CodigoDevolucionLocatarioDialogComponent,
     CodigoDevolucionPropietarioDialogComponent,
+    SuperadminComponent,
+    UsuariosComponent,
+    PublicacionesComponent,
+    AlquileresComponent,
+    ReclamosComponent,
+    EstadisticasComponent,
+    DatosUsuariosDialogComponent,
+    EliminarUsuarioDialogComponent,
 
     //SearchPipe
   ],
@@ -148,6 +164,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   bootstrap: [AppComponent],
   entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent,
     DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent, CodigoDevolucionLocatarioDialogComponent,
-    CodigoDevolucionPropietarioDialogComponent,]
+    CodigoDevolucionPropietarioDialogComponent,EliminarUsuarioDialogComponent,DatosUsuariosDialogComponent]
 })
 export class AppModule { }
