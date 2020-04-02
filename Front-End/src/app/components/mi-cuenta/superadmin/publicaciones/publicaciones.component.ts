@@ -111,5 +111,10 @@ export class PublicacionesComponent implements OnInit, OnDestroy {
     );
   }
 
+  redireccionar(row) {
+    let url = 'http://localhost:4200/publicaciones/' + row._id;
+    window.open(url, '_blank');
+  }
+
 
 }

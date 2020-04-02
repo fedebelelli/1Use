@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-eliminar-publicacion-dialog',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EliminarPublicacionDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<EliminarPublicacionDialogComponent>, private _auth:AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
+
+  publicacion;
 
   ngOnInit() {
+    this.publicacion = this.data.data;
+  }
+
+  eliminarPublicacion() {
+    this._auth.delete_publicacion(this.publicacion._id).subscribe(
+      err => {
+        this.ngOnInit();
+      },
+      res => {
+        this.ngOnInit();
+      }
+    )
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }
