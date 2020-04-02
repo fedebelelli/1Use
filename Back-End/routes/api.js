@@ -558,6 +558,39 @@ router.get('/get-all-publicaciones', function (req, res) {
     })
 })
 
+router.post('/update-superadmin-publicacion', function (req, res) {
+   
+    var datos = req.body;
+    var publicaciones = new Publicacion();
+
+    publicaciones._id = datos._id;
+    publicaciones.titulo = datos.titulo;
+    publicaciones.categoria = datos.categoria;
+    publicaciones.subcategoria = datos.subcategoria;
+    publicaciones.descripcion = datos.descripcion;
+    publicaciones.preciodia = datos.preciodia;
+    publicaciones.preciosemana = datos.preciosemana;
+    publicaciones.preciomes = datos.preciomes;
+    publicaciones.email = datos.email;
+    publicaciones.tipoAlquiler = datos.tipoAlquiler;
+    publicaciones.destacar = datos.destacar;
+    publicaciones.estado = datos.estado;
+    publicaciones.createdAt = datos.createdAt;
+    publicaciones.updatedAt = datos.updatedAt;
+    publicaciones.cantDias = datos.cantDias;
+    publicaciones.cantidadDisponible = datos.cantidadDisponible;
+    publicaciones.contadorDeVisita = datos.contadorDeVisita;
+
+
+    Publicacion.findByIdAndUpdate(publicaciones._id, publicaciones, (err, eliminado) => {
+        if (err) return res.status(500).send({ message: 'Error al eliminar' });
+
+        if (!eliminado) return res.status(404).send({ message: 'Error' });
+
+        return res.status(200).send({ message: "Todo ok" })
+
+    })
+})
 
 /* ------------------------------ Busqueda de publicaciones ----------------------------------- */
 router.get('/search-categoria', function (req, res) {

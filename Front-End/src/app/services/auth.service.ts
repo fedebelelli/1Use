@@ -55,6 +55,7 @@ export class AuthService {
   private _deleteUser = "http://localhost:4201/api/delete-user/"
   private _updateSuperadminUser = "http://localhost:4201/api/update-superadmin-user"
   private _getAllPublicaciones = "http://localhost:4201/api/get-all-publicaciones"
+  private _updateSuperadminPublicacion = "http://localhost:4201/api/update-superadmin-publicacion"
   //authSubject = new BehaviorSubject(false);
   //private token: string;
 
@@ -136,6 +137,10 @@ export class AuthService {
     let params = JSON.stringify(publicacion);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
+  }
+
+  update_superadmin_publicacion(publicacion){
+    return this.http.post<any>(this._updateSuperadminPublicacion, publicacion);
   }
 
   get_publicaciones_destacadas() {
