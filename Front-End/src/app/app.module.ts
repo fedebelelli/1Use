@@ -79,6 +79,10 @@ import { ModificarUsuarioDialogComponent } from './components/mi-cuenta/superadm
 import { DatosPublicacionesDialogComponent } from './components/mi-cuenta/superadmin/publicaciones/datos-publicaciones-dialog/datos-publicaciones-dialog.component';
 import { EliminarPublicacionDialogComponent } from './components/mi-cuenta/superadmin/publicaciones/eliminar-publicacion-dialog/eliminar-publicacion-dialog.component';
 import { ModificarPublicacionDialogComponent } from './components/mi-cuenta/superadmin/publicaciones/modificar-publicacion-dialog/modificar-publicacion-dialog.component';
+import { DatosAlquileresDialogComponent } from './components/mi-cuenta/superadmin/alquileres/datos-alquileres-dialog/datos-alquileres-dialog.component';
+import { ModificarAlquilerDialogComponent } from './components/mi-cuenta/superadmin/alquileres/modificar-alquiler-dialog/modificar-alquiler-dialog.component';
+import { EliminarAlquilerSuperadminDialogComponent } from './components/mi-cuenta/superadmin/alquileres/eliminar-alquiler-dialog/eliminar-alquiler-dialog.component';
+
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 //import { SearchPipe } from './search.pipe';
 
@@ -148,7 +152,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DatosPublicacionesDialogComponent,
     EliminarPublicacionDialogComponent,
     ModificarPublicacionDialogComponent,
-
+    DatosAlquileresDialogComponent,
+    ModificarAlquilerDialogComponent,
+    EliminarAlquilerSuperadminDialogComponent
     //SearchPipe
   ],
   imports: [
@@ -172,6 +178,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   bootstrap: [AppComponent],
   entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent,
     DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent, CodigoDevolucionLocatarioDialogComponent,
-    CodigoDevolucionPropietarioDialogComponent, EliminarUsuarioDialogComponent, DatosUsuariosDialogComponent, ModificarUsuarioDialogComponent, DatosPublicacionesDialogComponent, EliminarPublicacionDialogComponent, ModificarPublicacionDialogComponent]
+    CodigoDevolucionPropietarioDialogComponent, EliminarUsuarioDialogComponent, DatosUsuariosDialogComponent, ModificarUsuarioDialogComponent, DatosPublicacionesDialogComponent, EliminarPublicacionDialogComponent, ModificarPublicacionDialogComponent,
+    DatosAlquileresDialogComponent, ModificarAlquilerDialogComponent, EliminarAlquilerSuperadminDialogComponent]
 })
 export class AppModule { }

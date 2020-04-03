@@ -56,7 +56,10 @@ export class AuthService {
   private _updateSuperadminUser = "http://localhost:4201/api/update-superadmin-user"
   private _getAllPublicaciones = "http://localhost:4201/api/get-all-publicaciones"
   private _updateSuperadminPublicacion = "http://localhost:4201/api/update-superadmin-publicacion"
-  //authSubject = new BehaviorSubject(false);
+  private _getAllAlquileres = "http://localhost:4201/api/get-all-alquileres"
+  private _deleteAlquiler = "http://localhost:4201/api/delete-alquiler/"
+  private _getAlquilerId = "http://localhost:4201/api/get-alquiler-id/"
+  //authSubject = new BehaviorSubject(false);_deleteAlquiler 
   //private token: string;
 
 
@@ -139,7 +142,7 @@ export class AuthService {
     return this.http.post<any>(this._updatePublicacion + id, params, { headers: headers });
   }
 
-  update_superadmin_publicacion(publicacion){
+  update_superadmin_publicacion(publicacion) {
     return this.http.post<any>(this._updateSuperadminPublicacion, publicacion);
   }
 
@@ -147,7 +150,7 @@ export class AuthService {
     return this.http.get<any>(this._getPublicacionesDestacadas)
   }
 
-  get_all_publicaciones(){
+  get_all_publicaciones() {
     return this.http.get<any>(this._getAllPublicaciones);
   }
 
@@ -225,6 +228,18 @@ export class AuthService {
 
 
   /* MIS ALQUILERES */
+  get_all_alquileres() {
+    return this.http.get<any>(this._getAllAlquileres);
+  }
+
+  get_alquiler_id(id){
+    return this.http.get<any>(this._getAlquilerId + id);
+  }
+
+  delete_alquiler(id){
+    return this.http.delete<any>(this._deleteAlquiler + id);
+  }
+
   registrar_EnProcesoPago(id_publicacion, name_propietario, name_locatario, cantidadDias, cantidadAlquiler, imagen) {
     let params = JSON.stringify(id_publicacion);
     return this.http.post<any>(this._alquilerProcesoPago + id_publicacion + "/" + name_propietario + "/" + name_locatario + "/" + cantidadDias + "/" + cantidadAlquiler + "/" + imagen, params);

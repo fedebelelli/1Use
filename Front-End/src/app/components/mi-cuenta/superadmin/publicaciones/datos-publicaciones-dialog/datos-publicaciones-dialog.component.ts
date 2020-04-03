@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class DatosPublicacionesDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<DatosPublicacionesDialogComponent>, private _auth: AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
+  
   datos = {
     _id: undefined,
     titulo: undefined,

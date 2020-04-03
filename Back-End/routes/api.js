@@ -559,7 +559,7 @@ router.get('/get-all-publicaciones', function (req, res) {
 })
 
 router.post('/update-superadmin-publicacion', function (req, res) {
-   
+
     var datos = req.body;
     var publicaciones = new Publicacion();
 
@@ -1166,6 +1166,38 @@ router.post("/notificacion-caducidad-entrega-locatario/:imagen/:id_publicacion/:
 //Test de generación de códigos
 router.post('/codigo-alquiler', function (req, res) {
     res.status(200).send(randomstring.generate(10));
+})
+
+router.get('/get-all-alquileres', function (req, res) {
+    MisAlquileres.find((err, alquileres) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!alquileres) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send(alquileres);
+    })
+})
+
+router.get('/get-alquiler-id/:id', function (req, res) {
+    let id = req.params.id;
+    MisAlquileres.findById(id, (err, alquileres) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!alquileres) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send(alquileres);
+    })
+})
+
+router.delete('/delete-alquiler/:id', function (req, res) {
+    let id = req.params.id;
+    MisAlquileres.findByIdAndDelete(id, (err, alquiler) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!alquiler) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send(alquiler);
+    })
 })
 
 router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLocatario/:cantidadDias/:cantidadAlquilar/:imagen', function (req, res) {
