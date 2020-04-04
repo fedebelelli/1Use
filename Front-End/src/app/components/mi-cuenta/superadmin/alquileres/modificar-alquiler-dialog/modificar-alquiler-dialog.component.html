@@ -4,7 +4,7 @@
         <form [formGroup]="datosUsuariosGroup">
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <div>
-                    <h3>Datos del alquiler</h3>
+                    <h3><b>Datos del alquiler</b></h3>
                     <mat-form-field>
                         <input [value]="_id" formControlName="_id" name="_id" matInput (ngModelChange)="_id = $event"
                             placeholder="ID alquiler">
@@ -34,7 +34,7 @@
 
                     <mat-form-field>
                         <input [value]="cantidadDias" formControlName="cantidadDias" name="cantidadDias" matInput
-                            (ngModelChange)="cantidadDias = $event" placeholder="Cantidad de días de alquiler">
+                            (ngModelChange)="cantidadDias = $event" placeholder="Cantidad de días alquilado">
                     </mat-form-field>
 
                     <mat-form-field>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div>
-                    <h3>En proceso de entrega</h3>
+                    <h3><b>Entrega</b></h3>
                     <mat-form-field>
                         <input [value]="codigoEntregaPropietario" formControlName="codigoEntregaPropietario"
                             name="codigoEntregaPropietario" matInput (ngModelChange)="codigoEntregaPropietario = $event"
@@ -103,7 +103,7 @@
                 </div>
 
                 <div>
-                    <h3>Devolución</h3>
+                    <h3><b>Devolución</b></h3>
                     <mat-form-field>
                         <input [value]="codigoDevolucionPropietario" formControlName="codigoDevolucionPropietario"
                             name="codigoDevolucionPropietario" matInput
