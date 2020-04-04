@@ -48,9 +48,15 @@
     <div fxLayout="column" fxFlexOrder="2" fxLayoutAlign="start center" fxLayout.lt-lg="column"
         fxLayoutAlign.lt-lg="center center" style="width: 95%; margin-top: 20px; margin-bottom: 20px;">
         <div class="mat-elevation-z8" style="width: 95%;">
-            <mat-form-field style="width: 60%;margin-left: 20px; margin-top: 20px;">
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="20px" style="margin-left: 30px;">
+                <mat-form-field style="width: 60%;margin-left: 20px; margin-top: 20px;">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                </mat-form-field>
+
+                <button mat-icon-button (click)="ngOnInit()">
+                    <mat-icon>autorenew</mat-icon>
+                </button>
+            </div>
 
             <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
@@ -73,9 +79,12 @@
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let row">
                         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-                            <button mat-stroked-button color="primary" (click)="openDialogUsuarios(row)">Ver usuario</button>
-                            <button mat-stroked-button color="primary" (click)="openDialogModificarUsuario(row)">Modificar</button>
-                            <button mat-stroked-button color="warn" (click)="openDialogEliminarUsuario(row)">Eliminar</button>
+                            <button mat-stroked-button color="primary" (click)="openDialogUsuarios(row)">Ver
+                                usuario</button>
+                            <button mat-stroked-button color="primary"
+                                (click)="openDialogModificarUsuario(row)">Modificar</button>
+                            <button mat-stroked-button color="warn"
+                                (click)="openDialogEliminarUsuario(row)">Eliminar</button>
                         </div>
                     </td>
                 </ng-container>

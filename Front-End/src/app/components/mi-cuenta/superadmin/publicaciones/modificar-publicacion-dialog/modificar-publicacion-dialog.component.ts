@@ -36,18 +36,18 @@ export class ModificarPublicacionDialogComponent implements OnInit {
   public titulo: string;
   public categoria: string;
   public subcategoria: string;
-  public descripcion: number;
-  public preciodia: number;
+  public descripcion: string;
+  public preciodia: string;
   public preciosemana: Date;
   public preciomes: string;
   public email: string;
   public multiplefile: string;
   public tipoAlquiler: string;
   public destacar: string;
-  public estado: number;
-  public createdAt: number;
+  public estado: string;
+  public createdAt: string;
   public updatedAt: string;
-  public __v: number;
+  public __v: string;
   public cantDias: string;
   public cantidadDisponible: string;
   public contadorDeVisita: string;
@@ -74,7 +74,7 @@ export class ModificarPublicacionDialogComponent implements OnInit {
     contadorDeVisita: new FormControl({ value: '', disabled: false }),
   });
 
-  constructor(private _ngZone: NgZone, private dialogRef: MatDialogRef<ModificarPublicacionDialogComponent>, private _auth: AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
+  constructor(private dialogRef: MatDialogRef<ModificarPublicacionDialogComponent>, private _auth: AuthService, @Inject(MAT_DIALOG_DATA) private data) { }
 
   ngOnInit() {
     this.datos = this.data.data;

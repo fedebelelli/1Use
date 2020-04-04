@@ -59,9 +59,10 @@ export class AuthService {
   private _getAllAlquileres = "http://localhost:4201/api/get-all-alquileres"
   private _deleteAlquiler = "http://localhost:4201/api/delete-alquiler/"
   private _getAlquilerId = "http://localhost:4201/api/get-alquiler-id/"
-  //authSubject = new BehaviorSubject(false);_deleteAlquiler 
+  private _updateSuperadminAlquiler = "http://localhost:4201/api/update-superadmin-alquiler/"
+  //authSubject = new BehaviorSubject(false); 
   //private token: string;
-
+  
 
   constructor(private http: HttpClient) { }
 
@@ -287,6 +288,9 @@ export class AuthService {
     return this.http.post<any>(this._registrarCodigoDevolucionLocatario + codigo, params);
   }
 
+  update_superadmin_alquiler(alquiler){
+    return this.http.post<any>(this._updateSuperadminAlquiler, alquiler);
+  }
 
 
   //Reclamo

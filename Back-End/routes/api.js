@@ -1200,6 +1200,44 @@ router.delete('/delete-alquiler/:id', function (req, res) {
     })
 })
 
+router.post('/update-superadmin-alquiler/', function(req,res) {
+    
+    let datos = req.body;
+    let alquiler = new MisAlquileres();
+  
+    alquiler._id = datos._id
+    alquiler.imagen = datos.imagen
+    alquiler.fuePagado = datos.fuePagado
+    alquiler.estado = datos.estado
+    alquiler.id_publicacion = datos.id_publicacion
+    alquiler.name_usuarioPropietario = datos.name_usuarioPropietario
+    alquiler.name_usuarioLocatario = datos.name_usuarioLocatario
+    alquiler.cantidadDias = datos.cantidadDias
+    alquiler.cantidadAlquilar = datos.cantidadAlquilar
+    alquiler.createdAt = datos.createdAt
+    alquiler.updatedAt = datos.updatedAt
+    alquiler.codigoEntregaLocatario = datos.codigoEntregaLocatario
+    alquiler.codigoEntregaPropietario = datos.codigoEntregaPropietario
+    alquiler.codigoLocatarioIngresado = datos.codigoLocatarioIngresado
+    alquiler.codigoPropietarioIngresado = datos.codigoPropietarioIngresado
+    alquiler.fechaCaducidadEntrega = datos.fechaCaducidadEntrega
+    alquiler.fechaCaducidadEntrega = datos.fechaCaducidadEntrega
+    alquiler.codigoDevolucionLocatario = datos.codigoDevolucionLocatario
+    alquiler.codigoDevolucionPropietario = datos.codigoDevolucionPropietario
+    alquiler.codigoLocatarioDevolucionIngresado = datos.codigoLocatarioDevolucionIngresado
+    alquiler.codigoPropietarioDevolucionIngresado = datos.codigoPropietarioDevolucionIngresado
+    alquiler.fechaCaducidadDevolucion = datos.fechaEntrega
+    alquiler.fechaDevolucion = datos.fechaDevolucion
+
+    MisAlquileres.findByIdAndUpdate(alquiler._id, alquiler, (err,alquiler) => {
+        if (err) return res.status(500).send({ message: 'Error' });
+
+        if (!res) return res.status(404).send({ message: 'El doc no existe' });
+
+        return res.status(200).send( alquiler );
+    })
+})
+
 router.post('/registrar-alquiler/:id_publicacion/:usuarioPropietario/:usuarioLocatario/:cantidadDias/:cantidadAlquilar/:imagen', function (req, res) {
     var estado = 'En proceso de pago';
     var id_publicacion = req.params.id_publicacion;
