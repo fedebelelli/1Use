@@ -38,6 +38,13 @@
             </mat-toolbar-row>
 
             <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta/mis-reclamos']">
+                    <!-- [routerLink]="['mis-reclamos']"  -->
+                    <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-lg="true">Mis Reclamos</span>
+                </a>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
                 <a fxFlexAlign.lt-lg="flex-end" (click)="cerrarSesion()">
                     <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
                 </a>
