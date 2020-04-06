@@ -37,10 +37,6 @@ export class MiCuentaComponent implements OnInit {
         if (res.doc.length < 1) {
           this.hayPublicaciones = false;
           this.dataSource = undefined;
-          alert("No hay datos estadísticos con la publicación seleccionada");
-          }
-          else
-          {
             this.cargarDatos(id,titulo);
           } 
         }
