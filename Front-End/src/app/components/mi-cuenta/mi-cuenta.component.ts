@@ -30,6 +30,24 @@ export class MiCuentaComponent implements OnInit {
     this.singleton.cerrarSesion();
   }
 
+  verificarExisitenciaPublicaciones(id, titulo)
+  {
+    this._auth.get_visitas_id(id).subscribe(
+      res => {
+        if (res.doc.length < 1) {
+          this.hayPublicaciones = false;
+          this.dataSource = undefined;
+          alert("No hay datos estadísticos con la publicación seleccionada");
+          }
+          else
+          {
+            this.cargarDatos(id,titulo);
+          } 
+        }
+    )
+  }
+
+
   cargarDatos(id, titulo) {
     this._auth.get_visitas_id(id).subscribe(
       res => {
