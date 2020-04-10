@@ -38,6 +38,13 @@
             </mat-toolbar-row>
 
             <mat-toolbar-row>
+                <a [routerLink]="['/mi-cuenta/mis-reclamos']">
+                    <!-- [routerLink]="['mis-reclamos']"  -->
+                    <mat-icon>assignment</mat-icon> <span class="iconitos" fxHide.lt-lg="true">Mis Reclamos</span>
+                </a>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
                 <a fxFlexAlign.lt-lg="flex-end" (click)="cerrarSesion()">
                     <mat-icon>exit_to_app</mat-icon><span class="iconitos" fxHide.lt-lg="true">Salir</span>
                 </a>
@@ -60,17 +67,29 @@
                             Cantidad de visitas a tus publicaciones
                         </ng-template>
                     </div>
-                    <div fxLayout="column" fxLayoutAlign="center center">
-                        <div style="width: 300px;margin-top: 15px;">
-                            <mat-form-field>
-                                <mat-label>Publicación</mat-label>
+                    <div fxLayout="column" fxLayoutAlign="center center" id="prueba">
+                        
+                        <div style="width: 300px;margin-top: 15px;" *ngIf="publicaciones.length > 0 " >
+                            <mat-form-field >
+                                               <!-- -->   <mat-label>Publicación</mat-label> 
                                 <mat-select>
-                                    <mat-option #dropdown *ngFor="let p of publicaciones" (onSelectionChange)="cargarDatos(p._id, p.titulo)">
+                                    <mat-option #dropdown *ngFor="let p of publicaciones" (onSelectionChange)="CargarDatos(p._id, p.titulo)">
+                                       
                                         {{p.titulo}}
+
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
+
+                        <div style="width: 300px;margin-top: 30px;" *ngIf="publicaciones.length == 0 " >
+                                <img src="assets\images\Validacion Estadistica\sinPublicacionesAnuncio.png"> 
+                            
+                            <b>  <h4 >
+                                  
+                                  
+                                </h4> </b>
+                            </div>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 30px;" *ngIf="hayPublicaciones">
                         <fusioncharts width="700" height="400" type="Column2d" [dataSource]="dataSource"></fusioncharts>
