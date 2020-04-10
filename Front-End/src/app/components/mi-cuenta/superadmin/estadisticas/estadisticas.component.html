@@ -12,8 +12,7 @@
             <mat-toolbar-row>
                 <a [routerLink]="['/mi-cuenta/superadmin/publicaciones']">
                     <!-- [routerLink]="['/perfil']" -->
-                    <mat-icon>storefront</mat-icon><span class="iconitos"
-                        fxHide.lt-lg="true">Publicaciones</span>
+                    <mat-icon>storefront</mat-icon><span class="iconitos" fxHide.lt-lg="true">Publicaciones</span>
                 </a>
             </mat-toolbar-row>
 
@@ -47,9 +46,28 @@
     </div>
 
     <div fxLayout="column" fxFlexOrder="2" fxLayoutAlign="start center" fxLayout.lt-lg="column"
-        fxLayoutAlign.lt-lg="center center" style="width: 100%; margin-top: 20px;">
-        <div fxFlexFill>
+        fxLayoutAlign.lt-lg="center center" style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <mat-form-field class="selector">
+                <mat-label>Tipo de estadística</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let e of estadisticas" [value]="e">
+                        {{e}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
+            <mat-form-field class="selector">
+                <mat-label>Estadística</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let s of seleccionada" [value]="s">
+                        {{s}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
 
         </div>
     </div>
