@@ -63,16 +63,6 @@ export class CancelarAlquilerComponent implements OnInit {
     return true;
   }
 
-    //SWIPER
-    public config: SwiperConfigInterface = {
-      a11y: true,
-      direction: 'horizontal',
-      slidesPerView: 1,
-      keyboard: true,
-      mousewheel: false,
-      scrollbar: false,
-      navigation: true,
-    };
 
   cancelarDialogRef: MatDialogRef<CancelarDialogComponent>;
   openDialogCancelar(): void {
