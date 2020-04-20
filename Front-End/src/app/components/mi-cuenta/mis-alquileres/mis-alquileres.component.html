@@ -96,13 +96,23 @@
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px" *ngIf="!datos.fuePagado">
                                             <p><b>Esperando aceptación del pago</b></p>
+
+                                            <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
+                                                <mat-icon>cancel</mat-icon>
+                                                <span> Cancelar alquiler</span>
+                                            </button>
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px" *ngIf="datos.fuePagado">
 
-                                            <button mat-raised-button routerLink="/prereclamo" color="warn">
+                                            <button *ngIf="datos.estado == 'En proceso de entrega'" mat-raised-button routerLink="/reclamar-alquiler" color="warn">
                                                 <mat-icon>cancel</mat-icon>
-                                                <span> Cancelar alquiler</span>
+                                                <span> Reclamar alquiler</span>
+                                            </button>
+
+                                            <button *ngIf="datos.estado == 'En proceso de devolución'" mat-raised-button routerLink="/prereclamo" color="warn">
+                                                <mat-icon>cancel</mat-icon>
+                                                <span> Reclamar alquiler</span>
                                             </button>
 
                                             <button mat-icon-button [matMenuTriggerFor]="menu1">
@@ -193,7 +203,12 @@
                                         </div>
                                         <div class="info2" fxLayout="row" fxFlex="400" fxLayoutAlign="center center"
                                             fxLayoutGap="10px">
-                                            <button mat-raised-button routerLink="/prereclamo" color="warn">
+                                            
+                                            <button *ngIf="alquilerPropio.estado == 'En proceso de entrega'" mat-raised-button routerLink="/reclamar-alquiler" color="warn">
+                                                <mat-icon>cancel</mat-icon>
+                                                <span> Reclamar alquiler</span>
+                                            </button>
+                                            <button *ngIf="alquilerPropio.estado == 'En proceso de pago'" mat-raised-button routerLink="/cancelar-alquiler" color="warn">
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Cancelar alquiler</span>
                                             </button>

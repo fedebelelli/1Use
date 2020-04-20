@@ -57,7 +57,9 @@ import { DatosLocatarioDialogComponent } from './components/mi-cuenta/mis-alquil
 import { CodigoLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-locatario-dialog/codigo-locatario-dialog.component';
 import { CodigoPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-propietario-dialog/codigo-propietario-dialog.component';
 import { StarRatingComponent } from './components/busqueda/busqueda-publicaciones/star-rating.component'
+import { CancelarDialogComponent } from './components/cancelar-alquiler/cancelar-dialog/cancelar-dialog.component';
 import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
+import { ReclamarAlquilerComponent } from './components/reclamar-alquiler/reclamar-alquiler.component';
 import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
 import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.component';
 
@@ -136,6 +138,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CodigoPropietarioDialogComponent,
     StarRatingComponent,
     CancelarAlquilerComponent,
+    CancelarDialogComponent,
+    ReclamarAlquilerComponent,
     PrereclamoComponent,
     ReclamoExitoComponent,
     CodigoDevolucionLocatarioDialogComponent,
@@ -179,6 +183,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   entryComponents: [DeshabilitarDialogComponent, EliminarDialogComponent, DatosPropietarioDialogComponent, EliminarAlquilerDialogComponent,
     DatosLocatarioDialogComponent, CodigoPropietarioDialogComponent, CodigoLocatarioDialogComponent, CodigoDevolucionLocatarioDialogComponent,
     CodigoDevolucionPropietarioDialogComponent, EliminarUsuarioDialogComponent, DatosUsuariosDialogComponent, ModificarUsuarioDialogComponent, DatosPublicacionesDialogComponent, EliminarPublicacionDialogComponent, ModificarPublicacionDialogComponent,
-    DatosAlquileresDialogComponent, ModificarAlquilerDialogComponent, EliminarAlquilerSuperadminDialogComponent]
+    DatosAlquileresDialogComponent, ModificarAlquilerDialogComponent, EliminarAlquilerSuperadminDialogComponent, CancelarDialogComponent]
 })
 export class AppModule { }

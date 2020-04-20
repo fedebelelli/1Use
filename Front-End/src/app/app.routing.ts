@@ -28,6 +28,7 @@ import { ConfirmacionAlquilerComponent } from './components/confirmacion-alquile
 import { NotificacionesComponent } from './components/mi-cuenta/notificaciones/notificaciones.component';
 import { NewpwdComponent } from './components/newpwd/newpwd.component';
 import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
+import { ReclamarAlquilerComponent } from './components/reclamar-alquiler/reclamar-alquiler.component';
 import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
 import { ReclamoExitoComponent } from './components/reclamo-exito/reclamo-exito.component';
 import { SuperadminComponent } from './components//mi-cuenta/superadmin/superadmin.component';
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     { path: 'categorias', component: CategoriasComponent },
     { path: 'confirmacionemail/:token', component: ConfirmacionEmailComponent },
     { path: 'cancelar-alquiler', component: CancelarAlquilerComponent },
+    { path: 'reclamar-alquiler', component: ReclamarAlquilerComponent },
     { path: 'confirma', component: ConfirmaComponent },
     { path: 'register-publicacion', component: RegisterPublicacionComponent },
     { path: 'publicacion-exito', component: PublicacionExitoComponent },

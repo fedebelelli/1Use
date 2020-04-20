@@ -11,7 +11,7 @@ const reclamos = new Schema({
 
     tipo: {
         type: String
-    },
+    }, 
     motivo: {
         type: String
     },

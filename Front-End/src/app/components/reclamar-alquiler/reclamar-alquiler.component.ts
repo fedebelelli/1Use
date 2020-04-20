@@ -8,9 +8,6 @@ import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/materia
 import { SingletonService } from '../singleton.service';
 import { UploadService } from '../../services/upload.service';
 import motivos from './motivos.json';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CancelarDialogComponent } from './cancelar-dialog/cancelar-dialog.component'
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 declare var require: any;
 var sortJsonArray = require('sort-json-array');
@@ -23,12 +20,12 @@ export interface Motivos {
 
 @Component({
   selector: 'app-confirmacion',
-  templateUrl: './cancelar-alquiler.component.html',
-  styleUrls: ['./cancelar-alquiler.component.css'],
+  templateUrl: './reclamar-alquiler.component.html',
+  styleUrls: ['./reclamar-alquiler.component.css'],
   providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'es-LA' }, UploadService]
 
 })
-export class CancelarAlquilerComponent implements OnInit {
+export class ReclamarAlquilerComponent implements OnInit {
 
   //Para traer los datos de la BD en el form
   public user = {};
@@ -37,7 +34,7 @@ export class CancelarAlquilerComponent implements OnInit {
   //Para armar JSON
   hoy = new Date();
   motivosCancelacion: Motivos[];
-  constructor(private _auth: AuthService, private singletoon: SingletonService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService,public dialog: MatDialog) { }
+  constructor(private _auth: AuthService, private singletoon: SingletonService, private _snackBar: MatSnackBar, private _adapter: DateAdapter<any>, private singleton: SingletonService, private _router: Router, private _uploadService: UploadService) { }
 
   ngOnInit() {
    
@@ -63,30 +60,6 @@ export class CancelarAlquilerComponent implements OnInit {
     return true;
   }
 
-    //SWIPER
-    public config: SwiperConfigInterface = {
-      a11y: true,
-      direction: 'horizontal',
-      slidesPerView: 1,
-      keyboard: true,
-      mousewheel: false,
-      scrollbar: false,
-      navigation: true,
-    };
-
-  cancelarDialogRef: MatDialogRef<CancelarDialogComponent>;
-  openDialogCancelar(): void {
-    this.cancelarDialogRef = this.dialog.open(CancelarDialogComponent,
-      {
-        data: {
-         // alquiler: alquiler
-        }
-      });
-    this.cancelarDialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-    })
-  }
-
   reclamar() {
     
     this._auth.registrar_reclamo(this.reclamoData).subscribe(
@@ -100,7 +73,7 @@ export class CancelarAlquilerComponent implements OnInit {
         
       }
     )
-    this._router.navigate(['/mi-cuenta/mis-alquileres']);
+    this._router.navigate(['/reclamo-exito']);
   }
 
   crearJSONmotivos() {

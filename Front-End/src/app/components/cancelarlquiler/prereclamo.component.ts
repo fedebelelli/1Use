@@ -17,7 +17,7 @@ export class PrereclamoComponent implements OnInit {
   cancelacion() {
     
       
-        this._router.navigate(['/reclamar-alquiler'])
+        this._router.navigate(['/cancelar-alquiler'])
 
       }
       
