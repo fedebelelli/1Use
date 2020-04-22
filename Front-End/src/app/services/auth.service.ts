@@ -60,6 +60,7 @@ export class AuthService {
   private _deleteAlquiler = "http://localhost:4201/api/delete-alquiler/"
   private _getAlquilerId = "http://localhost:4201/api/get-alquiler-id/"
   private _updateSuperadminAlquiler = "http://localhost:4201/api/update-superadmin-alquiler/"
+  private _getEstadisticaPublicacionesCategorias = "http://localhost:4201/api/get-publicaciones-x-categoria"
   //authSubject = new BehaviorSubject(false); 
   //private token: string;
   
@@ -305,6 +306,10 @@ export class AuthService {
 
   get_visitas_id(id) {
     return this.http.get<any>(this._getVisitas + id)
+  }
+
+  get_estadistica_publicaciones_categorias() {
+    return this.http.get<any>(this._getEstadisticaPublicacionesCategorias)
   }
 
 }

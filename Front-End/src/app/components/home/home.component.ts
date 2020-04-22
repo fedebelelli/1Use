@@ -5,6 +5,8 @@ import { SingletonService } from '../singleton.service';
 import { CategoriasComponent } from '../../components/categorias/categorias.component';
 import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AuthService } from 'src/app/services/auth.service';
+declare var Mercadopago: any;
+// "src/assets/js/web-tokenize-checkout.js"
 
 @NgModule({
   imports: [CategoriasComponent]
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log(Mercadopago);
     this._auth.get_publicaciones_destacadas().subscribe(
       res => {
         this.publicacionesDestacadas = res.publicaciones; //ARRAY DE PUBLICACIONES DESTACADAS

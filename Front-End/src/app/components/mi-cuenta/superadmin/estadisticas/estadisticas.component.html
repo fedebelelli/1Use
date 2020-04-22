@@ -50,17 +50,23 @@
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
             <mat-form-field class="selector">
                 <mat-label>Tipo de estadística</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let e of estadisticas" [value]="e">
+                <mat-select [(value)]="selected">
+                    <mat-option (click)="deshabilitarEncuestas()">
+                        -Elegir encuesta-
+                    </mat-option>
+                    <mat-option *ngFor="let e of estadisticas" [value]="e" (click)="clickSelectEncuesta()">
                         {{e}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="selector">
+            <mat-form-field class="selector" *ngIf="publicacionesCategoriasSeleccionada">
                 <mat-label>Estadística</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let s of seleccionada" [value]="s">
+                <mat-select [(value)]="categoriaSeleccionada">
+                    <mat-option (click)="deshabilitarPublicacionesCategorias()">
+                        -Elegir subcategoria-
+                    </mat-option>
+                    <mat-option *ngFor="let s of seleccionada" [value]="s" (click)="clickSelectSubEncuesta()">
                         {{s}}
                     </mat-option>
                 </mat-select>
@@ -68,7 +74,9 @@
         </div>
 
         <div>
-
+            <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat"
+                [dataSource]="dataSource" *ngIf="mostrarGrafico">
+            </fusioncharts>
         </div>
     </div>
 </div>
