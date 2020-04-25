@@ -34,6 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+const mercadopago = require('mercadopago');
 
 /* ----------------------------------- MODELOS ----------------------------------- */
 const User = require("../auth/auth.model");
@@ -2175,4 +2176,50 @@ router.get("/get-publicaciones-x-categoria", function (req, res) {
     });
 });
 
+router.get("/get-alquileres-x-categoria", function (req, res) {
+    for (let index = 0; index < res.length; index++) {
+        MisAlquileres.find({}, function (err, alquiler) {
+            const element = alquiler[index];
+            Publicacion.find({ _id: element.id_publicacion }, function (req, res2) {
+                asd(res2)
+            })
+        })
+    }
+    return res.status(200).send(arreglo);
+})
 
+var arreglo = [];
+
+function asd(p) {
+    arreglo.push(p);
+    console.log(arreglo.length)
+}
+
+
+router.post("/mercadopago-initialize", function (req, res) {
+
+    console.log(req);
+    // Agrega credenciales
+    mercadopago.configure({
+        access_token: 'TEST-e63e4db8-7105-4505-8794-9b880390b25a'
+    });
+
+    // Crea un objeto de preferencia
+    let preference = {
+        items: [
+            {
+                title: 'Mi producto',
+                unit_price: 100,
+                quantity: 1,
+            }
+        ]
+    };
+
+    mercadopago.preferences.create(preference)
+        .then(function (response) {
+            // Este valor reemplazará el string "$$init_point$$" en tu HTML
+            global.init_point = response.body.init_point;
+        }).catch(function (error) {
+            console.log(error);
+        });
+})
