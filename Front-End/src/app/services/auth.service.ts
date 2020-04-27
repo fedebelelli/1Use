@@ -61,6 +61,7 @@ export class AuthService {
   private _getAlquilerId = "http://localhost:4201/api/get-alquiler-id/"
   private _updateSuperadminAlquiler = "http://localhost:4201/api/update-superadmin-alquiler/"
   private _getEstadisticaPublicacionesCategorias = "http://localhost:4201/api/get-publicaciones-x-categoria"
+  private _cancelarAlquiler = "http://localhost:4201/api/cancelarAlquiler"
   //authSubject = new BehaviorSubject(false); 
   //private token: string;
   
@@ -291,6 +292,10 @@ export class AuthService {
 
   update_superadmin_alquiler(alquiler){
     return this.http.post<any>(this._updateSuperadminAlquiler, alquiler);
+  }
+
+  cancelarAlquiler(alquiler){
+    return this.http.post<any>(this._cancelarAlquiler, alquiler);
   }
 
 

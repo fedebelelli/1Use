@@ -57,7 +57,7 @@ import { DatosLocatarioDialogComponent } from './components/mi-cuenta/mis-alquil
 import { CodigoLocatarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-locatario-dialog/codigo-locatario-dialog.component';
 import { CodigoPropietarioDialogComponent } from './components/mi-cuenta/mis-alquileres/codigo-propietario-dialog/codigo-propietario-dialog.component';
 import { StarRatingComponent } from './components/busqueda/busqueda-publicaciones/star-rating.component'
-import { CancelarDialogComponent } from './components/cancelar-alquiler/cancelar-dialog/cancelar-dialog.component';
+import { CancelarDialogComponent } from './components/mi-cuenta/mis-alquileres/cancelar-dialog/cancelar-dialog.component';
 import { CancelarAlquilerComponent } from './components/cancelar-alquiler/cancelar-alquiler.component';
 import { ReclamarAlquilerComponent } from './components/reclamar-alquiler/reclamar-alquiler.component';
 import { PrereclamoComponent } from './components/prereclamo/prereclamo.component';
