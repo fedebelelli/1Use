@@ -84,9 +84,9 @@ import { ModificarPublicacionDialogComponent } from './components/mi-cuenta/supe
 import { DatosAlquileresDialogComponent } from './components/mi-cuenta/superadmin/alquileres/datos-alquileres-dialog/datos-alquileres-dialog.component';
 import { ModificarAlquilerDialogComponent } from './components/mi-cuenta/superadmin/alquileres/modificar-alquiler-dialog/modificar-alquiler-dialog.component';
 import { EliminarAlquilerSuperadminDialogComponent } from './components/mi-cuenta/superadmin/alquileres/eliminar-alquiler-dialog/eliminar-alquiler-dialog.component';
+import { PagoMercadopagoComponent } from './components/pago-mercadopago/pago-mercadopago.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
-//import { SearchPipe } from './search.pipe';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -158,8 +158,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ModificarPublicacionDialogComponent,
     DatosAlquileresDialogComponent,
     ModificarAlquilerDialogComponent,
-    EliminarAlquilerSuperadminDialogComponent
-    //SearchPipe
+    EliminarAlquilerSuperadminDialogComponent,
+    PagoMercadopagoComponent
   ],
   imports: [
     BrowserModule,
@@ -176,7 +176,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MaterialFileInputModule,
     NgxDropzoneModule,
     SwiperModule,
-    FusionChartsModule
+    FusionChartsModule,
   ],
   providers: [appRoutingProviders, AuthService, SingletonService, { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG }],
   bootstrap: [AppComponent],

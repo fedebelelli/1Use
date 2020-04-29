@@ -1,6 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { SingletonService } from '../../singleton.service';
-import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/typings/dir-document-token';
 
 export interface Botones {
   icono: string,
@@ -13,27 +12,11 @@ export interface Botones {
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css']
 })
-export class SuperadminComponent implements OnInit, AfterViewInit {
+export class SuperadminComponent implements OnInit {
 
   constructor(private singleton: SingletonService, private elementRef: ElementRef) { }
 
-  @ViewChild('botonMP', { static: false }) boton: ElementRef;
-
   ngOnInit() {
-    Mercadopago.setPublishableKey('TEST-e63e4db8-7105-4505-8794-9b880390b25a');
-    Mercadopago.getIdentificationTypes();
-    console.log(Mercadopago);
-  }
-
-  ngAfterViewInit() {
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    //s.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    s.src = "../../../../assets/js/web-payment-checkout.js"
-    
-    this.boton.nativeElement.appendChild(s);
-
-    console.log(this.boton);
   }
 
   cerrarSesion() {
