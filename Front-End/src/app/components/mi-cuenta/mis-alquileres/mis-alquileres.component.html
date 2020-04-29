@@ -97,7 +97,7 @@
                                             fxLayoutGap="10px" *ngIf="!datos.fuePagado">
                                             <p><b>Esperando aceptación del pago</b></p>
 
-                                            <button mat-raised-button routerLink="/cancelar-alquiler" color="warn">
+                                            <button mat-raised-button (click)="openDialogCancelar(datos)" color="warn">
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Cancelar alquiler</span>
                                             </button>
@@ -208,7 +208,7 @@
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Reclamar alquiler</span>
                                             </button>
-                                            <button *ngIf="alquilerPropio.estado == 'En proceso de pago'" mat-raised-button routerLink="/cancelar-alquiler" color="warn">
+                                            <button *ngIf="alquilerPropio.estado == 'En proceso de pago'" mat-raised-button (click)="openDialogCancelar(alquilerPropio)" color="warn">
                                                 <mat-icon>cancel</mat-icon>
                                                 <span> Cancelar alquiler</span>
                                             </button>

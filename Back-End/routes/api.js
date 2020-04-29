@@ -34,6 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const mercadopago = require('mercadopago');
 
 /* ----------------------------------- MODELOS ----------------------------------- */
@@ -2002,6 +2003,36 @@ router.get("/get-propietario-alquiler/:username", function (req, res) {
 
         return res.status(200).send({ usuario });
     });
+});
+
+
+router.post("/cancelarAlquiler", (req, res) => {
+
+    alquiler = req.body;
+    id_f = req.body._id;
+    
+    let estado = "Cancelado";
+ 
+    if(req.body.estado != "Cancelado"){
+        MisAlquileres.findOneAndUpdate(
+            { _id: id_f},
+            {
+                estado: estado,
+            },{useFindAndModify: false},
+            function (err,alquiler) {
+                if (err) 
+                    return res.status(500).send({ message: "Error" });
+                else{                   
+                    return res.status(200).send({ alquiler });
+                   
+                }
+
+            }
+        );
+    }
+    else
+        return res.status(500).send({ message: "Error" });
+    
 });
 
 //Reclamo

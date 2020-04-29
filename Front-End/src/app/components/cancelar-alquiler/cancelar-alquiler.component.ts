@@ -9,7 +9,7 @@ import { SingletonService } from '../singleton.service';
 import { UploadService } from '../../services/upload.service';
 import motivos from './motivos.json';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CancelarDialogComponent } from './cancelar-dialog/cancelar-dialog.component'
+//import { CancelarDialogComponent } from './cancelar-dialog/cancelar-dialog.component'
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 declare var require: any;
@@ -64,18 +64,19 @@ export class CancelarAlquilerComponent implements OnInit {
   }
 
 
-  cancelarDialogRef: MatDialogRef<CancelarDialogComponent>;
-  openDialogCancelar(): void {
-    this.cancelarDialogRef = this.dialog.open(CancelarDialogComponent,
-      {
-        data: {
-         // alquiler: alquiler
-        }
-      });
-    this.cancelarDialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-    })
-  }
+  // cancelarDialogRef: MatDialogRef<CancelarDialogComponent>;
+  // openDialogCancelar(): void {
+  //   this.cancelarDialogRef = this.dialog.open(CancelarDialogComponent,
+  //     {
+  //       data: {
+  //        // alquiler: alquiler
+  //       }
+  //     });
+  //   this.cancelarDialogRef.afterClosed().subscribe(result => {
+  //     console.log('ak');
+  //     this.ngOnInit();
+  //   })
+  // }
 
   reclamar() {
     

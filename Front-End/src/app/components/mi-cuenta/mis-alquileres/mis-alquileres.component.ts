@@ -8,13 +8,15 @@ import { CodigoPropietarioDialogComponent } from './codigo-propietario-dialog/co
 import { CodigoLocatarioDialogComponent } from './codigo-locatario-dialog/codigo-locatario-dialog.component';
 import { CodigoDevolucionLocatarioDialogComponent } from './codigo-devolucion-locatario-dialog/codigo-devolucion-locatario-dialog.component';
 import { CodigoDevolucionPropietarioDialogComponent } from './codigo-devolucion-propietario-dialog/codigo-devolucion-propietario-dialog.component';
+import { CancelarDialogComponent } from './cancelar-dialog/cancelar-dialog.component'
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-alquileres',
   templateUrl: './mis-alquileres.component.html',
   styleUrls: ['./mis-alquileres.component.css']
-})
+}) 
 export class MisAlquileresComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
@@ -31,7 +33,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   arrayDevolucionLocatario = [];
   arrayDevolucionPropietario = [];
 
-  constructor(private _auth: AuthService, private singleton: SingletonService, public dialog: MatDialog) { }
+  constructor(private _auth: AuthService, private singleton: SingletonService, public dialog: MatDialog, private _router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.arrayAlquilerPropietario = []
@@ -47,7 +49,8 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
             for (let i = 0; i < this.arrayAlquilerPropietario.length; i++) {
               var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
               this.arrayAlquilerPropietario[i].createdAt = date;
-              this.arrayDatosPropietario.push(this.arrayAlquilerPropietario[i])
+              if(this.arrayAlquilerPropietario[i].estado != "Cancelado")
+                this.arrayDatosPropietario.push(this.arrayAlquilerPropietario[i])
             }
             this.hayAlquileresPropietario = true;
           })
@@ -79,7 +82,8 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
 
               var date = new Date(res1.alquiler[i].createdAt).toLocaleDateString();
               this.arrayAlquilerPropios[i].createdAt = date;
-              this.arrayDatosPropios.push(this.arrayAlquilerPropios[i])
+              if(this.arrayAlquilerPropios[i].estado != "Cancelado")
+                this.arrayDatosPropios.push(this.arrayAlquilerPropios[i])
             }
             this.hayAlquileresPropios = true;
           })
@@ -110,6 +114,7 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   codigoLocatarioDialogRef: MatDialogRef<CodigoLocatarioDialogComponent>
   codigoDevolucionPropietarioDialogRef: MatDialogRef<CodigoDevolucionPropietarioDialogComponent>
   codigoDevolucionLocatarioDialogRef: MatDialogRef<CodigoDevolucionLocatarioDialogComponent>
+  cancelarDialogRef: MatDialogRef<CancelarDialogComponent>;
 
   openDialogDatosPropietario(alquiler): void {
     this.datosPropietarioDialogRef = this.dialog.open(DatosPropietarioDialogComponent,
@@ -166,4 +171,23 @@ export class MisAlquileresComponent implements OnInit, OnDestroy {
   }
 
 
+
+  openDialogCancelar(alquiler): void {
+    localStorage.setItem('alquiler',JSON.stringify(alquiler))
+     this.cancelarDialogRef = this.dialog.open(CancelarDialogComponent,
+      {
+        data: { 
+          alquiler: alquiler
+        }
+      }); this.cancelarDialogRef.afterClosed().subscribe(result => {    
+           
+        window.location.reload();
+          
+        })
+    
+  }
+
+
 }
+
+
