@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pago-mercadopago',
@@ -8,61 +8,82 @@ import { createCustomElement } from '@angular/elements';
 })
 export class PagoMercadopagoComponent implements OnInit {
 
-  constructor() { }
+  mercadoPagoFormGroup: FormGroup;
+  description;
+  transaction_amount;
+  cardNumber;
+  cardholderName;
+  cardExpirationMonth;
+  cardExpirationYear;
+  securityCode;
+  installments;
+  docType;
+  docNumber;
+  email;
+
+  constructor(private _formBuilder: FormBuilder) { }
 
   @ViewChild('pay', { static: false }) pay: ElementRef;
-
-  cardnumber = '5031755734530604';
-  payment_method_id = 1;
-  amount = 500;
-  installments = 1;
 
   ngOnInit() {
     Mercadopago.setPublishableKey('TEST-366bb1a8-1506-4b7f-935f-e10999fe6b5c');
     Mercadopago.getIdentificationTypes();
-    console.log(Mercadopago);
-    this.guessPaymentMethod();
+
+    this.mercadoPagoFormGroup = this._formBuilder.group({
+      description: [''],
+      transaction_amount: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      cardholderName: ['', Validators.required],
+      cardExpirationMonth: ['', Validators.required],
+      cardExpirationYear: ['', Validators.required],
+      securityCode: ['', Validators.required],
+      installments: ['', Validators.required],
+      docType: ['', Validators.required],
+      docNumber: ['', Validators.required],
+      email: ['', Validators.required],
+    });
   }
 
-  guessPaymentMethod() {
-    //let cardnumber = document.getElementById("cardNumber").value;
+  guessPaymentMethod(event) {
+    let cardnumber = (<HTMLInputElement>document.getElementById("cardNumber")).value
 
-    if (this.cardnumber.length >= 6) {
-      let bin = this.cardnumber.substring(0, 6);
+    if (cardnumber.length >= 6) {
+      let bin = cardnumber.substring(0, 6);
       Mercadopago.getPaymentMethod({ "bin": bin }, this.setPaymentMethod);
     }
   };
 
   setPaymentMethod(status, response) {
+    console.log(response)
     if (status == 200) {
-      // let paymentMethodId = response[0].id;
-      // let element = this.payment_method_id;
-      this.getInstallments();
+      let paymentMethodId = response[0].id;
+      let element = (<HTMLInputElement>document.getElementById('payment_method_id'));
+      element.value = paymentMethodId;
+      //this.obtenerInstallments();
+
+      console.log(Mercadopago)
+
+      Mercadopago.getInstallments(
+        {
+          "payment_method_id": (<HTMLInputElement>document.getElementById('payment_method_id')).value,
+          "amount": parseFloat((<HTMLInputElement>document.getElementById('transaction_amount')).value)
+        },
+        function (status, response) {
+          if (status == 200) {
+            (<HTMLSelectElement>document.getElementById('installments')).options.length = 0;
+            response[0].payer_costs.forEach(installment => {
+              let opt = <HTMLOptionElement>document.createElement('option');
+              opt.text = installment.recommended_message;
+              opt.value = installment.installments;
+              (<HTMLSelectElement>document.getElementById('installments')).appendChild(opt);
+            });
+          } else {
+            alert(`installments method info error: ${response}`);
+          }
+        });
     } else {
       alert(`payment method info error: ${response}`);
     }
-  }
-
-  getInstallments() {
-    Mercadopago.getInstallments(
-      {
-        "payment_method_id": this.payment_method_id,
-        "amount": this.amount
-      },
-      function (status, response) {
-        if (status == 200) {
-          //document.getElementById('installments').options.length = 0;
-          response[0].payer_costs.forEach(installment => {
-            let opt = document.createElement('option');
-            opt.text = installment.recommended_message;
-            opt.value = installment.installments;
-            this.installments.appendChild(opt);
-            //document.getElementById('installments').appendChild(opt);
-          });
-        } else {
-          alert(`installments method info error: ${response}`);
-        }
-      });
   }
 
   doSubmit = false;
@@ -70,8 +91,10 @@ export class PagoMercadopagoComponent implements OnInit {
   doPay(event) {
     event.preventDefault();
     if (!this.doSubmit) {
-      var $form = this.pay;
+      var $form = (<HTMLFormElement>document.querySelector('#pay'));
       Mercadopago.createToken($form, this.sdkResponseHandler);
+
+      console.log(Mercadopago)
 
       return false;
     }
@@ -81,13 +104,15 @@ export class PagoMercadopagoComponent implements OnInit {
     if (status != 200 && status != 201) {
       alert("verify filled data");
     } else {
-      var form = this.pay;
-      var card = document.createElement('input');
+      var form = (<HTMLFormElement>document.querySelector('#pay'));
+      var card = (<HTMLInputElement>document.createElement('input'));
       card.setAttribute('name', 'token');
       card.setAttribute('type', 'hidden');
       card.setAttribute('value', response.id);
-      form.nativeElement.appendChild(card);
+      form.appendChild(card);
       this.doSubmit = true;
+      console.log(card)
+      console.log(form)
       //form.submit();
     }
   };

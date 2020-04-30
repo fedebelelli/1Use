@@ -1,32 +1,126 @@
+<form [formGroup]="mercadoPagoFormGroup">
+    <section fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Descripción del objeto" formControlName="description" name="description"
+                    (ngModelChange)="description = $event" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput #monto maxlength="6" placeholder="Monto a pagar" formControlName="transaction_amount"
+                    name="transaction_amount" (ngModelChange)="transaction_amount = $event" required>
+                <mat-hint align="start">{{monto.value.length}} / 6</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Número de tarjeta" formControlName="cardNumber" name="cardNumber"
+                    (ngModelChange)="cardNumber = $event" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Número de tarjeta" formControlName="cardholderName" name="cardholderName"
+                    (ngModelChange)="cardholderName = $event" required (keyup)="guessPaymentMethod($event)"
+                    onselectstart="return false" data-checkout="cardNumber" onpaste="return false" onCopy="return false"
+                    onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Nombre y apellido" formControlName="cardholderName" name="cardholderName"
+                    (ngModelChange)="cardholderName = $event" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Mes de vencimiento" formControlName="cardExpirationMonth"
+                    name="cardExpirationMonth" (ngModelChange)="cardExpirationMonth = $event" required
+                    data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false"
+                    onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                    autocomplete=off>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Año de vencimiento" formControlName="cardExpirationYear"
+                    name="cardExpirationYear" (ngModelChange)="cardExpirationYear = $event" required
+                    data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false"
+                    onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                    autocomplete=off>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Código de seguridad" formControlName="securityCode" name="securityCode"
+                    (ngModelChange)="securityCode = $event" required data-checkout="securityCode"
+                    onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                    onDrag="return false" onDrop="return false" autocomplete=off>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Cuotas" formControlName="installments" name="installments"
+                    (ngModelChange)="installments = $event" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Tipo de documento</mat-label>
+                <mat-select formControlName="docType" name="docType" (ngModelChange)="docType = $event" required
+                    data-checkout="docType"></mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Número de documento" formControlName="docNumber" name="docNumber"
+                    (ngModelChange)="docNumber = $event" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email" name="email"
+                    (ngModelChange)="email = $event" required>
+            </mat-form-field>
+        </div>
+    </section>
+    <input type="hidden" name="payment_method_id" id="payment_method_id" />
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Pagar</button>
+    </div>
+</form>
+
+
 <form action="/procesar_pago.php" method="post" id="pay" name="pay" #pay>
     <fieldset>
         <p>
-            <label for="description">Descripción</label>                        
-            <input type="text" name="description" id="description" value="Ítem seleccionado"/>
-        </p>                    
+            <label for="description">Descripción</label>
+            <input type="text" name="description" id="description" value="Ítem seleccionado" />
+        </p>
         <p>
-            <label for="transaction_amount">Monto a pagar</label>                        
-            <input name="transaction_amount" id="transaction_amount" value="100"/>
+            <label for="transaction_amount">Monto a pagar</label>
+            <input name="transaction_amount" id="transaction_amount" value="100" />
         </p>
         <p>
             <label for="cardNumber">Número de la tarjeta</label>
-            <input type="text" id="cardNumber" data-checkout="cardNumber" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+            <input type="text" id="cardNumber" (keyup)="guessPaymentMethod($event)" data-checkout="cardNumber"
+                onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                onDrag="return false" onDrop="return false" autocomplete=off />
         </p>
         <p>
             <label for="cardholderName">Nombre y apellido</label>
             <input type="text" id="cardholderName" data-checkout="cardholderName" />
-        </p>                                    
+        </p>
         <p>
             <label for="cardExpirationMonth">Mes de vencimiento</label>
-            <input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+            <input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false"
+                onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false"
+                onDrop="return false" autocomplete=off />
         </p>
         <p>
             <label for="cardExpirationYear">Año de vencimiento</label>
-            <input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+            <input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false"
+                onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false"
+                onDrop="return false" autocomplete=off />
         </p>
         <p>
             <label for="securityCode">Código de seguridad</label>
-            <input type="text" id="securityCode" data-checkout="securityCode" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+            <input type="text" id="securityCode" data-checkout="securityCode" onselectstart="return false"
+                onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false"
+                onDrop="return false" autocomplete=off />
         </p>
         <p>
             <label for="installments">Cuotas</label>
@@ -38,13 +132,13 @@
         </p>
         <p>
             <label for="docNumber">Número de documento</label>
-            <input type="text" id="docNumber" data-checkout="docNumber"/>
+            <input type="text" id="docNumber" data-checkout="docNumber" />
         </p>
         <p>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="test@test.com"/>
-        </p>  
-        <input type="hidden" name="payment_method_id" id="payment_method_id"/>
-        <input type="submit" value="Pagar"/>
+            <input type="email" id="email" name="email" value="test@test.com" />
+        </p>
+        <input type="hidden" name="payment_method_id" id="payment_method_id" />
+        <input type="submit" (click)="doPay($event)" value="Pagar" />
     </fieldset>
 </form>
