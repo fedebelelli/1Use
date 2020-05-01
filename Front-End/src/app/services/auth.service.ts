@@ -62,6 +62,7 @@ export class AuthService {
   private _updateSuperadminAlquiler = "http://localhost:4201/api/update-superadmin-alquiler/"
   private _getEstadisticaPublicacionesCategorias = "http://localhost:4201/api/get-publicaciones-x-categoria"
   private _cancelarAlquiler = "http://localhost:4201/api/cancelarAlquiler"
+  private _getTiposDniMercadoPago = "https://api.mercadopago.com/v1/identification_types"
   //authSubject = new BehaviorSubject(false); 
   //private token: string;
   
@@ -315,6 +316,12 @@ export class AuthService {
 
   get_estadistica_publicaciones_categorias() {
     return this.http.get<any>(this._getEstadisticaPublicacionesCategorias)
+  }
+
+
+  /* MERCADO PAGO */
+  get_tipos_dni(token){
+    return this.http.get<any>(this._getTiposDniMercadoPago+'?access_token='+token)
   }
 
 }
