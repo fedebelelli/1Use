@@ -37,6 +37,12 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const mercadopago = require('mercadopago');
 
+//Access token cuenta juan
+//mercadopago.configurations.setAccessToken("TEST-4098695958980794-042601-bbf0cd1a389dea655e9504621063e743-25259647");
+
+//Access token cuenta vendedor test
+mercadopago.configurations.setAccessToken("TEST-6154841231917150-052800-34a55d9d7e73a0024e594c6cb7a6b650-575276817");
+
 /* ----------------------------------- MODELOS ----------------------------------- */
 const User = require("../auth/auth.model");
 const Publicacion = require("../Models/publicaciones.model");
@@ -2010,21 +2016,21 @@ router.post("/cancelarAlquiler", (req, res) => {
 
     alquiler = req.body;
     id_f = req.body._id;
-    
+
     let estado = "Cancelado";
- 
-    if(req.body.estado != "Cancelado"){
+
+    if (req.body.estado != "Cancelado") {
         MisAlquileres.findOneAndUpdate(
-            { _id: id_f},
+            { _id: id_f },
             {
                 estado: estado,
-            },{useFindAndModify: false},
-            function (err,alquiler) {
-                if (err) 
+            }, { useFindAndModify: false },
+            function (err, alquiler) {
+                if (err)
                     return res.status(500).send({ message: "Error" });
-                else{                   
+                else {
                     return res.status(200).send({ alquiler });
-                   
+
                 }
 
             }
@@ -2032,7 +2038,7 @@ router.post("/cancelarAlquiler", (req, res) => {
     }
     else
         return res.status(500).send({ message: "Error" });
-    
+
 });
 
 //Reclamo
@@ -2226,31 +2232,30 @@ function asd(p) {
     console.log(arreglo.length)
 }
 
+/* -------------------- MERCADO PAGO --------------------------- */
 
-router.post("/mercadopago-initialize", function (req, res) {
-
-    console.log(req);
-    // Agrega credenciales
-    mercadopago.configure({
-        access_token: 'TEST-e63e4db8-7105-4505-8794-9b880390b25a'
-    });
-
-    // Crea un objeto de preferencia
-    let preference = {
-        items: [
-            {
-                title: 'Mi producto',
-                unit_price: 100,
-                quantity: 1,
-            }
-        ]
+router.post("/pago-tarjeta-mp", function (req, res) {
+    /*
+    var payment_data = {
+        transaction_amount: 105,
+        token: 'ff8080814c11e237014c1ff593b57b4d'
+        description: 'Fantastic Marble Bag',
+        installments: 1,
+        payment_method_id: 'visa',
+        payer: {
+            email: 'test@test.com'
+        }
     };
+    */
+    let payment_data = req.body;
+    
+    mercadopago.payment.save(payment_data).then(function (data) {
+        //console.log(data);
+        return res.status(200).send(data)
+    }).catch(function (error) {
+        //console.log(error);
+        return res.status(500).send(error)
+    });
+    
 
-    mercadopago.preferences.create(preference)
-        .then(function (response) {
-            // Este valor reemplazará el string "$$init_point$$" en tu HTML
-            global.init_point = response.body.init_point;
-        }).catch(function (error) {
-            console.log(error);
-        });
 })

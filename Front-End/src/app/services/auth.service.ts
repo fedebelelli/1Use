@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { User } from '../models/user';
 
@@ -63,9 +63,10 @@ export class AuthService {
   private _getEstadisticaPublicacionesCategorias = "http://localhost:4201/api/get-publicaciones-x-categoria"
   private _cancelarAlquiler = "http://localhost:4201/api/cancelarAlquiler"
   private _getTiposDniMercadoPago = "https://api.mercadopago.com/v1/identification_types"
+  private _postPagoTarjeta = "http://localhost:4201/api/pago-tarjeta-mp"
   //authSubject = new BehaviorSubject(false); 
   //private token: string;
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -236,11 +237,11 @@ export class AuthService {
     return this.http.get<any>(this._getAllAlquileres);
   }
 
-  get_alquiler_id(id){
+  get_alquiler_id(id) {
     return this.http.get<any>(this._getAlquilerId + id);
   }
 
-  delete_alquiler(id){
+  delete_alquiler(id) {
     return this.http.delete<any>(this._deleteAlquiler + id);
   }
 
@@ -291,11 +292,11 @@ export class AuthService {
     return this.http.post<any>(this._registrarCodigoDevolucionLocatario + codigo, params);
   }
 
-  update_superadmin_alquiler(alquiler){
+  update_superadmin_alquiler(alquiler) {
     return this.http.post<any>(this._updateSuperadminAlquiler, alquiler);
   }
 
-  cancelarAlquiler(alquiler){
+  cancelarAlquiler(alquiler) {
     return this.http.post<any>(this._cancelarAlquiler, alquiler);
   }
 
@@ -320,8 +321,13 @@ export class AuthService {
 
 
   /* MERCADO PAGO */
-  get_tipos_dni(token){
-    return this.http.get<any>(this._getTiposDniMercadoPago+'?access_token='+token)
+  get_tipos_dni(token) {
+    return this.http.get<any>(this._getTiposDniMercadoPago + '?access_token=' + token)
+  }
+
+  pago_tarjeta(data) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this._postPagoTarjeta, data, { headers: headers })
   }
 
 }

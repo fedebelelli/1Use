@@ -3,13 +3,13 @@
         <div>
             <mat-form-field>
                 <input matInput placeholder="Descripción del objeto" formControlName="description" name="description"
-                    (ngModelChange)="description = $event">
+                    id="description" (ngModelChange)="description = $event" [(value)]=" description">
             </mat-form-field>
 
             <mat-form-field>
                 <span matPrefix>$</span>
                 <input matInput #monto maxlength="6" placeholder="Monto a pagar" formControlName="transaction_amount"
-                    name="transaction_amount" [(value)]="transaction_amount">
+                    id="transaction_amount" name="transaction_amount" [(value)]="transaction_amount">
                 <mat-hint align="start">{{monto.value.length}} / 6</mat-hint>
             </mat-form-field>
 
@@ -18,30 +18,30 @@
 
             <mat-form-field>
                 <input matInput placeholder="Número de tarjeta" formControlName="cardNumber" name="cardNumber"
-                    (ngModelChange)="cardNumber = $event" required (keyup)="guessPaymentMethod($event)"
-                    onselectstart="return false" data-checkout="cardNumber" onpaste="return false" onCopy="return false"
-                    onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
+                    id="cardNumber" (ngModelChange)="cardNumber = $event" required (keyup)="guessPaymentMethod($event)"
+                    (change)="guessPaymentMethod($event)" onselectstart="return false" data-checkout="cardNumber">
             </mat-form-field>
 
             <mat-form-field>
                 <input matInput placeholder="Nombre y apellido" formControlName="cardholderName" name="cardholderName"
-                    (ngModelChange)="cardholderName = $event" required>
+                    id="cardholderName" (ngModelChange)="cardholderName = $event" required
+                    (change)="desencapsularDatosForm()" (keyup)="desencapsularDatosForm()">
             </mat-form-field>
 
             <mat-form-field>
                 <input matInput placeholder="Mes de vencimiento" formControlName="cardExpirationMonth"
-                    name="cardExpirationMonth" (ngModelChange)="cardExpirationMonth = $event" required
-                    data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false"
+                    id="cardExpirationMonth" name="cardExpirationMonth" (ngModelChange)="cardExpirationMonth = $event"
+                    required data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false"
                     onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-                    autocomplete=off>
+                    autocomplete=off (change)="desencapsularDatosForm()" (keyup)="desencapsularDatosForm()">
             </mat-form-field>
 
             <mat-form-field>
                 <input matInput placeholder="Año de vencimiento" formControlName="cardExpirationYear"
-                    name="cardExpirationYear" (ngModelChange)="cardExpirationYear = $event" required
-                    data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false"
+                    id="cardExpirationYear" name="cardExpirationYear" (ngModelChange)="cardExpirationYear = $event"
+                    required data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false"
                     onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-                    autocomplete=off>
+                    autocomplete=off (change)="desencapsularDatosForm()" (keyup)="desencapsularDatosForm()">
             </mat-form-field>
 
         </div>
@@ -49,9 +49,10 @@
         <div>
             <mat-form-field>
                 <input matInput placeholder="Código de seguridad" formControlName="securityCode" name="securityCode"
-                    (ngModelChange)="securityCode = $event" required data-checkout="securityCode"
+                    id="securityCode" (ngModelChange)="securityCode = $event" required data-checkout="securityCode"
                     onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
-                    onDrag="return false" onDrop="return false" autocomplete=off>
+                    onDrag="return false" onDrop="return false" autocomplete=off (change)="desencapsularDatosForm()"
+                    (keyup)="desencapsularDatosForm()">
             </mat-form-field>
 
             <!--LO OCULTO PORQUE SOLO ME SIRVE DE REFERENCIA PARA SETPAYMENTMETHOD()-->
@@ -74,17 +75,36 @@
 
             <mat-form-field>
                 <input matInput placeholder="Número de documento" formControlName="docNumber" name="docNumber"
-                    (ngModelChange)="docNumber = $event" required>
+                    id="docNumber" (ngModelChange)="docNumber = $event" (change)="desencapsularDatosForm()"
+                    (keyup)="desencapsularDatosForm()" required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Email" formControlName="email" name="email"
-                    (ngModelChange)="email = $event" required>
+                <input matInput placeholder="Email" formControlName="email" name="email" id="email"
+                    (ngModelChange)="email = $event" (change)="desencapsularDatosForm()"
+                    (keyup)="desencapsularDatosForm()" required>
             </mat-form-field>
         </div>
     </section>
     <input type="hidden" name="payment_method_id" id="payment_method_id" />
     <div style="text-align: center;">
-        <button mat-raised-button color="primary" (click)="onSubmit()">Pagar</button>
+        <button mat-raised-button color="primary" (click)="doPay($event); back()">Pagar</button>
     </div>
+</form>
+
+<form method="post" id="pay" name="pay" hidden>
+    <fieldset>
+        <input name="description2" id="description2" />
+        <input name="transaction_amount2" id="transaction_amount2" />
+        <input id="cardNumber2" data-checkout="cardNumber" />
+        <input id="cardholderName2" data-checkout="cardholderName" />
+        <input id="cardExpirationMonth2" data-checkout="cardExpirationMonth" />
+        <input id="cardExpirationYear2" data-checkout="cardExpirationYear" />
+        <input id="securityCode2" data-checkout="securityCode" />
+        <option id="installments2" name="installments2"></option>
+        <option id="docType2" data-checkout="docType"></option>
+        <input id="docNumber2" data-checkout="docNumber" />
+        <input id="email2" name="email2" />
+        <input name="payment_method_id2" id="payment_method_id2" />
+    </fieldset>
 </form>
